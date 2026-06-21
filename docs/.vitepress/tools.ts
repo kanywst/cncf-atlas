@@ -37,12 +37,12 @@ export const CATEGORY_ORDER: string[] = [
 ]
 
 export const tools: ToolEntry[] = [
-  // {
-  //   slug: 'argo-cd',
-  //   name: 'Argo CD',
-  //   tagline: 'Declarative GitOps continuous delivery for Kubernetes',
-  //   taglineJa: 'Kubernetes 向け宣言的 GitOps 継続的デリバリ',
-  //   category: 'App Definition & GitOps',
-  //   maturity: 'Graduated',
-  // },
+  {
+    slug: 'authelia',
+    name: 'Authelia',
+    tagline: 'SSO and 2FA for your reverse proxy, plus an OpenID Connect provider',
+    taglineJa: 'リバースプロキシ向けの SSO と 2FA、加えて OpenID Connect プロバイダ',
+    category: 'Identity & Policy',
+    maturity: 'Independent',
+  },
 ]
