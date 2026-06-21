@@ -1,0 +1,19 @@
+{
+  "name": "cncf-atlas",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A readable map of the cloud native ecosystem. Every CNCF project with its history, architecture, adoption, and code internals. English and Japanese.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "test": "node scripts/check-tools.mjs",
+    "lint": "markdownlint-cli2 \"**/*.md\""
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "^0.22.1",
+    "vitepress": "^1.6.3"
+  }
+}

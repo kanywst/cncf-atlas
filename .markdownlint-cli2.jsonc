@@ -1,0 +1,19 @@
+{
+  // Mirrors the maintainer's global markdownlint ruleset so CI and contributors
+  // lint with identical rules. Inline HTML is off only for the elements VitePress
+  // needs in markdown; the catalog itself is injected by the theme, not by tags.
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD024": false,
+    "MD033": { "allowed_elements": ["picture", "source", "img"] },
+    "MD036": false,
+    "MD041": false,
+    "MD060": false
+  },
+  "ignores": [
+    "node_modules",
+    "docs/.vitepress/dist",
+    "docs/.vitepress/cache"
+  ]
+}
