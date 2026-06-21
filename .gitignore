@@ -31,3 +31,6 @@ pnpm-debug.log*
 *.swo
 .DS_Store
 Thumbs.db
+
+# Local screenshot/debug artifacts
+.playwright-mcp/
