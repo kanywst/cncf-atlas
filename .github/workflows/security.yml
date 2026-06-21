@@ -22,7 +22,9 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm audit --audit-level=high
+      # The site ships no runtime npm dependencies; everything is build-time. Audit
+      # what is actually shipped. Dev-toolchain advisories are tracked in osv-scanner.toml.
+      - run: npm audit --omit=dev --audit-level=high
 
   osv-scanner:
     name: OSV scanner
@@ -35,6 +37,7 @@ jobs:
       - uses: google/osv-scanner-action/osv-scanner-action@v2.2.4
         with:
           scan-args: |-
+            --config=./osv-scanner.toml
             --lockfile=./package-lock.json
 
   dependency-review:

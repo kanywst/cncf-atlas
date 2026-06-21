@@ -1,0 +1,21 @@
+# Accepted advisories. These all live in VitePress's build-time toolchain (the Vite
+# dev server and esbuild), which is never run in CI or production. The deployed
+# artifact is a static site with no runtime npm dependencies, so these dev-server
+# request-forgery and DoS issues are not reachable by users. Dependabot tracks the
+# upstream VitePress bump that resolves them.
+
+[[IgnoredVulns]]
+id = "GHSA-67mh-4wv8-2f99"
+reason = "esbuild dev server only; not run in CI or the deployed static site"
+
+[[IgnoredVulns]]
+id = "GHSA-4w7w-66w2-5vf9"
+reason = "Vite dev server only; not run in CI or the deployed static site"
+
+[[IgnoredVulns]]
+id = "GHSA-fx2h-pf6j-xcff"
+reason = "Vite dev server only; not run in CI or the deployed static site"
+
+[[IgnoredVulns]]
+id = "GHSA-v6wh-96g9-6wx3"
+reason = "Vite dev server only; not run in CI or the deployed static site"

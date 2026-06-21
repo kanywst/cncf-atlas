@@ -1,4 +1,5 @@
 import { defineConfig, type DefaultTheme } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import { tools } from './tools'
 
 // GitHub Pages project site is served from /<repo>/.
@@ -34,7 +35,7 @@ function catalogLink(prefix: string, lang: 'en' | 'ja') {
   ]
 }
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   base,
   title: 'CNCF Atlas',
   description:
@@ -79,4 +80,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))
