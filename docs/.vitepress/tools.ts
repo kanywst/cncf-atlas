@@ -28,12 +28,17 @@ export const CATEGORY_ORDER: string[] = [
   'Orchestration & Scheduling',
   'App Definition & GitOps',
   'Service Mesh & Networking',
+  'API Gateway',
   'Observability',
   'Security & Compliance',
   'Identity & Policy',
   'Supply Chain',
   'Storage & Database',
+  'Messaging & Streaming',
   'Runtime',
+  'Container Registry',
+  'Chaos Engineering',
+  'Developer Tools',
 ]
 
 export const tools: ToolEntry[] = [
@@ -150,4 +155,5 @@ export const tools: ToolEntry[] = [
   { slug: 'spiffe', name: 'SPIFFE', tagline: 'Standards for giving workloads a short-lived, cryptographically verifiable identity without pre-shared secrets.', taglineJa: '秘密の事前共有なしに、ワークロードへ短命で暗号学的に検証可能な ID を与える標準群。', category: 'Identity & Policy', maturity: 'Graduated' },
   { slug: 'spire', name: 'SPIRE', tagline: 'Issues short-lived, attested workload identities (X509-SVID and JWT-SVID); the SPIFFE reference implementation.', taglineJa: '短命で attest 済みのワークロード ID (X509-SVID/JWT-SVID) を発行する SPIFFE 参照実装。', category: 'Identity & Policy', maturity: 'Graduated' },
   { slug: 'vitess', name: 'Vitess', tagline: 'A clustering system that shards MySQL horizontally behind a single MySQL-compatible endpoint.', taglineJa: 'MySQL を水平シャーディングし、単一の MySQL 互換エンドポイントの裏に隠すクラスタリングシステム。', category: 'Storage & Database', maturity: 'Graduated' },
+  { slug: 'tikv', name: 'TiKV', tagline: 'A distributed, transactional key-value database, the storage layer behind TiDB.', taglineJa: 'TiDB の下回りを担う分散トランザクショナル・キーバリューデータベース。', category: 'Storage & Database', maturity: 'Graduated' },
 ]

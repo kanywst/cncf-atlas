@@ -84,6 +84,7 @@
     { "name": "Antrea", "category": "Cloud Native Network" },
     { "name": "Apicurio Registry", "category": "Streaming & Messaging" },
     { "name": "Armada", "category": "Scheduling & Orchestration" },
+    { "name": "Athenz", "category": "Key Management" },
     { "name": "Atlantis", "category": "Automation & Configuration" },
     { "name": "Bank-Vaults", "category": "Security & Compliance" },
     { "name": "BFE", "category": "Service Proxy" },
