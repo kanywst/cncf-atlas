@@ -21,7 +21,7 @@ export PATH="$PWD/bin:$PATH"
 
 The `examples/local/` directory brings up a topology service, vtctld, VTGate, and VTTablets for a `commerce` keyspace. The command summary is in `examples/local/README.md`.
 
-1. Set up the environment and aliases, then bring up the initial cluster (`examples/local/README.md:8`, `README.md:12`).
+1. Set up the environment and aliases, then bring up the initial cluster (`examples/local/README.md:9`, `README.md:12`).
 
 ```bash
 source ../common/env.sh

@@ -21,7 +21,7 @@ export PATH="$PWD/bin:$PATH"
 
 `examples/local/` ディレクトリは、トポロジサービス・vtctld・VTGate・VTTablet を `commerce` keyspace 向けに立ち上げる。コマンドの要約は `examples/local/README.md` にある。
 
-1. 環境とエイリアスを設定し、初期クラスタを立ち上げる (`examples/local/README.md:8`, `README.md:12`)。
+1. 環境とエイリアスを設定し、初期クラスタを立ち上げる (`examples/local/README.md:9`, `README.md:12`)。
 
 ```bash
 source ../common/env.sh

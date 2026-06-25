@@ -25,7 +25,7 @@ const categories = [...(code.match(/CATEGORY_ORDER[^=]*=\s*\[([^\]]*)\]/s)?.[1] 
   (m) => m[1],
 )
 
-const entries = [...code.matchAll(/\{[^{}]*?slug:\s*'([^']+)'[^{}]*?category:\s*'([^']+)'[^{}]*?\}/gs)].map((m) => ({
+const entries = [...code.matchAll(/\{[^{}]*?slug:\s*['"]([^'"]+)['"][^{}]*?category:\s*['"]([^'"]+)['"][^{}]*?\}/gs)].map((m) => ({
   slug: m[1],
   category: m[2],
 }))
