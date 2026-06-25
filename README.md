@@ -18,7 +18,7 @@ The CNCF landscape lists hundreds of projects as logos in a grid. It tells you a
 - A docs site you browse by category, with every project tagged by its CNCF maturity.
 - Six sections per project, always in the same order, so you know where to look.
 - English by default and a full Japanese version, switchable on every page.
-- An authoring engine: two Claude Code skills research a project and write its bilingual deep-dive into a consistent structure.
+- A repeatable two-stage authoring process: read the project's source at a pinned commit, then write the bilingual deep-dive in a consistent structure.
 
 ## What a deep-dive covers
 
@@ -58,10 +58,10 @@ npm test              # validate the catalog registry against the files on disk
 
 ## Add a project
 
-Two skills under `.claude/skills/` do the work:
+Each deep-dive is produced in two stages:
 
-1. `atlas-recon <owner/repo>` clones and pins the upstream, maps its architecture and critical paths, and gathers cited history and adoption material into `research/<tool>/`.
-2. `atlas-write <tool>` turns that research into the bilingual six-section deep-dive and registers the project in `docs/.vitepress/tools.ts`.
+1. **Recon** clones and pins the upstream, maps its architecture and critical paths, and gathers cited history and adoption material into `research/<tool>/`.
+2. **Write** turns that research into the bilingual six-section deep-dive and registers the project in `docs/.vitepress/tools.ts`.
 
 Adding one entry to `tools.ts` updates the sidebar and the homepage catalog at once.
 
