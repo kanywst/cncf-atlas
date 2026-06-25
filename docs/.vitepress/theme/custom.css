@@ -423,6 +423,27 @@ body {
   white-space: nowrap;
 }
 
+/* Undocumented projects: present but not yet linked */
+.cp-tile.todo {
+  opacity: 0.42;
+}
+
+.cp-tile.todo:hover {
+  background: transparent;
+}
+
+/* Documented tiles are links; a hover arrow signals it */
+.cp-arrow {
+  flex: none;
+  color: var(--cp-accent);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.cp-tile:hover .cp-arrow {
+  opacity: 1;
+}
+
 /* Deep-dive panels */
 .cp-dives {
   margin-top: 26px;

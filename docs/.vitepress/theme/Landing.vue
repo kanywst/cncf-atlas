@@ -16,11 +16,30 @@ const totals = computed(() => ({
   total: cncf.graduated.length + cncf.incubating.length + cncf.sandbox.length,
 }))
 
+// Resolve a CNCF project name to a documented deep-dive slug, if one exists.
+function slugify(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/\(.*?\)/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+const docBySlug = new Set(tools.map((t) => t.slug))
+const docByName = new Map(tools.map((t) => [t.name, t.slug]))
+function docSlug(name: string): string | null {
+  const s = slugify(name)
+  if (docBySlug.has(s)) return s
+  return docByName.get(name) ?? null
+}
+
 const panels = computed(() => {
-  const map = new Map<string, { name: string; m: 'g' | 'i' | 's' }[]>()
+  type Tile = { name: string; m: 'g' | 'i' | 's'; link: string | null }
+  const map = new Map<string, Tile[]>()
   const push = (cat: string, name: string, m: 'g' | 'i' | 's') => {
     if (!map.has(cat)) map.set(cat, [])
-    map.get(cat)!.push({ name, m })
+    const slug = docSlug(name)
+    const link = slug ? withBase(`${prefix.value}/tools/${slug}/`) : null
+    map.get(cat)!.push({ name, m, link })
   }
   cncf.graduated.forEach((p) => push(p.category, p.name, 'g'))
   cncf.incubating.forEach((p) => push(p.category, p.name, 'i'))
@@ -151,10 +170,18 @@ const t = computed(() =>
               <span class="c">{{ p.total }}</span>
             </div>
             <div class="cp-tiles">
-              <span class="cp-tile" :class="proj.m" v-for="proj in p.projects" :key="proj.name">
+              <component
+                :is="proj.link ? 'a' : 'span'"
+                v-for="proj in p.projects"
+                :key="proj.name"
+                class="cp-tile"
+                :class="[proj.m, { todo: !proj.link }]"
+                :href="proj.link || undefined"
+              >
                 <i class="dot" />
                 <span class="nm">{{ proj.name }}</span>
-              </span>
+                <span v-if="proj.link" class="cp-arrow">→</span>
+              </component>
             </div>
           </div>
         </div>
