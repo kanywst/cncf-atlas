@@ -1,15 +1,13 @@
-<img src="docs/public/favicon.svg" alt="CNCF Atlas" width="72" align="right" />
+<img src="assets/banner.svg" alt="CNCF Atlas — クラウドネイティブのコントロールサーフェス" width="100%" />
 
-# CNCF Atlas
+[![CI](https://img.shields.io/github/actions/workflow/status/kanywst/cncf-atlas/ci.yml?style=flat-square&label=CI)](https://github.com/kanywst/cncf-atlas/actions/workflows/ci.yml)
+[![Security](https://img.shields.io/github/actions/workflow/status/kanywst/cncf-atlas/security.yml?style=flat-square&label=security)](https://github.com/kanywst/cncf-atlas/actions/workflows/security.yml)
+[![Pages](https://img.shields.io/github/actions/workflow/status/kanywst/cncf-atlas/deploy.yml?style=flat-square&label=pages)](https://github.com/kanywst/cncf-atlas/actions/workflows/deploy.yml)
+[![License](https://img.shields.io/badge/license-MIT-4d9fff?style=flat-square)](./LICENSE)
+[![Stars](https://img.shields.io/github/stars/kanywst/cncf-atlas?style=flat-square&color=4d9fff)](https://github.com/kanywst/cncf-atlas)
+[![Live site](https://img.shields.io/badge/site-live-4d9fff?style=flat-square)](https://kanywst.github.io/cncf-atlas/)
 
-クラウドネイティブ・エコシステムの読める地図。CNCF の各プロジェクトを、歴史・アーキテクチャ・実際の採用事例・コード内部まで、ソースを読んで解説する。
-
-[![CI](https://github.com/kanywst/cncf-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/kanywst/cncf-atlas/actions/workflows/ci.yml)
-[![Security](https://github.com/kanywst/cncf-atlas/actions/workflows/security.yml/badge.svg)](https://github.com/kanywst/cncf-atlas/actions/workflows/security.yml)
-[![Pages](https://github.com/kanywst/cncf-atlas/actions/workflows/deploy.yml/badge.svg)](https://github.com/kanywst/cncf-atlas/actions/workflows/deploy.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-
-[English README →](./README.md)
+[English](./README.md) · **日本語**
 
 ## なぜ作るか
 

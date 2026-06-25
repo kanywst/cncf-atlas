@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 300" width="1280" height="300" role="img" aria-label="CNCF Atlas">
+  <defs>
+    <linearGradient id="ink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d0f11"/>
+      <stop offset="1" stop-color="#08090a"/>
+    </linearGradient>
+    <radialGradient id="aura" cx="78%" cy="6%" r="62%">
+      <stop offset="0" stop-color="#4d9fff" stop-opacity="0.28"/>
+      <stop offset="0.55" stop-color="#4d9fff" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#4d9fff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="300" rx="16" fill="url(#ink)"/>
+  <rect width="1280" height="300" rx="16" fill="url(#grid)"/>
+  <rect width="1280" height="300" rx="16" fill="url(#aura)"/>
+  <rect x="0.5" y="0.5" width="1279" height="299" rx="16" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <g transform="translate(72,84)">
+    <circle cx="5" cy="-5" r="5" fill="#4d9fff"/>
+    <text x="22" y="0" font-family="'JetBrains Mono','SFMono-Regular',ui-monospace,monospace" font-size="14" letter-spacing="3" fill="#4d9fff">CLOUD NATIVE  ·  FIELD MANUAL  ·  230 PROJECTS</text>
+
+    <text x="0" y="78" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="76" font-weight="700" letter-spacing="-2" fill="#e6e9ec">CNCF <tspan fill="#4d9fff">Atlas</tspan></text>
+
+    <text x="2" y="120" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" fill="#8b949e">A control surface for the cloud native ecosystem.</text>
+
+    <g transform="translate(2,150)" font-family="'JetBrains Mono','SFMono-Regular',ui-monospace,monospace" font-size="13">
+      <circle cx="5" cy="-4" r="5" fill="#34d399"/><text x="18" y="0" fill="#8b949e">graduated</text>
+      <circle cx="135" cy="-4" r="5" fill="#fbbf24"/><text x="148" y="0" fill="#8b949e">incubating</text>
+      <circle cx="270" cy="-4" r="5" fill="#94a3b8"/><text x="283" y="0" fill="#8b949e">sandbox</text>
+    </g>
+  </g>
+</svg>
