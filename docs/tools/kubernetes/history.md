@@ -2,7 +2,7 @@
 
 ## Origin
 
-Kubernetes came out of Google. It builds on a decade and a half of running production workloads at scale with an internal system called Borg, plus its successor Omega, and folds in ideas from the wider community ([README.md:13](https://github.com/kubernetes/kubernetes/blob/8c64324b69ac1e444979f2fddf07a63baa759e5a/README.md#L13)). Google describes Kubernetes as its third generation of container management, carrying over the operational lessons from Borg ([Google Cloud origin story](https://cloud.google.com/blog/products/containers-kubernetes/from-google-to-the-world-the-kubernetes-origin-story)).
+Kubernetes came out of Google. It builds on a decade and a half of running production workloads at scale with an internal system called Borg, and folds in ideas from the wider community ([README.md:13](https://github.com/kubernetes/kubernetes/blob/8c64324b69ac1e444979f2fddf07a63baa759e5a/README.md#L13)). Google describes Kubernetes as its third generation of container management, after Borg and its successor Omega, carrying over the operational lessons from both ([Google Cloud origin story](https://cloud.google.com/blog/products/containers-kubernetes/from-google-to-the-world-the-kubernetes-origin-story)).
 
 The project was proposed inside Google in 2013 by Craig McLuckie, Joe Beda, and Brendan Burns, with Brian Grant and Tim Hockin joining soon after. Its internal codename was "Project 7", a Star Trek reference (Seven of Nine) that explains the seven spokes in the logo. The name itself is Greek for "helmsman" ([Wikipedia: Kubernetes](https://en.wikipedia.org/wiki/Kubernetes)). The repository was opened as open source on 2014-06-06 ([IBM: History of Kubernetes](https://www.ibm.com/think/topics/kubernetes-history)).
 

@@ -21,7 +21,7 @@
 
 `PushContext` (`pilot/pkg/model/push_context.go:205`) is the immutable snapshot for one push. It indexes services, virtual services, destination rules, gateways, sidecars, authentication and authorization policies, telemetry, and mesh config. A config change rebuilds it whole.
 
-`PushRequest` (`pilot/pkg/model/push_context.go:358`) is the unit of push. Its `ConfigsUpdated sets.Set[ConfigKey]` field drives the scope optimization: empty means push to all proxies, non-empty means only proxies that depend on those configs (`push_context.go:359-364`). It also carries `Push *PushContext`, `Reason`, `Delta`, and `Forced`. Debounce merges these.
+`PushRequest` (`pilot/pkg/model/push_context.go:359`) is the unit of push. Its `ConfigsUpdated sets.Set[ConfigKey]` field drives the scope optimization: empty means push to all proxies, non-empty means only proxies that depend on those configs (`push_context.go:359-364`). It also carries `Push *PushContext`, `Reason`, `Delta`, and `Forced`. Debounce merges these.
 
 `Proxy` (`pilot/pkg/model/context.go:312`) represents one connected Envoy. It carries `Type`, `IPAddresses`, `ID`, `Locality`, `ConfigNamespace`, `Labels`, `Metadata`, and `SidecarScope`, the set of config visible to that proxy.
 
@@ -68,7 +68,7 @@ From there `StartPush` enqueues every client (`pilot/pkg/xds/ads.go:580-592`), `
 
 The whole config model is rebuilt on every change, not patched. `initPushContext` constructs a fresh `PushContext` and the old one is discarded (`pilot/pkg/xds/discovery.go:294-298`). That sounds expensive, and it is, which is exactly why the design puts a debounce window in front of it (`pilot/pkg/xds/discovery.go:355`) to fold bursts into one rebuild.
 
-The expensive work is also kept off the request path. `ConfigUpdate` only increments counters and writes to a channel (`pilot/pkg/xds/discovery.go:341-342`); the comment above `handleUpdates` notes that debounce and push run on a separate thread precisely because `ConfigUpdate` may already hold other locks (`pilot/pkg/xds/discovery.go:345-348`).
+The expensive work is also kept off the request path. `ConfigUpdate` only increments counters and writes to a channel (`pilot/pkg/xds/discovery.go:335-342`); the comment above `handleUpdates` notes that debounce and push run on a separate thread precisely because `ConfigUpdate` may already hold other locks (`pilot/pkg/xds/discovery.go:345-348`).
 
 Pushes are deliberately throttled. `StartPush` enqueues all clients at once (`pilot/pkg/xds/ads.go:580-592`), but a `concurrentPushLimit` semaphore caps how many proxies are actually written to concurrently, so a config change to a mesh with tens of thousands of proxies does not spike at once.
 

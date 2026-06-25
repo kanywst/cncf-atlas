@@ -12,7 +12,7 @@
 | `in_toto/rulelib.py` | Parses artifact-rule strings into dicts (in_toto/rulelib.py:43) |
 | `in_toto/models/layout.py` | Layout, SupplyChainItem, Step, Inspection (in_toto/models/layout.py:65) |
 | `in_toto/models/link.py` | Link metadata type and filename format (in_toto/models/link.py:36) |
-| `in_toto/models/metadata.py` | Signed-container abstraction: DSSE Envelope and legacy Metablock (in_toto/models/metadata.py:50) |
+| `in_toto/models/metadata.py` | Signed-container abstraction: Dead Simple Signing Envelope (DSSE) and legacy Metablock (in_toto/models/metadata.py:50) |
 | `in_toto/resolver/_resolver.py` | URI-scheme dispatch for hashing artifacts (in_toto/resolver/_resolver.py:21) |
 
 ## Core data structures
@@ -49,11 +49,11 @@ Only through a subsequent "DISALLOW" rule, that finds
 unconsumed artifacts, is an exception raised.
 ```
 
-So a DISALLOW rule punishes anything left in the queue, and a REQUIRE rule punishes a missing artifact, but a plain MATCH or ALLOW just consumes. A MATCH rule is checked by `verify_match_rule` (in_toto/verifylib.py:645), which only consumes a source artifact when the destination link has an artifact with the same path and identical hash (in_toto/verifylib.py:759):
+So a DISALLOW rule punishes anything left in the queue, and a REQUIRE rule punishes a missing artifact, but a plain MATCH or ALLOW just consumes. A MATCH rule is checked by `verify_match_rule` (in_toto/verifylib.py:645), which only consumes a source artifact when the destination link has an artifact with the same path and identical hash (in_toto/verifylib.py:758-760):
 
 ```python
+# Don't consume source artifact w/o corresponding dest artifact (by hash)
 if source_artifact != dest_artifact:
-    # Skip mismatching artifacts
     continue
 ```
 

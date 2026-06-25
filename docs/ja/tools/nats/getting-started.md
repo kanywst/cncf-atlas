@@ -25,21 +25,21 @@ docker run -p 4222:4222 nats
 
 1. JetStream と監視を有効にしてサーバを起動する。
 
-```bash
-nats-server -js -m 8222
-```
+   ```bash
+   nats-server -js -m 8222
+   ```
 
 1. 2 つ目の端末で subject を購読する。
 
-```bash
-nats sub foo
-```
+   ```bash
+   nats sub foo
+   ```
 
 1. 3 つ目の端末でその subject へ publish する。
 
-```bash
-nats pub foo hello
-```
+   ```bash
+   nats pub foo hello
+   ```
 
 購読側が `foo` で受信したメッセージを表示する。
 

@@ -24,7 +24,7 @@
 
 ## エコシステム
 
-Keycloak は OIDC・OAuth 2.0・SAML 2.0 を話す IdP として機能する。LDAP・Active Directory・Kerberos からユーザをフェデレーションし、外部 IdP やソーシャルログインから identity をブローカリングし、UMA 2.0 ベースの Authorization Services を提供する。Kubernetes Operator (`operator/`) と React 製の Admin / Account コンソール (`js/`) を同梱する。Red Hat build of Keycloak の upstream でもある。
+Keycloak は OIDC・OAuth 2.0・SAML 2.0 を話す IdP として機能する。LDAP・Active Directory・Kerberos からユーザをフェデレーションし、外部 IdP やソーシャルログインから identity をブローカリングし、User-Managed Access (UMA) 2.0 ベースの Authorization Services を提供する。Kubernetes Operator (`operator/`) と React 製の Admin / Account コンソール (`js/`) を同梱する。Red Hat build of Keycloak の upstream でもある。
 
 ## 代替候補
 

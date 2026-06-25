@@ -64,4 +64,4 @@ flowchart LR
 
 ## 拡張ポイント
 
-artifact リゾルバのレジストリが主なサードパーティの接続口である。リゾルバは `RESOLVER_FOR_URI_SCHEME` に URI スキーマで自身を登録し (in_toto/resolver/_resolver.py:21)、`Resolver` 抽象基底クラスを実装する (in_toto/resolver/_resolver.py:24)。メタデータ層もエンベロープ形式をまたいで差し替え可能で、DSSE の `Envelope` も旧来の `Metablock` も `Metadata` 抽象を継承している (in_toto/models/metadata.py:144, in_toto/models/metadata.py:220)。
+artifact リゾルバのレジストリが主なサードパーティの接続口である。リゾルバは `RESOLVER_FOR_URI_SCHEME` に URI スキーマで自身を登録し (in_toto/resolver/_resolver.py:21)、`Resolver` 抽象基底クラスを実装する (in_toto/resolver/_resolver.py:24)。メタデータ層もエンベロープ形式をまたいで差し替え可能で、DSSE (Dead Simple Signing Envelope) の `Envelope` も旧来の `Metablock` も `Metadata` 抽象を継承している (in_toto/models/metadata.py:144, in_toto/models/metadata.py:220)。

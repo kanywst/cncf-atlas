@@ -55,6 +55,11 @@ kubectl get deployment hello
 
 健全なクラスタはコントロールプレーンのノードを `Ready`、`hello` Deployment を `1/1` ready で報告する。Service をローカルポートへ port-forward して curl すれば、ワークロードがトラフィックを返すことを確認できる。
 
+```bash
+kubectl port-forward service/hello 8080:8080 &
+curl http://localhost:8080
+```
+
 ## 次に読むもの
 
 コントロールプレーンの HA、RBAC と admission の強化、スケーリングといった本番運用は公式ドキュメント <https://kubernetes.io/docs/> を辿る。実クラスタのブートストラップは `kind` ではなく `kubeadm` (`cmd/kubeadm` 配下) がサポートされた経路だ。

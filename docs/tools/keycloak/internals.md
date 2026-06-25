@@ -6,7 +6,7 @@
 
 | Path | Responsibility |
 | --- | --- |
-| `server-spi/src/main/java/org/keycloak/models/` | SPI facade and domain model interfaces (`KeycloakSession`, `RealmModel`, `ClientModel`, `UserModel`, `UserSessionModel`) |
+| `server-spi/src/main/java/org/keycloak/models/` | Service Provider Interface (SPI) facade and domain model interfaces (`KeycloakSession`, `RealmModel`, `ClientModel`, `UserModel`, `UserSessionModel`) |
 | `services/src/main/java/org/keycloak/protocol/oidc/` | OIDC endpoints, grant types, and code/token utilities |
 | `core/src/main/java/org/keycloak/representations/` | Token representations (`AccessToken`, `IDToken`) |
 | `quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/` | Quarkus server entrypoint and runtime |

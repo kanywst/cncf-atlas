@@ -21,7 +21,8 @@ python -m pip install tuf
 
 ```bash
 git clone https://github.com/theupdateframework/python-tuf
-examples/repository/repo
+cd python-tuf/examples/repository
+./repo
 ```
 
 1. 別のターミナルで、client を trust-on-first-use で初期化する。初期 root をダウンロードし、`Updater` を構築する。

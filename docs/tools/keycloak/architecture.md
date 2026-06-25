@@ -4,7 +4,7 @@
 
 Keycloak is a Maven multi-module Java project that builds into a single Quarkus server distribution. The root `pom.xml` aggregates the modules and pins `maven.compiler.release` to 17 (`pom.xml:36`). The running server starts from a Quarkus entrypoint annotated `@QuarkusMain` (`quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/KeycloakMain.java:58-71`).
 
-The design axis is the SPI plus ProviderFactory pattern: nearly every capability is an interface resolved at runtime, so storage backends, protocols, and authentication steps can be swapped without touching callers. The central facade is `KeycloakSession` (`server-spi/src/main/java/org/keycloak/models/KeycloakSession.java:35`).
+The design axis is the Service Provider Interface (SPI) plus ProviderFactory pattern: nearly every capability is an interface resolved at runtime, so storage backends, protocols, and authentication steps can be swapped without touching callers. The central facade is `KeycloakSession` (`server-spi/src/main/java/org/keycloak/models/KeycloakSession.java:35`).
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ The actual runnable server distribution: the picocli CLI, Quarkus integration, a
 
 ### crypto, saml-core, authz, federation, operator, js, themes, adapters
 
-Supporting modules: cryptography, SAML core, Authorization Services / UMA (`authz`), LDAP/Kerberos user federation (`federation`), the Kubernetes Operator (`operator`), the React Admin/Account consoles and adapters (`js`), and theming (`themes`).
+Supporting modules: cryptography, SAML core, Authorization Services / User-Managed Access (UMA) (`authz`), LDAP/Kerberos user federation (`federation`), the Kubernetes Operator (`operator`), the React Admin/Account consoles and adapters (`js`), and theming (`themes`).
 
 ## How a request flows
 
@@ -60,4 +60,4 @@ The realm is the tenant boundary, a user session is the SSO session, and a clien
 
 ## Extension points
 
-The SPI surface is the extension model. Third parties implement provider interfaces (storage, authenticators, protocol mappers, grant types) and Keycloak resolves them by id. Grant types are themselves SPI providers: `authorization_code`, `refresh_token`, `client_credentials`, `password`, `token-exchange`, CIBA, device, JWT bearer, UMA, and pre-authorized, implemented under `services/src/main/java/org/keycloak/protocol/oidc/grants/`.
+The SPI surface is the extension model. Third parties implement provider interfaces (storage, authenticators, protocol mappers, grant types) and Keycloak resolves them by id. Grant types are themselves SPI providers: `authorization_code`, `refresh_token`, `client_credentials`, `password`, `token-exchange`, CIBA (Client-Initiated Backchannel Authentication), device, JWT bearer, UMA, and pre-authorized, implemented under `services/src/main/java/org/keycloak/protocol/oidc/grants/`.

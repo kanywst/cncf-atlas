@@ -21,7 +21,7 @@ cert-manager は Kubernetes 内部で TLS 証明書管理を自動化する。`C
 
 - Kubernetes 上でワークロードを動かし、TLS 証明書を自動で発行・更新したい。
 - Let's Encrypt など ACME CA を使い、HTTP-01 / DNS-01 チャレンジをクラスタ内で解きたい。
-- 内部 PKI (Vault、プライベート CA、Venafi) があり、Kubernetes ネイティブな単一の消費方法が欲しい。
+- Vault、プライベート CA、Venafi といった内部 PKI (Public Key Infrastructure) があり、Kubernetes ネイティブな単一の消費方法が欲しい。
 - Ingress や Gateway API で TLS を終端し、アノテーションや参照で証明書を結線したい。
 
 証明書が Kubernetes の外側にある場合は不向きで、ホストレベルの ACME クライアントの方が単純である。信頼バンドルをワークロードへ配布する機能は単体では持たない。それは姉妹プロジェクト trust-manager の役割である。

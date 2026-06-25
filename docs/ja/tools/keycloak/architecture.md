@@ -4,7 +4,7 @@
 
 Keycloak は Maven マルチモジュールの Java プロジェクトで、単一の Quarkus サーバ配布物にビルドされる。ルートの `pom.xml` がモジュール群を集約し、`maven.compiler.release` を 17 に固定する (`pom.xml:36`)。動作するサーバは `@QuarkusMain` を付けた Quarkus エントリポイントから起動する (`quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/KeycloakMain.java:58-71`)。
 
-設計の軸は SPI + ProviderFactory パターンである。ほぼすべての機能が実行時に解決される interface であり、ストレージバックエンド・プロトコル・認証ステップを呼び出し側に触れずに差し替えられる。中心となるファサードが `KeycloakSession` である (`server-spi/src/main/java/org/keycloak/models/KeycloakSession.java:35`)。
+設計の軸は Service Provider Interface (SPI) + ProviderFactory パターンである。ほぼすべての機能が実行時に解決される interface であり、ストレージバックエンド・プロトコル・認証ステップを呼び出し側に触れずに差し替えられる。中心となるファサードが `KeycloakSession` である (`server-spi/src/main/java/org/keycloak/models/KeycloakSession.java:35`)。
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ flowchart TD
 
 ### crypto, saml-core, authz, federation, operator, js, themes, adapters
 
-補助モジュール群。暗号、SAML core、Authorization Services / UMA (`authz`)、LDAP/Kerberos ユーザフェデレーション (`federation`)、Kubernetes Operator (`operator`)、React 製 Admin/Account コンソールと adapters (`js`)、テーマ (`themes`)。
+補助モジュール群。暗号、SAML core、Authorization Services / User-Managed Access (UMA) (`authz`)、LDAP/Kerberos ユーザフェデレーション (`federation`)、Kubernetes Operator (`operator`)、React 製 Admin/Account コンソールと adapters (`js`)、テーマ (`themes`)。
 
 ## リクエストの流れ
 
@@ -60,4 +60,4 @@ realm がテナント境界、user session が SSO セッション、client が 
 
 ## 拡張ポイント
 
-SPI 面そのものが拡張モデルである。サードパーティは provider interface (ストレージ、authenticator、protocol mapper、grant 種別) を実装し、Keycloak が id で解決する。grant 種別自体も SPI provider であり、`authorization_code`・`refresh_token`・`client_credentials`・`password`・`token-exchange`・CIBA・device・JWT bearer・UMA・pre-authorized があり、`services/src/main/java/org/keycloak/protocol/oidc/grants/` 配下に実装される。
+SPI 面そのものが拡張モデルである。サードパーティは provider interface (ストレージ、authenticator、protocol mapper、grant 種別) を実装し、Keycloak が id で解決する。grant 種別自体も SPI provider であり、`authorization_code`・`refresh_token`・`client_credentials`・`password`・`token-exchange`・CIBA (Client-Initiated Backchannel Authentication)・device・JWT bearer・UMA・pre-authorized があり、`services/src/main/java/org/keycloak/protocol/oidc/grants/` 配下に実装される。

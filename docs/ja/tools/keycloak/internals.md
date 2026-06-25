@@ -6,7 +6,7 @@
 
 | パス | 責務 |
 | --- | --- |
-| `server-spi/src/main/java/org/keycloak/models/` | SPI ファサードとドメインモデル interface (`KeycloakSession`, `RealmModel`, `ClientModel`, `UserModel`, `UserSessionModel`) |
+| `server-spi/src/main/java/org/keycloak/models/` | Service Provider Interface (SPI) ファサードとドメインモデル interface (`KeycloakSession`, `RealmModel`, `ClientModel`, `UserModel`, `UserSessionModel`) |
 | `services/src/main/java/org/keycloak/protocol/oidc/` | OIDC エンドポイント、grant 種別、code/token ユーティリティ |
 | `core/src/main/java/org/keycloak/representations/` | トークン表現 (`AccessToken`, `IDToken`) |
 | `quarkus/runtime/src/main/java/org/keycloak/quarkus/runtime/` | Quarkus サーバのエントリポイントとランタイム |

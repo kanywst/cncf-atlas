@@ -54,7 +54,7 @@ kubectl get pods
 istioctl proxy-status
 ```
 
-各プロキシは CDS・LDS・EDS・RDS で `SYNCED` を示すはず。`STALE` は push が未 ACK の意味。設定問題を事前に洗い出すには `istioctl analyze` も使える。
+各プロキシは xDS のサブプロトコルである CDS (Cluster Discovery Service)・LDS (Listener Discovery Service)・EDS (Endpoint Discovery Service)・RDS (Route Discovery Service) で `SYNCED` を示すはず。`STALE` は push が未 ACK の意味。設定問題を事前に洗い出すには `istioctl analyze` も使える。
 
 ## 次に読むもの
 

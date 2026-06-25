@@ -2,7 +2,7 @@
 
 ## 起源
 
-Kubernetes は Google から生まれた。本番ワークロードを大規模に動かしてきた 15 年以上の経験、すなわち社内システム Borg、そしてその後継 Omega の知見の上に、コミュニティのアイデアを組み合わせて作られた ([README.md:13](https://github.com/kubernetes/kubernetes/blob/8c64324b69ac1e444979f2fddf07a63baa759e5a/README.md#L13))。Google は Kubernetes を自社における第 3 世代のコンテナ管理基盤と位置づけ、Borg の運用知見を引き継いだものだと述べている ([Google Cloud origin story](https://cloud.google.com/blog/products/containers-kubernetes/from-google-to-the-world-the-kubernetes-origin-story))。
+Kubernetes は Google から生まれた。本番ワークロードを大規模に動かしてきた 15 年以上の経験、すなわち社内システム Borg の知見の上に、コミュニティのアイデアを組み合わせて作られた ([README.md:13](https://github.com/kubernetes/kubernetes/blob/8c64324b69ac1e444979f2fddf07a63baa759e5a/README.md#L13))。Google は Kubernetes を、Borg とその後継 Omega に続く自社における第 3 世代のコンテナ管理基盤と位置づけ、両者の運用知見を引き継いだものだと述べている ([Google Cloud origin story](https://cloud.google.com/blog/products/containers-kubernetes/from-google-to-the-world-the-kubernetes-origin-story))。
 
 プロジェクトは 2013 年に Craig McLuckie・Joe Beda・Brendan Burns によって Google 社内で提案され、まもなく Brian Grant・Tim Hockin らが合流した。社内コードネームは "Project 7" で、Star Trek の Seven of Nine に由来する。ロゴの 7 本のスポークはこれが理由だ。名称自体はギリシャ語で「操舵手」を意味する ([Wikipedia: Kubernetes](https://en.wikipedia.org/wiki/Kubernetes))。リポジトリは 2014-06-06 にオープンソースとして公開された ([IBM: History of Kubernetes](https://www.ibm.com/think/topics/kubernetes-history))。
 

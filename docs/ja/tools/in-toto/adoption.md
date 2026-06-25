@@ -20,7 +20,7 @@ Python リファレンスリポジトリ (in-toto/in-toto) について、GitHub
 
 ## エコシステム
 
-in-toto の attestation フレームワーク (ITE-6) は、他のサプライチェーンツールが中身を埋める statement/subject/predicate エンベロープを定義する。SLSA Provenance はこのエンベロープ上の predicate type として表現される ([SLSA v1.1 FAQ](https://slsa.dev/spec/v1.1/faq))。Sigstore は in-toto メタデータの keyless 署名を提供し、Tekton Chains や GitHub artifact attestations が生成し、GUAC や Grafeas が消費・集約する ([in-toto/friends](https://github.com/in-toto/friends))。
+in-toto の attestation フレームワーク (ITE-6, in-toto Enhancement 6) は、他のサプライチェーンツールが中身を埋める statement/subject/predicate エンベロープを定義する。SLSA Provenance はこのエンベロープ上の predicate type として表現される ([SLSA v1.1 FAQ](https://slsa.dev/spec/v1.1/faq))。Sigstore は in-toto メタデータの keyless 署名を提供し、Tekton Chains や GitHub artifact attestations が生成し、GUAC や Grafeas が消費・集約する ([in-toto/friends](https://github.com/in-toto/friends))。
 
 ## 代替候補
 

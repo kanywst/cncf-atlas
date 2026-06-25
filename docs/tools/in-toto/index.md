@@ -15,7 +15,7 @@ in-toto protects the integrity of a software supply chain end to end. A project 
 
 The Python repository documented here is the reference implementation of the in-toto specification. It ships six command line tools (pyproject.toml:50). The specification itself, and ports in Go, Java, and Rust, live in sibling repositories under the same project.
 
-in-toto is a format and a verification model, not a hosted service. It sits below opinionated layers like SLSA (which expresses build provenance as an in-toto attestation) and alongside Sigstore (which solves the signing and transparency problem). A typical pipeline uses all three together.
+in-toto is a format and a verification model, not a hosted service. It sits below opinionated layers like SLSA (which expresses build provenance as an in-toto attestation) and alongside Sigstore (which solves the signing and transparency problem).
 
 ## When to use it
 

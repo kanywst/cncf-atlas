@@ -29,7 +29,7 @@ Takes the targets discovery produces and pulls their HTTP metrics endpoints on a
 
 ### Storage
 
-The local store is the TSDB, opened via `tsdb.Open` (`cmd/prometheus/main.go:1620`, wrapped by `openDBWithMetrics`). Remote write and remote read go through `remote.NewStorage` (`cmd/prometheus/main.go:917`). A fanout storage combines the local and remote stores into one `storage.Storage` with `storage.NewFanout` (`cmd/prometheus/main.go:918`), so the rest of the system sees a single appender and querier.
+The local store is the TSDB, opened via `tsdb.Open` (`cmd/prometheus/main.go:1620`, wrapped by `openDBWithMetrics`). Remote write and remote read go through `remote.NewStorage` (`cmd/prometheus/main.go:917`). A fanout storage combines the local and remote stores into one `storage.Storage` with `storage.NewFanout` (`cmd/prometheus/main.go:918`), so the rest of the system sees a single appender (the storage write handle that batches samples behind a transaction) and querier.
 
 ### PromQL engine and rule manager
 
@@ -46,7 +46,7 @@ One scrape, end to end:
 1. `scrapeLoop.run` fires every interval and calls `scrapeAndReport` (`scrape/scrape.go:1263`, `scrape/scrape.go:1346`).
 2. It gets an appender and defers the transaction boundary: `Commit` on success, `Rollback` on error (`scrape/scrape.go:1362-1377`).
 3. It scrapes over HTTP and reads the body, reusing a pooled buffer (`scrape/scrape.go:1408`, `scrape/scrape.go:1413`).
-4. The body is handed to `app.append(b, contentType, appendTime)` (`scrape/scrape.go:1446`). On failure it rolls back and writes stale markers via an empty scrape.
+4. The body is handed to `app.append(b, contentType, appendTime)` (`scrape/scrape.go:1446`). On failure it rolls back and writes stale markers (special NaN samples that mark a series as no longer present) via an empty scrape.
 5. `scrapeLoopAppender.append` is the body of the work: it builds a parser for the content type with `textparse.New` (`scrape/scrape.go:1595`, `scrape/scrape.go:1605`) and loops over entries (`scrape/scrape.go:1653`).
 6. Samples pass through an appender wrapped by `appenderWithLimits`, which enforces sample and bucket limits (`scrape/scrape.go:1643`).
 7. They reach `headAppender.Append` in the TSDB (`tsdb/head_append.go:434`), which looks up the series by ref and creates it if absent (`tsdb/head_append.go:442`).

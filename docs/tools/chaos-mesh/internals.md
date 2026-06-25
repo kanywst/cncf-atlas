@@ -17,7 +17,7 @@
 
 - `ChaosImpl` interface: the two methods every fault type implements, `Apply` and `Recover(ctx, index, records, obj) (Phase, error)` (`controllers/chaosimpl/types/types.go:25-29`). This is the seam that absorbs the difference between fault types.
 - `Record`: the injection state of a single target, with `Id`, `SelectorKey`, `Phase`, `InjectedCount`, `RecoveredCount`, and `Events` (`api/v1alpha1/common_types.go:78-88`).
-- `Phase` and `DesiredPhase`: `Phase` is `Not Injected` or `Injected` (`api/v1alpha1/common_types.go:89-97`); `DesiredPhase` is `Run` or `Stop` (`api/v1alpha1/common_types.go:36-43`). These two axes drive the reconciler's state machine.
+- `Phase` and `DesiredPhase`: `Phase` is `Not Injected` or `Injected` (`api/v1alpha1/common_types.go:89-97`); `DesiredPhase` is `Run` or `Stop` (`api/v1alpha1/common_types.go:61-67`). These two axes drive the reconciler's state machine.
 - `InnerObject` and its variants: the common interface every chaos CRD satisfies, covering duration, paused, oneshot, and webhook validation (`api/v1alpha1/common_types.go:146-182`).
 - `ExecStressRequest` (proto): the daemon request for stress injection, carrying `Scope`, `Target` (container id), `CpuStressors`, `MemoryStressors`, `EnterNS`, and `OomScoreAdj` (`pkg/chaosdaemon/pb/chaosdaemon.proto`).
 
@@ -40,7 +40,7 @@ req := pb.ExecStressRequest{
 res, err := pbClient.ExecStressors(ctx, &req)
 ```
 
-That is `controllers/chaosimpl/stresschaos/impl.go:77-87`; the stress argument strings come from `Stressors.Normalize()` at `impl.go:67-75`, and the returned PID and start time are written into `Status.Instances` at `impl.go:90-101`.
+That is `controllers/chaosimpl/stresschaos/impl.go:77-87`; the stress argument strings come from `Stressors.Normalize()` at `impl.go:67-75`, and the returned PID and start time are written into `Status.Instances` at `impl.go:93-102`.
 
 On the node, `ExecStressors` (`pkg/chaosdaemon/stress_server_linux.go:33`) dispatches to `ExecCPUStressors` (`:112`), which looks up the container PID with `crClient.GetPidFromContainerID` (`:118`), gets the cgroup attacher with `cgroups.GetAttacherForPID` (`:123`), builds the process with `bpm.DefaultProcessBuilder("stress-ng", ...).EnablePause()` and, when `EnterNS` is set, `SetNS(pid, bpm.PidNS)` (`:128-132`).
 

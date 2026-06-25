@@ -19,7 +19,7 @@
 
 The `Entity` type is the spine: `apiVersion`, `kind`, `metadata`, optional `spec`, optional `relations` (`packages/catalog-model/src/entity/Entity.ts:28-54`). The invariant worth knowing is in `EntityMeta`: `uid` and `etag` are server-owned. The docstrings state they cannot be set by the user at creation time and the server will reject requests that try (`Entity.ts:67-100`, fields at `uid` line 77 and `etag` line 89 in that block).
 
-Entity references are the other foundational structure. `parseEntityRef`, `stringifyEntityRef`, and `getCompoundEntityRef` convert between the `kind:namespace/name` string form and a `CompoundEntityRef` object (`packages/catalog-model/src/entity/ref.ts:55`, `:77`, `:140`). Processing and stitching use these ref strings as map keys, which is why the relation-diff logic in the engine builds `Map<string, string>` keyed by stringified refs.
+Entity references are the other foundational structure. `getCompoundEntityRef`, `parseEntityRef`, and `stringifyEntityRef` convert between the `kind:namespace/name` string form and a `CompoundEntityRef` object (`packages/catalog-model/src/entity/ref.ts:55`, `:77`, `:140`). Processing and stitching use these ref strings as map keys, which is why the relation-diff logic in the engine builds `Map<string, string>` keyed by stringified refs.
 
 The processing queue item is `RefreshStateItem`: `id`, `unprocessedEntity`, `state`, `entityRef`, `locationKey`, `resultHash`. The engine destructures exactly these fields when it processes a task (`DefaultCatalogProcessingEngine.ts:155-172`).
 

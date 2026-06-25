@@ -2,9 +2,9 @@
 
 ## Who uses it
 
-Authelia's adoption is visible mainly through its GitHub presence and its standing in the self-hosting community, not through named enterprise case studies. As of 2026-06-21 the repository has about 28,100 stars and 1,420 forks. The README credits more than one hundred contributors.
+Authelia's adoption is visible mainly through its GitHub presence and its standing in the self-hosting community; there are no named enterprise case studies. As of 2026-06-21 the repository has about 28,100 stars and 1,420 forks. The README credits more than one hundred contributors.
 
-There is no ADOPTERS file and no published case study naming specific organisations running Authelia in production. Several independent comparison write-ups from 2025 and 2026 consistently describe it as a default, purpose-built SSO and 2FA choice in the homelab and self-hosting community, often paired with LLDAP as a lightweight user store. That is the honest shape of its adoption: broad in self-hosting, not documented in enterprise references.
+There is no ADOPTERS file and no published case study naming specific organisations running Authelia in production. Several independent comparison write-ups from 2025 and 2026 consistently describe it as a default, purpose-built SSO and 2FA choice in the homelab and self-hosting community, often paired with LLDAP as a lightweight user store. Its adoption is broad in self-hosting and not documented in enterprise references.
 
 ## Adoption signals
 
@@ -24,7 +24,7 @@ Authelia is a companion to a reverse proxy, so its ecosystem is the set of proxi
 | Traefik (v2 and v3) | ForwardAuth | Fully supported |
 | Caddy (v2.5.1+) | ForwardAuth | Fully supported |
 | NGINX | auth_request | Fully supported |
-| Envoy (v4.37.0+) | ExtAuthz | Fully supported |
+| Envoy (via Authelia v4.37.0+) | ExtAuthz | Fully supported |
 | HAProxy | ForwardAuth (Lua) | Supported, Lua required |
 | Skipper | ForwardAuth | Fully supported |
 

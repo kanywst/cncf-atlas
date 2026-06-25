@@ -20,7 +20,7 @@ For the Python reference repository (in-toto/in-toto), the GitHub API reported 1
 
 ## Ecosystem
 
-in-toto's attestation framework (ITE-6) defines the statement/subject/predicate envelope that other supply chain tools fill in. SLSA Provenance is expressed as a predicate type on top of this envelope ([SLSA v1.1 FAQ](https://slsa.dev/spec/v1.1/faq)). Sigstore provides keyless signing for in-toto metadata, Tekton Chains and GitHub artifact attestations produce it, and GUAC and Grafeas consume and aggregate it ([in-toto/friends](https://github.com/in-toto/friends)).
+in-toto's attestation framework (ITE-6, in-toto Enhancement 6) defines the statement/subject/predicate envelope that other supply chain tools fill in. SLSA Provenance is expressed as a predicate type on top of this envelope ([SLSA v1.1 FAQ](https://slsa.dev/spec/v1.1/faq)). Sigstore provides keyless signing for in-toto metadata, Tekton Chains and GitHub artifact attestations produce it, and GUAC and Grafeas consume and aggregate it ([in-toto/friends](https://github.com/in-toto/friends)).
 
 ## Alternatives
 

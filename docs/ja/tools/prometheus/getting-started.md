@@ -5,7 +5,7 @@
 ## 前提
 
 - 手早く試すなら Docker。または
-- ソースからビルドするなら Go (`go.mod` 記載のバージョン以上)、Node (`web/ui/.nvmrc` 記載のバージョン以上)、npm 10 以上 (README:71-74)。
+- ソースからビルドするなら Go (`go.mod` 記載のバージョン以上)、Node (`web/ui/.nvmrc` 記載のバージョン以上)、npm 10 以上 (README:70-72)。
 
 ## インストール
 
@@ -15,7 +15,7 @@
 docker run --name prometheus -d -p 127.0.0.1:9090:9090 prom/prometheus
 ```
 
-ソースからビルドする場合 (README:79-101)。
+ソースからビルドする場合 (README:76-78, 101)。
 
 ```bash
 git clone https://github.com/prometheus/prometheus.git

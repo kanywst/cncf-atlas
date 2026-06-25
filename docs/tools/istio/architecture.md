@@ -32,7 +32,7 @@ The CLI is `istioctl/`, built from `istioctl/cmd/istioctl` (`Makefile.core.mk:21
 
 ### istio-cni
 
-`cni/` is the CNI plugin, built from `cni/cmd/istio-cni` (`Makefile.core.mk:219`). It sets up the traffic redirection that steers a pod's traffic through the sidecar or, in ambient mode, the node ztunnel.
+`cni/` is the CNI plugin, built from `cni/cmd/istio-cni` (`Makefile.core.mk:218`). It sets up the traffic redirection that steers a pod's traffic through the sidecar or, in ambient mode, the node ztunnel.
 
 ### Shared libraries
 

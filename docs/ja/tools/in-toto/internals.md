@@ -12,7 +12,7 @@
 | `in_toto/rulelib.py` | artifact rule 文字列を dict にパース (in_toto/rulelib.py:43) |
 | `in_toto/models/layout.py` | Layout, SupplyChainItem, Step, Inspection (in_toto/models/layout.py:65) |
 | `in_toto/models/link.py` | Link メタデータ型とファイル名形式 (in_toto/models/link.py:36) |
-| `in_toto/models/metadata.py` | 署名コンテナ抽象。DSSE Envelope と旧 Metablock (in_toto/models/metadata.py:50) |
+| `in_toto/models/metadata.py` | 署名コンテナ抽象。DSSE (Dead Simple Signing Envelope) と旧 Metablock (in_toto/models/metadata.py:50) |
 | `in_toto/resolver/_resolver.py` | artifact ハッシュ化の URI スキーマ別ディスパッチ (in_toto/resolver/_resolver.py:21) |
 
 ## 中核データ構造
@@ -49,11 +49,11 @@ Only through a subsequent "DISALLOW" rule, that finds
 unconsumed artifacts, is an exception raised.
 ```
 
-つまり DISALLOW ルールはキューに残ったものを罰し、REQUIRE ルールは見つからないものを罰するが、素の MATCH や ALLOW は消費するだけである。MATCH ルールは `verify_match_rule` (in_toto/verifylib.py:645) が検査し、宛先 link に同じパスかつ同一ハッシュの artifact があるときだけ source artifact を消費する (in_toto/verifylib.py:759):
+つまり DISALLOW ルールはキューに残ったものを罰し、REQUIRE ルールは見つからないものを罰するが、素の MATCH や ALLOW は消費するだけである。MATCH ルールは `verify_match_rule` (in_toto/verifylib.py:645) が検査し、宛先 link に同じパスかつ同一ハッシュの artifact があるときだけ source artifact を消費する (in_toto/verifylib.py:758-760):
 
 ```python
+# Don't consume source artifact w/o corresponding dest artifact (by hash)
 if source_artifact != dest_artifact:
-    # Skip mismatching artifacts
     continue
 ```
 

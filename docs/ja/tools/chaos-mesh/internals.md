@@ -17,7 +17,7 @@
 
 - `ChaosImpl` インターフェース: 全障害種別が実装する 2 メソッド `Apply` と `Recover(ctx, index, records, obj) (Phase, error)` (`controllers/chaosimpl/types/types.go:25-29`)。障害種別の差を吸収する継ぎ目。
 - `Record`: ターゲット 1 個の注入状態。`Id` / `SelectorKey` / `Phase` / `InjectedCount` / `RecoveredCount` / `Events` を持つ (`api/v1alpha1/common_types.go:78-88`)。
-- `Phase` と `DesiredPhase`: `Phase` は `Not Injected` か `Injected` (`api/v1alpha1/common_types.go:89-97`)、`DesiredPhase` は `Run` か `Stop` (`api/v1alpha1/common_types.go:36-43`)。この 2 軸が reconciler の状態機械を駆動する。
+- `Phase` と `DesiredPhase`: `Phase` は `Not Injected` か `Injected` (`api/v1alpha1/common_types.go:89-97`)、`DesiredPhase` は `Run` か `Stop` (`api/v1alpha1/common_types.go:61-67`)。この 2 軸が reconciler の状態機械を駆動する。
 - `InnerObject` とその派生: 全カオス CRD が満たす共通インターフェース。duration / paused / oneshot 判定と webhook validation を含む (`api/v1alpha1/common_types.go:146-182`)。
 - `ExecStressRequest` (proto): daemon へのストレス注入リクエスト。`Scope` / `Target` (container id) / `CpuStressors` / `MemoryStressors` / `EnterNS` / `OomScoreAdj` を運ぶ (`pkg/chaosdaemon/pb/chaosdaemon.proto`)。
 
@@ -40,7 +40,7 @@ req := pb.ExecStressRequest{
 res, err := pbClient.ExecStressors(ctx, &req)
 ```
 
-これは `controllers/chaosimpl/stresschaos/impl.go:77-87`。ストレス引数文字列は `impl.go:67-75` の `Stressors.Normalize()` で組まれ、戻りの PID と起動時刻は `impl.go:90-101` で `Status.Instances` に書かれる。
+これは `controllers/chaosimpl/stresschaos/impl.go:77-87`。ストレス引数文字列は `impl.go:67-75` の `Stressors.Normalize()` で組まれ、戻りの PID と起動時刻は `impl.go:93-102` で `Status.Instances` に書かれる。
 
 ノード側では `ExecStressors` (`pkg/chaosdaemon/stress_server_linux.go:33`) が `ExecCPUStressors` (`:112`) に振り分ける。これは `crClient.GetPidFromContainerID` でコンテナ PID を引き (`:118`)、`cgroups.GetAttacherForPID` で cgroup attacher を得て (`:123`)、`bpm.DefaultProcessBuilder("stress-ng", ...).EnablePause()` でプロセスを組み、`EnterNS` が立っていれば `SetNS(pid, bpm.PidNS)` を付ける (`:128-132`)。
 

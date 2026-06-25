@@ -25,21 +25,21 @@ The shortest path to a running server and a delivered message. The default clien
 
 1. Start the server with JetStream enabled and monitoring on.
 
-```bash
-nats-server -js -m 8222
-```
+   ```bash
+   nats-server -js -m 8222
+   ```
 
 1. In a second terminal, subscribe to a subject.
 
-```bash
-nats sub foo
-```
+   ```bash
+   nats sub foo
+   ```
 
 1. In a third terminal, publish a message to that subject.
 
-```bash
-nats pub foo hello
-```
+   ```bash
+   nats pub foo hello
+   ```
 
 The subscriber prints the received message on `foo`.
 

@@ -2,7 +2,7 @@
 
 ## Big picture
 
-Backstage is a monorepo with two top-level halves: `packages/*` is the framework core, and `plugins/*` is the 159 plugins that do the actual work. An adopter composes a frontend React app and a Node backend out of these. The conceptual center is the Software Catalog, which stores Entities and keeps them fresh through a reconcile loop modeled on Kubernetes, rather than a CRUD store. Templates, TechDocs, and Search all build on top of the catalog.
+Backstage is a monorepo with two top-level halves: `packages/*` is the framework core, and `plugins/*` is the 159 plugins that do the actual work. An adopter composes a frontend React app and a Node backend out of these. The conceptual center is the Software Catalog, which stores Entities and keeps them fresh through a reconcile loop modeled on Kubernetes, rather than a CRUD store. Templates, TechDocs, and Search all build on top of the catalog. Stitching, referenced throughout below, is the step that merges an entity's relations from every source into the single final record the API serves.
 
 ```mermaid
 flowchart TD
@@ -28,7 +28,7 @@ Owns the processing loop, stitching, and the database. This is where entities go
 
 ### Backend framework (`packages/backend-plugin-api`, `packages/backend`)
 
-The dependency-injection wiring. Core services such as auth, cache, database, discovery, and httpRouter are declared with `createServiceRef` in `packages/backend-plugin-api/src/services/definitions/CoreServices.ts:34`, and plugins and modules are declared with `createBackendPlugin` (`packages/backend-plugin-api/src/wiring/createBackendPlugin.ts:53`) and `createBackendModule` (`createBackendModule.ts:58`). The example backend assembles a portal in `packages/backend/src/index.ts:24-82`.
+The dependency-injection wiring. Core services such as auth, cache, database, discovery, and httpRouter are declared with `createServiceRef` in `packages/backend-plugin-api/src/services/definitions/CoreServices.ts:34`, and plugins and modules are declared with `createBackendPlugin` (`packages/backend-plugin-api/src/wiring/createBackendPlugin.ts:53`) and `createBackendModule` (`createBackendModule.ts:58`). The example backend assembles a portal in `packages/backend/src/index.ts:24-80`.
 
 ## How a request flows
 
@@ -37,11 +37,11 @@ Trace one entity from ingestion to being served by the API:
 1. The engine starts. `DefaultCatalogProcessingEngine.start()` launches the processing pipeline and an orphan-cleanup loop (`plugins/catalog-backend/src/processing/DefaultCatalogProcessingEngine.ts:114-126`).
 2. The pipeline is polling-driven. `startPipeline` calls `startTaskPipeline` with `lowWatermark: 5` and `highWatermark: 10`, and `loadTasks` pulls due entities from the DB via `getProcessableEntities` (`DefaultCatalogProcessingEngine.ts:135-154`, `processing/TaskPipeline.ts:66-75`).
 3. For each item, `processTask` calls `orchestrator.process({ entity, state })` (`DefaultCatalogProcessingEngine.ts:155-172`).
-4. The orchestrator runs `processSingleEntity`, applying the registered processors in order: envelope validation, preProcess, policy, validate, optional special-location handling, then postProcess (`processing/DefaultCatalogProcessingOrchestrator.ts:116-130`).
+4. The orchestrator runs `processSingleEntity`, applying the registered processors in order: envelope validation, preProcess, policy, validate, optional special-location handling, then postProcess (envelope check at `processing/DefaultCatalogProcessingOrchestrator.ts:139`, the ordered steps at `:158-164`).
 5. Processors emit side products into a `collector`: derived (deferred) entities, relations, and refresh keys. Each emitted entity is checked against `rulesEnforcer.isAllowed` so that a location can only originate kinds it is permitted to, which blocks cross-location injection (`DefaultCatalogProcessingOrchestrator.ts:166-186`).
 6. Back in the engine, the outputs are hashed. If the new `resultHash` equals the previous one, the engine writes nothing and skips stitching entirely (`DefaultCatalogProcessingEngine.ts:219-249`).
 7. On a real change, `updateProcessedEntity` persists the result, the diff of old and new relation sources builds a `setOfThingsToStitch`, and `markForStitching` flags those entities in the DB (`DefaultCatalogProcessingEngine.ts:292-342`).
-8. A separate Stitcher phase (`plugins/catalog-backend/src/stitching/DefaultStitcher.ts`) assembles the final entity in the `final_entities` table from every source's relations. That final entity is what the Catalog API returns.
+8. A separate Stitcher phase (`plugins/catalog-backend/src/stitching/DefaultStitcher.ts`) assembles the final entity from every source's relations; the actual write to the `final_entities` table happens in `plugins/catalog-backend/src/database/operations/stitcher/performStitching.ts:225`. That final entity is what the Catalog API returns.
 
 ## Key design decisions
 

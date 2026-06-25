@@ -29,33 +29,33 @@ helm install chaos-mesh chaos-mesh/chaos-mesh \
 
 1. コンポーネントが動いているか確認する。
 
-```bash
-kubectl get pods -n chaos-mesh
-```
+   ```bash
+   kubectl get pods -n chaos-mesh
+   ```
 
-1. ラベルセレクタにマッチする 1 つの Pod を kill する最小の PodChaos を用意する。`pod-kill.yaml` として保存する。
+2. ラベルセレクタにマッチする 1 つの Pod を kill する最小の PodChaos を用意する。`pod-kill.yaml` として保存する。
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: PodChaos
-metadata:
-  name: pod-kill-example
-  namespace: chaos-mesh
-spec:
-  action: pod-kill
-  mode: one
-  selector:
-    namespaces:
-      - default
-    labelSelectors:
-      app: my-app
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: PodChaos
+   metadata:
+     name: pod-kill-example
+     namespace: chaos-mesh
+   spec:
+     action: pod-kill
+     mode: one
+     selector:
+       namespaces:
+         - default
+       labelSelectors:
+         app: my-app
+   ```
 
-1. 実験を適用する。
+3. 実験を適用する。
 
-```bash
-kubectl apply -f pod-kill.yaml
-```
+   ```bash
+   kubectl apply -f pod-kill.yaml
+   ```
 
 ## 動作確認
 

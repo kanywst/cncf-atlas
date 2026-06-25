@@ -13,7 +13,7 @@
 
 Keycloak is a standalone identity provider (IdP). Applications delegate login, single sign-on, and token issuance to it instead of building their own. It speaks OpenID Connect, OAuth 2.0, and SAML 2.0, so a web app, a mobile client, or a backend service can authenticate users and obtain tokens through standard protocols.
 
-Beyond issuing tokens, Keycloak manages the users themselves. It can store accounts in its own database, federate them from LDAP, Active Directory, or Kerberos, or broker identity from external IdPs and social logins. It also ships fine-grained Authorization Services based on UMA 2.0 for projects that need policy-driven access decisions in one place.
+Beyond issuing tokens, Keycloak manages the users themselves. It can store accounts in its own database, federate them from LDAP, Active Directory, or Kerberos, or broker identity from external IdPs and social logins. It also ships fine-grained Authorization Services based on User-Managed Access (UMA) 2.0 for projects that need policy-driven access decisions in one place.
 
 The runtime is a Quarkus application. The same server runs the login flows, the admin REST API, the React-based Admin and Account consoles, and an optional Kubernetes Operator for cluster deployment.
 

@@ -21,7 +21,8 @@ The client and repository examples in the source tree are the shortest path to a
 
 ```bash
 git clone https://github.com/theupdateframework/python-tuf
-examples/repository/repo
+cd python-tuf/examples/repository
+./repo
 ```
 
 1. In another terminal, initialize the client with trust-on-first-use. This downloads the initial root, then constructs an `Updater`.

@@ -29,33 +29,33 @@ The chart deploys the controller-manager, the chaos-daemon DaemonSet, and the da
 
 1. Confirm the components are running.
 
-```bash
-kubectl get pods -n chaos-mesh
-```
+   ```bash
+   kubectl get pods -n chaos-mesh
+   ```
 
-1. Apply a minimal PodChaos that kills one pod matched by a label selector. Save it as `pod-kill.yaml`.
+2. Apply a minimal PodChaos that kills one pod matched by a label selector. Save it as `pod-kill.yaml`.
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: PodChaos
-metadata:
-  name: pod-kill-example
-  namespace: chaos-mesh
-spec:
-  action: pod-kill
-  mode: one
-  selector:
-    namespaces:
-      - default
-    labelSelectors:
-      app: my-app
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: PodChaos
+   metadata:
+     name: pod-kill-example
+     namespace: chaos-mesh
+   spec:
+     action: pod-kill
+     mode: one
+     selector:
+       namespaces:
+         - default
+       labelSelectors:
+         app: my-app
+   ```
 
-1. Apply the experiment.
+3. Apply the experiment.
 
-```bash
-kubectl apply -f pod-kill.yaml
-```
+   ```bash
+   kubectl apply -f pod-kill.yaml
+   ```
 
 ## Verify it works
 

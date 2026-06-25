@@ -45,8 +45,8 @@ Issuing one `Certificate` is not a single loop. It is split across several small
 
 1. trigger: `ProcessItem` (`pkg/controller/certificates/trigger/trigger_controller.go:160`) checks for duplicate Secret ownership via `CertificateOwnsSecret` (`:188`), applies a failure backoff (`:210`), and evaluates the reissue policy with `shouldReissue` (`:225`). If reissuance is due it sets the `Issuing` condition to True and updates status (`:243`). It does not create a CertificateRequest.
 2. keymanager: sees `Issuing=True`, generates the private key Secret for the next revision, and records `status.nextPrivateKeySecretName` (`pkg/controller/certificates/keymanager`).
-3. requestmanager: `ProcessItem` (`pkg/controller/certificates/requestmanager/requestmanager_controller.go:140`) confirms `Issuing=True` (`:156`), decodes the key from the next-private-key Secret (`:180`), and if no matching CertificateRequest exists calls `createNewCertificateRequest` (`:236`, defined at `:367`). The CSR is encoded from the key (`:381`) and PEM-wrapped (`:387`), then the request is created via `CertmanagerV1().CertificateRequests(...).Create(...)` (`:435`).
-4. signer: the signer matching the `IssuerRef` handles the CertificateRequest. For ACME, `Sign` (`pkg/controller/certificaterequests/acme/acme.go:118`) decodes the CSR (`:122`), checks the CommonName appears in the SANs (`:133`), builds the expected `Order` (`:145`), and creates it if absent (`:160`).
+3. requestmanager: `ProcessItem` (`pkg/controller/certificates/requestmanager/requestmanager_controller.go:140`) confirms `Issuing=True` (`:156`), decodes the key from the next-private-key Secret (`:180`), and if no matching CertificateRequest exists calls `createNewCertificateRequest` (`:236`, defined at `:367`). The CSR (Certificate Signing Request) is encoded from the key (`:381`) and PEM-wrapped (`:387`), then the request is created via `CertmanagerV1().CertificateRequests(...).Create(...)` (`:435`).
+4. signer: the signer matching the `IssuerRef` handles the CertificateRequest. For ACME, `Sign` (`pkg/controller/certificaterequests/acme/acme.go:118`) decodes the CSR (`:122`), checks the CommonName appears in the SANs (Subject Alternative Names) (`:133`), builds the expected `Order` (`:145`), and creates it if absent (`:160`).
 5. acmeorders / acmechallenges: `pkg/controller/acmeorders` and `pkg/controller/acmechallenges` drive the Order against the ACME server and solve the Challenge (HTTP-01 or DNS-01). The acmesolver Pod answers HTTP-01. The signed certificate is written back to the CertificateRequest status.
 6. issuing: writes the signed certificate into the real Secret and clears the `Issuing` condition (`pkg/controller/certificates/issuing`). The readiness controller then sets the `Ready` condition.
 
@@ -56,7 +56,7 @@ The defining choice is splitting reconciliation into micro-controllers. Each con
 
 The `CertificateRequest` is a deliberate intermediate contract. Every issuer type, ACME, CA, SelfSigned, Vault, Venafi (`pkg/controller/certificaterequests/`), consumes the same CertificateRequest, so an external process can sign requests out of band. This is what lets third-party issuers exist without forking the core.
 
-ACME error handling separates retriable from fatal. Network failures become Pending plus backoff, while an undecodable CSR or a CommonName not in the SANs is a hard fail to avoid infinite retries (`pkg/controller/certificaterequests/acme/acme.go:122`-`:142`).
+ACME error handling separates retriable from fatal. Network failures become Pending plus backoff (`pkg/controller/certificaterequests/acme/acme.go:164`, `:181`), while an undecodable CSR or a CommonName not in the SANs is a hard fail to avoid infinite retries (`acme.go:122`-`:142`).
 
 ## Extension points
 

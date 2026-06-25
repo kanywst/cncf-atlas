@@ -19,7 +19,7 @@
 
 `Entity` 型が背骨だ。`apiVersion`・`kind`・`metadata`・任意の `spec`・任意の `relations` (`packages/catalog-model/src/entity/Entity.ts:28-54`)。知っておくべき不変条件は `EntityMeta` にある。`uid` と `etag` はサーバ所有だ。docstring はこれらが作成時にユーザによって設定できず、設定しようとするリクエストをサーバが拒否すると明記している (`Entity.ts:67-100`、当該ブロック内で `uid` が 77 行目、`etag` が 89 行目)。
 
-entity ref はもう 1 つの基礎構造だ。`parseEntityRef`・`stringifyEntityRef`・`getCompoundEntityRef` が `kind:namespace/name` の文字列形式と `CompoundEntityRef` オブジェクトを相互変換する (`packages/catalog-model/src/entity/ref.ts:55`, `:77`, `:140`)。処理と stitching はこの ref 文字列をマップのキーに使う。だからエンジンの relation 差分ロジックは stringify した ref をキーにした `Map<string, string>` を組む。
+entity ref はもう 1 つの基礎構造だ。`getCompoundEntityRef`・`parseEntityRef`・`stringifyEntityRef` が `kind:namespace/name` の文字列形式と `CompoundEntityRef` オブジェクトを相互変換する (`packages/catalog-model/src/entity/ref.ts:55`, `:77`, `:140`)。処理と stitching はこの ref 文字列をマップのキーに使う。だからエンジンの relation 差分ロジックは stringify した ref をキーにした `Map<string, string>` を組む。
 
 処理キューのアイテムは `RefreshStateItem` だ: `id`・`unprocessedEntity`・`state`・`entityRef`・`locationKey`・`resultHash`。エンジンはタスクを処理するときまさにこれらのフィールドを分解する (`DefaultCatalogProcessingEngine.ts:155-172`)。
 

@@ -5,7 +5,7 @@
 ## Prerequisites
 
 - Docker, for the quickest trial run, or
-- Go (version in `go.mod` or greater), Node (version in `web/ui/.nvmrc` or greater), and npm 10+ to build from source (README:71-74).
+- Go (version in `go.mod` or greater), Node (version in `web/ui/.nvmrc` or greater), and npm 10+ to build from source (README:70-72).
 
 ## Install
 
@@ -15,7 +15,7 @@ The fastest path is the official container image (README:60-61):
 docker run --name prometheus -d -p 127.0.0.1:9090:9090 prom/prometheus
 ```
 
-To build from source instead (README:79-101):
+To build from source instead (README:76-78, 101):
 
 ```bash
 git clone https://github.com/prometheus/prometheus.git

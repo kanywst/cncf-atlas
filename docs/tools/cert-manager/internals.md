@@ -14,7 +14,7 @@ The repository is multi-module. The root module is `github.com/cert-manager/cert
 | `pkg/controller/certificaterequests/` | Issuer-specific signers: acme, ca, selfsigned, vault, venafi, plus approver and checks |
 | `pkg/controller/acmeorders`, `pkg/controller/acmechallenges` | ACME Order and Challenge reconcilers |
 | `pkg/issuer/`, `pkg/acme/` | Issuer abstraction and the ACME client wrapper |
-| `internal/cainjector/` | CA bundle injection reconciler |
+| `pkg/controller/cainjector/` | CA bundle injection reconciler (supporting code under `internal/cainjector`) |
 | `cmd/` | Binary entry points, each an independent module |
 
 ## Core data structures
@@ -22,7 +22,7 @@ The repository is multi-module. The root module is `github.com/cert-manager/cert
 A handful of types carry the whole system:
 
 - `CertificateSpec` (`pkg/apis/certmanager/v1/types_certificate.go:133`) and `CertificateStatus` (`:646`). The status holds conditions, revision, renewalTime, and `nextPrivateKeySecretName`, which is the coordination surface the micro-controllers read and write.
-- `CertificateRequestSpec` (`pkg/apis/certmanager/v1/types_certificaterequest.go:111`). It carries the CSR PEM in `Request`, plus `IssuerRef`, `Duration`, and `IsCA`. It is the issuer-neutral intermediate representation of one issuance.
+- `CertificateRequestSpec` (`pkg/apis/certmanager/v1/types_certificaterequest.go:111`). It carries the CSR (Certificate Signing Request) PEM in `Request`, plus `IssuerRef`, `Duration`, and `IsCA`. It is the issuer-neutral intermediate representation of one issuance.
 - `IssuerSpec` (`pkg/apis/certmanager/v1/types_issuer.go:100`) wrapping `IssuerConfig` (`:106`), a union of `ACME`, `CA`, `Vault`, `SelfSigned`, and `Venafi`.
 - `Order` (`pkg/apis/acme/v1/types_order.go:39`, spec at `:58`) and `Challenge` (`pkg/apis/acme/v1/types_challenge.go:39`, spec at `:58`). These persist ACME protocol state as CRDs.
 
@@ -46,4 +46,4 @@ State is spread across resources on purpose. No single controller owns issuance;
 
 The deterministic naming has a documented sharp edge. Under the `StableCertificateRequestName` feature gate, the CertificateRequest name is derived from a cryptographic hash of the certificate name to stay within the 253-character limit (`requestmanager_controller.go:417`-`:432`). The ACME signer carries a TODO that the hash does not account for the request's public key, so two requests could collide on a name (`acme.go:186`-).
 
-ACME failures are sorted by cause. A failed Order create is treated as network-related, so it backs off and retries (`acme.go:160` onward), while a CSR that cannot be decoded or a CommonName missing from the SANs calls `reporter.Failed` and returns without retry (`acme.go:122`-`:142`). The split keeps transient outages from becoming permanent failures and keeps user errors from looping forever.
+ACME failures are sorted by cause. A failed Order create is treated as network-related, so it backs off and retries (`acme.go:158`-`:160`), while a CSR that cannot be decoded or a CommonName missing from the SANs (Subject Alternative Names) calls `reporter.Failed` and returns without retry (`acme.go:122`-`:142`). The split keeps transient outages from becoming permanent failures and keeps user errors from looping forever.

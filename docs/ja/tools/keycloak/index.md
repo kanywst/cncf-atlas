@@ -13,7 +13,7 @@
 
 Keycloak は単独で動く ID プロバイダ (IdP) である。アプリは自前でログインを実装せず、ログイン・シングルサインオン・トークン発行を Keycloak に委譲する。OpenID Connect / OAuth 2.0 / SAML 2.0 を話すため、Web アプリ・モバイルクライアント・バックエンドサービスが標準プロトコル経由でユーザ認証とトークン取得を行える。
 
-トークン発行にとどまらず、ユーザ自体も管理する。アカウントを自前の DB に保存することも、LDAP・Active Directory・Kerberos からフェデレーションすることも、外部 IdP やソーシャルログインから identity をブローカリングすることもできる。さらに UMA 2.0 ベースのきめ細かい Authorization Services を備え、ポリシー駆動のアクセス判定を一箇所に集約したいプロジェクトに対応する。
+トークン発行にとどまらず、ユーザ自体も管理する。アカウントを自前の DB に保存することも、LDAP・Active Directory・Kerberos からフェデレーションすることも、外部 IdP やソーシャルログインから identity をブローカリングすることもできる。さらに User-Managed Access (UMA) 2.0 ベースのきめ細かい Authorization Services を備え、ポリシー駆動のアクセス判定を一箇所に集約したいプロジェクトに対応する。
 
 ランタイムは Quarkus アプリケーションである。同一サーバがログインフロー・admin REST API・React 製の Admin / Account コンソール・(任意の) Kubernetes Operator を提供する。
 

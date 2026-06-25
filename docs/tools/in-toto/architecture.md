@@ -64,4 +64,4 @@ Tracing `in-toto-verify` end to end:
 
 ## Extension points
 
-The artifact resolver registry is the main third-party seam: a resolver registers itself under a URI scheme in `RESOLVER_FOR_URI_SCHEME` (in_toto/resolver/_resolver.py:21) and implements the `Resolver` abstract base class (in_toto/resolver/_resolver.py:24). The metadata layer is also pluggable across envelope formats: both the DSSE `Envelope` and the legacy `Metablock` subclass the `Metadata` abstraction (in_toto/models/metadata.py:144, in_toto/models/metadata.py:220).
+The artifact resolver registry is the main third-party seam: a resolver registers itself under a URI scheme in `RESOLVER_FOR_URI_SCHEME` (in_toto/resolver/_resolver.py:21) and implements the `Resolver` abstract base class (in_toto/resolver/_resolver.py:24). The metadata layer is also pluggable across envelope formats: both the DSSE (Dead Simple Signing Envelope) `Envelope` and the legacy `Metablock` subclass the `Metadata` abstraction (in_toto/models/metadata.py:144, in_toto/models/metadata.py:220).

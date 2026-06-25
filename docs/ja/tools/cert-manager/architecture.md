@@ -45,8 +45,8 @@ ACME HTTP-01 チャレンジのトークンを配信する使い捨て Pod (`cmd
 
 1. trigger: `ProcessItem` (`pkg/controller/certificates/trigger/trigger_controller.go:160`) が `CertificateOwnsSecret` (`:188`) で Secret の重複所有を確認し、失敗バックオフ (`:210`) を適用し、`shouldReissue` (`:225`) で再発行ポリシーを評価する。再発行が必要なら `Issuing` condition を True にして status を更新する (`:243`)。ここでは CertificateRequest を作らない。
 2. keymanager: `Issuing=True` を見て次のリビジョン用の秘密鍵 Secret を生成し、`status.nextPrivateKeySecretName` を記録する (`pkg/controller/certificates/keymanager`)。
-3. requestmanager: `ProcessItem` (`pkg/controller/certificates/requestmanager/requestmanager_controller.go:140`) が `Issuing=True` を確認し (`:156`)、next-private-key Secret から鍵をデコードし (`:180`)、合致する CertificateRequest がなければ `createNewCertificateRequest` (`:236`、定義は `:367`) を呼ぶ。CSR は鍵からエンコードされ (`:381`)、PEM 化され (`:387`)、`CertmanagerV1().CertificateRequests(...).Create(...)` (`:435`) で作成される。
-4. signer: `IssuerRef` に合致する signer が CertificateRequest を処理する。ACME の場合 `Sign` (`pkg/controller/certificaterequests/acme/acme.go:118`) が CSR をデコードし (`:122`)、CommonName が SAN に含まれるか確認し (`:133`)、期待する `Order` を構築し (`:145`)、未存在なら作成する (`:160`)。
+3. requestmanager: `ProcessItem` (`pkg/controller/certificates/requestmanager/requestmanager_controller.go:140`) が `Issuing=True` を確認し (`:156`)、next-private-key Secret から鍵をデコードし (`:180`)、合致する CertificateRequest がなければ `createNewCertificateRequest` (`:236`、定義は `:367`) を呼ぶ。CSR (Certificate Signing Request) は鍵からエンコードされ (`:381`)、PEM 化され (`:387`)、`CertmanagerV1().CertificateRequests(...).Create(...)` (`:435`) で作成される。
+4. signer: `IssuerRef` に合致する signer が CertificateRequest を処理する。ACME の場合 `Sign` (`pkg/controller/certificaterequests/acme/acme.go:118`) が CSR をデコードし (`:122`)、CommonName が SAN (Subject Alternative Name) に含まれるか確認し (`:133`)、期待する `Order` を構築し (`:145`)、未存在なら作成する (`:160`)。
 5. acmeorders / acmechallenges: `pkg/controller/acmeorders` と `pkg/controller/acmechallenges` が Order を ACME サーバへ発注し、Challenge (HTTP-01 / DNS-01) を解く。acmesolver Pod が HTTP-01 に応答する。署名済み証明書は CertificateRequest の status に書き戻される。
 6. issuing: 署名済み証明書を本番 Secret に書き込み、`Issuing` condition を外す (`pkg/controller/certificates/issuing`)。続いて readiness コントローラが `Ready` condition を設定する。
 
@@ -56,7 +56,7 @@ ACME HTTP-01 チャレンジのトークンを配信する使い捨て Pod (`cmd
 
 `CertificateRequest` は意図的な中間契約である。すべての issuer 種別 (ACME・CA・SelfSigned・Vault・Venafi、`pkg/controller/certificaterequests/`) が同じ CertificateRequest を消費するので、外部プロセスがリクエストを out-of-band で署名できる。これがサードパーティ issuer をコアをフォークせずに成立させている。
 
-ACME のエラー処理は再試行可能なものと致命的なものを分ける。ネットワーク障害は Pending + バックオフになり、デコード不能な CSR や SAN にない CommonName は無限リトライを避けるため hard fail にする (`pkg/controller/certificaterequests/acme/acme.go:122`-`:142`)。
+ACME のエラー処理は再試行可能なものと致命的なものを分ける。ネットワーク障害は Pending + バックオフになり (`pkg/controller/certificaterequests/acme/acme.go:164`、`:181`)、デコード不能な CSR や SAN にない CommonName は無限リトライを避けるため hard fail にする (`acme.go:122`-`:142`)。
 
 ## 拡張ポイント
 

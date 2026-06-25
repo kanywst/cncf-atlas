@@ -32,7 +32,7 @@ CLI は `istioctl/`、`istioctl/cmd/istioctl` からビルドする (`Makefile.c
 
 ### istio-cni
 
-`cni/` は CNI plugin、`cni/cmd/istio-cni` からビルドする (`Makefile.core.mk:219`)。Pod のトラフィックをサイドカー、または ambient ではノードの ztunnel へ向けるリダイレクトを設定する。
+`cni/` は CNI plugin、`cni/cmd/istio-cni` からビルドする (`Makefile.core.mk:218`)。Pod のトラフィックをサイドカー、または ambient ではノードの ztunnel へ向けるリダイレクトを設定する。
 
 ### 共有ライブラリ
 

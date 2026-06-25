@@ -55,6 +55,11 @@ kubectl get deployment hello
 
 A healthy cluster reports the control-plane node as `Ready` and the `hello` Deployment with `1/1` ready replicas. Port-forwarding the Service to a local port and curling it confirms the workload serves traffic.
 
+```bash
+kubectl port-forward service/hello 8080:8080 &
+curl http://localhost:8080
+```
+
 ## Where to go next
 
 For production concerns such as high availability of the control plane, RBAC and admission hardening, and scaling, follow the official documentation at <https://kubernetes.io/docs/>. `kubeadm` (under `cmd/kubeadm`) is the supported path for bootstrapping real clusters rather than `kind`.

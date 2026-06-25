@@ -21,7 +21,7 @@ In a typical stack it sits behind Ingress controllers and the Gateway API, suppl
 
 - You run workloads on Kubernetes and want TLS certificates issued and renewed automatically.
 - You use Let's Encrypt or another ACME CA and need HTTP-01 or DNS-01 challenges solved in-cluster.
-- You have an internal PKI (Vault, a private CA, Venafi) and want a single Kubernetes-native way to consume it.
+- You have an internal PKI (Public Key Infrastructure) backed by Vault, a private CA, or Venafi, and want a single Kubernetes-native way to consume it.
 - You terminate TLS at Ingress or the Gateway API and want certificates wired in by annotation or reference.
 
 It is a weaker fit when certificates live outside Kubernetes, where a host-level ACME client is simpler. It does not distribute trust bundles to workloads on its own; that is the job of the companion project trust-manager.

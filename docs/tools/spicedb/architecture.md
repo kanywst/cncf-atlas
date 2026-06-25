@@ -34,7 +34,7 @@ The v1 gRPC services live in `internal/services/v1/`: Permissions, Schema, Watch
 
 ### Graph engine
 
-`internal/graph/` is the traversal engine: `check.go` for permission checks, `expand.go` for expanding a relation into its members, and `lookupresources*.go` / `lookupsubjects.go` for the reverse queries. `ConcurrentChecker` in `check.go` is the core: it either reads tuples directly or recursively evaluates a userset rewrite (union, intersection, exclusion).
+`internal/graph/` is the traversal engine: `check.go` for permission checks, `expand.go` for expanding a relation into its members, and `lookupresources*.go` / `lookupsubjects.go` for the reverse queries. `ConcurrentChecker` in `check.go` is the core: it either reads tuples directly or recursively evaluates a userset rewrite (a schema rule that derives a permission by combining other relations or permissions with set operations: union, intersection, exclusion).
 
 ### Datastore
 
@@ -44,8 +44,8 @@ The v1 gRPC services live in `internal/services/v1/`: Permissions, Schema, Watch
 
 A `CheckPermission` call traces as follows.
 
-1. `(*permissionServer).CheckPermission` at `internal/services/v1/permissions.go:62` resolves the revision and schema hash with `consistency.RevisionFromContext` (`permissions.go:78`), opens a snapshot reader (`permissions.go:83`), builds the Caveat context (`permissions.go:85`), and validates the object types and relations with `namespace.CheckNamespaceAndRelations` (`permissions.go:95`).
-2. It calls `computed.ComputeCheck` (`permissions.go:124`), passing `ResourceType = tuple.RR(objectType, permission)`, the subject ONR, and `MaximumDepth = config.MaximumAPIDepth`.
+1. `(*permissionServer).CheckPermission` at `internal/services/v1/permissions.go:62` resolves the revision and schema hash with `consistency.RevisionFromContext` (`permissions.go:78`), opens a snapshot reader (`permissions.go:83`), builds the Caveat context (`permissions.go:85`; Caveats are user-defined CEL expressions that attach runtime conditions to relationships, and the context supplies the values they evaluate against), and validates the object types and relations with `namespace.CheckNamespaceAndRelations` (`permissions.go:95`).
+2. It calls `computed.ComputeCheck` (`permissions.go:124`), passing `ResourceType = tuple.RR(objectType, permission)`, the subject ObjectAndRelation (ONR), and `MaximumDepth = config.MaximumAPIDepth`.
 3. `computeCheck` at `internal/graph/computed/computecheck.go:89` creates a traversal bloom filter sized to the depth (`computecheck.go:113`), splits the resource IDs into chunks (`computecheck.go:122`), and calls `d.DispatchCheck` per chunk (`computecheck.go:123`), carrying the bloom filter in `Metadata.TraversalBloom` (`computecheck.go:131`).
 4. The dispatch chain runs: a cache hit returns immediately; otherwise singleflight collapses duplicate in-flight checks, and a cluster deployment may redispatch to another node.
 5. Local traversal runs in `(*ConcurrentChecker).Check` at `internal/graph/check.go:99`, then `checkInternal` (`check.go:165`). It first filters resource IDs that match the subject directly (`filterForFoundMemberResource`, `check.go:192`). With no userset rewrite it reads tuples in `checkDirect` (`check.go:304`); with a rewrite it recurses through `checkUsersetRewrite` (`check.go:539`), redispatching each child via `dispatch` (`check.go:561`).
@@ -53,7 +53,7 @@ A `CheckPermission` call traces as follows.
 
 ## Key design decisions
 
-- **Configurable consistency over always-fresh reads.** The datastore exposes both `HeadRevision` (guaranteed fresh) and `OptimizedRevision` (likely-replicated, lower latency) at `pkg/datastore/datastore.go:711` and `:715`. Clients pick a consistency level per request, and `ZedToken` (`pkg/zedtoken/zedtoken.go`) lets them demand "at least as fresh as this earlier write" to avoid the New Enemy problem.
+- **Configurable consistency over always-fresh reads.** The datastore exposes both `OptimizedRevision` (likely-replicated, lower latency) and `HeadRevision` (guaranteed fresh) at `pkg/datastore/datastore.go:711` and `:715`. Clients pick a consistency level per request, and `ZedToken` (`pkg/zedtoken/zedtoken.go`) lets them demand "at least as fresh as this earlier write" to avoid the New Enemy problem.
 - **Dispatch as a cache-and-fan-out chain.** Building caching, singleflight, and the local graph into one self-referential chain (`internal/dispatch/combined/combined.go:201`, `:245`, `:318`) means a single check naturally spreads across nodes while each sub-result is memoized.
 - **Pluggable datastores.** A single `Datastore` interface lets the same engine run on CockroachDB, PostgreSQL, MySQL, Spanner, or in-memory, trading Zanzibar's Spanner-only assumption for deployment flexibility.
 

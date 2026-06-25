@@ -54,7 +54,7 @@ Check that the control plane and proxies agree on config.
 istioctl proxy-status
 ```
 
-Every listed proxy should show `SYNCED` for CDS, LDS, EDS, and RDS. A `STALE` entry means a push has not been acknowledged. You can also run `istioctl analyze` to surface configuration problems before they bite.
+Every listed proxy should show `SYNCED` for CDS (Cluster Discovery Service), LDS (Listener Discovery Service), EDS (Endpoint Discovery Service), and RDS (Route Discovery Service), the xDS sub-protocols. A `STALE` entry means a push has not been acknowledged. You can also run `istioctl analyze` to surface configuration problems before they bite.
 
 ## Where to go next
 

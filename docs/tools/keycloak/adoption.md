@@ -24,7 +24,7 @@ The in-repo `ADOPTERS.md` lists organizations that agreed to be named publicly. 
 
 ## Ecosystem
 
-Keycloak acts as an IdP over OIDC, OAuth 2.0, and SAML 2.0. It federates users from LDAP, Active Directory, and Kerberos, brokers identity from external IdPs and social logins, and offers UMA 2.0 Authorization Services. It ships a Kubernetes Operator (`operator/`) and React-based Admin and Account consoles (`js/`). It is the upstream for the Red Hat build of Keycloak.
+Keycloak acts as an IdP over OIDC, OAuth 2.0, and SAML 2.0. It federates users from LDAP, Active Directory, and Kerberos, brokers identity from external IdPs and social logins, and offers User-Managed Access (UMA) 2.0 Authorization Services. It ships a Kubernetes Operator (`operator/`) and React-based Admin and Account consoles (`js/`). It is the upstream for the Red Hat build of Keycloak.
 
 ## Alternatives
 
