@@ -8,6 +8,18 @@ This repo is both a published VitePress site and the engine that fills it. Three
 
 Keep the stages separate so a human can review the dossier before pages get written, and review the pages before they ship.
 
+## Commands
+
+```bash
+npm run docs:dev      # local VitePress server with hot reload while writing
+npm run docs:build    # production build; fails on broken links and bad config
+npm run docs:preview  # serve the built site
+npm test              # scripts/check-tools.mjs: every catalog entry has all six pages in both locales
+npm run lint          # markdownlint-cli2 over every .md
+```
+
+There is no per-tool test target: `check-tools.mjs` validates the whole catalog at once. To check one tool, build and eyeball its pages, or read the `research/<tool>/status.md` dossier state.
+
 ## Product premise
 
 The CNCF landscape lists hundreds of projects as logos in a grid. It tells you a project exists, not what it is or how it works. This site is the readable version. Every page earns its place by saying something the marketing page does not: read from the source, cited, honest about trade-offs.
