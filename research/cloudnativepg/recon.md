@@ -17,7 +17,7 @@ CRD (CustomResourceDefinition) は API group `postgresql.cnpg.io/v1`。主要 CR
 
 エントリポイントは 2 つ。
 
-- operator 本体: `cmd/manager/main.go:44` の `func main()`。cobra ルートに `controller` / `instance` / `backup` / `bootstrap` 等のサブコマンドをぶら下げる (`cmd/manager/main.go:58` 以降)。同一バイナリが operator (controller) としても Pod 内エージェント (instance manager) としても動く。
+- operator 本体: `cmd/manager/main.go:45` の `func main()`。cobra ルートに `controller` / `instance` / `backup` / `bootstrap` 等のサブコマンドをぶら下げる (`cmd/manager/main.go:60` 以降)。同一バイナリが operator (controller) としても Pod 内エージェント (instance manager) としても動く。
 - kubectl プラグイン: `cmd/kubectl-cnpg` (`make build-plugin` で `bin/kubectl-cnpg` を生成、`Makefile:180`)。
 
 ## 歴史の素材
@@ -34,7 +34,7 @@ CRD (CustomResourceDefinition) は API group `postgresql.cnpg.io/v1`。主要 CR
 
 トップレベルのコンポーネント。
 
-- `cmd/manager` / `internal/cmd/manager`: 単一バイナリのサブコマンド群 (`controller`, `instance`, `backup`, `bootstrap`, `walarchive`, `walrestore`, `pgbouncer`, `show`, `debug`)。`cmd/manager/main.go:58`-`67`。
+- `cmd/manager` / `internal/cmd/manager`: 単一バイナリのサブコマンド群 (`controller`, `instance`, `backup`, `bootstrap`, `walarchive`, `walrestore`, `pgbouncer`, `show`, `versions`)。`cmd/manager/main.go:60`-`68`。
 - `internal/controller`: operator 側の reconciler 群。`Cluster` / `Backup` / `ScheduledBackup` / `Pooler` / `Database` / `DatabaseRole` / `Plugin` ごとに 1 controller。
 - `internal/management/controller`: instance manager 側 (Pod 内) の reconciler。`database_controller.go` などが PostgreSQL 内オブジェクトを SQL で調停する。
 - `pkg/management/postgres`: PostgreSQL プロセス管理、webserver (local/remote)、ステータス抽出。
@@ -95,7 +95,7 @@ operator 本体の reconcile 起点は `ClusterReconciler.Reconcile`。`internal
 - Vera Rubin Observatory (2025-06-17): 望遠鏡システムと天文データ公開に利用。
 - Tesla (2026-03-31)、Ericsson (2026-06-17, 5G ネットワーク製品)、Belastingdienst (オランダ税務局, 2026-04-02)、Nutanix NKP (2025-11-19)。
 
-出典はすべて <https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md>。GitHub シグナル: スター 8,873、コントリビュータ約 226 名 (`gh api .../contributors` のページネーション末尾 `page=226`、いずれも 2026-06-27 時点)。
+出典はすべて <https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md>。GitHub シグナル: スター 8,883、コントリビュータ約 226 名 (`gh api .../contributors` のページネーション末尾 `page=226`、いずれも 2026-06-28 時点)。
 
 ## 代替・エコシステム
 

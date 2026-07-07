@@ -14,5 +14,6 @@
 - pinned commit は `main` HEAD (2026-06-26)。shallow clone なのでタグ未解決。最新安定版 `v1.29.1`、`main` は `v1.30.0-rc1` manifest を同梱。write 段階では安定版 manifest URL に差し替えること。
 - 推し: 外部 DCS (etcd/Patroni) 非依存で Kubernetes API を HA の合意源に使う点 + operator/instance-manager の二重 reconcile (`internal/cmd/manager/instance/run/cmd.go:277`)。CNPG-i プラグイン機構も差別化要素。
 - 採用事例は ADOPTERS.md に多数。捏造不要。EDB / IBM / Google Cloud / Azure / Akamai / Tesla / Ericsson / Mirakl (300+ クラスタ・8TB) など出典確実。
-- 確認保留: コントリビュータ数は `gh` ページネーション概算 (約 226)。スター 8,873 (2026-06-27)。write 時に最新値を取り直すと安全。
+- 確認保留: コントリビュータ数は `gh` ページネーション概算 (約 226)。スター 8,883 (2026-06-28)。write 時に最新値を取り直すと安全。
+- アンカー再検証済み (2026-06-28): `func main` は :45、サブコマンド登録 :60-:68 に修正。他の cluster_controller.go / cluster_types.go / url.go / instance.go / failoverquorum_types.go / Makefile / go.mod アンカーは pinned commit で一致確認。
 - 代表操作トレースは「Cluster reconcile 1 周」で確定。end-to-end アンカー検証済み。

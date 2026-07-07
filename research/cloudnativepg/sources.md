@@ -20,7 +20,7 @@
 
 ## コードアンカー (commit 7ef33bb)
 
-- エントリポイント: `cmd/manager/main.go:44` (`main`)、サブコマンド登録 `cmd/manager/main.go:58`-`67`。
+- エントリポイント: `cmd/manager/main.go:45` (`main`)、サブコマンド登録 `cmd/manager/main.go:60`-`68`。
 - operator reconcile: `internal/controller/cluster_controller.go:95` (`ClusterReconciler` 型)、`:169` (`Reconcile`)、`:310` (inner `reconcile`)、`:456` (`GetStatusFromInstances` 呼び出し)、`:477` (split-brain 検知)、`:589` (`handleSwitchover`)、`:605` (`finalizeReconciliation`)。
 - Pod 内エージェント: `internal/cmd/manager/instance/run/cmd.go:259` (プラグイン登録)、`:277`-`280` (`For(&apiv1.Cluster{})`)、`:397` / `:407` (remote/local webserver)。
 - HTTP クライアント: `pkg/management/postgres/webserver/client/remote/instance.go:183` (`GetStatusFromInstances`)、`:320` (status URL 組み立て)。

@@ -21,15 +21,15 @@
 | ファイル | 行 | 内容 |
 | --- | --- | --- |
 | `cmd/main.go` | 61 | `func main()` エントリポイント |
-| `cmd/main.go` | 167 / 176 / 186 / 196 | 3 reconciler + webhook 登録 |
+| `cmd/main.go` | 167 / 176 / 186 / 196 / 197 | 3 reconciler 登録 + webhook ガード / `SetupWebhookWithManager` |
 | `api/v1alpha1/composabilityrequest_types.go` | 36 / 40 / 67 / 74 | `ComposabilityRequestSpec` / `ScalarResourceDetails` / Status |
 | `api/v1alpha1/composableresource_types.go` | 27 / 36 | `ComposableResourceSpec` / `ComposableResourceStatus` |
 | `internal/cdi/client.go` | 25 / 34 | `DeviceInfo` / `CdiProvider` interface |
 | `internal/controller/composableresource_adapter.go` | 40 / 63 | プロバイダ選択 / FTI CM・FM 分岐 |
-| `internal/controller/composabilityrequest_controller.go` | 72 / 197 / 213 / 487 / 551 / 658 / 684 | 二段 reconcile の状態機械と Watch |
+| `internal/controller/composabilityrequest_controller.go` | 72 / 197 / 213 / 487 / 552 / 658 / 684 | 二段 reconcile の状態機械と Watch |
 | `internal/controller/composableresource_controller.go` | 82 / 185 / 209 / 333 | デバイス着脱の状態機械 |
 | `internal/cdi/fti/fm/client.go` | 50 / 100 / 147 / 195 / 416 | `FTIClient` / AddResource / FM PATCH / OptionStatus 判定 / machine UUID 解決 |
 | `internal/cdi/fti/token.go` | 58 / 74 / 103 | `CachedToken` / GetToken / Token (password grant) |
-| `internal/controller/upstreamsyncer_controller.go` | 38 / 49 / 79 / 140 | 猶予期間 / 同期 goroutine / ドリフト照合 / detach CR 生成 |
+| `internal/controller/upstreamsyncer_controller.go` | 38 / 40 / 49 / 61 / 79 / 140 | 猶予期間 / 型 / `SetupWithManager` goroutine / 1 分 ticker / ドリフト照合 / detach CR 生成 |
 | `internal/webhook/v1alpha1/composabilityrequest_webhook.go` | 60 / 100 | validating webhook |
 | `README.md` | 181-187 | 未解決マージコンフリクトマーカー |
