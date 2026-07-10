@@ -6,7 +6,7 @@
 
 | Path | Responsibility |
 | --- | --- |
-| `cmd/scheduler/` | HTTP server that registers the extender, webhook, and metrics routes (`main.go:143-147`) |
+| `cmd/scheduler/` | HTTP server that registers the extender, webhook, and metrics routes (`main.go:145-147`) |
 | `cmd/device-plugin/nvidia/` | NVIDIA device-plugin entrypoint |
 | `cmd/vGPUmonitor/` | Per-pod GPU usage monitor |
 | `pkg/scheduler/` | Filter, Bind, Score, and the mutating webhook logic |

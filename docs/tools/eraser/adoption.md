@@ -24,4 +24,4 @@ Eraser's distinction is that it deletes non-running images from nodes on a polic
 | --- | --- |
 | kubelet image garbage collection | Kubernetes-native, but deletes by disk-usage threshold with no notion of vulnerability or an allow/deny list; Eraser fills that gap ([cncf/sandbox issue #24](https://github.com/cncf/sandbox/issues/24)) |
 | Trivy on its own | Finds vulnerabilities but does not remove images from nodes; Eraser runs Trivy as its scanner and acts on the verdict (`pkg/scanners/trivy`) |
-| kube-image-keeper | Caches and mirrors in-use images to survive registry outages, so it preserves images rather than deleting them; the opposite goal to Eraser |
+| kube-image-keeper | Caches and mirrors in-use images to survive registry outages, so it preserves images rather than deleting them; the opposite goal to Eraser ([enix/kube-image-keeper](https://github.com/enix/kube-image-keeper)) |

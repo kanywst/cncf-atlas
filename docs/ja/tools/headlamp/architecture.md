@@ -43,7 +43,7 @@ flowchart LR
 4. 宛先 URL を組み立てる。`url.Parse(kContext.Cluster.Server)` (`headlamp.go:1805`) の後、`r.URL.Host`・`r.URL.Scheme`・`r.URL.Path = mux.Vars(r)["api"]` を設定してリクエストをクラスタ向けに書き換え、`/clusters/{name}/` プレフィックスを剥がす (`headlamp.go:1828-1830`)。
 5. 認証を注入する。`auth.GetTokenFromCookie(r, clusterName)` がトークンを読み、`Authorization: Bearer <token>` を設定する (`headlamp.go:1845`, `headlamp.go:1849`)。
 6. `kContext.ProxyRequest(w, r)` (`headlamp.go:1857`) に引き渡す。実体は `backend/pkg/kubeconfig/kubeconfig.go:387` にある。初回は `SetupProxy` (`kubeconfig.go:431`) が `httputil.NewSingleHostReverseProxy(URL)` を生成し (`kubeconfig.go:437`)、その transport を Headlamp の User-Agent を付ける `userAgentRoundTripper` で包む (`kubeconfig.go:34-51`)。以後 `c.proxy.ServeHTTP` が kube-apiserver へ転送する (`kubeconfig.go:395`)。
-7. 応答はプロキシ経由でフロントへ戻る。キャッシュ有効時は `k8cache` が GET 応答を保存し、非 GET で無効化する (`server.go:cacheMiddlewareHandler`)。
+7. 応答はプロキシ経由でフロントへ戻る。キャッシュ有効時は `k8cache` が GET 応答を保存し、非 GET で無効化する (`server.go:285`)。
 
 ## 主要な設計判断
 

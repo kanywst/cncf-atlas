@@ -43,7 +43,7 @@ Trace a resource fetch from a click in the browser to the kube-apiserver and bac
 4. It builds the destination URL: `url.Parse(kContext.Cluster.Server)` (`headlamp.go:1805`), then rewrites the incoming request to the cluster by setting `r.URL.Host`, `r.URL.Scheme`, and `r.URL.Path = mux.Vars(r)["api"]`, which strips the `/clusters/{name}/` prefix back off (`headlamp.go:1828-1830`).
 5. It injects auth: `auth.GetTokenFromCookie(r, clusterName)` reads the token and sets `Authorization: Bearer <token>` (`headlamp.go:1845`, `headlamp.go:1849`).
 6. It hands off with `kContext.ProxyRequest(w, r)` (`headlamp.go:1857`), which lives in `backend/pkg/kubeconfig/kubeconfig.go:387`. On first use `SetupProxy` (`kubeconfig.go:431`) builds an `httputil.NewSingleHostReverseProxy(URL)` (`kubeconfig.go:437`) and wraps its transport in a `userAgentRoundTripper` that stamps a Headlamp User-Agent (`kubeconfig.go:34-51`). After that `c.proxy.ServeHTTP` forwards to the kube-apiserver (`kubeconfig.go:395`).
-7. The response returns through the proxy to the frontend. When caching is on, `k8cache` stores GET responses and invalidates on non-GET requests (`server.go:cacheMiddlewareHandler`).
+7. The response returns through the proxy to the frontend. When caching is on, `k8cache` stores GET responses and invalidates on non-GET requests (`server.go:285`).
 
 ## Key design decisions
 

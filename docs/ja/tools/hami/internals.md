@@ -6,7 +6,7 @@
 
 | パス | 責務 |
 | --- | --- |
-| `cmd/scheduler/` | extender・webhook・metrics ルートを登録する HTTP サーバ (`main.go:143-147`) |
+| `cmd/scheduler/` | extender・webhook・metrics ルートを登録する HTTP サーバ (`main.go:145-147`) |
 | `cmd/device-plugin/nvidia/` | NVIDIA device-plugin のエントリポイント |
 | `cmd/vGPUmonitor/` | Pod ごとの GPU 使用量モニタ |
 | `pkg/scheduler/` | Filter・Bind・Score と mutating webhook のロジック |
