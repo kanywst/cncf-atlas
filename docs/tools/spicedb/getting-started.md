@@ -23,41 +23,41 @@ The shortest path is the in-memory datastore, which needs no external database. 
 
 1. Start a server with the in-memory store, exposing gRPC (50051) and HTTP (8443), using a preshared key as the API token:
 
-```bash
-docker run --rm -p 50051:50051 -p 8443:8443 authzed/spicedb \
-  serve --http-enabled true --grpc-preshared-key "somerandomkeyhere"
-```
+   ```bash
+   docker run --rm -p 50051:50051 -p 8443:8443 authzed/spicedb \
+     serve --http-enabled true --grpc-preshared-key "somerandomkeyhere"
+   ```
 
 1. Write a schema defining `user`, `folder`, and `document` with a `view` permission:
 
-```bash
-curl --location 'http://localhost:8443/v1/schema/write' \
-  --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer somerandomkeyhere' \
-  --data '{
-    "schema": "definition user {} \n definition folder { \n relation parent: folder\n relation viewer: user \n permission view = viewer + parent->view \n } \n definition document {\n relation folder: folder \n relation viewer: user \n permission view = viewer + folder->view \n }"
-  }'
-```
+   ```bash
+   curl --location 'http://localhost:8443/v1/schema/write' \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer somerandomkeyhere' \
+     --data '{
+       "schema": "definition user {} \n definition folder { \n relation parent: folder\n relation viewer: user \n permission view = viewer + parent->view \n } \n definition document {\n relation folder: folder \n relation viewer: user \n permission view = viewer + folder->view \n }"
+     }'
+   ```
 
 1. Write a relationship: `anne` is a viewer of `folder:budget`:
 
-```bash
-curl --location 'http://localhost:8443/v1/relationships/write' \
-  --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer somerandomkeyhere' \
-  --data '{
-    "updates": [
-      {
-        "operation": "OPERATION_TOUCH",
-        "relationship": {
-          "resource": { "objectType": "folder", "objectId": "budget" },
-          "relation": "viewer",
-          "subject": { "object": { "objectType": "user", "objectId": "anne" } }
-        }
-      }
-    ]
-  }'
-```
+   ```bash
+   curl --location 'http://localhost:8443/v1/relationships/write' \
+     --header 'Content-Type: application/json' \
+     --header 'Authorization: Bearer somerandomkeyhere' \
+     --data '{
+       "updates": [
+         {
+           "operation": "OPERATION_TOUCH",
+           "relationship": {
+             "resource": { "objectType": "folder", "objectId": "budget" },
+             "relation": "viewer",
+             "subject": { "object": { "objectType": "user", "objectId": "anne" } }
+           }
+         }
+       ]
+     }'
+   ```
 
 ## Verify it works
 

@@ -24,48 +24,48 @@ This creates a `SecretStore` backed by the `fake` provider, syncs one value thro
 
 1. Create a `SecretStore` using the `fake` provider with one canned value.
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: external-secrets.io/v1
-kind: SecretStore
-metadata:
-  name: fake-store
-spec:
-  provider:
-    fake:
-      data:
-        - key: "/db/password"
-          value: "s3cr3t"
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: external-secrets.io/v1
+   kind: SecretStore
+   metadata:
+     name: fake-store
+   spec:
+     provider:
+       fake:
+         data:
+           - key: "/db/password"
+             value: "s3cr3t"
+   EOF
+   ```
 
 1. Create an `ExternalSecret` that pulls that key into a Kubernetes Secret named `db-secret`.
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: external-secrets.io/v1
-kind: ExternalSecret
-metadata:
-  name: db-secret
-spec:
-  refreshInterval: 1h
-  secretStoreRef:
-    name: fake-store
-    kind: SecretStore
-  target:
-    name: db-secret
-  data:
-    - secretKey: password
-      remoteRef:
-        key: "/db/password"
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: external-secrets.io/v1
+   kind: ExternalSecret
+   metadata:
+     name: db-secret
+   spec:
+     refreshInterval: 1h
+     secretStoreRef:
+       name: fake-store
+       kind: SecretStore
+     target:
+       name: db-secret
+     data:
+       - secretKey: password
+         remoteRef:
+           key: "/db/password"
+   EOF
+   ```
 
 1. Read back the synced Secret and confirm the value.
 
-```bash
-kubectl get secret db-secret -o jsonpath='{.data.password}' | base64 -d
-```
+   ```bash
+   kubectl get secret db-secret -o jsonpath='{.data.password}' | base64 -d
+   ```
 
 The command prints `s3cr3t`, the value the `fake` provider returned.
 

@@ -28,21 +28,21 @@ istioctl install --set profile=demo -y
 
 1. Label a namespace so new pods get an Envoy sidecar injected automatically.
 
-```bash
-kubectl label namespace default istio-injection=enabled
-```
+   ```bash
+   kubectl label namespace default istio-injection=enabled
+   ```
 
 1. Deploy a workload into that namespace. Any pod created from now on in `default` gets a sidecar.
 
-```bash
-kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-```
+   ```bash
+   kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+   ```
 
 1. Confirm each pod has two containers, the app and the injected `istio-proxy`.
 
-```bash
-kubectl get pods
-```
+   ```bash
+   kubectl get pods
+   ```
 
 Each pod should report `2/2` in the READY column once started.
 

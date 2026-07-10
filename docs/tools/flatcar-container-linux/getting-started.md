@@ -23,28 +23,28 @@ The shortest real path is booting a published image with an Ignition config. To 
 
 1. Start the SDK container with privileged access to `/dev`, required for the loop devices used during image builds (`README.md:89`).
 
-```bash
-docker run -ti --privileged -v /dev:/dev \
-    ghcr.io/flatcar/flatcar-sdk-all:3033.0.0
-```
+   ```bash
+   docker run -ti --privileged -v /dev:/dev \
+       ghcr.io/flatcar/flatcar-sdk-all:3033.0.0
+   ```
 
 1. Inside the container, build the binary packages for a board.
 
-```bash
-./build_packages --board=amd64-usr
-```
+   ```bash
+   ./build_packages --board=amd64-usr
+   ```
 
 1. Build the production image. This runs the `create_prod_image` flow described in [Architecture](./architecture) (`src/build_image:189`).
 
-```bash
-./build_image --board=amd64-usr prod
-```
+   ```bash
+   ./build_image --board=amd64-usr prod
+   ```
 
 1. Convert the generic image into a runnable VM image.
 
-```bash
-./image_to_vm.sh --from=<image-dir> --board=amd64-usr
-```
+   ```bash
+   ./image_to_vm.sh --from=<image-dir> --board=amd64-usr
+   ```
 
 ## Verify it works
 

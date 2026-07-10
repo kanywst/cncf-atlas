@@ -25,23 +25,23 @@ The in-cluster deployment needs two things to be useful: a way to reach it in th
 
 1. Port-forward the Headlamp service to your machine.
 
-```bash
-kubectl port-forward -n kube-system service/headlamp 8080:80
-```
+   ```bash
+   kubectl port-forward -n kube-system service/headlamp 8080:80
+   ```
 
 1. Create a service account and give it cluster-admin rights (tighten this with RBAC for anything beyond a first look).
 
-```bash
-kubectl -n kube-system create serviceaccount headlamp-admin
-kubectl create clusterrolebinding headlamp-admin \
-  --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
-```
+   ```bash
+   kubectl -n kube-system create serviceaccount headlamp-admin
+   kubectl create clusterrolebinding headlamp-admin \
+     --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
+   ```
 
 1. Mint a token for that account.
 
-```bash
-kubectl create token headlamp-admin -n kube-system
-```
+   ```bash
+   kubectl create token headlamp-admin -n kube-system
+   ```
 
 1. Open `http://localhost:8080` in your browser and paste the token to log in.
 

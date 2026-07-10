@@ -22,21 +22,21 @@ The shortest path to a running Kafka cluster: install the operator, deploy a `Ka
 
 1. Wait for the Cluster Operator deployment to be ready.
 
-```bash
-kubectl wait deployment/strimzi-cluster-operator --for=condition=Available --timeout=300s -n kafka
-```
+   ```bash
+   kubectl wait deployment/strimzi-cluster-operator --for=condition=Available --timeout=300s -n kafka
+   ```
 
 1. Deploy a single-node KRaft Kafka cluster using the examples bundled in the repository.
 
-```bash
-kubectl apply -f examples/kafka/ -n kafka
-```
+   ```bash
+   kubectl apply -f examples/kafka/ -n kafka
+   ```
 
 1. Wait for the cluster to become ready. The operator runs the full reconcile chain and reports readiness on the `Kafka` resource status.
 
-```bash
-kubectl wait kafka/my-cluster --for=condition=Ready --timeout=300s -n kafka
-```
+   ```bash
+   kubectl wait kafka/my-cluster --for=condition=Ready --timeout=300s -n kafka
+   ```
 
 ## Verify it works
 

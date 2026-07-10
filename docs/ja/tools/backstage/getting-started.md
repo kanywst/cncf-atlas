@@ -22,16 +22,16 @@ npx @backstage/create-app@latest
 
 1. create-app コマンドを実行し、アプリ名のプロンプトに答える。フロントエンド (`packages/app`) とバックエンド (`packages/backend`) を含む新しいディレクトリが scaffold される。
 
-```bash
-npx @backstage/create-app@latest
-```
+   ```bash
+   npx @backstage/create-app@latest
+   ```
 
 1. 生成されたディレクトリに入り、フロントエンドとバックエンドを一緒に起動する。
 
-```bash
-cd my-backstage-app
-yarn start
-```
+   ```bash
+   cd my-backstage-app
+   yarn start
+   ```
 
 1. フロントエンドはポート `3000`、バックエンドはポート `7007` で動く。ブラウザで `http://localhost:3000` を開く。
 

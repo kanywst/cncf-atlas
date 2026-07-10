@@ -31,21 +31,21 @@ cd dalec
 
 1. Azure Linux 3 向けの RPM をビルドし、ローカルディレクトリへ書き出す。`azlinux3/rpm` ターゲットがパッケージを生成し、`--output` が `_output` へエクスポートする。
 
-```bash
-docker build -f docs/examples/hello.inline.yml --target=azlinux3/rpm --output=_output .
-```
+   ```bash
+   docker build -f docs/examples/hello.inline.yml --target=azlinux3/rpm --output=_output .
+   ```
 
 1. 代わりに、パッケージをインストールした最小コンテナをビルドする。`azlinux3` ターゲット (`/rpm` サフィックスなし) がイメージを生成し、`hello-inline:dev` としてタグ付けする。
 
-```bash
-docker build -f docs/examples/hello.inline.yml --target=azlinux3 -t hello-inline:dev .
-```
+   ```bash
+   docker build -f docs/examples/hello.inline.yml --target=azlinux3 -t hello-inline:dev .
+   ```
 
 1. 生成イメージを実行し、インストールされたバイナリが動くことを確かめる。
 
-```bash
-docker run --rm hello-inline:dev
-```
+   ```bash
+   docker run --rm hello-inline:dev
+   ```
 
 ## 動作確認
 

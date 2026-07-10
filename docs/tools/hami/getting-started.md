@@ -33,17 +33,17 @@ The shortest path to a shared GPU is one labelled node, the chart, and the bundl
 
 1. Confirm the scheduler and device plugin are running.
 
-```bash
-kubectl get pods -n kube-system
-```
+   ```bash
+   kubectl get pods -n kube-system
+   ```
 
 Wait until both `hami-scheduler` and `hami-device-plugin` show `Running`.
 
 1. Submit the example workload, which asks for one GPU with a memory and core budget.
 
-```bash
-kubectl apply -f examples/nvidia/default_use.yaml
-```
+   ```bash
+   kubectl apply -f examples/nvidia/default_use.yaml
+   ```
 
 The example pod requests `nvidia.com/gpu: 1`, `nvidia.com/gpumem: 3000`, and `nvidia.com/gpucores: 30`, so it takes one physical GPU limited to 3000 MB and 30 percent of the cores (`examples/nvidia/default_use.yaml`).
 

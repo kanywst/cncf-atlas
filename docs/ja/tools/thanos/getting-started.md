@@ -26,23 +26,23 @@ make build
 
 1. Prometheus の隣でサイドカーを起動し、そのデータを StoreAPI で公開する (`docs/quick-tutorial.md:91`)。`--objstore.config-file` フラグは任意で、長期保存をする場合にのみ必要。
 
-```bash
-thanos sidecar \
-    --tsdb.path            /var/prometheus \
-    --objstore.config-file bucket_config.yaml \
-    --prometheus.url       http://localhost:9090 \
-    --http-address         0.0.0.0:19191 \
-    --grpc-address         0.0.0.0:19090
-```
+   ```bash
+   thanos sidecar \
+       --tsdb.path            /var/prometheus \
+       --objstore.config-file bucket_config.yaml \
+       --prometheus.url       http://localhost:9090 \
+       --http-address         0.0.0.0:19191 \
+       --grpc-address         0.0.0.0:19090
+   ```
 
 1. サイドカーの gRPC エンドポイントに接続し、Prometheus 互換の API と UI を出す Querier を起動する (`docs/quick-tutorial.md:133`)。`dnssrv+` プレフィックスは DNS SRV レコード経由でエンドポイントを発見する。
 
-```bash
-thanos query \
-    --http-address 0.0.0.0:19192 \
-    --endpoint     1.2.3.4:19090 \
-    --endpoint     dnssrv+_grpc._tcp.thanos-store.monitoring.svc
-```
+   ```bash
+   thanos query \
+       --http-address 0.0.0.0:19192 \
+       --endpoint     1.2.3.4:19090 \
+       --endpoint     dnssrv+_grpc._tcp.thanos-store.monitoring.svc
+   ```
 
 ## 動作確認
 

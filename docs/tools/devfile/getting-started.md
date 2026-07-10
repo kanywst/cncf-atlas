@@ -22,59 +22,59 @@ The goal is to see a parent devfile's override applied to a base devfile, which 
 
 1. Write a base devfile with one container component. Save it as `base.yaml`.
 
-```yaml
-schemaVersion: "2.3.0"
-metadata:
-  name: demo
-components:
-  - name: tools
-    container:
-      image: quay.io/devfile/universal-developer-image:latest
-      memoryLimit: 512Mi
-```
+   ```yaml
+   schemaVersion: "2.3.0"
+   metadata:
+     name: demo
+   components:
+     - name: tools
+       container:
+         image: quay.io/devfile/universal-developer-image:latest
+         memoryLimit: 512Mi
+   ```
 
 1. Write a parent override that raises the memory limit of the existing `tools` component. Save it as `parent.yaml`. An override can only change elements that already exist in the base; naming a new component here would be rejected.
 
-```yaml
-components:
-  - name: tools
-    container:
-      memoryLimit: 1Gi
-```
+   ```yaml
+   components:
+     - name: tools
+       container:
+         memoryLimit: 1Gi
+   ```
 
 1. Apply the override with a short Go program. Save it as `main.go`.
 
-```go
-package main
+   ```go
+   package main
 
-import (
-    "fmt"
-    "os"
+   import (
+       "fmt"
+       "os"
 
-    "github.com/devfile/api/v2/pkg/utils/overriding"
-    "sigs.k8s.io/yaml"
-)
+       "github.com/devfile/api/v2/pkg/utils/overriding"
+       "sigs.k8s.io/yaml"
+   )
 
-func main() {
-    base, _ := os.ReadFile("base.yaml")
-    parent, _ := os.ReadFile("parent.yaml")
+   func main() {
+       base, _ := os.ReadFile("base.yaml")
+       parent, _ := os.ReadFile("parent.yaml")
 
-    merged, err := overriding.OverrideDevWorkspaceTemplateSpecBytes(base, parent)
-    if err != nil {
-        panic(err)
-    }
+       merged, err := overriding.OverrideDevWorkspaceTemplateSpecBytes(base, parent)
+       if err != nil {
+           panic(err)
+       }
 
-    out, _ := yaml.Marshal(merged)
-    fmt.Print(string(out))
-}
-```
+       out, _ := yaml.Marshal(merged)
+       fmt.Print(string(out))
+   }
+   ```
 
 1. Run it.
 
-```bash
-go mod tidy
-go run main.go
-```
+   ```bash
+   go mod tidy
+   go run main.go
+   ```
 
 ## Verify it works
 

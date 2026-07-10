@@ -22,24 +22,24 @@ The shortest path is `flux bootstrap github`, which creates the repository if ne
 
 1. Check the cluster meets Flux's prerequisites.
 
-```bash
-flux check --pre
-```
+   ```bash
+   flux check --pre
+   ```
 
 1. Export a GitHub token. Flux reads it from the `GITHUB_TOKEN` environment variable (`cmd/flux/bootstrap_github.go:115`).
 
-```bash
-export GITHUB_TOKEN=<your-token>
-```
+   ```bash
+   export GITHUB_TOKEN=<your-token>
+   ```
 
 1. Bootstrap. This creates the repo, installs the controllers, and commits the sync configuration. The default reconcile interval is one minute.
 
-```bash
-flux bootstrap github \
-  --owner=<organization> \
-  --repository=<repository name> \
-  --path=clusters/my-cluster
-```
+   ```bash
+   flux bootstrap github \
+     --owner=<organization> \
+     --repository=<repository name> \
+     --path=clusters/my-cluster
+   ```
 
 ## Verify it works
 

@@ -28,21 +28,21 @@ The shortest path to a running component is scaffold, build, then run the hot-re
 
 1. Create a new component from the HTTP hello-world template.
 
-```bash
-wash new https://github.com/wasmCloud/wasmCloud.git --subfolder templates/http-hello-world
-```
+   ```bash
+   wash new https://github.com/wasmCloud/wasmCloud.git --subfolder templates/http-hello-world
+   ```
 
 1. Build the component.
 
-```bash
-wash -C ./http-hello-world build
-```
+   ```bash
+   wash -C ./http-hello-world build
+   ```
 
 1. Start the development loop. `wash dev` builds the component, loads it into a local host, and reloads on file changes.
 
-```bash
-wash -C ./http-hello-world dev
-```
+   ```bash
+   wash -C ./http-hello-world dev
+   ```
 
 ## Verify it works
 

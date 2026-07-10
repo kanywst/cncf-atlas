@@ -23,36 +23,36 @@ The manifest set lives under `manifests/` in the repo.
 
 1. Wait for the core pods to come up.
 
-```bash
-kubectl wait --for=condition=available --timeout=300s \
-  deployment/argocd-server -n argocd
-```
+   ```bash
+   kubectl wait --for=condition=available --timeout=300s \
+     deployment/argocd-server -n argocd
+   ```
 
 1. Get the initial admin password and expose the API server locally.
 
-```bash
-argocd admin initial-password -n argocd
-kubectl port-forward svc/argocd-server -n argocd 8080:443
-```
+   ```bash
+   argocd admin initial-password -n argocd
+   kubectl port-forward svc/argocd-server -n argocd 8080:443
+   ```
 
 The port-forward serves the UI and API on the local address `localhost:8080`.
 
 1. Log in and register an Application that points at a Git repo path.
 
-```bash
-argocd login localhost:8080
-argocd app create guestbook \
-  --repo https://github.com/argoproj/argocd-example-apps.git \
-  --path guestbook \
-  --dest-server https://kubernetes.default.svc \
-  --dest-namespace default
-```
+   ```bash
+   argocd login localhost:8080
+   argocd app create guestbook \
+     --repo https://github.com/argoproj/argocd-example-apps.git \
+     --path guestbook \
+     --dest-server https://kubernetes.default.svc \
+     --dest-namespace default
+   ```
 
 1. Sync it so the controller applies the manifests.
 
-```bash
-argocd app sync guestbook
-```
+   ```bash
+   argocd app sync guestbook
+   ```
 
 ## Verify it works
 

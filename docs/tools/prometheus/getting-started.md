@@ -31,21 +31,21 @@ The container above starts with a default config. To run your own, point Prometh
 
 1. Write a minimal `prometheus.yml`:
 
-```yaml
-global:
-  scrape_interval: 15s
+   ```yaml
+   global:
+     scrape_interval: 15s
 
-scrape_configs:
-  - job_name: prometheus
-    static_configs:
-      - targets: ["localhost:9090"]
-```
+   scrape_configs:
+     - job_name: prometheus
+       static_configs:
+         - targets: ["localhost:9090"]
+   ```
 
 1. Start the server with that config (README:85-86):
 
-```bash
-./prometheus --config.file=prometheus.yml
-```
+   ```bash
+   ./prometheus --config.file=prometheus.yml
+   ```
 
 When built with `go install` rather than `make build`, run the binary from the root of the cloned repository so it can find web assets under `web/ui/static` (README:88-92).
 

@@ -23,23 +23,23 @@ curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/d
 
 1. Create a working directory and fetch the Compose file plus the example environment.
 
-```bash
-mkdir zitadel && cd zitadel
-curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/docker-compose.yml
-curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/.env.example
-```
+   ```bash
+   mkdir zitadel && cd zitadel
+   curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/docker-compose.yml
+   curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/.env.example
+   ```
 
 1. Copy the example environment to `.env`. The defaults are fine for a local trial; review them before any real deployment.
 
-```bash
-cp .env.example .env
-```
+   ```bash
+   cp .env.example .env
+   ```
 
 1. Start the stack and wait for the containers to become healthy.
 
-```bash
-docker compose up -d --wait
-```
+   ```bash
+   docker compose up -d --wait
+   ```
 
 1. Open the Console in a browser at the address printed in the Compose output (the local default is `http://localhost:8080/ui/console`) and sign in with the initial admin credentials from the docs ([Compose deploy](https://zitadel.com/docs/self-hosting/deploy/compose)).
 

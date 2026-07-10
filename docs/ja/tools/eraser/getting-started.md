@@ -26,30 +26,30 @@ helm install -n eraser-system eraser eraser/eraser --create-namespace
 
 1. コントローラが動いているか確認する。
 
-```bash
-kubectl get pods -n eraser-system
-```
+   ```bash
+   kubectl get pods -n eraser-system
+   ```
 
 1. `ImageList` を apply する。リソース名は `imagelist` でなければならず、他の名前は無視される (`src/controllers/imagelist/imagelist_controller.go:139-144`)。ノードに存在し実行中でないと分かっているイメージ (例: `docker.io/library/alpine:3.7.3`) を使う。
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: eraser.sh/v1
-kind: ImageList
-metadata:
-  name: imagelist
-spec:
-  images:
-    - docker.io/library/alpine:3.7.3
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: eraser.sh/v1
+   kind: ImageList
+   metadata:
+     name: imagelist
+   spec:
+     images:
+       - docker.io/library/alpine:3.7.3
+   EOF
+   ```
 
 1. Eraser はノード 1 台につき 1 つのワーカー Pod を fan-out する `ImageJob` を作る。それらが現れて完了するのを見る。
 
-```bash
-kubectl get imagejob
-kubectl get pods -n eraser-system -w
-```
+   ```bash
+   kubectl get imagejob
+   kubectl get pods -n eraser-system -w
+   ```
 
 特定リストではなく非実行イメージをすべて削除するには、`spec.images` の唯一のエントリを `*` にする。これが prune パスを起動する (`src/pkg/remover/helpers.go:99-126`)。
 

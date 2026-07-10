@@ -33,11 +33,11 @@ openfga run
 
 1. ストアを作成する。
 
-```bash
-curl -X POST 'localhost:8080/stores' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"name": "openfga-demo"}'
-```
+   ```bash
+   curl -X POST 'localhost:8080/stores' \
+     --header 'Content-Type: application/json' \
+     --data-raw '{"name": "openfga-demo"}'
+   ```
 
 成功するとストアが返る。例 (1):
 
@@ -52,43 +52,43 @@ curl -X POST 'localhost:8080/stores' \
 
 1. 返ってきた `id` を控え、最小の認可モデル (`viewer` 関係を持つ `document` 型を、API が受け付ける JSON 形式で) を書き込む。
 
-```bash
-STORE=01G3EMTKQRKJ93PFVDA1SJHWD2
-curl -X POST "localhost:8080/stores/$STORE/authorization-models" \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-    "schema_version": "1.1",
-    "type_definitions": [
-      { "type": "user" },
-      { "type": "document",
-        "relations": { "viewer": { "this": {} } },
-        "metadata": { "relations": { "viewer": { "directly_related_user_types": [ { "type": "user" } ] } } }
-      }
-    ]
-  }'
-```
+   ```bash
+   STORE=01G3EMTKQRKJ93PFVDA1SJHWD2
+   curl -X POST "localhost:8080/stores/$STORE/authorization-models" \
+     --header 'Content-Type: application/json' \
+     --data-raw '{
+       "schema_version": "1.1",
+       "type_definitions": [
+         { "type": "user" },
+         { "type": "document",
+           "relations": { "viewer": { "this": {} } },
+           "metadata": { "relations": { "viewer": { "directly_related_user_types": [ { "type": "user" } ] } } }
+         }
+       ]
+     }'
+   ```
 
 1. `user:alice` に `document:1` の `viewer` 関係を付与する関係タプルを書き込む。
 
-```bash
-curl -X POST "localhost:8080/stores/$STORE/write" \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-    "writes": { "tuple_keys": [
-      { "user": "user:alice", "relation": "viewer", "object": "document:1" }
-    ] }
-  }'
-```
+   ```bash
+   curl -X POST "localhost:8080/stores/$STORE/write" \
+     --header 'Content-Type: application/json' \
+     --data-raw '{
+       "writes": { "tuple_keys": [
+         { "user": "user:alice", "relation": "viewer", "object": "document:1" }
+       ] }
+     }'
+   ```
 
 1. Check を問い合わせる。
 
-```bash
-curl -X POST "localhost:8080/stores/$STORE/check" \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-    "tuple_key": { "user": "user:alice", "relation": "viewer", "object": "document:1" }
-  }'
-```
+   ```bash
+   curl -X POST "localhost:8080/stores/$STORE/check" \
+     --header 'Content-Type: application/json' \
+     --data-raw '{
+       "tuple_key": { "user": "user:alice", "relation": "viewer", "object": "document:1" }
+     }'
+   ```
 
 応答が認可判定である:
 

@@ -23,42 +23,42 @@ helm install kruise openkruise/kruise --version 1.9.0 \
 
 1. CloneSet を作る。
 
-```bash
-cat <<'EOF' | kubectl apply -f -
-apiVersion: apps.kruise.io/v1alpha1
-kind: CloneSet
-metadata:
-  name: sample
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: sample
-  template:
-    metadata:
-      labels:
-        app: sample
-    spec:
-      containers:
-        - name: main
-          image: nginx:1.25.0
-  updateStrategy:
-    type: InPlaceIfPossible
-EOF
-```
+   ```bash
+   cat <<'EOF' | kubectl apply -f -
+   apiVersion: apps.kruise.io/v1alpha1
+   kind: CloneSet
+   metadata:
+     name: sample
+   spec:
+     replicas: 3
+     selector:
+       matchLabels:
+         app: sample
+     template:
+       metadata:
+         labels:
+           app: sample
+       spec:
+         containers:
+           - name: main
+             image: nginx:1.25.0
+     updateStrategy:
+       type: InPlaceIfPossible
+   EOF
+   ```
 
 1. 別ターミナルで Pod を監視する。
 
-```bash
-kubectl get pod -l app=sample -w
-```
+   ```bash
+   kubectl get pod -l app=sample -w
+   ```
 
 1. さらに別ターミナルで image だけを変える。
 
-```bash
-kubectl patch cloneset sample --type='merge' \
-  -p '{"spec":{"template":{"spec":{"containers":[{"name":"main","image":"nginx:1.25.3"}]}}}}'
-```
+   ```bash
+   kubectl patch cloneset sample --type='merge' \
+     -p '{"spec":{"template":{"spec":{"containers":[{"name":"main","image":"nginx:1.25.3"}]}}}}'
+   ```
 
 Pod は名前と IP を保ったまま、`RESTARTS` が増え `AGE` はリセットされない。Pod が再作成されるのではなく、コンテナが in-place で再起動するため。
 

@@ -29,21 +29,21 @@ This brings up the GUAC services with the in-memory backend, ingests a folder of
 
 1. Start the stack (GraphQL server, collectsub, ingestor) with the in-memory backend. The target force-recreates containers and waits for the GraphQL endpoint to answer on port 8080.
 
-```bash
-make start-service
-```
+   ```bash
+   make start-service
+   ```
 
 1. Ingest a folder of SBOMs/attestations directly into the graph. The `files` subcommand talks straight to the GraphQL endpoint (`cmd/guacone/cmd/files.go:62`).
 
-```bash
-bin/guacone collect files /path/to/sbom-folder
-```
+   ```bash
+   bin/guacone collect files /path/to/sbom-folder
+   ```
 
 1. Query the graph from the CLI.
 
-```bash
-bin/guacone query
-```
+   ```bash
+   bin/guacone query
+   ```
 
 ## Verify it works
 

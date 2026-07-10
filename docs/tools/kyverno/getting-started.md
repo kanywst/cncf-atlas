@@ -29,41 +29,41 @@ The goal is to require a label on every Pod and watch Kyverno block one that lac
 
 1. Confirm the controllers are running.
 
-```bash
-kubectl get pods -n kyverno
-```
+   ```bash
+   kubectl get pods -n kyverno
+   ```
 
 1. Create a policy that requires the `team` label on Pods and enforces it.
 
-```bash
-cat <<'EOF' | kubectl apply -f -
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
-metadata:
-  name: require-team-label
-spec:
-  validationFailureAction: Enforce
-  rules:
-    - name: check-team-label
-      match:
-        any:
-          - resources:
-              kinds:
-                - Pod
-      validate:
-        message: "The label 'team' is required on every Pod."
-        pattern:
-          metadata:
-            labels:
-              team: "?*"
-EOF
-```
+   ```bash
+   cat <<'EOF' | kubectl apply -f -
+   apiVersion: kyverno.io/v1
+   kind: ClusterPolicy
+   metadata:
+     name: require-team-label
+   spec:
+     validationFailureAction: Enforce
+     rules:
+       - name: check-team-label
+         match:
+           any:
+             - resources:
+                 kinds:
+                   - Pod
+         validate:
+           message: "The label 'team' is required on every Pod."
+           pattern:
+             metadata:
+               labels:
+                 team: "?*"
+   EOF
+   ```
 
 1. Try to create a Pod without the label. The admission request is denied.
 
-```bash
-kubectl run nginx --image=nginx
-```
+   ```bash
+   kubectl run nginx --image=nginx
+   ```
 
 Expected output:
 
@@ -78,9 +78,9 @@ require-team-label:
 
 1. Create the same Pod with the label and it is admitted.
 
-```bash
-kubectl run nginx --image=nginx --labels team=payments
-```
+   ```bash
+   kubectl run nginx --image=nginx --labels team=payments
+   ```
 
 ## Verify it works
 

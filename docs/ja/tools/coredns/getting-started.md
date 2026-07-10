@@ -26,25 +26,25 @@ make
 
 1. Corefile を書く。`.:1053` ブロックは root zone をポート 1053 で提供し、`8.8.8.8` に転送し、ログとエラー報告を有効にする。
 
-```text
-.:1053 {
-    forward . 8.8.8.8
-    log
-    errors
-}
-```
+   ```text
+   .:1053 {
+       forward . 8.8.8.8
+       log
+       errors
+   }
+   ```
 
 1. その Corefile で CoreDNS を起動する。
 
-```bash
-./coredns -conf Corefile
-```
+   ```bash
+   ./coredns -conf Corefile
+   ```
 
 1. 別のターミナルから問い合わせる。任意の DNS クライアントで良い。ここでは `dig` を使う。
 
-```bash
-dig @127.0.0.1 -p 1053 example.com
-```
+   ```bash
+   dig @127.0.0.1 -p 1053 example.com
+   ```
 
 `example.com` の answer セクションが返り、CoreDNS のターミナルに そのクエリの `log` 行が出るはずだ。
 

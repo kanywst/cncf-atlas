@@ -28,38 +28,38 @@ kubectl create -f https://raw.githubusercontent.com/longhorn/longhorn/master/dep
 
 1. control plane が立ち上がるのを待つ。全コンポーネントは `longhorn-system` で動く。
 
-```bash
-kubectl -n longhorn-system get pods --watch
-```
+   ```bash
+   kubectl -n longhorn-system get pods --watch
+   ```
 
 1. デフォルトの `StorageClass` が作られたか確認する。マニフェストは `longhorn` を登録する。
 
-```bash
-kubectl get storageclass longhorn
-```
+   ```bash
+   kubectl get storageclass longhorn
+   ```
 
 1. `longhorn` クラスを使う `PersistentVolumeClaim` でボリュームを要求する。
 
-```yaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: longhorn-demo
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 1Gi
-```
+   ```yaml
+   apiVersion: v1
+   kind: PersistentVolumeClaim
+   metadata:
+     name: longhorn-demo
+   spec:
+     accessModes:
+       - ReadWriteOnce
+     storageClassName: longhorn
+     resources:
+       requests:
+         storage: 1Gi
+   ```
 
 1. 適用して bind を確認する。
 
-```bash
-kubectl apply -f longhorn-demo.yaml
-kubectl get pvc longhorn-demo
-```
+   ```bash
+   kubectl apply -f longhorn-demo.yaml
+   kubectl get pvc longhorn-demo
+   ```
 
 ## 動作確認
 

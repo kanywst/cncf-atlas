@@ -30,21 +30,21 @@ Helm によるインストールパスもサポートされる。chart の値は
 
 1. 現在のクラスタコンテキストに Cilium をインストールする。
 
-```bash
-cilium install
-```
+   ```bash
+   cilium install
+   ```
 
 1. コントロールプレーンと datapath の起動を待つ。
 
-```bash
-cilium status --wait
-```
+   ```bash
+   cilium status --wait
+   ```
 
 1. 組み込みの接続テストを実行する。テスト用ワークロードをデプロイし、pod 間とサービストラフィックを検証する。
 
-```bash
-cilium connectivity test
-```
+   ```bash
+   cilium connectivity test
+   ```
 
 ## 動作確認
 

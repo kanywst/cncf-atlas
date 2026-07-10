@@ -22,31 +22,31 @@ make install
 
 1. Install the CRDs into the cluster.
 
-```bash
-make install
-```
+   ```bash
+   make install
+   ```
 
 1. Deploy the controller with kustomize, then run it locally with the ironic plugin loaded. The ironic backend must be deployed separately (IrSO or the `ironic-deployment/` bases).
 
-```bash
-make deploy
-make run
-```
+   ```bash
+   make deploy
+   make run
+   ```
 
 1. Create a minimal `BareMetalHost`. A working host needs a BMC address, a credentials secret, the boot NIC MAC (the host NIC, not the BMC), and `online: true` ([source 6](https://book.metal3.io/bmo/introduction)).
 
-```yaml
-apiVersion: metal3.io/v1alpha1
-kind: BareMetalHost
-metadata:
-  name: node-0
-spec:
-  online: true
-  bootMACAddress: 00:11:22:33:44:55
-  bmc:
-    address: redfish://192.168.1.10/redfish/v1/Systems/1
-    credentialsName: node-0-bmc-secret
-```
+   ```yaml
+   apiVersion: metal3.io/v1alpha1
+   kind: BareMetalHost
+   metadata:
+     name: node-0
+   spec:
+     online: true
+     bootMACAddress: 00:11:22:33:44:55
+     bmc:
+       address: redfish://192.168.1.10/redfish/v1/Systems/1
+       credentialsName: node-0-bmc-secret
+   ```
 
 ## Verify it works
 

@@ -22,38 +22,38 @@ To build from source instead, the repository uses a Go workspace and a Makefile 
 
 1. Write a flag definition file `flags.json` in the current directory. `state` enables the flag, `variants` lists the possible values, and `defaultVariant` is returned when no targeting matches.
 
-```json
-{
-  "flags": {
-    "show-welcome-banner": {
-      "state": "ENABLED",
-      "variants": {
-        "on": true,
-        "off": false
-      },
-      "defaultVariant": "off"
-    }
-  }
-}
-```
+   ```json
+   {
+     "flags": {
+       "show-welcome-banner": {
+         "state": "ENABLED",
+         "variants": {
+           "on": true,
+           "off": false
+         },
+         "defaultVariant": "off"
+       }
+     }
+   }
+   ```
 
 1. Start flagd, mounting the file and passing it as a `file:` sync source. The default flag ports are `8013` (evaluation), `8014` (management), `8015` (gRPC sync), and `8016` (OFREP) (`flagd/cmd/start.go:53-56`).
 
-```bash
-docker run --rm -it \
-  -p 8013:8013 -p 8016:8016 \
-  -v "$(pwd)":/etc/flagd \
-  ghcr.io/open-feature/flagd:latest \
-  start --uri file:/etc/flagd/flags.json
-```
+   ```bash
+   docker run --rm -it \
+     -p 8013:8013 -p 8016:8016 \
+     -v "$(pwd)":/etc/flagd \
+     ghcr.io/open-feature/flagd:latest \
+     start --uri file:/etc/flagd/flags.json
+   ```
 
 1. Evaluate the flag over OFREP (the REST evaluation API). An empty context evaluates with no targeting input.
 
-```bash
-curl -X POST http://localhost:8016/ofrep/v1/evaluate/flags/show-welcome-banner \
-  -H 'Content-Type: application/json' \
-  -d '{"context": {}}'
-```
+   ```bash
+   curl -X POST http://localhost:8016/ofrep/v1/evaluate/flags/show-welcome-banner \
+     -H 'Content-Type: application/json' \
+     -d '{"context": {}}'
+   ```
 
 The response carries the resolved value and a reason. With no targeting rule, the reason is `STATIC` and the value is the `defaultVariant` (`core/pkg/evaluator/json.go:420`).
 

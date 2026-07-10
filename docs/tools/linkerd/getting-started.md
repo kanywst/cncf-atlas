@@ -24,28 +24,28 @@ The shortest path to a meshed workload. Each step prints manifests through the C
 
 1. Check that the cluster can host Linkerd.
 
-```bash
-linkerd check --pre
-```
+   ```bash
+   linkerd check --pre
+   ```
 
 1. Install the CRDs, then the control plane.
 
-```bash
-linkerd install --crds | kubectl apply -f -
-linkerd install | kubectl apply -f -
-```
+   ```bash
+   linkerd install --crds | kubectl apply -f -
+   linkerd install | kubectl apply -f -
+   ```
 
 1. Wait for the control plane to be healthy.
 
-```bash
-linkerd check
-```
+   ```bash
+   linkerd check
+   ```
 
 1. Mesh an existing workload by injecting the sidecar into its pod spec.
 
-```bash
-kubectl get deploy <app> -o yaml | linkerd inject - | kubectl apply -f -
-```
+   ```bash
+   kubectl get deploy <app> -o yaml | linkerd inject - | kubectl apply -f -
+   ```
 
 The `linkerd inject` step is the proxy-injector contract from the client side: it adds the inject annotation so the mutating webhook patches the pod with the `linkerd-proxy` sidecar at admission time.
 

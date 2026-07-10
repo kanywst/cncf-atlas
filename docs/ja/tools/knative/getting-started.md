@@ -23,18 +23,18 @@ kn quickstart kind
 
 1. Serving の Pod が動いていることを確認する。
 
-```bash
-kubectl get pods -n knative-serving
-```
+   ```bash
+   kubectl get pods -n knative-serving
+   ```
 
 1. コンテナイメージからサービスをデプロイする。
 
-```bash
-kn service create hello \
-  --image ghcr.io/knative/helloworld-go:latest \
-  --port 8080 \
-  --env TARGET=World
-```
+   ```bash
+   kn service create hello \
+     --image ghcr.io/knative/helloworld-go:latest \
+     --port 8080 \
+     --env TARGET=World
+   ```
 
 1. Knative が Configuration・immutable な Revision・Route を作成し、Revision が Ready になるとサービス URL を表示する。
 

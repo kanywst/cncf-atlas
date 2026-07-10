@@ -33,17 +33,17 @@ helm install hami hami-charts/hami -n kube-system
 
 1. スケジューラと device plugin が動いているか確認する。
 
-```bash
-kubectl get pods -n kube-system
-```
+   ```bash
+   kubectl get pods -n kube-system
+   ```
 
 `hami-scheduler` と `hami-device-plugin` の両方が `Running` になるまで待つ。
 
 1. メモリとコアの予算付きで GPU 1 枚を要求する例ワークロードを投入する。
 
-```bash
-kubectl apply -f examples/nvidia/default_use.yaml
-```
+   ```bash
+   kubectl apply -f examples/nvidia/default_use.yaml
+   ```
 
 この例 Pod は `nvidia.com/gpu: 1`、`nvidia.com/gpumem: 3000`、`nvidia.com/gpucores: 30` を要求するので、3000MB とコア 30% に制限された物理 GPU 1 枚を取る (`examples/nvidia/default_use.yaml`)。
 

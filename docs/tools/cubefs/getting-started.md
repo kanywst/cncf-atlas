@@ -25,15 +25,15 @@ The fastest way to a running cluster is the bundled Docker compose stack, which 
 
 1. Start the full stack, pointing it at a disk path with 10+ GB free:
 
-```bash
-./docker/run_docker.sh -r -d /path/to/disk
-```
+   ```bash
+   ./docker/run_docker.sh -r -d /path/to/disk
+   ```
 
 1. To run a single role manually instead, point the binary at a role config. The role is read from the `role` key (`cmd/cmd.go:184`), and the dispatch switch maps it to a server (`cmd/cmd.go:206-239`):
 
-```bash
-./cfs-server -c master.json
-```
+   ```bash
+   ./cfs-server -c master.json
+   ```
 
 Valid roles are the constants in `cmd/cmd.go:71-93`: `master`, `metanode`, `datanode`, `objectnode`, `authnode`, `console`, `lcnode`, `flashnode`, `flashgroupmanager`.
 

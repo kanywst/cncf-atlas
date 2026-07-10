@@ -23,18 +23,18 @@ For a manual install on an existing cluster, apply the Serving CRDs, then the co
 
 1. Confirm the Serving pods are running.
 
-```bash
-kubectl get pods -n knative-serving
-```
+   ```bash
+   kubectl get pods -n knative-serving
+   ```
 
 1. Deploy a service from a container image.
 
-```bash
-kn service create hello \
-  --image ghcr.io/knative/helloworld-go:latest \
-  --port 8080 \
-  --env TARGET=World
-```
+   ```bash
+   kn service create hello \
+     --image ghcr.io/knative/helloworld-go:latest \
+     --port 8080 \
+     --env TARGET=World
+   ```
 
 1. Knative creates a Configuration, an immutable Revision, and a Route, then prints the service URL once the Revision is Ready.
 

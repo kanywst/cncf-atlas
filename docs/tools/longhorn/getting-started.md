@@ -28,38 +28,38 @@ kubectl create -f https://raw.githubusercontent.com/longhorn/longhorn/master/dep
 
 1. Wait for the control plane to come up. Every component runs in `longhorn-system`.
 
-```bash
-kubectl -n longhorn-system get pods --watch
-```
+   ```bash
+   kubectl -n longhorn-system get pods --watch
+   ```
 
 1. Confirm the default `StorageClass` was created. The manifest registers `longhorn`.
 
-```bash
-kubectl get storageclass longhorn
-```
+   ```bash
+   kubectl get storageclass longhorn
+   ```
 
 1. Request a volume with a `PersistentVolumeClaim` that uses the `longhorn` class.
 
-```yaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: longhorn-demo
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 1Gi
-```
+   ```yaml
+   apiVersion: v1
+   kind: PersistentVolumeClaim
+   metadata:
+     name: longhorn-demo
+   spec:
+     accessModes:
+       - ReadWriteOnce
+     storageClassName: longhorn
+     resources:
+       requests:
+         storage: 1Gi
+   ```
 
 1. Apply it and confirm it binds.
 
-```bash
-kubectl apply -f longhorn-demo.yaml
-kubectl get pvc longhorn-demo
-```
+   ```bash
+   kubectl apply -f longhorn-demo.yaml
+   kubectl get pvc longhorn-demo
+   ```
 
 ## Verify it works
 

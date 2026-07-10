@@ -27,15 +27,15 @@ CRI-O is a daemon the kubelet drives; there is no end-user CLI. The shortest rea
 
 1. Start the `crio` daemon (as root). It listens on a Unix socket, by default at the path `unix:///var/run/crio/crio.sock`.
 
-```bash
-sudo crio
-```
+   ```bash
+   sudo crio
+   ```
 
 1. Point the kubelet at that socket with its CRI endpoint flag:
 
-```bash
-kubelet --container-runtime-endpoint=unix:///var/run/crio/crio.sock
-```
+   ```bash
+   kubelet --container-runtime-endpoint=unix:///var/run/crio/crio.sock
+   ```
 
 For a full cluster bootstrap, the repository ships tutorials: `tutorials/kubeadm.md` for kubeadm and `tutorials/crio-in-kind.md` for kind.
 

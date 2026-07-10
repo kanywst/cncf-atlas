@@ -30,21 +30,21 @@ Helm is also supported as an install path; see the official docs for chart value
 
 1. Install Cilium into the current cluster context.
 
-```bash
-cilium install
-```
+   ```bash
+   cilium install
+   ```
 
 1. Wait for the control plane and datapath to come up.
 
-```bash
-cilium status --wait
-```
+   ```bash
+   cilium status --wait
+   ```
 
 1. Run the built-in connectivity test, which deploys test workloads and exercises pod-to-pod and service traffic.
 
-```bash
-cilium connectivity test
-```
+   ```bash
+   cilium connectivity test
+   ```
 
 ## Verify it works
 

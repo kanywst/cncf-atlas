@@ -23,15 +23,15 @@ The shortest path is to run any process with a sidecar and call it through the s
 
 1. Start an app with a sidecar. Replace the trailing command with your own; here a Python HTTP server stands in for the app.
 
-```bash
-dapr run --app-id myapp --app-port 8080 -- python3 -m http.server 8080
-```
+   ```bash
+   dapr run --app-id myapp --app-port 8080 -- python3 -m http.server 8080
+   ```
 
 1. Call the app through its sidecar. The runtime listens on HTTP port `3500` by default, so a service-invocation request to app ID `myapp` looks like the command below. The host is the local sidecar, addressed as `localhost:3500`.
 
-```bash
-curl http://127.0.0.1:3500/v1.0/invoke/myapp/method/
-```
+   ```bash
+   curl http://127.0.0.1:3500/v1.0/invoke/myapp/method/
+   ```
 
 The sidecar resolves the target by app ID, applies any resiliency policy, and forwards the call to your app on its `--app-port` (`pkg/api/http/directmessaging.go:97`).
 

@@ -26,23 +26,23 @@ The shortest path to a global query view is a sidecar next to Prometheus plus a 
 
 1. Start the sidecar next to Prometheus to expose its data over the StoreAPI (`docs/quick-tutorial.md:91`). The `--objstore.config-file` flag is optional and only needed for long-term retention.
 
-```bash
-thanos sidecar \
-    --tsdb.path            /var/prometheus \
-    --objstore.config-file bucket_config.yaml \
-    --prometheus.url       http://localhost:9090 \
-    --http-address         0.0.0.0:19191 \
-    --grpc-address         0.0.0.0:19090
-```
+   ```bash
+   thanos sidecar \
+       --tsdb.path            /var/prometheus \
+       --objstore.config-file bucket_config.yaml \
+       --prometheus.url       http://localhost:9090 \
+       --http-address         0.0.0.0:19191 \
+       --grpc-address         0.0.0.0:19090
+   ```
 
 1. Start a Querier that connects to the sidecar's gRPC endpoint and serves the Prometheus-compatible API and UI (`docs/quick-tutorial.md:133`). The `dnssrv+` prefix discovers endpoints through DNS SRV records.
 
-```bash
-thanos query \
-    --http-address 0.0.0.0:19192 \
-    --endpoint     1.2.3.4:19090 \
-    --endpoint     dnssrv+_grpc._tcp.thanos-store.monitoring.svc
-```
+   ```bash
+   thanos query \
+       --http-address 0.0.0.0:19192 \
+       --endpoint     1.2.3.4:19090 \
+       --endpoint     dnssrv+_grpc._tcp.thanos-store.monitoring.svc
+   ```
 
 ## Verify it works
 

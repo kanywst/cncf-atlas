@@ -25,39 +25,39 @@ helm install fluid fluid/fluid -n fluid-system --create-namespace
 
 1. under-file-system のマウント点を指す `Dataset` を作る。
 
-```yaml
-apiVersion: data.fluid.io/v1alpha1
-kind: Dataset
-metadata:
-  name: demo
-spec:
-  mounts:
-    - mountPoint: https://mirrors.bit.edu.cn/apache/spark/
-      name: spark
-```
+   ```yaml
+   apiVersion: data.fluid.io/v1alpha1
+   kind: Dataset
+   metadata:
+     name: demo
+   spec:
+     mounts:
+       - mountPoint: https://mirrors.bit.edu.cn/apache/spark/
+         name: spark
+   ```
 
 1. 同名の `AlluxioRuntime` を作る。名前の一致が両者をバインドする鍵である。
 
-```yaml
-apiVersion: data.fluid.io/v1alpha1
-kind: AlluxioRuntime
-metadata:
-  name: demo
-spec:
-  replicas: 1
-  tieredstore:
-    levels:
-      - mediumtype: MEM
-        path: /dev/shm
-        quota: 2Gi
-```
+   ```yaml
+   apiVersion: data.fluid.io/v1alpha1
+   kind: AlluxioRuntime
+   metadata:
+     name: demo
+   spec:
+     replicas: 1
+     tieredstore:
+       levels:
+         - mediumtype: MEM
+           path: /dev/shm
+           quota: 2Gi
+   ```
 
 1. 両方を apply し、データセットのバインドを待つ。
 
-```bash
-kubectl apply -f dataset.yaml -f runtime.yaml
-kubectl get dataset demo
-```
+   ```bash
+   kubectl apply -f dataset.yaml -f runtime.yaml
+   kubectl get dataset demo
+   ```
 
 ランタイムコントローラが setup を終えると、データセットは `Bound` フェーズに達し、`demo` という名の PersistentVolumeClaim が生える。その PVC をアプリ Pod でマウントすれば、キャッシュ経由でデータを読める。
 

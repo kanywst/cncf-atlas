@@ -33,17 +33,17 @@ nginx Deployment をメンバークラスタへ配布する。コントロール
 
 1. kubectl を Karmada コントロールプレーンに向ける。
 
-```bash
-export KUBECONFIG="$HOME/.kube/karmada.config"
-kubectl config use-context karmada-apiserver
-```
+   ```bash
+   export KUBECONFIG="$HOME/.kube/karmada.config"
+   kubectl config use-context karmada-apiserver
+   ```
 
 1. Deployment テンプレートと PropagationPolicy を作る。
 
-```bash
-kubectl create -f samples/nginx/deployment.yaml
-kubectl create -f samples/nginx/propagationpolicy.yaml
-```
+   ```bash
+   kubectl create -f samples/nginx/deployment.yaml
+   kubectl create -f samples/nginx/propagationpolicy.yaml
+   ```
 
 サンプルポリシーは `nginx` Deployment を選び、レプリカを静的な重みで `member1` と `member2` に分割する (`samples/nginx/propagationpolicy.yaml`)。
 

@@ -25,39 +25,39 @@ The core job is: declare a dataset, give it a runtime, and have an application P
 
 1. Create a `Dataset` pointing at your under-file-system mount.
 
-```yaml
-apiVersion: data.fluid.io/v1alpha1
-kind: Dataset
-metadata:
-  name: demo
-spec:
-  mounts:
-    - mountPoint: https://mirrors.bit.edu.cn/apache/spark/
-      name: spark
-```
+   ```yaml
+   apiVersion: data.fluid.io/v1alpha1
+   kind: Dataset
+   metadata:
+     name: demo
+   spec:
+     mounts:
+       - mountPoint: https://mirrors.bit.edu.cn/apache/spark/
+         name: spark
+   ```
 
 1. Create a same-named `AlluxioRuntime`. The matching name is what binds them.
 
-```yaml
-apiVersion: data.fluid.io/v1alpha1
-kind: AlluxioRuntime
-metadata:
-  name: demo
-spec:
-  replicas: 1
-  tieredstore:
-    levels:
-      - mediumtype: MEM
-        path: /dev/shm
-        quota: 2Gi
-```
+   ```yaml
+   apiVersion: data.fluid.io/v1alpha1
+   kind: AlluxioRuntime
+   metadata:
+     name: demo
+   spec:
+     replicas: 1
+     tieredstore:
+       levels:
+         - mediumtype: MEM
+           path: /dev/shm
+           quota: 2Gi
+   ```
 
 1. Apply both and wait for the dataset to bind.
 
-```bash
-kubectl apply -f dataset.yaml -f runtime.yaml
-kubectl get dataset demo
-```
+   ```bash
+   kubectl apply -f dataset.yaml -f runtime.yaml
+   kubectl get dataset demo
+   ```
 
 When the runtime controller finishes setup, the dataset reaches the `Bound` phase and a PersistentVolumeClaim named `demo` appears. Mount that PVC in an application Pod to read the data through the cache.
 

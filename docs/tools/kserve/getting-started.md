@@ -30,22 +30,22 @@ Serve the scikit-learn iris model. The manifest below matches the in-repo sample
 
 1. Create the `InferenceService`.
 
-```yaml
-apiVersion: "serving.kserve.io/v1beta1"
-kind: "InferenceService"
-metadata:
-  name: "sklearn-iris"
-spec:
-  predictor:
-    sklearn:
-      storageUri: "gs://kfserving-examples/models/sklearn/1.0/model"
-```
+   ```yaml
+   apiVersion: "serving.kserve.io/v1beta1"
+   kind: "InferenceService"
+   metadata:
+     name: "sklearn-iris"
+   spec:
+     predictor:
+       sklearn:
+         storageUri: "gs://kfserving-examples/models/sklearn/1.0/model"
+   ```
 
 1. Apply it.
 
-```bash
-kubectl apply -f sklearn-iris.yaml
-```
+   ```bash
+   kubectl apply -f sklearn-iris.yaml
+   ```
 
 KServe picks the scikit-learn `ServingRuntime` by model format, injects a storage-initializer init container that downloads the model from `storageUri` into `/mnt/models`, and creates the Deployment, Service, and HPA.
 

@@ -18,21 +18,21 @@ README の Quick Start は、インストールからイベント確認まで 4 
 
 1. サンプル設定ディレクトリを生成する。
 
-```bash
-fluentd -s conf
-```
+   ```bash
+   fluentd -s conf
+   ```
 
 1. その設定でバックグラウンドで Fluentd を起動する。
 
-```bash
-fluentd -c conf/fluent.conf &
-```
+   ```bash
+   fluentd -c conf/fluent.conf &
+   ```
 
 1. テストイベントを送る。`fluent-cat` は gem に同梱され、指定したタグで JSON レコードを転送する。
 
-```bash
-echo '{"json":"message"}' | fluent-cat debug.test
-```
+   ```bash
+   echo '{"json":"message"}' | fluent-cat debug.test
+   ```
 
 生成された `conf/fluent.conf` には `stdout` 出力を使う `<match debug.**>` ブロックが含まれるため、イベントは Fluentd が動く端末に表示される。
 

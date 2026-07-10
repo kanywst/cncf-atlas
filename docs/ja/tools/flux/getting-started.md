@@ -22,24 +22,24 @@ Makefile は同じバイナリをソースから `CGO_ENABLED=0 go build -ldflag
 
 1. クラスタが Flux の前提を満たすか確認する。
 
-```bash
-flux check --pre
-```
+   ```bash
+   flux check --pre
+   ```
 
 1. GitHub token を export する。Flux は `GITHUB_TOKEN` 環境変数から読む (`cmd/flux/bootstrap_github.go:115`)。
 
-```bash
-export GITHUB_TOKEN=<your-token>
-```
+   ```bash
+   export GITHUB_TOKEN=<your-token>
+   ```
 
 1. ブートストラップする。リポジトリ作成、コントローラのインストール、同期構成の commit を行う。デフォルトのリコンサイル間隔は 1 分だ。
 
-```bash
-flux bootstrap github \
-  --owner=<organization> \
-  --repository=<repository name> \
-  --path=clusters/my-cluster
-```
+   ```bash
+   flux bootstrap github \
+     --owner=<organization> \
+     --repository=<repository name> \
+     --path=clusters/my-cluster
+   ```
 
 ## 動作確認
 

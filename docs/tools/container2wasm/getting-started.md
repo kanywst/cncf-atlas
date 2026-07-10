@@ -21,21 +21,21 @@ sudo make install
 
 1. Convert a container image to a `.wasm` file. This drives Docker Buildx and can take a while on the first run.
 
-```bash
-c2w ubuntu:22.04 out.wasm
-```
+   ```bash
+   c2w ubuntu:22.04 out.wasm
+   ```
 
 1. Run the output on a WASI runtime. The `.wasm` boots an emulated Linux and runs the command in the container.
 
-```bash
-wasmtime out.wasm uname -a
-```
+   ```bash
+   wasmtime out.wasm uname -a
+   ```
 
 1. Map a host directory into the guest. The WASI filesystem exposes it and the emulator mounts it over 9p.
 
-```bash
-wasmtime --mapdir /mnt/share::/tmp/share out.wasm cat /mnt/share/from-host
-```
+   ```bash
+   wasmtime --mapdir /mnt/share::/tmp/share out.wasm cat /mnt/share/from-host
+   ```
 
 To target riscv64 instead of the default amd64, pass `--target-arch`:
 

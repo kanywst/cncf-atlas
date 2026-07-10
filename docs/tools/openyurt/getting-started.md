@@ -25,11 +25,11 @@ helm upgrade --install yurt-manager openyurt/yurt-manager --namespace kube-syste
 
 1. Join an edge node with `yurtadm`. Run this on the edge machine, pointing at the cloud apiserver:
 
-```bash
-yurtadm join <apiserver-host>:<port> \
-  --token=<bootstrap-token> \
-  --node-type=edge
-```
+   ```bash
+   yurtadm join <apiserver-host>:<port> \
+     --token=<bootstrap-token> \
+     --node-type=edge
+   ```
 
 1. To detach a node later, run `yurtadm reset` on that node. The join and reset commands live under `pkg/yurtadm/cmd/`.
 

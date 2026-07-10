@@ -31,21 +31,21 @@ The example's first line is the frontend reference that makes it a Dalec build:
 
 1. Build the RPM for Azure Linux 3 and write it to a local directory. The `azlinux3/rpm` target produces the package; `--output` exports it to `_output`.
 
-```bash
-docker build -f docs/examples/hello.inline.yml --target=azlinux3/rpm --output=_output .
-```
+   ```bash
+   docker build -f docs/examples/hello.inline.yml --target=azlinux3/rpm --output=_output .
+   ```
 
 1. Build the minimal container instead, with the package installed. The `azlinux3` target (no `/rpm` suffix) produces the image and tags it `hello-inline:dev`.
 
-```bash
-docker build -f docs/examples/hello.inline.yml --target=azlinux3 -t hello-inline:dev .
-```
+   ```bash
+   docker build -f docs/examples/hello.inline.yml --target=azlinux3 -t hello-inline:dev .
+   ```
 
 1. Run the resulting image to confirm the installed binary works.
 
-```bash
-docker run --rm hello-inline:dev
-```
+   ```bash
+   docker run --rm hello-inline:dev
+   ```
 
 ## Verify it works
 

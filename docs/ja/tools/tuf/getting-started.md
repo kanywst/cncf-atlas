@@ -19,17 +19,17 @@ python -m pip install tuf
 
 1. ソースを clone し、example リポジトリを起動して動かしたままにする。
 
-```bash
-git clone https://github.com/theupdateframework/python-tuf
-cd python-tuf/examples/repository
-./repo
-```
+   ```bash
+   git clone https://github.com/theupdateframework/python-tuf
+   cd python-tuf/examples/repository
+   ./repo
+   ```
 
 1. 別のターミナルで、client を trust-on-first-use で初期化する。初期 root をダウンロードし、`Updater` を構築する。
 
-```bash
-./examples/client/client tofu
-```
+   ```bash
+   ./examples/client/client tofu
+   ```
 
 期待される出力:
 
@@ -39,9 +39,9 @@ Trust-on-First-Use: Initialized new root in /home/you/.local/share/tuf-example/<
 
 1. ターゲットファイルをダウンロードする。client はトップレベルメタデータをリフレッシュし、ターゲットを引き、ローカルキャッシュを確認し、必要ならダウンロードする。
 
-```bash
-./examples/client/client download file1.txt
-```
+   ```bash
+   ./examples/client/client download file1.txt
+   ```
 
 期待される出力:
 

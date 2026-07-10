@@ -24,48 +24,48 @@ helm install external-secrets external-secrets/external-secrets \
 
 1. `fake` プロバイダを使い、1 つの固定値を持つ `SecretStore` を作る。
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: external-secrets.io/v1
-kind: SecretStore
-metadata:
-  name: fake-store
-spec:
-  provider:
-    fake:
-      data:
-        - key: "/db/password"
-          value: "s3cr3t"
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: external-secrets.io/v1
+   kind: SecretStore
+   metadata:
+     name: fake-store
+   spec:
+     provider:
+       fake:
+         data:
+           - key: "/db/password"
+             value: "s3cr3t"
+   EOF
+   ```
 
 1. そのキーを `db-secret` という Kubernetes Secret に取り込む `ExternalSecret` を作る。
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: external-secrets.io/v1
-kind: ExternalSecret
-metadata:
-  name: db-secret
-spec:
-  refreshInterval: 1h
-  secretStoreRef:
-    name: fake-store
-    kind: SecretStore
-  target:
-    name: db-secret
-  data:
-    - secretKey: password
-      remoteRef:
-        key: "/db/password"
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: external-secrets.io/v1
+   kind: ExternalSecret
+   metadata:
+     name: db-secret
+   spec:
+     refreshInterval: 1h
+     secretStoreRef:
+       name: fake-store
+       kind: SecretStore
+     target:
+       name: db-secret
+     data:
+       - secretKey: password
+         remoteRef:
+           key: "/db/password"
+   EOF
+   ```
 
 1. 同期された Secret を読み戻し、値を確認する。
 
-```bash
-kubectl get secret db-secret -o jsonpath='{.data.password}' | base64 -d
-```
+   ```bash
+   kubectl get secret db-secret -o jsonpath='{.data.password}' | base64 -d
+   ```
 
 `fake` プロバイダが返した値 `s3cr3t` が表示される。
 

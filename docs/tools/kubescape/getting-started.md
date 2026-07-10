@@ -35,49 +35,49 @@ The core job is a framework scan. The steps below scan local manifests against t
 
 1. Create a manifest to scan.
 
-```bash
-cat > deployment.yaml <<'EOF'
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: demo
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: demo
-  template:
-    metadata:
-      labels:
-        app: demo
-    spec:
-      containers:
-        - name: demo
-          image: nginx:1.27
-EOF
-```
+   ```bash
+   cat > deployment.yaml <<'EOF'
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: demo
+   spec:
+     replicas: 1
+     selector:
+       matchLabels:
+         app: demo
+     template:
+       metadata:
+         labels:
+           app: demo
+       spec:
+         containers:
+           - name: demo
+             image: nginx:1.27
+   EOF
+   ```
 
 1. Scan it against the NSA framework.
 
-```bash
-kubescape scan framework nsa deployment.yaml
-```
+   ```bash
+   kubescape scan framework nsa deployment.yaml
+   ```
 
 The output prints per-control pass/fail rows, a resource summary, and a risk score and compliance score at the end.
 
 1. Scan a live cluster instead of a file.
 
-```bash
-kubescape scan framework nsa
-```
+   ```bash
+   kubescape scan framework nsa
+   ```
 
 With no path argument the engine collects objects from the current kubeconfig context.
 
 1. Turn the scan into a CI gate. This fails the command when compliance drops below 80.
 
-```bash
-kubescape scan framework nsa deployment.yaml --compliance-threshold 80
-```
+   ```bash
+   kubescape scan framework nsa deployment.yaml --compliance-threshold 80
+   ```
 
 ## Verify it works
 

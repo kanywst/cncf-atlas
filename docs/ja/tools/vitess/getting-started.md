@@ -23,29 +23,29 @@ export PATH="$PWD/bin:$PATH"
 
 1. 環境とエイリアスを設定し、初期クラスタを立ち上げる (`examples/local/README.md:9`, `README.md:12`)。
 
-```bash
-source ../common/env.sh
-./101_initial_cluster.sh
-```
+   ```bash
+   source ../common/env.sh
+   ./101_initial_cluster.sh
+   ```
 
 1. VTGate 経由でサンプルデータを挿入し読み戻す (`examples/local/README.md:15`)。
 
-```bash
-mysql < ../common/insert_commerce_data.sql
-mysql --table < ../common/select_commerce_data.sql
-```
+   ```bash
+   mysql < ../common/insert_commerce_data.sql
+   mysql --table < ../common/select_commerce_data.sql
+   ```
 
 1. VReplication で 2 つのテーブルを新しい `customer` keyspace へ移す (`examples/local/README.md:22`)。
 
-```bash
-vtctldclient MoveTables --workflow commerce2customer --target-keyspace customer create --source-keyspace commerce --tables "customer,corder"
-```
+   ```bash
+   vtctldclient MoveTables --workflow commerce2customer --target-keyspace customer create --source-keyspace commerce --tables "customer,corder"
+   ```
 
 1. `customer` keyspace を 1 シャードから 2 シャードへリシャードする (`examples/local/README.md:40`)。
 
-```bash
-vtctldclient Reshard --workflow cust2cust --target-keyspace customer create --source-shards '0' --target-shards '-80,80-'
-```
+   ```bash
+   vtctldclient Reshard --workflow cust2cust --target-keyspace customer create --source-shards '0' --target-shards '-80,80-'
+   ```
 
 ## 動作確認
 

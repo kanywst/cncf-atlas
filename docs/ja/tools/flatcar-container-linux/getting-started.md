@@ -23,28 +23,28 @@ cd scripts
 
 1. `/dev` への特権アクセス付きで SDK コンテナを起動する。イメージビルドで使う loop device に必要だ（`README.md:89`）。
 
-```bash
-docker run -ti --privileged -v /dev:/dev \
-    ghcr.io/flatcar/flatcar-sdk-all:3033.0.0
-```
+   ```bash
+   docker run -ti --privileged -v /dev:/dev \
+       ghcr.io/flatcar/flatcar-sdk-all:3033.0.0
+   ```
 
 1. コンテナ内で、ボード向けのバイナリパッケージをビルドする。
 
-```bash
-./build_packages --board=amd64-usr
-```
+   ```bash
+   ./build_packages --board=amd64-usr
+   ```
 
 1. プロダクションイメージをビルドする。[アーキテクチャ](./architecture)で説明した `create_prod_image` フローが走る（`src/build_image:189`）。
 
-```bash
-./build_image --board=amd64-usr prod
-```
+   ```bash
+   ./build_image --board=amd64-usr prod
+   ```
 
 1. 汎用イメージを実行可能な VM イメージへ変換する。
 
-```bash
-./image_to_vm.sh --from=<image-dir> --board=amd64-usr
-```
+   ```bash
+   ./image_to_vm.sh --from=<image-dir> --board=amd64-usr
+   ```
 
 ## 動作確認
 

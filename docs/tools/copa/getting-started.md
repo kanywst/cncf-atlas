@@ -29,22 +29,22 @@ This scans an image with Trivy, patches only the flagged OS packages, and re-sca
 
 1. Scan the image and write a JSON report of fixable OS vulnerabilities.
 
-```bash
-export IMAGE=docker.io/library/nginx:1.21.6
-trivy image --vuln-type os --ignore-unfixed -f json -o nginx-report.json "$IMAGE"
-```
+   ```bash
+   export IMAGE=docker.io/library/nginx:1.21.6
+   trivy image --vuln-type os --ignore-unfixed -f json -o nginx-report.json "$IMAGE"
+   ```
 
 1. Patch the image using the report. Copa produces a new tag and loads it into the local runtime.
 
-```bash
-copa patch -i "$IMAGE" -r nginx-report.json -t 1.21.6-patched
-```
+   ```bash
+   copa patch -i "$IMAGE" -r nginx-report.json -t 1.21.6-patched
+   ```
 
 1. Re-scan the patched tag to confirm the flagged CVEs are gone.
 
-```bash
-trivy image --vuln-type os --ignore-unfixed "${IMAGE%:*}:1.21.6-patched"
-```
+   ```bash
+   trivy image --vuln-type os --ignore-unfixed "${IMAGE%:*}:1.21.6-patched"
+   ```
 
 To patch every outdated package without a report, omit `-r`; Copa updates all outdated OS packages:
 

@@ -21,30 +21,30 @@ make build
 
 1. サンプル設定でサーバを起動する。`conf/server/server.conf` は `trust_domain`・`data_dir` と `DataStore`・`KeyManager`・`NodeAttestor` プラグインを設定する。`conf/server/server_full.conf` に全項目の例がある。
 
-```bash
-bin/spire-server run -config conf/server/server.conf
-```
+   ```bash
+   bin/spire-server run -config conf/server/server.conf
+   ```
 
 1. agent 用の join トークンを生成する。このトークンが agent のノード attestation のブートストラップクレデンシャルになる。
 
-```bash
-bin/spire-server token generate -spiffeID spiffe://example.org/myagent
-```
+   ```bash
+   bin/spire-server token generate -spiffeID spiffe://example.org/myagent
+   ```
 
 1. そのトークンと、サンプルの agent 設定 `conf/agent/agent.conf` で agent を起動する。
 
-```bash
-bin/spire-agent run -config conf/agent/agent.conf -joinToken <token>
-```
+   ```bash
+   bin/spire-agent run -config conf/agent/agent.conf -joinToken <token>
+   ```
 
 1. 登録エントリを作る。「agent の SPIFFE ID の下で uid 1000 で動くワークロードに `spiffe://example.org/myworkload` を発行する」という宣言だ。
 
-```bash
-bin/spire-server entry create \
-  -parentID spiffe://example.org/myagent \
-  -spiffeID spiffe://example.org/myworkload \
-  -selector unix:uid:1000
-```
+   ```bash
+   bin/spire-server entry create \
+     -parentID spiffe://example.org/myagent \
+     -spiffeID spiffe://example.org/myworkload \
+     -selector unix:uid:1000
+   ```
 
 ## 動作確認
 

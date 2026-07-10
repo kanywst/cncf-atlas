@@ -35,49 +35,49 @@ kubescape version
 
 1. スキャン対象のマニフェストを作る。
 
-```bash
-cat > deployment.yaml <<'EOF'
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: demo
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: demo
-  template:
-    metadata:
-      labels:
-        app: demo
-    spec:
-      containers:
-        - name: demo
-          image: nginx:1.27
-EOF
-```
+   ```bash
+   cat > deployment.yaml <<'EOF'
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: demo
+   spec:
+     replicas: 1
+     selector:
+       matchLabels:
+         app: demo
+     template:
+       metadata:
+         labels:
+           app: demo
+       spec:
+         containers:
+           - name: demo
+             image: nginx:1.27
+   EOF
+   ```
 
 1. NSA フレームワークに照らしてスキャンする。
 
-```bash
-kubescape scan framework nsa deployment.yaml
-```
+   ```bash
+   kubescape scan framework nsa deployment.yaml
+   ```
 
 出力は control ごとの pass/fail 行、リソースのサマリ、そして末尾の risk スコアと compliance スコアを表示する。
 
 1. ファイルではなく稼働クラスタをスキャンする。
 
-```bash
-kubescape scan framework nsa
-```
+   ```bash
+   kubescape scan framework nsa
+   ```
 
 path 引数なしだと、エンジンは現在の kubeconfig コンテキストからオブジェクトを収集する。
 
 1. スキャンを CI ゲートにする。compliance が 80 を下回るとコマンドが失敗する。
 
-```bash
-kubescape scan framework nsa deployment.yaml --compliance-threshold 80
-```
+   ```bash
+   kubescape scan framework nsa deployment.yaml --compliance-threshold 80
+   ```
 
 ## 動作確認
 

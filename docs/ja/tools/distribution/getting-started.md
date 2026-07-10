@@ -25,29 +25,29 @@ docker run -d -p 5000:5000 --restart=always --name registry registry:3
 
 1. push する対象として、小さい公開イメージを pull する。
 
-```bash
-docker pull ubuntu:16.04
-```
+   ```bash
+   docker pull ubuntu:16.04
+   ```
 
 1. ローカルレジストリ向けにタグ付けする。タグの先頭がホストとポートのとき、Docker は push 時にそれをレジストリの場所として扱う。
 
-```bash
-docker tag ubuntu:16.04 localhost:5000/my-ubuntu
-```
+   ```bash
+   docker tag ubuntu:16.04 localhost:5000/my-ubuntu
+   ```
 
 1. push する。これで POST/PATCH/PUT の blob upload セッションが走り、各 blob が digest チェックで確定される。
 
-```bash
-docker push localhost:5000/my-ubuntu
-```
+   ```bash
+   docker push localhost:5000/my-ubuntu
+   ```
 
 1. ローカルのコピーを消し、自分のレジストリから pull してイメージが返ってくることを確かめる。
 
-```bash
-docker image remove ubuntu:16.04
-docker image remove localhost:5000/my-ubuntu
-docker pull localhost:5000/my-ubuntu
-```
+   ```bash
+   docker image remove ubuntu:16.04
+   docker image remove localhost:5000/my-ubuntu
+   docker pull localhost:5000/my-ubuntu
+   ```
 
 ## 動作確認
 

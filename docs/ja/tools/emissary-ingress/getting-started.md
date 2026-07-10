@@ -29,47 +29,47 @@ helm install emissary \
 
 1. `Listener`・`Host`・`Mapping` を定義する。
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: Listener
-metadata:
-  name: emissary-listener
-  namespace: emissary
-spec:
-  port: 8080
-  protocol: HTTP
-  securityModel: INSECURE
-  hostBinding:
-    namespace:
-      from: ALL
----
-apiVersion: getambassador.io/v3alpha1
-kind: Host
-metadata:
-  name: wildcard-host
-  namespace: emissary
-spec:
-  hostname: "*"
-  requestPolicy:
-    insecure:
-      action: Route
----
-apiVersion: getambassador.io/v3alpha1
-kind: Mapping
-metadata:
-  name: quote-backend
-  namespace: emissary
-spec:
-  hostname: "*"
-  prefix: /backend/
-  service: quote
-```
+   ```yaml
+   apiVersion: getambassador.io/v3alpha1
+   kind: Listener
+   metadata:
+     name: emissary-listener
+     namespace: emissary
+   spec:
+     port: 8080
+     protocol: HTTP
+     securityModel: INSECURE
+     hostBinding:
+       namespace:
+         from: ALL
+   ---
+   apiVersion: getambassador.io/v3alpha1
+   kind: Host
+   metadata:
+     name: wildcard-host
+     namespace: emissary
+   spec:
+     hostname: "*"
+     requestPolicy:
+       insecure:
+         action: Route
+   ---
+   apiVersion: getambassador.io/v3alpha1
+   kind: Mapping
+   metadata:
+     name: quote-backend
+     namespace: emissary
+   spec:
+     hostname: "*"
+     prefix: /backend/
+     service: quote
+   ```
 
 1. マニフェストを適用する。
 
-```bash
-kubectl apply -f routing.yaml
-```
+   ```bash
+   kubectl apply -f routing.yaml
+   ```
 
 ## 動作確認
 

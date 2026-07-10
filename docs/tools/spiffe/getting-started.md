@@ -20,39 +20,39 @@ The shortest path to mTLS is the `spiffetls` helpers. They build an `X509Source`
 
 1. Point the library at the Workload API socket.
 
-```bash
-export SPIFFE_ENDPOINT_SOCKET=unix:///tmp/agent.sock
-```
+   ```bash
+   export SPIFFE_ENDPOINT_SOCKET=unix:///tmp/agent.sock
+   ```
 
 1. Start an mTLS server that accepts any SPIFFE peer.
 
-```go
-package main
+   ```go
+   package main
 
-import (
-    "context"
-    "log"
+   import (
+       "context"
+       "log"
 
-    "github.com/spiffe/go-spiffe/v2/spiffetls"
-    "github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
-)
+       "github.com/spiffe/go-spiffe/v2/spiffetls"
+       "github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
+   )
 
-func main() {
-    ctx := context.Background()
-    listener, err := spiffetls.Listen(ctx, "tcp", "127.0.0.1:8443", tlsconfig.AuthorizeAny())
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer listener.Close()
-    log.Println("listening with a SPIFFE identity")
-}
-```
+   func main() {
+       ctx := context.Background()
+       listener, err := spiffetls.Listen(ctx, "tcp", "127.0.0.1:8443", tlsconfig.AuthorizeAny())
+       if err != nil {
+           log.Fatal(err)
+       }
+       defer listener.Close()
+       log.Println("listening with a SPIFFE identity")
+   }
+   ```
 
 1. Dial it from a client.
 
-```go
-conn, err := spiffetls.Dial(ctx, "tcp", "127.0.0.1:8443", tlsconfig.AuthorizeAny())
-```
+   ```go
+   conn, err := spiffetls.Dial(ctx, "tcp", "127.0.0.1:8443", tlsconfig.AuthorizeAny())
+   ```
 
 Both sides fetch X509-SVIDs and X.509 bundles from the Workload API, present them, and keep them refreshed as the agent rotates them ([README.md:36-42](https://github.com/spiffe/go-spiffe/blob/e9973f6314a3fa0e36eb1f00fbfe37bdc1554b96/README.md#L36-L42)).
 

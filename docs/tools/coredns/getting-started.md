@@ -26,25 +26,25 @@ The goal is a resolver that forwards every query to a public upstream and logs w
 
 1. Write a Corefile. The block `.:1053` serves the root zone on port 1053, forwards to `8.8.8.8`, and enables logging and error reporting.
 
-```text
-.:1053 {
-    forward . 8.8.8.8
-    log
-    errors
-}
-```
+   ```text
+   .:1053 {
+       forward . 8.8.8.8
+       log
+       errors
+   }
+   ```
 
 1. Start CoreDNS against that Corefile.
 
-```bash
-./coredns -conf Corefile
-```
+   ```bash
+   ./coredns -conf Corefile
+   ```
 
 1. In another terminal, query it. Any DNS client works; `dig` is shown here.
 
-```bash
-dig @127.0.0.1 -p 1053 example.com
-```
+   ```bash
+   dig @127.0.0.1 -p 1053 example.com
+   ```
 
 You should get an answer section for `example.com`, and the CoreDNS terminal should print a `log` line for the query.
 

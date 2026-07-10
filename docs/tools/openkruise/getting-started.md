@@ -23,42 +23,42 @@ The shortest path that exercises the core feature is a CloneSet rolled with `InP
 
 1. Create a CloneSet.
 
-```bash
-cat <<'EOF' | kubectl apply -f -
-apiVersion: apps.kruise.io/v1alpha1
-kind: CloneSet
-metadata:
-  name: sample
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: sample
-  template:
-    metadata:
-      labels:
-        app: sample
-    spec:
-      containers:
-        - name: main
-          image: nginx:1.25.0
-  updateStrategy:
-    type: InPlaceIfPossible
-EOF
-```
+   ```bash
+   cat <<'EOF' | kubectl apply -f -
+   apiVersion: apps.kruise.io/v1alpha1
+   kind: CloneSet
+   metadata:
+     name: sample
+   spec:
+     replicas: 3
+     selector:
+       matchLabels:
+         app: sample
+     template:
+       metadata:
+         labels:
+           app: sample
+       spec:
+         containers:
+           - name: main
+             image: nginx:1.25.0
+     updateStrategy:
+       type: InPlaceIfPossible
+   EOF
+   ```
 
 1. Watch the Pods in one terminal.
 
-```bash
-kubectl get pod -l app=sample -w
-```
+   ```bash
+   kubectl get pod -l app=sample -w
+   ```
 
 1. Change only the image, in another terminal.
 
-```bash
-kubectl patch cloneset sample --type='merge' \
-  -p '{"spec":{"template":{"spec":{"containers":[{"name":"main","image":"nginx:1.25.3"}]}}}}'
-```
+   ```bash
+   kubectl patch cloneset sample --type='merge' \
+     -p '{"spec":{"template":{"spec":{"containers":[{"name":"main","image":"nginx:1.25.3"}]}}}}'
+   ```
 
 The Pods keep their names and IPs; the `RESTARTS` count rises while `AGE` does not reset, because the container restarts in place rather than the Pod being recreated.
 

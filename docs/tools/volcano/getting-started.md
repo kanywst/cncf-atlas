@@ -27,9 +27,9 @@ helm install volcano volcano-sh/volcano -n volcano-system --create-namespace
 
 1. Confirm the three control-plane pods are running in `volcano-system`.
 
-```bash
-kubectl get pods -n volcano-system
-```
+   ```bash
+   kubectl get pods -n volcano-system
+   ```
 
 Expected output is one running pod each for the scheduler, controllers, and admission webhook:
 
@@ -42,36 +42,36 @@ volcano-scheduler-94998fc64-4z8kh      1/1     Running   0          96s
 
 1. Submit a VolcanoJob. The key fields are `schedulerName: volcano` and `minAvailable`, which is the gang size. This example asks for 6 replicas but will only start once at least 3 pods can be placed together.
 
-```yaml
-apiVersion: batch.volcano.sh/v1alpha1
-kind: Job
-metadata:
-  name: test-job
-spec:
-  minAvailable: 3
-  schedulerName: volcano
-  queue: default
-  maxRetry: 5
-  tasks:
-    - replicas: 6
-      name: "default-nginx"
-      template:
-        spec:
-          containers:
-            - image: nginx
-              imagePullPolicy: IfNotPresent
-              name: nginx
-              resources:
-                requests:
-                  cpu: "1"
-          restartPolicy: OnFailure
-```
+   ```yaml
+   apiVersion: batch.volcano.sh/v1alpha1
+   kind: Job
+   metadata:
+     name: test-job
+   spec:
+     minAvailable: 3
+     schedulerName: volcano
+     queue: default
+     maxRetry: 5
+     tasks:
+       - replicas: 6
+         name: "default-nginx"
+         template:
+           spec:
+             containers:
+               - image: nginx
+                 imagePullPolicy: IfNotPresent
+                 name: nginx
+                 resources:
+                   requests:
+                     cpu: "1"
+             restartPolicy: OnFailure
+   ```
 
 1. Apply it.
 
-```bash
-kubectl apply -f job.yaml
-```
+   ```bash
+   kubectl apply -f job.yaml
+   ```
 
 ## Verify it works
 

@@ -28,39 +28,39 @@ drasi init
 
 1. 変更を観測したいシステムに接続する Source を apply する。PostgreSQL Source は監視するテーブルを指定する (`cli/test-source.yaml`)。`drasi apply` はリソースを作成・更新する (`cli/cmd/apply.go`)。
 
-```bash
-drasi apply -f source.yaml
-```
+   ```bash
+   drasi apply -f source.yaml
+   ```
 
 1. 何を観測するかを定義する Continuous Query を apply する。クエリは Cypher で、id で Source を購読し、出力の形を返す (`cli/test-query.yaml`)。
 
-```yaml
-kind: ContinuousQuery
-apiVersion: v1
-name: query1
-spec:
-  mode: query
-  sources:
-    subscriptions:
-      - id: foo
-  query: >
-    MATCH
-      (i:Item {Category: '1'})
-    RETURN
-      i.ItemId AS Id,
-      i.Name as Name,
-      i.Category as Category
-```
+   ```yaml
+   kind: ContinuousQuery
+   apiVersion: v1
+   name: query1
+   spec:
+     mode: query
+     sources:
+       subscriptions:
+         - id: foo
+     query: >
+       MATCH
+         (i:Item {Category: '1'})
+       RETURN
+         i.ItemId AS Id,
+         i.Name as Name,
+         i.Category as Category
+   ```
 
-```bash
-drasi apply -f query.yaml
-```
+   ```bash
+   drasi apply -f query.yaml
+   ```
 
 1. 出力を観測する Reaction を apply する。チュートリアルは、クエリが追加・更新・削除する行を表示するデバッグ Reaction を使う。
 
-```bash
-drasi apply -f reaction.yaml
-```
+   ```bash
+   drasi apply -f reaction.yaml
+   ```
 
 ## 動作確認
 

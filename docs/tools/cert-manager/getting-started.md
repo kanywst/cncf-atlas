@@ -27,38 +27,38 @@ The shortest path that runs without any external CA or DNS is a self-signed Issu
 
 1. Create a self-signed Issuer in a namespace.
 
-```bash
-kubectl create namespace demo
-cat <<'EOF' | kubectl apply -f -
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: selfsigned
-  namespace: demo
-spec:
-  selfSigned: {}
-EOF
-```
+   ```bash
+   kubectl create namespace demo
+   cat <<'EOF' | kubectl apply -f -
+   apiVersion: cert-manager.io/v1
+   kind: Issuer
+   metadata:
+     name: selfsigned
+     namespace: demo
+   spec:
+     selfSigned: {}
+   EOF
+   ```
 
 1. Request a Certificate from it.
 
-```bash
-cat <<'EOF' | kubectl apply -f -
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: demo-cert
-  namespace: demo
-spec:
-  secretName: demo-cert-tls
-  commonName: demo.example.com
-  dnsNames:
-    - demo.example.com
-  issuerRef:
-    name: selfsigned
-    kind: Issuer
-EOF
-```
+   ```bash
+   cat <<'EOF' | kubectl apply -f -
+   apiVersion: cert-manager.io/v1
+   kind: Certificate
+   metadata:
+     name: demo-cert
+     namespace: demo
+   spec:
+     secretName: demo-cert-tls
+     commonName: demo.example.com
+     dnsNames:
+       - demo.example.com
+     issuerRef:
+       name: selfsigned
+       kind: Issuer
+   EOF
+   ```
 
 ## Verify it works
 

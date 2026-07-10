@@ -25,29 +25,29 @@ Push an image to the local registry and pull it back, which exercises the blob u
 
 1. Pull a small public image to have something to push.
 
-```bash
-docker pull ubuntu:16.04
-```
+   ```bash
+   docker pull ubuntu:16.04
+   ```
 
 1. Tag it for the local registry. When the first part of a tag is a host and port, Docker treats it as a registry location on push.
 
-```bash
-docker tag ubuntu:16.04 localhost:5000/my-ubuntu
-```
+   ```bash
+   docker tag ubuntu:16.04 localhost:5000/my-ubuntu
+   ```
 
 1. Push it. This runs the POST/PATCH/PUT blob upload session and finalizes each blob with a digest check.
 
-```bash
-docker push localhost:5000/my-ubuntu
-```
+   ```bash
+   docker push localhost:5000/my-ubuntu
+   ```
 
 1. Remove the local copies, then pull from your registry to prove it served the image back.
 
-```bash
-docker image remove ubuntu:16.04
-docker image remove localhost:5000/my-ubuntu
-docker pull localhost:5000/my-ubuntu
-```
+   ```bash
+   docker image remove ubuntu:16.04
+   docker image remove localhost:5000/my-ubuntu
+   docker pull localhost:5000/my-ubuntu
+   ```
 
 ## Verify it works
 

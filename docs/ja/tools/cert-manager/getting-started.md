@@ -27,38 +27,38 @@ Helm を使わない場合は、リリース資産の静的マニフェストを
 
 1. namespace に自己署名 Issuer を作る。
 
-```bash
-kubectl create namespace demo
-cat <<'EOF' | kubectl apply -f -
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: selfsigned
-  namespace: demo
-spec:
-  selfSigned: {}
-EOF
-```
+   ```bash
+   kubectl create namespace demo
+   cat <<'EOF' | kubectl apply -f -
+   apiVersion: cert-manager.io/v1
+   kind: Issuer
+   metadata:
+     name: selfsigned
+     namespace: demo
+   spec:
+     selfSigned: {}
+   EOF
+   ```
 
 1. そこから Certificate を要求する。
 
-```bash
-cat <<'EOF' | kubectl apply -f -
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: demo-cert
-  namespace: demo
-spec:
-  secretName: demo-cert-tls
-  commonName: demo.example.com
-  dnsNames:
-    - demo.example.com
-  issuerRef:
-    name: selfsigned
-    kind: Issuer
-EOF
-```
+   ```bash
+   cat <<'EOF' | kubectl apply -f -
+   apiVersion: cert-manager.io/v1
+   kind: Certificate
+   metadata:
+     name: demo-cert
+     namespace: demo
+   spec:
+     secretName: demo-cert-tls
+     commonName: demo.example.com
+     dnsNames:
+       - demo.example.com
+     issuerRef:
+       name: selfsigned
+       kind: Issuer
+   EOF
+   ```
 
 ## 動作確認
 

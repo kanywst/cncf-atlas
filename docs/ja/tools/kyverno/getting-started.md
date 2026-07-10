@@ -29,41 +29,41 @@ kubectl apply -f https://github.com/kyverno/kyverno/releases/download/v1.18.1/in
 
 1. controller が動いていることを確認する。
 
-```bash
-kubectl get pods -n kyverno
-```
+   ```bash
+   kubectl get pods -n kyverno
+   ```
 
 1. Pod に `team` ラベルを必須とし、それを enforce するポリシーを作る。
 
-```bash
-cat <<'EOF' | kubectl apply -f -
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
-metadata:
-  name: require-team-label
-spec:
-  validationFailureAction: Enforce
-  rules:
-    - name: check-team-label
-      match:
-        any:
-          - resources:
-              kinds:
-                - Pod
-      validate:
-        message: "The label 'team' is required on every Pod."
-        pattern:
-          metadata:
-            labels:
-              team: "?*"
-EOF
-```
+   ```bash
+   cat <<'EOF' | kubectl apply -f -
+   apiVersion: kyverno.io/v1
+   kind: ClusterPolicy
+   metadata:
+     name: require-team-label
+   spec:
+     validationFailureAction: Enforce
+     rules:
+       - name: check-team-label
+         match:
+           any:
+             - resources:
+                 kinds:
+                   - Pod
+         validate:
+           message: "The label 'team' is required on every Pod."
+           pattern:
+             metadata:
+               labels:
+                 team: "?*"
+   EOF
+   ```
 
 1. ラベルなしの Pod を作ろうとする。admission リクエストは拒否される。
 
-```bash
-kubectl run nginx --image=nginx
-```
+   ```bash
+   kubectl run nginx --image=nginx
+   ```
 
 期待される出力:
 
@@ -78,9 +78,9 @@ require-team-label:
 
 1. 同じ Pod をラベル付きで作ると admit される。
 
-```bash
-kubectl run nginx --image=nginx --labels team=payments
-```
+   ```bash
+   kubectl run nginx --image=nginx --labels team=payments
+   ```
 
 ## 動作確認
 

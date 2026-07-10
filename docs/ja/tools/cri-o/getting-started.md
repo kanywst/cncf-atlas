@@ -27,15 +27,15 @@ CRI-O は kubelet が駆動するデーモンで、エンドユーザ CLI はな
 
 1. `crio` デーモンを (root で) 起動する。Unix ソケットで待ち受け、既定パスは `unix:///var/run/crio/crio.sock`。
 
-```bash
-sudo crio
-```
+   ```bash
+   sudo crio
+   ```
 
 1. kubelet を CRI エンドポイントフラグでそのソケットに向ける:
 
-```bash
-kubelet --container-runtime-endpoint=unix:///var/run/crio/crio.sock
-```
+   ```bash
+   kubelet --container-runtime-endpoint=unix:///var/run/crio/crio.sock
+   ```
 
 クラスタ全体のブートストラップ向けに、リポジトリはチュートリアルを同梱する。kubeadm 用の `tutorials/kubeadm.md`、kind 用の `tutorials/crio-in-kind.md` だ。
 

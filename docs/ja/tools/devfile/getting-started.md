@@ -22,59 +22,59 @@ go get github.com/devfile/api/v2@v2.3.0
 
 1. コンテナ component を 1 つ持つ基底 devfile を書く。`base.yaml` として保存する。
 
-```yaml
-schemaVersion: "2.3.0"
-metadata:
-  name: demo
-components:
-  - name: tools
-    container:
-      image: quay.io/devfile/universal-developer-image:latest
-      memoryLimit: 512Mi
-```
+   ```yaml
+   schemaVersion: "2.3.0"
+   metadata:
+     name: demo
+   components:
+     - name: tools
+       container:
+         image: quay.io/devfile/universal-developer-image:latest
+         memoryLimit: 512Mi
+   ```
 
 1. 既存の `tools` component のメモリ上限を引き上げる親 override を書く。`parent.yaml` として保存する。override は基底に既に存在する要素しか変更できず、ここで新しい component を名指しすると拒否される。
 
-```yaml
-components:
-  - name: tools
-    container:
-      memoryLimit: 1Gi
-```
+   ```yaml
+   components:
+     - name: tools
+       container:
+         memoryLimit: 1Gi
+   ```
 
 1. 短い Go プログラムで override を適用する。`main.go` として保存する。
 
-```go
-package main
+   ```go
+   package main
 
-import (
-    "fmt"
-    "os"
+   import (
+       "fmt"
+       "os"
 
-    "github.com/devfile/api/v2/pkg/utils/overriding"
-    "sigs.k8s.io/yaml"
-)
+       "github.com/devfile/api/v2/pkg/utils/overriding"
+       "sigs.k8s.io/yaml"
+   )
 
-func main() {
-    base, _ := os.ReadFile("base.yaml")
-    parent, _ := os.ReadFile("parent.yaml")
+   func main() {
+       base, _ := os.ReadFile("base.yaml")
+       parent, _ := os.ReadFile("parent.yaml")
 
-    merged, err := overriding.OverrideDevWorkspaceTemplateSpecBytes(base, parent)
-    if err != nil {
-        panic(err)
-    }
+       merged, err := overriding.OverrideDevWorkspaceTemplateSpecBytes(base, parent)
+       if err != nil {
+           panic(err)
+       }
 
-    out, _ := yaml.Marshal(merged)
-    fmt.Print(string(out))
-}
-```
+       out, _ := yaml.Marshal(merged)
+       fmt.Print(string(out))
+   }
+   ```
 
 1. 実行する。
 
-```bash
-go mod tidy
-go run main.go
-```
+   ```bash
+   go mod tidy
+   go run main.go
+   ```
 
 ## 動作確認
 

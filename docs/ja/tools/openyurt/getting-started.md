@@ -25,11 +25,11 @@ helm upgrade --install yurt-manager openyurt/yurt-manager --namespace kube-syste
 
 1. `yurtadm` でエッジノードを join する。エッジマシン上でクラウドの apiserver を指して実行する。
 
-```bash
-yurtadm join <apiserver-host>:<port> \
-  --token=<bootstrap-token> \
-  --node-type=edge
-```
+   ```bash
+   yurtadm join <apiserver-host>:<port> \
+     --token=<bootstrap-token> \
+     --node-type=edge
+   ```
 
 1. 後でノードを切り離すには、そのノードで `yurtadm reset` を実行する。join と reset のコマンドは `pkg/yurtadm/cmd/` 配下にある。
 

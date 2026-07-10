@@ -22,23 +22,23 @@ curl -O https://docs.goauthentik.io/compose.yml
 
 1. 必要なシークレットを `compose.yml` の隣の `.env` に生成する。
 
-```bash
-echo "PG_PASS=$(openssl rand -base64 36 | tr -d '\n')" >> .env
-echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 60 | tr -d '\n')" >> .env
-```
+   ```bash
+   echo "PG_PASS=$(openssl rand -base64 36 | tr -d '\n')" >> .env
+   echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 60 | tr -d '\n')" >> .env
+   ```
 
 1. イメージを取得してスタックを起動する。
 
-```bash
-docker compose pull
-docker compose up -d
-```
+   ```bash
+   docker compose pull
+   docker compose up -d
+   ```
 
 1. 初期セットアップページを開き、最初の管理者アカウント (`akadmin`) を作成する。
 
-```text
-http://<your-host>:9000/if/flow/initial-setup/
-```
+   ```text
+   http://<your-host>:9000/if/flow/initial-setup/
+   ```
 
 ## 動作確認
 

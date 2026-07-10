@@ -25,9 +25,9 @@ The core job of Artifact Hub is indexing a repository so its packages become sea
 1. Sign in to the instance and open the control panel.
 2. Add a repository, choosing its kind (for example Helm) and URL, following the repositories guide.
 
-```bash
-helm repo add my-charts https://example.com/charts
-```
+   ```bash
+   helm repo add my-charts https://example.com/charts
+   ```
 
 The tracker then scans the repository on its next run and registers each package; unchanged repositories are skipped by digest comparison (`internal/tracker/tracker.go:41`).
 

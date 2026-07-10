@@ -25,22 +25,22 @@ The shortest path to a running cluster with a workload on it.
 
 1. Create a local cluster.
 
-```bash
-kind create cluster --name demo
-```
+   ```bash
+   kind create cluster --name demo
+   ```
 
 1. Run a Deployment and expose it.
 
-```bash
-kubectl create deployment hello --image=registry.k8s.io/echoserver:1.4
-kubectl expose deployment hello --port=8080
-```
+   ```bash
+   kubectl create deployment hello --image=registry.k8s.io/echoserver:1.4
+   kubectl expose deployment hello --port=8080
+   ```
 
 1. Watch the scheduler place the Pod and the kubelet start it.
 
-```bash
-kubectl get pods -o wide
-```
+   ```bash
+   kubectl get pods -o wide
+   ```
 
 Expected output shows the Pod moving to `Running` with a node assigned in the `NODE` column.
 

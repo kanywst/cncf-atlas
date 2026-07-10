@@ -35,16 +35,16 @@ The shortest working run is a single `ask` against a cluster. The model picks th
 
 1. Set your provider API key.
 
-```bash
-export ANTHROPIC_API_KEY="your-api-key"
-```
+   ```bash
+   export ANTHROPIC_API_KEY="your-api-key"
+   ```
 
 1. Ask HolmesGPT to investigate, naming the model. Point the question at whatever your data source can see.
 
-```bash
-holmes ask "what pods are unhealthy in my cluster and why?" \
-  --model="anthropic/claude-sonnet-4-5-20250929"
-```
+   ```bash
+   holmes ask "what pods are unhealthy in my cluster and why?" \
+     --model="anthropic/claude-sonnet-4-5-20250929"
+   ```
 
 1. Watch the run. HolmesGPT calls tools (for example, listing pods and fetching logs), feeds the results back to the model, and prints a root cause analysis once the model stops calling tools.
 

@@ -24,23 +24,23 @@ The installer CLI exposes `init`, `gettoken`, and `join` (`keadm/cmd/keadm/app/c
 
 1. On the cloud host, bootstrap `cloudcore` against your cluster. `keadm init` installs it via Helm.
 
-```bash
-keadm init --advertise-address="<cloud-host-ip>"
-```
+   ```bash
+   keadm init --advertise-address="<cloud-host-ip>"
+   ```
 
 1. Read the join token that `cloudcore` generated.
 
-```bash
-keadm gettoken
-```
+   ```bash
+   keadm gettoken
+   ```
 
 1. On the edge node, join the cluster by pointing at the cloud host's CloudHub port (10000) and passing the token from step 2.
 
-```bash
-keadm join \
-  --cloudcore-ipport="<cloud-host-ip>:10000" \
-  --token="<token-from-gettoken>"
-```
+   ```bash
+   keadm join \
+     --cloudcore-ipport="<cloud-host-ip>:10000" \
+     --token="<token-from-gettoken>"
+   ```
 
 This installs and starts `edgecore` on the node (`keadm/cmd/keadm/app/cmd/edge/join.go:61`).
 

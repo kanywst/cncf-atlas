@@ -34,30 +34,30 @@ installer は `cozystack-operator` をデプロイする。その variant (`talo
 
 1. テナントの namespace とオブジェクトを作る。
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: apps.cozystack.io/v1alpha1
-kind: Tenant
-metadata:
-  name: my-tenant
-  namespace: tenant-root
-spec: {}
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: apps.cozystack.io/v1alpha1
+   kind: Tenant
+   metadata:
+     name: my-tenant
+     namespace: tenant-root
+   spec: {}
+   EOF
+   ```
 
 1. テナントに Postgres をプロビジョニングする。ここの `spec` は `packages/apps/postgres` chart の Helm values になる (`pkg/registry/apps/application/rest.go:1605`)。
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: apps.cozystack.io/v1alpha1
-kind: Postgres
-metadata:
-  name: my-db
-  namespace: tenant-my-tenant
-spec:
-  replicas: 2
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: apps.cozystack.io/v1alpha1
+   kind: Postgres
+   metadata:
+     name: my-db
+     namespace: tenant-my-tenant
+   spec:
+     replicas: 2
+   EOF
+   ```
 
 ## 動作確認
 

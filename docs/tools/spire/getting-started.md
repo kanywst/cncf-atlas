@@ -21,30 +21,30 @@ This produces `bin/spire-server` and `bin/spire-agent` (`Makefile:256`, `build: 
 
 1. Start the server with the sample config. `conf/server/server.conf` sets `trust_domain`, `data_dir`, and the `DataStore`, `KeyManager`, and `NodeAttestor` plugins; `conf/server/server_full.conf` documents every option.
 
-```bash
-bin/spire-server run -config conf/server/server.conf
-```
+   ```bash
+   bin/spire-server run -config conf/server/server.conf
+   ```
 
 1. Generate a join token for the agent. The token is the agent's bootstrap credential for node attestation.
 
-```bash
-bin/spire-server token generate -spiffeID spiffe://example.org/myagent
-```
+   ```bash
+   bin/spire-server token generate -spiffeID spiffe://example.org/myagent
+   ```
 
 1. Start the agent with that token, using the sample agent config `conf/agent/agent.conf`.
 
-```bash
-bin/spire-agent run -config conf/agent/agent.conf -joinToken <token>
-```
+   ```bash
+   bin/spire-agent run -config conf/agent/agent.conf -joinToken <token>
+   ```
 
 1. Create a registration entry. This says: a workload running as uid 1000 under the agent's SPIFFE ID is issued `spiffe://example.org/myworkload`.
 
-```bash
-bin/spire-server entry create \
-  -parentID spiffe://example.org/myagent \
-  -spiffeID spiffe://example.org/myworkload \
-  -selector unix:uid:1000
-```
+   ```bash
+   bin/spire-server entry create \
+     -parentID spiffe://example.org/myagent \
+     -spiffeID spiffe://example.org/myworkload \
+     -selector unix:uid:1000
+   ```
 
 ## Verify it works
 

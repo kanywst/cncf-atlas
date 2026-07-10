@@ -33,11 +33,11 @@ The default in-memory store needs no migration. For PostgreSQL, MySQL, or SQLite
 
 1. Create a store.
 
-```bash
-curl -X POST 'localhost:8080/stores' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"name": "openfga-demo"}'
-```
+   ```bash
+   curl -X POST 'localhost:8080/stores' \
+     --header 'Content-Type: application/json' \
+     --data-raw '{"name": "openfga-demo"}'
+   ```
 
 A successful response returns the store, for example (1):
 
@@ -52,43 +52,43 @@ A successful response returns the store, for example (1):
 
 1. Save the returned `id` and write a minimal authorization model (a `document` type with a `viewer` relation, in the JSON form the API accepts).
 
-```bash
-STORE=01G3EMTKQRKJ93PFVDA1SJHWD2
-curl -X POST "localhost:8080/stores/$STORE/authorization-models" \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-    "schema_version": "1.1",
-    "type_definitions": [
-      { "type": "user" },
-      { "type": "document",
-        "relations": { "viewer": { "this": {} } },
-        "metadata": { "relations": { "viewer": { "directly_related_user_types": [ { "type": "user" } ] } } }
-      }
-    ]
-  }'
-```
+   ```bash
+   STORE=01G3EMTKQRKJ93PFVDA1SJHWD2
+   curl -X POST "localhost:8080/stores/$STORE/authorization-models" \
+     --header 'Content-Type: application/json' \
+     --data-raw '{
+       "schema_version": "1.1",
+       "type_definitions": [
+         { "type": "user" },
+         { "type": "document",
+           "relations": { "viewer": { "this": {} } },
+           "metadata": { "relations": { "viewer": { "directly_related_user_types": [ { "type": "user" } ] } } }
+         }
+       ]
+     }'
+   ```
 
 1. Write a relationship tuple granting `user:alice` the `viewer` relation on `document:1`.
 
-```bash
-curl -X POST "localhost:8080/stores/$STORE/write" \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-    "writes": { "tuple_keys": [
-      { "user": "user:alice", "relation": "viewer", "object": "document:1" }
-    ] }
-  }'
-```
+   ```bash
+   curl -X POST "localhost:8080/stores/$STORE/write" \
+     --header 'Content-Type: application/json' \
+     --data-raw '{
+       "writes": { "tuple_keys": [
+         { "user": "user:alice", "relation": "viewer", "object": "document:1" }
+       ] }
+     }'
+   ```
 
 1. Ask a Check question.
 
-```bash
-curl -X POST "localhost:8080/stores/$STORE/check" \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-    "tuple_key": { "user": "user:alice", "relation": "viewer", "object": "document:1" }
-  }'
-```
+   ```bash
+   curl -X POST "localhost:8080/stores/$STORE/check" \
+     --header 'Content-Type: application/json' \
+     --data-raw '{
+       "tuple_key": { "user": "user:alice", "relation": "viewer", "object": "document:1" }
+     }'
+   ```
 
 The response is the authorization decision:
 

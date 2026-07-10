@@ -30,15 +30,15 @@ helm install falco falcosecurity/falco \
 
 1. Wait for the pods to be ready:
 
-```bash
-kubectl get pods --namespace falco --watch
-```
+   ```bash
+   kubectl get pods --namespace falco --watch
+   ```
 
 1. Trigger a built-in rule. The default ruleset alerts on a shell started inside a container, so exec into any running pod and start one:
 
-```bash
-kubectl exec -it <some-pod> -- /bin/sh
-```
+   ```bash
+   kubectl exec -it <some-pod> -- /bin/sh
+   ```
 
 ## Verify it works
 

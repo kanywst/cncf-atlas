@@ -24,28 +24,28 @@ linkerd version --client
 
 1. クラスタが Linkerd をホストできるか確認する。
 
-```bash
-linkerd check --pre
-```
+   ```bash
+   linkerd check --pre
+   ```
 
 1. CRD を入れ、続いてコントロールプレーンを入れる。
 
-```bash
-linkerd install --crds | kubectl apply -f -
-linkerd install | kubectl apply -f -
-```
+   ```bash
+   linkerd install --crds | kubectl apply -f -
+   linkerd install | kubectl apply -f -
+   ```
 
 1. コントロールプレーンが正常になるまで待つ。
 
-```bash
-linkerd check
-```
+   ```bash
+   linkerd check
+   ```
 
 1. 既存ワークロードの Pod spec にサイドカーを注入してメッシュ化する。
 
-```bash
-kubectl get deploy <app> -o yaml | linkerd inject - | kubectl apply -f -
-```
+   ```bash
+   kubectl get deploy <app> -o yaml | linkerd inject - | kubectl apply -f -
+   ```
 
 `linkerd inject` のステップは、クライアント側から見た proxy-injector の契約である。inject アノテーションを付与し、mutating webhook が admission 時に Pod を `linkerd-proxy` サイドカーでパッチするようにする。
 

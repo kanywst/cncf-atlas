@@ -35,16 +35,16 @@ holmes ask --help
 
 1. プロバイダの API キーを設定する。
 
-```bash
-export ANTHROPIC_API_KEY="your-api-key"
-```
+   ```bash
+   export ANTHROPIC_API_KEY="your-api-key"
+   ```
 
 1. モデルを指定して HolmesGPT に調査させる。質問は自分のデータソースが見えるものに向ける。
 
-```bash
-holmes ask "what pods are unhealthy in my cluster and why?" \
-  --model="anthropic/claude-sonnet-4-5-20250929"
-```
+   ```bash
+   holmes ask "what pods are unhealthy in my cluster and why?" \
+     --model="anthropic/claude-sonnet-4-5-20250929"
+   ```
 
 1. 実行を眺める。HolmesGPT はツールを呼び (例: Pod の一覧やログの取得)、結果をモデルに戻し、モデルがツール呼び出しを止めた時点で根本原因分析を出力する。
 

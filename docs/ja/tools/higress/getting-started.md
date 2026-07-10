@@ -36,15 +36,15 @@ helm install higress -n higress-system higress.io/higress \
 1. Install セクションの `docker run` コマンドで all-in-one コンテナを起動する。設定ファイルはカレントディレクトリに書かれる。
 1. コンソールを開き、コントロールプレーンが立っていることを確認する。
 
-```bash
-open http://localhost:8001
-```
+   ```bash
+   open http://localhost:8001
+   ```
 
 1. ゲートウェイの HTTP 入口へリクエストを送る。ルート未設定でもゲートウェイはポート 8080 で応答し、Envoy データプレーンが提供中であることを確認できる。
 
-```bash
-curl -i http://localhost:8080/
-```
+   ```bash
+   curl -i http://localhost:8080/
+   ```
 
 コンソールからルート (ドメインと上流サービス) を追加すれば、ゲートウェイを再起動せずに反映されるのを見られる。これは [アーキテクチャ](./architecture) ページが xDS を通じて追う挙動だ。
 

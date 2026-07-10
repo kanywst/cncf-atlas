@@ -24,23 +24,23 @@ make all WHAT=keadm
 
 1. クラウドホストでクラスタに対し `cloudcore` をブートストラップする。`keadm init` が Helm 経由でインストールする。
 
-```bash
-keadm init --advertise-address="<cloud-host-ip>"
-```
+   ```bash
+   keadm init --advertise-address="<cloud-host-ip>"
+   ```
 
 1. `cloudcore` が生成した join トークンを読む。
 
-```bash
-keadm gettoken
-```
+   ```bash
+   keadm gettoken
+   ```
 
 1. エッジノードで、クラウドホストの CloudHub ポート (10000) を指定し、手順 2 のトークンを渡してクラスタに参加する。
 
-```bash
-keadm join \
-  --cloudcore-ipport="<cloud-host-ip>:10000" \
-  --token="<token-from-gettoken>"
-```
+   ```bash
+   keadm join \
+     --cloudcore-ipport="<cloud-host-ip>:10000" \
+     --token="<token-from-gettoken>"
+   ```
 
 これによりノード上で `edgecore` がインストール・起動される (`keadm/cmd/keadm/app/cmd/edge/join.go:61`)。
 

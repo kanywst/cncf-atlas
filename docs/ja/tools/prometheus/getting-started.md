@@ -31,21 +31,21 @@ make build
 
 1. 最小の `prometheus.yml` を書く。
 
-```yaml
-global:
-  scrape_interval: 15s
+   ```yaml
+   global:
+     scrape_interval: 15s
 
-scrape_configs:
-  - job_name: prometheus
-    static_configs:
-      - targets: ["localhost:9090"]
-```
+   scrape_configs:
+     - job_name: prometheus
+       static_configs:
+         - targets: ["localhost:9090"]
+   ```
 
 1. その設定でサーバを起動する (README:85-86)。
 
-```bash
-./prometheus --config.file=prometheus.yml
-```
+   ```bash
+   ./prometheus --config.file=prometheus.yml
+   ```
 
 `make build` ではなく `go install` でビルドした場合は、`web/ui/static` 配下の web アセットを見つけられるよう、clone したリポジトリのルートからバイナリを実行する (README:88-92)。
 

@@ -22,31 +22,31 @@ pip install c7n
 
 1. ポリシーを `custodian.yml` に書く:
 
-```yaml
-policies:
-  - name: my-first-policy
-    resource: aws.ec2
-    filters:
-      - "State.Name": running
-```
+   ```yaml
+   policies:
+     - name: my-first-policy
+       resource: aws.ec2
+       filters:
+         - "State.Name": running
+   ```
 
 1. 検証する。検証は `run` 時にも自動で走る:
 
-```bash
-custodian validate custodian.yml
-```
+   ```bash
+   custodian validate custodian.yml
+   ```
 
 1. ドライランする。リソースを照会するがアクションは実行しない:
 
-```bash
-custodian run --dryrun -s out custodian.yml
-```
+   ```bash
+   custodian run --dryrun -s out custodian.yml
+   ```
 
 1. 本番実行する:
 
-```bash
-custodian run -s out custodian.yml
-```
+   ```bash
+   custodian run -s out custodian.yml
+   ```
 
 これらのコマンドは README のクイックスタートに対応する ([README.md](https://github.com/cloud-custodian/cloud-custodian/blob/master/README.md))。
 

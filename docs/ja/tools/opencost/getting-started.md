@@ -22,15 +22,15 @@ helm install opencost opencost/opencost
 
 1. クラスタ内の Prometheus サービスをワークステーションにフォワードする。
 
-```bash
-kubectl port-forward svc/prometheus-server 9080:80
-```
+   ```bash
+   kubectl port-forward svc/prometheus-server 9080:80
+   ```
 
 1. そのエンドポイントを指定し、ソースからコストモデルを実行する。
 
-```bash
-PROMETHEUS_SERVER_ENDPOINT="http://127.0.0.1:9080" go run ./cmd/costmodel/main.go
-```
+   ```bash
+   PROMETHEUS_SERVER_ENDPOINT="http://127.0.0.1:9080" go run ./cmd/costmodel/main.go
+   ```
 
 API は既定でポート `9003` を listen する。
 

@@ -23,16 +23,16 @@ The shortest path is to add a chart repository, install a chart as a named relea
 
 1. Add a chart repository.
 
-```bash
-helm repo add <name> <repo-url>
-helm repo update
-```
+   ```bash
+   helm repo add <name> <repo-url>
+   helm repo update
+   ```
 
 1. Install a chart as a release.
 
-```bash
-helm install <release> <name>/<chart>
-```
+   ```bash
+   helm install <release> <name>/<chart>
+   ```
 
 For an OCI-hosted chart, install by reference instead of a repo:
 
@@ -42,15 +42,15 @@ helm install <release> oci://<registry>/<chart> --version <version>
 
 1. List the releases in the namespace.
 
-```bash
-helm list
-```
+   ```bash
+   helm list
+   ```
 
 1. Remove the release when done.
 
-```bash
-helm uninstall <release>
-```
+   ```bash
+   helm uninstall <release>
+   ```
 
 ## Verify it works
 

@@ -27,9 +27,9 @@ helm install volcano volcano-sh/volcano -n volcano-system --create-namespace
 
 1. `volcano-system` で 3 つのコントロールプレーン Pod が動いていることを確認する。
 
-```bash
-kubectl get pods -n volcano-system
-```
+   ```bash
+   kubectl get pods -n volcano-system
+   ```
 
 期待される出力は、スケジューラ・コントローラ・admission Webhook がそれぞれ 1 つずつ Running の状態:
 
@@ -42,36 +42,36 @@ volcano-scheduler-94998fc64-4z8kh      1/1     Running   0          96s
 
 1. VolcanoJob を投入する。要となるフィールドは `schedulerName: volcano` と、gang サイズである `minAvailable`。この例は 6 replica を要求するが、少なくとも 3 Pod を同時に配置できて初めて起動する。
 
-```yaml
-apiVersion: batch.volcano.sh/v1alpha1
-kind: Job
-metadata:
-  name: test-job
-spec:
-  minAvailable: 3
-  schedulerName: volcano
-  queue: default
-  maxRetry: 5
-  tasks:
-    - replicas: 6
-      name: "default-nginx"
-      template:
-        spec:
-          containers:
-            - image: nginx
-              imagePullPolicy: IfNotPresent
-              name: nginx
-              resources:
-                requests:
-                  cpu: "1"
-          restartPolicy: OnFailure
-```
+   ```yaml
+   apiVersion: batch.volcano.sh/v1alpha1
+   kind: Job
+   metadata:
+     name: test-job
+   spec:
+     minAvailable: 3
+     schedulerName: volcano
+     queue: default
+     maxRetry: 5
+     tasks:
+       - replicas: 6
+         name: "default-nginx"
+         template:
+           spec:
+             containers:
+               - image: nginx
+                 imagePullPolicy: IfNotPresent
+                 name: nginx
+                 resources:
+                   requests:
+                     cpu: "1"
+             restartPolicy: OnFailure
+   ```
 
 1. 適用する。
 
-```bash
-kubectl apply -f job.yaml
-```
+   ```bash
+   kubectl apply -f job.yaml
+   ```
 
 ## 動作確認
 

@@ -34,30 +34,30 @@ Once the platform is up, create a tenant and provision a managed database into i
 
 1. Create a tenant namespace and object.
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: apps.cozystack.io/v1alpha1
-kind: Tenant
-metadata:
-  name: my-tenant
-  namespace: tenant-root
-spec: {}
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: apps.cozystack.io/v1alpha1
+   kind: Tenant
+   metadata:
+     name: my-tenant
+     namespace: tenant-root
+   spec: {}
+   EOF
+   ```
 
 1. Provision a Postgres into the tenant. The `spec` here becomes the Helm values of the `packages/apps/postgres` chart (`pkg/registry/apps/application/rest.go:1605`).
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: apps.cozystack.io/v1alpha1
-kind: Postgres
-metadata:
-  name: my-db
-  namespace: tenant-my-tenant
-spec:
-  replicas: 2
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: apps.cozystack.io/v1alpha1
+   kind: Postgres
+   metadata:
+     name: my-db
+     namespace: tenant-my-tenant
+   spec:
+     replicas: 2
+   EOF
+   ```
 
 ## Verify it works
 

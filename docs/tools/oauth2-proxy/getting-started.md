@@ -24,23 +24,23 @@ docker pull quay.io/oauth2-proxy/oauth2-proxy:latest
 
 1. Generate a cookie secret. It must decode to 16, 24, or 32 bytes, or startup validation rejects it (`pkg/validation/cookie.go:64-67`).
 
-```bash
-openssl rand -base64 32 | tr -- '+/' '-_'
-```
+   ```bash
+   openssl rand -base64 32 | tr -- '+/' '-_'
+   ```
 
 1. Run the proxy in front of your upstream. Replace the client credentials, the upstream URL, and the cookie secret from step 1.
 
-```bash
-oauth2-proxy \
-  --provider=github \
-  --client-id=YOUR_CLIENT_ID \
-  --client-secret=YOUR_CLIENT_SECRET \
-  --redirect-url=https://your.host/oauth2/callback \
-  --cookie-secret=GENERATED_SECRET \
-  --email-domain=* \
-  --upstream=http://127.0.0.1:8080/ \
-  --http-address=0.0.0.0:4180
-```
+   ```bash
+   oauth2-proxy \
+     --provider=github \
+     --client-id=YOUR_CLIENT_ID \
+     --client-secret=YOUR_CLIENT_SECRET \
+     --redirect-url=https://your.host/oauth2/callback \
+     --cookie-secret=GENERATED_SECRET \
+     --email-domain=* \
+     --upstream=http://127.0.0.1:8080/ \
+     --http-address=0.0.0.0:4180
+   ```
 
 1. The flags map directly to behaviour: `--upstream` is the service the proxy forwards authenticated requests to, `--redirect-url` must match the provider registration, and `--email-domain=*` sets the access boundary to "any authenticated email" (tighten it to a domain, or use `--authenticated-emails-file`, in production). The email check is enforced by the validator in `validator.go:107`.
 

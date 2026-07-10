@@ -27,15 +27,15 @@ This runs a single-member etcd and stores a key.
 
 1. Start the server. With no flags it listens for clients on 2379 and peers on 2380.
 
-```bash
-etcd &
-```
+   ```bash
+   etcd &
+   ```
 
 1. Write a key with `etcdctl`.
 
-```bash
-etcdctl put greeting "Hello, etcd"
-```
+   ```bash
+   etcdctl put greeting "Hello, etcd"
+   ```
 
 Expected output:
 
@@ -45,9 +45,9 @@ OK
 
 1. Read it back.
 
-```bash
-etcdctl get greeting
-```
+   ```bash
+   etcdctl get greeting
+   ```
 
 Expected output:
 

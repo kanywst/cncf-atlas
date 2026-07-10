@@ -22,31 +22,31 @@ The shortest useful policy lists running EC2 instances. It uses the default `pul
 
 1. Write the policy to `custodian.yml`:
 
-```yaml
-policies:
-  - name: my-first-policy
-    resource: aws.ec2
-    filters:
-      - "State.Name": running
-```
+   ```yaml
+   policies:
+     - name: my-first-policy
+       resource: aws.ec2
+       filters:
+         - "State.Name": running
+   ```
 
 1. Validate it. Validation also runs automatically on `run`:
 
-```bash
-custodian validate custodian.yml
-```
+   ```bash
+   custodian validate custodian.yml
+   ```
 
 1. Do a dry run, which queries resources but executes no actions:
 
-```bash
-custodian run --dryrun -s out custodian.yml
-```
+   ```bash
+   custodian run --dryrun -s out custodian.yml
+   ```
 
 1. Run it for real:
 
-```bash
-custodian run -s out custodian.yml
-```
+   ```bash
+   custodian run -s out custodian.yml
+   ```
 
 These commands match the README quickstart ([README.md](https://github.com/cloud-custodian/cloud-custodian/blob/master/README.md)).
 

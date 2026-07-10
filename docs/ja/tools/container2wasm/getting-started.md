@@ -21,21 +21,21 @@ sudo make install
 
 1. コンテナイメージを `.wasm` ファイルに変換する。Docker Buildx を回すので初回は時間がかかる。
 
-```bash
-c2w ubuntu:22.04 out.wasm
-```
+   ```bash
+   c2w ubuntu:22.04 out.wasm
+   ```
 
 1. 出力を WASI ランタイムで実行する。`.wasm` がエミュレート Linux を起動し、コンテナ内でコマンドを走らせる。
 
-```bash
-wasmtime out.wasm uname -a
-```
+   ```bash
+   wasmtime out.wasm uname -a
+   ```
 
 1. ホストディレクトリをゲストにマッピングする。WASI ファイルシステムがそれを見せ、エミュレータが 9p でマウントする。
 
-```bash
-wasmtime --mapdir /mnt/share::/tmp/share out.wasm cat /mnt/share/from-host
-```
+   ```bash
+   wasmtime --mapdir /mnt/share::/tmp/share out.wasm cat /mnt/share/from-host
+   ```
 
 既定の amd64 ではなく riscv64 を狙うなら `--target-arch` を渡す。
 

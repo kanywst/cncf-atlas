@@ -26,21 +26,21 @@ This brings up a local ZMS, ZTS, and UI for development. The build step is slow 
 
 1. Build the Athenz container images.
 
-```bash
-make build
-```
+   ```bash
+   make build
+   ```
 
 1. Deploy the development environment (ZMS on port 4443, ZTS on port 8443).
 
-```bash
-make deploy-dev
-```
+   ```bash
+   make deploy-dev
+   ```
 
 1. Run the bundled verification once the containers are up.
 
-```bash
-make verify
-```
+   ```bash
+   make verify
+   ```
 
 ## Verify it works
 

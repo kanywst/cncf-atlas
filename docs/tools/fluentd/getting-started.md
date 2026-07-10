@@ -18,21 +18,21 @@ The README Quick Start gets you from install to a confirmed event in four comman
 
 1. Generate a sample configuration directory.
 
-```bash
-fluentd -s conf
-```
+   ```bash
+   fluentd -s conf
+   ```
 
 1. Start Fluentd with that configuration in the background.
 
-```bash
-fluentd -c conf/fluent.conf &
-```
+   ```bash
+   fluentd -c conf/fluent.conf &
+   ```
 
 1. Send a test event. `fluent-cat` ships with the gem and forwards a JSON record under the tag you give it.
 
-```bash
-echo '{"json":"message"}' | fluent-cat debug.test
-```
+   ```bash
+   echo '{"json":"message"}' | fluent-cat debug.test
+   ```
 
 The generated `conf/fluent.conf` includes a `<match debug.**>` block using the `stdout` output, so the event prints to the terminal where Fluentd is running.
 

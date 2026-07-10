@@ -26,30 +26,30 @@ This is the manual mode: name the images to delete and watch Eraser remove them 
 
 1. Confirm the controller is running.
 
-```bash
-kubectl get pods -n eraser-system
-```
+   ```bash
+   kubectl get pods -n eraser-system
+   ```
 
 1. Apply an `ImageList`. The resource must be named `imagelist`; any other name is ignored (`src/controllers/imagelist/imagelist_controller.go:139-144`). Use `docker.io/library/alpine:3.7.3` or another image you know is present and not running.
 
-```bash
-kubectl apply -f - <<'EOF'
-apiVersion: eraser.sh/v1
-kind: ImageList
-metadata:
-  name: imagelist
-spec:
-  images:
-    - docker.io/library/alpine:3.7.3
-EOF
-```
+   ```bash
+   kubectl apply -f - <<'EOF'
+   apiVersion: eraser.sh/v1
+   kind: ImageList
+   metadata:
+     name: imagelist
+   spec:
+     images:
+       - docker.io/library/alpine:3.7.3
+   EOF
+   ```
 
 1. Eraser creates an `ImageJob` that fans out one worker Pod per node. Watch them appear and complete.
 
-```bash
-kubectl get imagejob
-kubectl get pods -n eraser-system -w
-```
+   ```bash
+   kubectl get imagejob
+   kubectl get pods -n eraser-system -w
+   ```
 
 To delete every non-running image instead of a specific list, use `*` as the only entry in `spec.images`; that triggers the prune path (`src/pkg/remover/helpers.go:99-126`).
 

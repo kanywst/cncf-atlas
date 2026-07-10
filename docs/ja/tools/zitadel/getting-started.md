@@ -23,23 +23,23 @@ curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/d
 
 1. 作業ディレクトリを作り、Compose ファイルと環境例を取得する。
 
-```bash
-mkdir zitadel && cd zitadel
-curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/docker-compose.yml
-curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/.env.example
-```
+   ```bash
+   mkdir zitadel && cd zitadel
+   curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/docker-compose.yml
+   curl -LO https://raw.githubusercontent.com/zitadel/zitadel/main/deploy/compose/.env.example
+   ```
 
 1. 環境例を `.env` にコピーする。ローカル試用ならデフォルトで問題ないが、本番投入の前には必ず見直す。
 
-```bash
-cp .env.example .env
-```
+   ```bash
+   cp .env.example .env
+   ```
 
 1. スタックを起動し、コンテナが healthy になるまで待つ。
 
-```bash
-docker compose up -d --wait
-```
+   ```bash
+   docker compose up -d --wait
+   ```
 
 1. Compose の出力に表示されるアドレス (ローカルの既定は `http://localhost:8080/ui/console`) をブラウザで開き、ドキュメント記載の初期管理者認証情報でサインインする ([Compose deploy](https://zitadel.com/docs/self-hosting/deploy/compose))。
 

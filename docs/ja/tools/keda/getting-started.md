@@ -30,36 +30,36 @@ kubectl apply --server-side -f https://github.com/kedacore/keda/releases/downloa
 
 1. スケール対象の Deployment を作る。
 
-```bash
-kubectl create deployment nginx --image=nginx --replicas=0
-```
+   ```bash
+   kubectl create deployment nginx --image=nginx --replicas=0
+   ```
 
 1. 毎日の時間帯に Deployment を 5 レプリカへ、時間外は 0 へ戻す `ScaledObject` を作る。
 
-```yaml
-apiVersion: keda.sh/v1alpha1
-kind: ScaledObject
-metadata:
-  name: nginx-cron
-spec:
-  scaleTargetRef:
-    name: nginx
-  minReplicaCount: 0
-  maxReplicaCount: 5
-  triggers:
-    - type: cron
-      metadata:
-        timezone: Etc/UTC
-        start: 0 6 * * *
-        end: 0 20 * * *
-        desiredReplicas: "5"
-```
+   ```yaml
+   apiVersion: keda.sh/v1alpha1
+   kind: ScaledObject
+   metadata:
+     name: nginx-cron
+   spec:
+     scaleTargetRef:
+       name: nginx
+     minReplicaCount: 0
+     maxReplicaCount: 5
+     triggers:
+       - type: cron
+         metadata:
+           timezone: Etc/UTC
+           start: 0 6 * * *
+           end: 0 20 * * *
+           desiredReplicas: "5"
+   ```
 
 1. 適用する。
 
-```bash
-kubectl apply -f scaledobject.yaml
-```
+   ```bash
+   kubectl apply -f scaledobject.yaml
+   ```
 
 ## 動作確認
 

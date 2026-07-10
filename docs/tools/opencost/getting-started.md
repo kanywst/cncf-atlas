@@ -22,15 +22,15 @@ The shortest path that actually computes cost. The Helm install above is the rec
 
 1. Forward the in-cluster Prometheus service to your workstation.
 
-```bash
-kubectl port-forward svc/prometheus-server 9080:80
-```
+   ```bash
+   kubectl port-forward svc/prometheus-server 9080:80
+   ```
 
 1. Point OpenCost at that endpoint and run the cost model from source.
 
-```bash
-PROMETHEUS_SERVER_ENDPOINT="http://127.0.0.1:9080" go run ./cmd/costmodel/main.go
-```
+   ```bash
+   PROMETHEUS_SERVER_ENDPOINT="http://127.0.0.1:9080" go run ./cmd/costmodel/main.go
+   ```
 
 The API listens on port `9003` by default.
 

@@ -33,17 +33,17 @@ Propagate an nginx Deployment to member clusters. Use the `karmada-apiserver` co
 
 1. Point kubectl at the Karmada control plane.
 
-```bash
-export KUBECONFIG="$HOME/.kube/karmada.config"
-kubectl config use-context karmada-apiserver
-```
+   ```bash
+   export KUBECONFIG="$HOME/.kube/karmada.config"
+   kubectl config use-context karmada-apiserver
+   ```
 
 1. Create the Deployment template and a PropagationPolicy.
 
-```bash
-kubectl create -f samples/nginx/deployment.yaml
-kubectl create -f samples/nginx/propagationpolicy.yaml
-```
+   ```bash
+   kubectl create -f samples/nginx/deployment.yaml
+   kubectl create -f samples/nginx/propagationpolicy.yaml
+   ```
 
 The sample policy selects the `nginx` Deployment and divides replicas across `member1` and `member2` by static weight (`samples/nginx/propagationpolicy.yaml`).
 

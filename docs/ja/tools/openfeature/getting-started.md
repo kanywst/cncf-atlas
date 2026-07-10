@@ -22,38 +22,38 @@ docker pull ghcr.io/open-feature/flagd:latest
 
 1. カレントディレクトリに flag 定義ファイル `flags.json` を書く。`state` で flag を有効化し、`variants` が取りうる値を並べ、`defaultVariant` が targeting にマッチしないときに返る。
 
-```json
-{
-  "flags": {
-    "show-welcome-banner": {
-      "state": "ENABLED",
-      "variants": {
-        "on": true,
-        "off": false
-      },
-      "defaultVariant": "off"
-    }
-  }
-}
-```
+   ```json
+   {
+     "flags": {
+       "show-welcome-banner": {
+         "state": "ENABLED",
+         "variants": {
+           "on": true,
+           "off": false
+         },
+         "defaultVariant": "off"
+       }
+     }
+   }
+   ```
 
 1. ファイルをマウントし、`file:` sync ソースとして渡して flagd を起動する。flag のデフォルトポートは `8013` (評価)・`8014` (management)・`8015` (gRPC sync)・`8016` (OFREP) (`flagd/cmd/start.go:53-56`)。
 
-```bash
-docker run --rm -it \
-  -p 8013:8013 -p 8016:8016 \
-  -v "$(pwd)":/etc/flagd \
-  ghcr.io/open-feature/flagd:latest \
-  start --uri file:/etc/flagd/flags.json
-```
+   ```bash
+   docker run --rm -it \
+     -p 8013:8013 -p 8016:8016 \
+     -v "$(pwd)":/etc/flagd \
+     ghcr.io/open-feature/flagd:latest \
+     start --uri file:/etc/flagd/flags.json
+   ```
 
 1. OFREP (REST 評価 API) で flag を評価する。空のコンテキストは targeting 入力なしで評価する。
 
-```bash
-curl -X POST http://localhost:8016/ofrep/v1/evaluate/flags/show-welcome-banner \
-  -H 'Content-Type: application/json' \
-  -d '{"context": {}}'
-```
+   ```bash
+   curl -X POST http://localhost:8016/ofrep/v1/evaluate/flags/show-welcome-banner \
+     -H 'Content-Type: application/json' \
+     -d '{"context": {}}'
+   ```
 
 応答には解決された値と理由が入る。targeting ルールが無ければ理由は `STATIC` で、値は `defaultVariant` だ (`core/pkg/evaluator/json.go:420`)。
 

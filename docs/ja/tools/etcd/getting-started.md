@@ -27,15 +27,15 @@ etcd --version && etcdctl version
 
 1. サーバを起動します。フラグなしだとクライアントは 2379、peer は 2380 で待ち受けます。
 
-```bash
-etcd &
-```
+   ```bash
+   etcd &
+   ```
 
 1. `etcdctl` でキーを書きます。
 
-```bash
-etcdctl put greeting "Hello, etcd"
-```
+   ```bash
+   etcdctl put greeting "Hello, etcd"
+   ```
 
 期待される出力:
 
@@ -45,9 +45,9 @@ OK
 
 1. 読み戻します。
 
-```bash
-etcdctl get greeting
-```
+   ```bash
+   etcdctl get greeting
+   ```
 
 期待される出力:
 

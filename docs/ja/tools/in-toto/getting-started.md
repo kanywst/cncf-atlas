@@ -23,29 +23,29 @@ pip install in-toto
 
 1. ステップを in-toto の下で実行する。ここではファイル `bar` を作る作業を記録する。
 
-```bash
-in-toto-mock --name foo -- touch bar
-```
+   ```bash
+   in-toto-mock --name foo -- touch bar
+   ```
 
 これは `touch bar` を実行し、コマンド・products・byproducts を記述した署名なし link ファイル `foo.link` を書き出す。
 
 1. 記録された link を確認する。中身は素の JSON。
 
-```bash
-cat foo.link
-```
+   ```bash
+   cat foo.link
+   ```
 
 1. 本物の署名付きステップでは、代わりに署名鍵付きの `in-toto-run` を使う。functionary はステップ名を付け、materials と products を列挙し、鍵を渡す (in_toto/in_toto_run.py:86-91):
 
-```bash
-in-toto-run --step-name build --products bar --signing-key key_file -- touch bar
-```
+   ```bash
+   in-toto-run --step-name build --products bar --signing-key key_file -- touch bar
+   ```
 
 1. プロジェクトオーナーは、署名付き layout と検証鍵に照らして最終成果物を検証する (in_toto/in_toto_verify.py:101):
 
-```bash
-in-toto-verify --layout root.layout --verification-keys key_file.pub
-```
+   ```bash
+   in-toto-verify --layout root.layout --verification-keys key_file.pub
+   ```
 
 ## 動作確認
 

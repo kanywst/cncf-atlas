@@ -19,17 +19,17 @@ The client and repository examples in the source tree are the shortest path to a
 
 1. Clone the source and start the example repository. Leave it running.
 
-```bash
-git clone https://github.com/theupdateframework/python-tuf
-cd python-tuf/examples/repository
-./repo
-```
+   ```bash
+   git clone https://github.com/theupdateframework/python-tuf
+   cd python-tuf/examples/repository
+   ./repo
+   ```
 
 1. In another terminal, initialize the client with trust-on-first-use. This downloads the initial root, then constructs an `Updater`.
 
-```bash
-./examples/client/client tofu
-```
+   ```bash
+   ./examples/client/client tofu
+   ```
 
 Expected output:
 
@@ -39,9 +39,9 @@ Trust-on-First-Use: Initialized new root in /home/you/.local/share/tuf-example/<
 
 1. Download a target file. The client refreshes the top-level metadata, looks up the target, checks the local cache, and downloads if needed.
 
-```bash
-./examples/client/client download file1.txt
-```
+   ```bash
+   ./examples/client/client download file1.txt
+   ```
 
 Expected output:
 

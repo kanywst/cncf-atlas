@@ -30,15 +30,15 @@ helm install falco falcosecurity/falco \
 
 1. pod が ready になるのを待つ:
 
-```bash
-kubectl get pods --namespace falco --watch
-```
+   ```bash
+   kubectl get pods --namespace falco --watch
+   ```
 
 1. 組み込みルールを発火させる。既定のルールセットはコンテナ内で起動したシェルにアラートするので、稼働中の任意の pod に exec してシェルを起動する:
 
-```bash
-kubectl exec -it <some-pod> -- /bin/sh
-```
+   ```bash
+   kubectl exec -it <some-pod> -- /bin/sh
+   ```
 
 ## 動作確認
 

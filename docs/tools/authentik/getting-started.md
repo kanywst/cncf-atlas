@@ -22,23 +22,23 @@ curl -O https://docs.goauthentik.io/compose.yml
 
 1. Generate the required secrets into a `.env` file next to `compose.yml`.
 
-```bash
-echo "PG_PASS=$(openssl rand -base64 36 | tr -d '\n')" >> .env
-echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 60 | tr -d '\n')" >> .env
-```
+   ```bash
+   echo "PG_PASS=$(openssl rand -base64 36 | tr -d '\n')" >> .env
+   echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 60 | tr -d '\n')" >> .env
+   ```
 
 1. Pull the images and start the stack.
 
-```bash
-docker compose pull
-docker compose up -d
-```
+   ```bash
+   docker compose pull
+   docker compose up -d
+   ```
 
 1. Open the initial setup page and create the first administrator account (`akadmin`).
 
-```text
-http://<your-host>:9000/if/flow/initial-setup/
-```
+   ```text
+   http://<your-host>:9000/if/flow/initial-setup/
+   ```
 
 ## Verify it works
 

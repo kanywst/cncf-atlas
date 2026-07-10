@@ -28,39 +28,39 @@ The shortest working path is a Source, a Continuous Query, and a Reaction that s
 
 1. Apply a Source that connects to the system whose changes you want to observe. A PostgreSQL Source names the tables to watch (`cli/test-source.yaml`). `drasi apply` creates or updates resources (`cli/cmd/apply.go`).
 
-```bash
-drasi apply -f source.yaml
-```
+   ```bash
+   drasi apply -f source.yaml
+   ```
 
 1. Apply a Continuous Query that defines what to observe. The query is Cypher, and it subscribes to the Source by id and returns the shape of the output (`cli/test-query.yaml`):
 
-```yaml
-kind: ContinuousQuery
-apiVersion: v1
-name: query1
-spec:
-  mode: query
-  sources:
-    subscriptions:
-      - id: foo
-  query: >
-    MATCH
-      (i:Item {Category: '1'})
-    RETURN
-      i.ItemId AS Id,
-      i.Name as Name,
-      i.Category as Category
-```
+   ```yaml
+   kind: ContinuousQuery
+   apiVersion: v1
+   name: query1
+   spec:
+     mode: query
+     sources:
+       subscriptions:
+         - id: foo
+     query: >
+       MATCH
+         (i:Item {Category: '1'})
+       RETURN
+         i.ItemId AS Id,
+         i.Name as Name,
+         i.Category as Category
+   ```
 
-```bash
-drasi apply -f query.yaml
-```
+   ```bash
+   drasi apply -f query.yaml
+   ```
 
 1. Apply a Reaction to observe the output. The tutorial uses a debug Reaction that displays the rows a query adds, updates, and deletes.
 
-```bash
-drasi apply -f reaction.yaml
-```
+   ```bash
+   drasi apply -f reaction.yaml
+   ```
 
 ## Verify it works
 

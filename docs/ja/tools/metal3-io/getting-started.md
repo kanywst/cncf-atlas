@@ -22,31 +22,31 @@ make install
 
 1. CRD をクラスタに導入する。
 
-```bash
-make install
-```
+   ```bash
+   make install
+   ```
 
 1. コントローラを kustomize で展開し、ironic plugin 込みでローカル起動する。ironic backend は別途デプロイが必要 (IrSO か `ironic-deployment/` の base)。
 
-```bash
-make deploy
-make run
-```
+   ```bash
+   make deploy
+   make run
+   ```
 
 1. 最小の `BareMetalHost` を作る。動くホストには BMC アドレス、credentials secret、起動 NIC の MAC (BMC ではなくホスト NIC)、`online: true` が要る ([出典 6](https://book.metal3.io/bmo/introduction))。
 
-```yaml
-apiVersion: metal3.io/v1alpha1
-kind: BareMetalHost
-metadata:
-  name: node-0
-spec:
-  online: true
-  bootMACAddress: 00:11:22:33:44:55
-  bmc:
-    address: redfish://192.168.1.10/redfish/v1/Systems/1
-    credentialsName: node-0-bmc-secret
-```
+   ```yaml
+   apiVersion: metal3.io/v1alpha1
+   kind: BareMetalHost
+   metadata:
+     name: node-0
+   spec:
+     online: true
+     bootMACAddress: 00:11:22:33:44:55
+     bmc:
+       address: redfish://192.168.1.10/redfish/v1/Systems/1
+       credentialsName: node-0-bmc-secret
+   ```
 
 ## 動作確認
 

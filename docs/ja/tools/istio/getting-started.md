@@ -28,21 +28,21 @@ istioctl install --set profile=demo -y
 
 1. namespace にラベルを付け、新規 Pod に Envoy サイドカーが自動注入されるようにする。
 
-```bash
-kubectl label namespace default istio-injection=enabled
-```
+   ```bash
+   kubectl label namespace default istio-injection=enabled
+   ```
 
 1. その namespace にワークロードを deploy する。以後 `default` に作られる Pod にはサイドカーが付く。
 
-```bash
-kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-```
+   ```bash
+   kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+   ```
 
 1. 各 Pod がアプリと注入された `istio-proxy` の 2 コンテナを持つことを確認する。
 
-```bash
-kubectl get pods
-```
+   ```bash
+   kubectl get pods
+   ```
 
 起動後、各 Pod の READY 列は `2/2` になるはず。
 

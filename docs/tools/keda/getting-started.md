@@ -30,36 +30,36 @@ The shortest path to scaling something. This uses the built-in `cron` scaler so 
 
 1. Create a Deployment to scale.
 
-```bash
-kubectl create deployment nginx --image=nginx --replicas=0
-```
+   ```bash
+   kubectl create deployment nginx --image=nginx --replicas=0
+   ```
 
 1. Create a `ScaledObject` that scales the Deployment to 5 replicas during a daily window and back to 0 outside it.
 
-```yaml
-apiVersion: keda.sh/v1alpha1
-kind: ScaledObject
-metadata:
-  name: nginx-cron
-spec:
-  scaleTargetRef:
-    name: nginx
-  minReplicaCount: 0
-  maxReplicaCount: 5
-  triggers:
-    - type: cron
-      metadata:
-        timezone: Etc/UTC
-        start: 0 6 * * *
-        end: 0 20 * * *
-        desiredReplicas: "5"
-```
+   ```yaml
+   apiVersion: keda.sh/v1alpha1
+   kind: ScaledObject
+   metadata:
+     name: nginx-cron
+   spec:
+     scaleTargetRef:
+       name: nginx
+     minReplicaCount: 0
+     maxReplicaCount: 5
+     triggers:
+       - type: cron
+         metadata:
+           timezone: Etc/UTC
+           start: 0 6 * * *
+           end: 0 20 * * *
+           desiredReplicas: "5"
+   ```
 
 1. Apply it.
 
-```bash
-kubectl apply -f scaledobject.yaml
-```
+   ```bash
+   kubectl apply -f scaledobject.yaml
+   ```
 
 ## Verify it works
 

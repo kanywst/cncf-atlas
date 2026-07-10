@@ -26,21 +26,21 @@ cd athenz/docker
 
 1. Athenz のコンテナイメージをビルドする。
 
-```bash
-make build
-```
+   ```bash
+   make build
+   ```
 
 1. 開発環境をデプロイする (ZMS はポート 4443、ZTS はポート 8443)。
 
-```bash
-make deploy-dev
-```
+   ```bash
+   make deploy-dev
+   ```
 
 1. コンテナ起動後、同梱の検証を実行する。
 
-```bash
-make verify
-```
+   ```bash
+   make verify
+   ```
 
 ## 動作確認
 

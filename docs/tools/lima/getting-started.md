@@ -19,21 +19,21 @@ On Linux you can use the release binaries, or build from source with `make`. Fro
 
 1. Start the default instance. This downloads an image and boots a Linux VM, mounting your home directory read-only and forwarding ports automatically.
 
-```bash
-limactl start
-```
+   ```bash
+   limactl start
+   ```
 
 1. Open a shell inside the guest. The `lima` command is a wrapper around `limactl shell default`.
 
-```bash
-lima uname -a
-```
+   ```bash
+   lima uname -a
+   ```
 
 1. Run a container from the host using the bundled nerdctl wrapper.
 
-```bash
-nerdctl.lima run --rm hello-world
-```
+   ```bash
+   nerdctl.lima run --rm hello-world
+   ```
 
 ## Verify it works
 

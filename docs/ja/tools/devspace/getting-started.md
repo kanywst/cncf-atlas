@@ -36,21 +36,21 @@ devspace version
 
 1. プロジェクトディレクトリから `devspace.yaml` を生成する。対話的な `init` がプロジェクトを調べて config を書き、イメージのビルド方法とデプロイ方法を配線する。
 
-```bash
-devspace init
-```
+   ```bash
+   devspace init
+   ```
 
 1. 作業するネームスペースを選ぶ (DevSpace は現在の kube-context を使う):
 
-```bash
-devspace use namespace my-dev-namespace
-```
+   ```bash
+   devspace use namespace my-dev-namespace
+   ```
 
 1. dev セッションを開始する。これは `dev` パイプラインを走らせる。イメージをビルドし、デプロイし、対象 Pod を dev pod に置換し、ヘルパーを注入し、双方向ファイル同期を開く。
 
-```bash
-devspace dev
-```
+   ```bash
+   devspace dev
+   ```
 
 `devspace dev` は動かしたままにする。パイプラインの進行をストリームし、その後ファイル同期を有効にしたままセッションを開いて保持する。ローカルでファイルを編集すると、変更は再ビルドなしに動作中コンテナへ同期される。
 

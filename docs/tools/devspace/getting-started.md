@@ -36,21 +36,21 @@ The core job is developing an app against the cluster with live sync. The shorte
 
 1. From your project directory, generate a `devspace.yaml`. The interactive `init` inspects the project and writes the config, wiring up how to build the image and deploy it.
 
-```bash
-devspace init
-```
+   ```bash
+   devspace init
+   ```
 
 1. Select a namespace to work in (DevSpace uses your current kube-context):
 
-```bash
-devspace use namespace my-dev-namespace
-```
+   ```bash
+   devspace use namespace my-dev-namespace
+   ```
 
 1. Start the dev session. This runs the `dev` pipeline: build the image, deploy, replace the target pod with a dev pod, inject the helper, and open the two-way file sync.
 
-```bash
-devspace dev
-```
+   ```bash
+   devspace dev
+   ```
 
 Leave `devspace dev` running. It streams the pipeline's progress and then holds the session open with the file sync active. Edit a file locally and the change is synced into the running container without a rebuild.
 

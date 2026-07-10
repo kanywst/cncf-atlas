@@ -23,36 +23,36 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 1. 中核 pod が立ち上がるのを待つ。
 
-```bash
-kubectl wait --for=condition=available --timeout=300s \
-  deployment/argocd-server -n argocd
-```
+   ```bash
+   kubectl wait --for=condition=available --timeout=300s \
+     deployment/argocd-server -n argocd
+   ```
 
 1. 初期 admin パスワードを取得し、API server をローカルに公開する。
 
-```bash
-argocd admin initial-password -n argocd
-kubectl port-forward svc/argocd-server -n argocd 8080:443
-```
+   ```bash
+   argocd admin initial-password -n argocd
+   kubectl port-forward svc/argocd-server -n argocd 8080:443
+   ```
 
 port-forward は UI と API をローカルアドレス `localhost:8080` で提供する。
 
 1. login し、Git repo のパスを指す Application を登録する。
 
-```bash
-argocd login localhost:8080
-argocd app create guestbook \
-  --repo https://github.com/argoproj/argocd-example-apps.git \
-  --path guestbook \
-  --dest-server https://kubernetes.default.svc \
-  --dest-namespace default
-```
+   ```bash
+   argocd login localhost:8080
+   argocd app create guestbook \
+     --repo https://github.com/argoproj/argocd-example-apps.git \
+     --path guestbook \
+     --dest-server https://kubernetes.default.svc \
+     --dest-namespace default
+   ```
 
 1. sync して、コントローラにマニフェストを適用させる。
 
-```bash
-argocd app sync guestbook
-```
+   ```bash
+   argocd app sync guestbook
+   ```
 
 ## 動作確認
 

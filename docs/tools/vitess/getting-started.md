@@ -23,29 +23,29 @@ The `examples/local/` directory brings up a topology service, vtctld, VTGate, an
 
 1. Set up the environment and aliases, then bring up the initial cluster (`examples/local/README.md:9`, `README.md:12`).
 
-```bash
-source ../common/env.sh
-./101_initial_cluster.sh
-```
+   ```bash
+   source ../common/env.sh
+   ./101_initial_cluster.sh
+   ```
 
 1. Insert and read back sample data through VTGate (`examples/local/README.md:15`).
 
-```bash
-mysql < ../common/insert_commerce_data.sql
-mysql --table < ../common/select_commerce_data.sql
-```
+   ```bash
+   mysql < ../common/insert_commerce_data.sql
+   mysql --table < ../common/select_commerce_data.sql
+   ```
 
 1. Move two tables into a new `customer` keyspace with VReplication (`examples/local/README.md:22`).
 
-```bash
-vtctldclient MoveTables --workflow commerce2customer --target-keyspace customer create --source-keyspace commerce --tables "customer,corder"
-```
+   ```bash
+   vtctldclient MoveTables --workflow commerce2customer --target-keyspace customer create --source-keyspace commerce --tables "customer,corder"
+   ```
 
 1. Reshard the `customer` keyspace from one shard into two (`examples/local/README.md:40`).
 
-```bash
-vtctldclient Reshard --workflow cust2cust --target-keyspace customer create --source-shards '0' --target-shards '-80,80-'
-```
+   ```bash
+   vtctldclient Reshard --workflow cust2cust --target-keyspace customer create --source-shards '0' --target-shards '-80,80-'
+   ```
 
 ## Verify it works
 

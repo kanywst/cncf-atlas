@@ -37,15 +37,15 @@ Using the standalone Docker install above:
 
 1. Open the console to confirm the control plane is up.
 
-```bash
-open http://localhost:8001
-```
+   ```bash
+   open http://localhost:8001
+   ```
 
 1. Send a request through the gateway HTTP entry. Before any route is configured the gateway answers on port 8080, which confirms the Envoy data plane is serving.
 
-```bash
-curl -i http://localhost:8080/
-```
+   ```bash
+   curl -i http://localhost:8080/
+   ```
 
 From the console you can then add a route (a domain plus an upstream service) and see it take effect without restarting the gateway, which is the behavior the [architecture](./architecture) page traces through xDS.
 

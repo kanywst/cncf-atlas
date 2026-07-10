@@ -25,24 +25,24 @@ make build
 
 1. プロジェクトディレクトリを作り、プロジェクトを初期化する。
 
-```bash
-mkdir memcached-operator && cd memcached-operator
-operator-sdk init --domain example.com --repo github.com/example/memcached-operator
-```
+   ```bash
+   mkdir memcached-operator && cd memcached-operator
+   operator-sdk init --domain example.com --repo github.com/example/memcached-operator
+   ```
 
 1. API の group・version・kind と、そのコントローラを作る。
 
-```bash
-operator-sdk create api --group cache --version v1alpha1 --kind Memcached --resource --controller
-```
+   ```bash
+   operator-sdk create api --group cache --version v1alpha1 --kind Memcached --resource --controller
+   ```
 
 1. マニフェストを生成し、CRD をインストールし、コントローラをローカルでクラスタに対して動かす。
 
-```bash
-make manifests
-make install
-make run
-```
+   ```bash
+   make manifests
+   make install
+   make run
+   ```
 
 `make run` は kubeconfig を使ってコントローラをフォアグラウンドで起動する。manager が起動し reconcile していることをログに出す。
 

@@ -22,16 +22,16 @@ npx @backstage/create-app@latest
 
 1. Run the create-app command and answer the prompt for an app name. It scaffolds a new directory containing the frontend (`packages/app`) and backend (`packages/backend`).
 
-```bash
-npx @backstage/create-app@latest
-```
+   ```bash
+   npx @backstage/create-app@latest
+   ```
 
 1. Enter the generated directory and start both the frontend and backend together.
 
-```bash
-cd my-backstage-app
-yarn start
-```
+   ```bash
+   cd my-backstage-app
+   yarn start
+   ```
 
 1. The frontend serves on port `3000` and the backend on port `7007`. Open the app in a browser at `http://localhost:3000`.
 

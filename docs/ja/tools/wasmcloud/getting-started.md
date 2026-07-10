@@ -28,21 +28,21 @@ cargo install --path wasmCloud/crates/wash
 
 1. HTTP hello-world テンプレートから新しい component を作る。
 
-```bash
-wash new https://github.com/wasmCloud/wasmCloud.git --subfolder templates/http-hello-world
-```
+   ```bash
+   wash new https://github.com/wasmCloud/wasmCloud.git --subfolder templates/http-hello-world
+   ```
 
 1. component をビルドする。
 
-```bash
-wash -C ./http-hello-world build
-```
+   ```bash
+   wash -C ./http-hello-world build
+   ```
 
 1. dev ループを起動する。`wash dev` は component をビルドし、ローカルホストに載せ、ファイル変更で再ロードする。
 
-```bash
-wash -C ./http-hello-world dev
-```
+   ```bash
+   wash -C ./http-hello-world dev
+   ```
 
 ## 動作確認
 

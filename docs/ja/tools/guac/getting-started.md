@@ -29,21 +29,21 @@ make build
 
 1. インメモリバックエンドでスタック (GraphQL サーバ、collectsub、ingestor) を起動する。このターゲットはコンテナを force-recreate し、ポート 8080 で GraphQL エンドポイントが応答するまで待つ。
 
-```bash
-make start-service
-```
+   ```bash
+   make start-service
+   ```
 
 1. SBOM/attestation のフォルダをグラフへ直接取り込む。`files` サブコマンドは GraphQL エンドポイントと直接通信する (`cmd/guacone/cmd/files.go:62`)。
 
-```bash
-bin/guacone collect files /path/to/sbom-folder
-```
+   ```bash
+   bin/guacone collect files /path/to/sbom-folder
+   ```
 
 1. CLI からグラフをクエリする。
 
-```bash
-bin/guacone query
-```
+   ```bash
+   bin/guacone query
+   ```
 
 ## 動作確認
 

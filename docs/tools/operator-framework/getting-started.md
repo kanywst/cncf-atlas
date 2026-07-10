@@ -25,24 +25,24 @@ This scaffolds a minimal Go Operator and runs its controller against your curren
 
 1. Create a project directory and initialize the project.
 
-```bash
-mkdir memcached-operator && cd memcached-operator
-operator-sdk init --domain example.com --repo github.com/example/memcached-operator
-```
+   ```bash
+   mkdir memcached-operator && cd memcached-operator
+   operator-sdk init --domain example.com --repo github.com/example/memcached-operator
+   ```
 
 1. Create an API group, version, kind, and a controller for it.
 
-```bash
-operator-sdk create api --group cache --version v1alpha1 --kind Memcached --resource --controller
-```
+   ```bash
+   operator-sdk create api --group cache --version v1alpha1 --kind Memcached --resource --controller
+   ```
 
 1. Generate manifests, install the CRD, and run the controller locally against your cluster.
 
-```bash
-make manifests
-make install
-make run
-```
+   ```bash
+   make manifests
+   make install
+   make run
+   ```
 
 `make run` starts the controller in the foreground using your kubeconfig. It logs that the manager has started and is reconciling.
 

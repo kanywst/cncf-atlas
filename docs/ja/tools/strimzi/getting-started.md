@@ -22,21 +22,21 @@ kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
 
 1. Cluster Operator の Deployment が ready になるのを待つ。
 
-```bash
-kubectl wait deployment/strimzi-cluster-operator --for=condition=Available --timeout=300s -n kafka
-```
+   ```bash
+   kubectl wait deployment/strimzi-cluster-operator --for=condition=Available --timeout=300s -n kafka
+   ```
 
 1. リポジトリ同梱の examples を使い、単一ノードの KRaft Kafka クラスタをデプロイする。
 
-```bash
-kubectl apply -f examples/kafka/ -n kafka
-```
+   ```bash
+   kubectl apply -f examples/kafka/ -n kafka
+   ```
 
 1. クラスタが ready になるのを待つ。Operator が reconcile チェーンを最後まで回し、`Kafka` リソースの status に readiness を報告する。
 
-```bash
-kubectl wait kafka/my-cluster --for=condition=Ready --timeout=300s -n kafka
-```
+   ```bash
+   kubectl wait kafka/my-cluster --for=condition=Ready --timeout=300s -n kafka
+   ```
 
 ## 動作確認
 

@@ -24,23 +24,23 @@ docker pull quay.io/oauth2-proxy/oauth2-proxy:latest
 
 1. cookie secret を生成する。decode して 16, 24, 32 byte でないと起動時検証で弾かれる (`pkg/validation/cookie.go:64-67`)。
 
-```bash
-openssl rand -base64 32 | tr -- '+/' '-_'
-```
+   ```bash
+   openssl rand -base64 32 | tr -- '+/' '-_'
+   ```
 
 1. 上流の前段でプロキシを起動する。client 資格情報、上流 URL、ステップ 1 の cookie secret を差し替える。
 
-```bash
-oauth2-proxy \
-  --provider=github \
-  --client-id=YOUR_CLIENT_ID \
-  --client-secret=YOUR_CLIENT_SECRET \
-  --redirect-url=https://your.host/oauth2/callback \
-  --cookie-secret=GENERATED_SECRET \
-  --email-domain=* \
-  --upstream=http://127.0.0.1:8080/ \
-  --http-address=0.0.0.0:4180
-```
+   ```bash
+   oauth2-proxy \
+     --provider=github \
+     --client-id=YOUR_CLIENT_ID \
+     --client-secret=YOUR_CLIENT_SECRET \
+     --redirect-url=https://your.host/oauth2/callback \
+     --cookie-secret=GENERATED_SECRET \
+     --email-domain=* \
+     --upstream=http://127.0.0.1:8080/ \
+     --http-address=0.0.0.0:4180
+   ```
 
 1. フラグは挙動に直結する: `--upstream` は認証済みリクエストの転送先サービス、`--redirect-url` はプロバイダ登録と一致が必須、`--email-domain=*` はアクセス境界を「認証済みの任意の email」に設定する (本番ではドメインに絞るか `--authenticated-emails-file` を使う)。email チェックは `validator.go:107` の validator が強制する。
 

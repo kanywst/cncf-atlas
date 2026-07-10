@@ -29,31 +29,31 @@ pip install kfp==2.16.1
 
 1. SDK から API サーバに到達できるよう UI と API を port-forward する。
 
-```bash
-kubectl -n kubeflow port-forward svc/ml-pipeline-ui 8080:80
-```
+   ```bash
+   kubectl -n kubeflow port-forward svc/ml-pipeline-ui 8080:80
+   ```
 
 UI は `http://localhost:8080` で到達できる。
 
 1. 最小のパイプラインを記述・コンパイル・投入する。
 
-```python
-from kfp import dsl, compiler, Client
+   ```python
+   from kfp import dsl, compiler, Client
 
 
-@dsl.component
-def say(msg: str):
-    print(msg)
+   @dsl.component
+   def say(msg: str):
+       print(msg)
 
 
-@dsl.pipeline(name="hello")
-def hello_pipeline(text: str = "hi"):
-    say(msg=text)
+   @dsl.pipeline(name="hello")
+   def hello_pipeline(text: str = "hi"):
+       say(msg=text)
 
 
-compiler.Compiler().compile(hello_pipeline, "hello.yaml")
-Client(host="http://localhost:8080").create_run_from_pipeline_package("hello.yaml")
-```
+   compiler.Compiler().compile(hello_pipeline, "hello.yaml")
+   Client(host="http://localhost:8080").create_run_from_pipeline_package("hello.yaml")
+   ```
 
 ## 動作確認
 

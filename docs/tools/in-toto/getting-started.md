@@ -23,29 +23,29 @@ The fastest way to see the core behaviour without dealing with keys is `in-toto-
 
 1. Run a step under in-toto. This records the activity of creating a file `bar`.
 
-```bash
-in-toto-mock --name foo -- touch bar
-```
+   ```bash
+   in-toto-mock --name foo -- touch bar
+   ```
 
 This executes `touch bar` and writes an unsigned link file `foo.link` describing the command, its products, and its byproducts.
 
 1. Inspect the recorded link. It is plain JSON.
 
-```bash
-cat foo.link
-```
+   ```bash
+   cat foo.link
+   ```
 
 1. For a real, signed step, use `in-toto-run` with a signing key instead. The functionary names the step, lists materials and products, and supplies a key (in_toto/in_toto_run.py:86-91):
 
-```bash
-in-toto-run --step-name build --products bar --signing-key key_file -- touch bar
-```
+   ```bash
+   in-toto-run --step-name build --products bar --signing-key key_file -- touch bar
+   ```
 
 1. The project owner verifies the final product against a signed layout and the verification keys (in_toto/in_toto_verify.py:101):
 
-```bash
-in-toto-verify --layout root.layout --verification-keys key_file.pub
-```
+   ```bash
+   in-toto-verify --layout root.layout --verification-keys key_file.pub
+   ```
 
 ## Verify it works
 

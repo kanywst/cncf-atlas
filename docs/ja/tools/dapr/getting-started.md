@@ -23,15 +23,15 @@ dapr init
 
 1. アプリをサイドカー付きで起動する。末尾のコマンドは自分のものに置き換える。ここではアプリの代わりに Python の HTTP サーバを置く。
 
-```bash
-dapr run --app-id myapp --app-port 8080 -- python3 -m http.server 8080
-```
+   ```bash
+   dapr run --app-id myapp --app-port 8080 -- python3 -m http.server 8080
+   ```
 
 1. サイドカー経由でアプリを呼ぶ。ランタイムは既定で HTTP ポート `3500` を待ち受けるので、app ID `myapp` へのサービス呼び出しは下記になる。ホストはローカルサイドカーで `localhost:3500` として指す。
 
-```bash
-curl http://127.0.0.1:3500/v1.0/invoke/myapp/method/
-```
+   ```bash
+   curl http://127.0.0.1:3500/v1.0/invoke/myapp/method/
+   ```
 
 サイドカーは app ID で宛先を解決し、resiliency ポリシを適用し、`--app-port` で待つアプリへ呼び出しを転送する (`pkg/api/http/directmessaging.go:97`)。
 

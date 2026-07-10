@@ -25,22 +25,22 @@ go install sigs.k8s.io/kind@latest
 
 1. ローカルクラスタを作る。
 
-```bash
-kind create cluster --name demo
-```
+   ```bash
+   kind create cluster --name demo
+   ```
 
 1. Deployment を動かして公開する。
 
-```bash
-kubectl create deployment hello --image=registry.k8s.io/echoserver:1.4
-kubectl expose deployment hello --port=8080
-```
+   ```bash
+   kubectl create deployment hello --image=registry.k8s.io/echoserver:1.4
+   kubectl expose deployment hello --port=8080
+   ```
 
 1. スケジューラが Pod を配置し kubelet が起動する様子を見る。
 
-```bash
-kubectl get pods -o wide
-```
+   ```bash
+   kubectl get pods -o wide
+   ```
 
 期待される出力では Pod が `Running` へ遷移し、`NODE` 列にノードが割り当てられている。
 

@@ -25,15 +25,15 @@ make build
 
 1. 10 GB 以上の空きがあるディスクパスを指定して、スタック全体を起動します。
 
-```bash
-./docker/run_docker.sh -r -d /path/to/disk
-```
+   ```bash
+   ./docker/run_docker.sh -r -d /path/to/disk
+   ```
 
 1. 単一ロールを手動で起動するなら、バイナリにロール config を渡します。ロールは `role` キーから読まれ (`cmd/cmd.go:184`)、dispatch の switch がサーバへマップします (`cmd/cmd.go:206-239`)。
 
-```bash
-./cfs-server -c master.json
-```
+   ```bash
+   ./cfs-server -c master.json
+   ```
 
 有効なロールは `cmd/cmd.go:71-93` の定数です。`master`, `metanode`, `datanode`, `objectnode`, `authnode`, `console`, `lcnode`, `flashnode`, `flashgroupmanager`。
 

@@ -32,28 +32,28 @@ The core job of Easegress is to proxy traffic to backends. Start a single node, 
 
 1. Launch the server. It starts a one-node embedded etcd cluster and begins serving.
 
-```bash
-easegress-server
-```
+   ```bash
+   easegress-server
+   ```
 
 1. Check the cluster member from another shell.
 
-```bash
-egctl get member
-```
+   ```bash
+   egctl get member
+   ```
 
 1. Create an HTTP proxy on port 10080 that load-balances across two backends. This creates an HTTP server and a pipeline behind it.
 
-```bash
-egctl create httpproxy demo --port 10080 \
-  --rule="/pipeline=http://127.0.0.1:9095,http://127.0.0.1:9096"
-```
+   ```bash
+   egctl create httpproxy demo --port 10080 \
+     --rule="/pipeline=http://127.0.0.1:9095,http://127.0.0.1:9096"
+   ```
 
 1. Send a request through the proxy.
 
-```bash
-curl -v 127.0.0.1:10080/pipeline
-```
+   ```bash
+   curl -v 127.0.0.1:10080/pipeline
+   ```
 
 The request is forwarded to `127.0.0.1:9095/pipeline` or `127.0.0.1:9096/pipeline` using round-robin load balancing (README).
 

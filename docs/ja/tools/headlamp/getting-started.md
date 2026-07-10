@@ -25,23 +25,23 @@ helm install my-headlamp headlamp/headlamp --namespace kube-system
 
 1. Headlamp のサービスを自分のマシンへ port-forward する。
 
-```bash
-kubectl port-forward -n kube-system service/headlamp 8080:80
-```
+   ```bash
+   kubectl port-forward -n kube-system service/headlamp 8080:80
+   ```
 
 1. サービスアカウントを作り、cluster-admin 権限を与える (最初の確認以上の用途では RBAC で絞ること)。
 
-```bash
-kubectl -n kube-system create serviceaccount headlamp-admin
-kubectl create clusterrolebinding headlamp-admin \
-  --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
-```
+   ```bash
+   kubectl -n kube-system create serviceaccount headlamp-admin
+   kubectl create clusterrolebinding headlamp-admin \
+     --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
+   ```
 
 1. そのアカウント用のトークンを発行する。
 
-```bash
-kubectl create token headlamp-admin -n kube-system
-```
+   ```bash
+   kubectl create token headlamp-admin -n kube-system
+   ```
 
 1. ブラウザで `http://localhost:8080` を開き、トークンを貼り付けてログインする。
 
