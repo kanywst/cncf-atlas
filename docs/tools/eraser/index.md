@@ -7,7 +7,7 @@
 - **Language**: Go (`go 1.24.0`)
 - **License**: Apache-2.0
 - **Repository**: [eraser-dev/eraser](https://github.com/eraser-dev/eraser)
-- **Documented at commit**: `20576a24` (near tag `v1.5.0-beta.0`, 2025-12-02)
+- **Documented at commit**: `20576a24` (`git describe` = `v1.5.0-beta.0-57-g20576a24`)
 
 ## What it is
 

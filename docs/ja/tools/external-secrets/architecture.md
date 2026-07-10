@@ -34,7 +34,7 @@ flowchart LR
 
 ### プロバイダ (`providers/v1/<name>/`)
 
-41 個のプロバイダ実装で、それぞれが独自の Go モジュールであり、`esv1.Provider` と `esv1.SecretsClient` のインタフェースを満たす。プロバイダは `pkg/register/` 配下のビルドタグ付きファイルで登録される (例: `pkg/register/aws.go:1` の `//go:build aws` ...)。これによりビルドに 1 つのバックエンドだけを含めることも、すべてを含めることもできる。
+41 個のプロバイダ実装で、それぞれが独自の Go モジュールであり、`esv1.Provider` と `esv1.SecretsClient` のインタフェースを満たす。プロバイダは `pkg/register/` 配下のビルドタグ付きファイルで登録される (例: `pkg/register/aws.go:1` の `//go:build aws || all_providers`)。これによりビルドに 1 つのバックエンドだけを含めることも、すべてを含めることもできる。
 
 ### Generator (`generators/v1/<name>/`)
 

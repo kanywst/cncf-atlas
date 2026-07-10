@@ -10,7 +10,7 @@ The repository has no `ADOPTERS.md` file. The named production users below come 
 | KE Holdings Inc. (Beike) | GPU sharing for AI workloads on Kubernetes | [CNCF case study](https://www.cncf.io/case-studies/ke-holdings-inc/) |
 | NIO | GPU sharing for AI workloads on Kubernetes | [CNCF case study](https://www.cncf.io/case-studies/nio/) |
 
-The project's own technical review notes that formal user surveys are limited, so this list is the set that can be named with a source rather than a complete adopter count.
+Formal adopter surveys are limited, so this list is the set that can be named with a source (the CNCF end-user case studies above) rather than a complete adopter count.
 
 ## Adoption signals
 

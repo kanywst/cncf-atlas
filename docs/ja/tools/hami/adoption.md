@@ -10,7 +10,7 @@
 | KE Holdings Inc. (貝殻找房) | Kubernetes 上の AI ワークロードの GPU 共有 | [CNCF ケーススタディ](https://www.cncf.io/case-studies/ke-holdings-inc/) |
 | NIO (蔚来) | Kubernetes 上の AI ワークロードの GPU 共有 | [CNCF ケーススタディ](https://www.cncf.io/case-studies/nio/) |
 
-プロジェクト自身の技術レビューも、形式的なユーザサーベイは限定的だと述べている。このリストは、完全な採用企業数ではなく、出典付きで名前を挙げられる範囲だ。
+形式的な採用企業サーベイは限定的なため、このリストは完全な採用企業数ではなく、出典付きで名前を挙げられる範囲 (上記の CNCF エンドユーザ事例) だ。
 
 ## 採用のシグナル
 

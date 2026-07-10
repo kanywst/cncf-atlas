@@ -50,7 +50,7 @@ main                              cmd/higress/main.go:26
                      normalizeWeightedCluster ingress_config.go:542
 ```
 
-`initConfigController` が設計判断の具体化する場所だ。`NewIngressTranslation` が `IngressConfig` 裏付けのストアを構築し (`pkg/bootstrap/server.go:239`)、`s.configStores` に append され (`pkg/bootstrap/server.go:242`)、`configaggregate.MakeCache` が集合を 1 つのコントローラに畳み (`pkg/bootstrap/server.go:245`)、`s.environment.ConfigStore` にセットされる (`pkg/bootstrap/server.go:252`)。これ以降、Pilot はユーザ適用 config と同じインターフェースを通じて翻訳済み Istio config を読む。
+`initConfigController` は設計判断が具体化する場所だ。`NewIngressTranslation` が `IngressConfig` 裏付けのストアを構築し (`pkg/bootstrap/server.go:239`)、`s.configStores` に append され (`pkg/bootstrap/server.go:242`)、`configaggregate.MakeCache` が集合を 1 つのコントローラに畳み (`pkg/bootstrap/server.go:245`)、`s.environment.ConfigStore` にセットされる (`pkg/bootstrap/server.go:252`)。これ以降、Pilot はユーザ適用 config と同じインターフェースを通じて翻訳済み Istio config を読む。
 
 `IngressConfig.List` は自身が生む 6 つ以外の GVK を拒否し (`pkg/ingress/config/ingress_config.go:289`)、続いて `listFromIngressControllers` がクラスタ横断で生 Ingress を集め、作成時刻でソートしてから (`pkg/ingress/config/ingress_config.go:352`, `pkg/ingress/config/ingress_config.go:357`)、要求型で分岐する (`pkg/ingress/config/ingress_config.go:361`)。作成時刻順のソートが効くのは、後の Ingress が前を上書きでき、canary 統合が安定した順序に依存するからだ。
 

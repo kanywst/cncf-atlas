@@ -24,7 +24,7 @@ Governance changed through acquisition. When Red Hat acquired CoreOS, the projec
 
 ## Where it stands now
 
-Dex is maintained by a community group with a `MAINTAINERS.md` and a contributor guide, and roughly 260 contributors have landed changes over its lifetime. Releases continue in the `v2.45.x` line. The scope has stayed deliberately narrow: a federated OIDC provider, not a full identity platform. One consequence of the small maintainer surface is honest about its limits: the SAML 2.0 connector is marked in the README as unmaintained and likely vulnerable to authentication bypasses, a trade-off discussed on the [Adoption & Ecosystem](./adoption) page.
+Dex is maintained by a community group with a `MAINTAINERS.md` and a contributor guide, and roughly 260 contributors have landed changes over its lifetime. Releases continue in the `v2.45.x` line. The scope has stayed deliberately narrow: a federated OIDC provider, not a full identity platform. One consequence of the small maintainer surface is documented plainly: the SAML 2.0 connector is marked in the README as unmaintained and likely vulnerable to authentication bypasses, a trade-off discussed on the [Adoption & Ecosystem](./adoption) page.
 
 ## Sources
 

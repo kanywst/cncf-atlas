@@ -2,7 +2,7 @@
 
 ## Origin
 
-Higress started inside Alibaba. The problem it addressed was concrete: the company ran Tengine, a fork of nginx, and nginx reloads its configuration on every route change. For services holding long-lived connections that reload was disruptive, and the nginx model also lacked good load balancing for gRPC and Dubbo, Alibaba's internal RPC stack. Higress was built to route traffic without that reload penalty and to handle those protocols (README).
+Higress started inside Alibaba. The problem it addressed was concrete: the company ran Tengine, a fork of nginx, and nginx reloads its configuration on every route change. For services holding long-lived connections that reload was disruptive, and the nginx model also lacked good load balancing for gRPC and for Dubbo, Alibaba's own RPC framework. Higress was built to route traffic without that reload penalty and to handle those protocols (README).
 
 Alibaba Cloud went on to build a commercial API gateway product on top of Higress, which it markets with a 99.99% availability claim. Internally, Higress backs core AI applications including the Tongyi Bailian (通义百炼) model studio and the PAI machine learning platform (README). The GitHub repository was created on 2022-10-27 (repository metadata).
 

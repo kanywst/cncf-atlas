@@ -2,7 +2,7 @@
 
 ## 起源
 
-Higress は Alibaba 社内で生まれた。解こうとした問題は具体的だった。同社は nginx フォークである Tengine を運用しており、nginx は経路変更のたびに設定を reload する。long-lived な接続を保持するサービスにとって、その reload は破壊的だった。加えて nginx モデルは Alibaba 社内の RPC スタックである gRPC や Dubbo への負荷分散が弱かった。Higress はその reload ペナルティなしにトラフィックをルーティングし、これらのプロトコルを扱うために作られた (README)。
+Higress は Alibaba 社内で生まれた。解こうとした問題は具体的だった。同社は nginx フォークである Tengine を運用しており、nginx は経路変更のたびに設定を reload する。long-lived な接続を保持するサービスにとって、その reload は破壊的だった。加えて nginx モデルは gRPC や、Alibaba 独自の RPC フレームワークである Dubbo への負荷分散が弱かった。Higress はその reload ペナルティなしにトラフィックをルーティングし、これらのプロトコルを扱うために作られた (README)。
 
 Alibaba Cloud はこれを基盤に商用 API ゲートウェイ製品を構築し、99.99% 可用性をうたう。社内では Higress が通義百煉 (Tongyi Bailian) の model studio や PAI 機械学習プラットフォームといった中核 AI アプリケーションを支える (README)。GitHub リポジトリの作成は 2022-10-27 (リポジトリメタデータ)。
 
