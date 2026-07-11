@@ -58,9 +58,9 @@ At query startup the same path runs in reverse for initial data: `bootstrap` (`q
 
 ## Key design decisions
 
-**Incremental evaluation, not re-query.** The engine keeps an index of every element it has seen so that an update can be diffed against the element's previous version rather than recomputing the whole query. That is why an update looks up the old version before computing the new result (`continuous_query.rs:196`), and it is what lets a continuous query stay cheap as changes arrive (Continuous Queries docs).
+**Incremental evaluation.** The engine keeps an index of every element it has seen so that an update can be diffed against the element's previous version rather than recomputing the whole query. That is why an update looks up the old version before computing the new result (`continuous_query.rs:196`), and it is what lets a continuous query stay cheap as changes arrive (Continuous Queries docs).
 
-**Push, not poll.** Sources push captured changes forward and Reactions are pushed the result diffs; nothing polls on a timer. The two transports are deliberately different: an at-least-once Redis Stream carries Source to query so changes are durable and acked, and Dapr pub/sub carries query to Reaction (`redis_change_stream.rs:73`; `result_publisher.rs:47`).
+**Everything is pushed.** Sources push captured changes forward and Reactions are pushed the result diffs; nothing polls on a timer. The two transports are deliberately different: an at-least-once Redis Stream carries Source to query so changes are durable and acked, and Dapr pub/sub carries query to Reaction (`redis_change_stream.rs:73`; `result_publisher.rs:47`).
 
 **Built on Dapr.** Each continuous query runs as a Dapr virtual actor and the components communicate through Dapr, so Drasi assumes a Dapr sidecar is present. This buys the actor lifecycle and state management from Dapr rather than reimplementing them (Azure blog).
 

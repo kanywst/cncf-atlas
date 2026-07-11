@@ -15,7 +15,7 @@ A devfile is a single YAML file that describes a development environment: the co
 
 The `devfile/api` repository is the specification itself, not a tool a developer runs directly. It defines the format as Go types under `pkg/apis/workspaces/v1alpha2/`, and the README states plainly that these Go sources are the origin from which the Kubernetes CRDs, the JSON schemas, and the npm TypeScript model are all generated (`README.md:11-24`). The devfile 2.x format is a subset of a Kubernetes API called `DevWorkspace` that this repository also defines, so the file format and the cluster resource share one set of types.
 
-Alongside the type definitions, `devfile/api` ships a small runtime library: utilities that apply a parent devfile or a plugin as an override, merge inherited content, normalize discriminated unions, and validate a devfile's internal references. It does not contain the full parser. Reading a `devfile.yaml`, resolving its `parent`, and fetching stacks from a registry live in a separate repository, `devfile/library`. This page and the ones that follow read from `devfile/api` at commit `368ea4e`.
+Alongside the type definitions, `devfile/api` ships a small runtime library: utilities that apply a parent devfile or a plugin as an override, merge inherited content, normalize discriminated unions (types where one discriminator field selects which variant is set), and validate a devfile's internal references. It does not contain the full parser. Reading a `devfile.yaml`, resolving its `parent`, and fetching stacks from a registry live in a separate repository, `devfile/library`. This page and the ones that follow read from `devfile/api` at commit `368ea4e`.
 
 ## When to use it
 

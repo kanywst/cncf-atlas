@@ -15,7 +15,7 @@ devfile とは、開発環境を記述する 1 つの YAML ファイルである
 
 `devfile/api` リポジトリは仕様そのものであって、開発者が直接実行するツールではない。フォーマットは `pkg/apis/workspaces/v1alpha2/` 以下の Go 型として定義されており、README はこの Go ソースこそが起点であり、Kubernetes の CRD・JSON スキーマ・npm の TypeScript モデルはすべてそこから生成されると明言している (`README.md:11-24`)。devfile 2.x フォーマットは、このリポジトリが同時に定義する `DevWorkspace` という Kubernetes API のサブセットであり、ファイルフォーマットとクラスタリソースは 1 組の型を共有している。
 
-型定義の隣に、`devfile/api` は小さなランタイムライブラリを同梱している。親 devfile や plugin を override として適用し、継承した内容をマージし、discriminated union を正規化し、devfile 内部の参照を検証するユーティリティである。パーサ本体は含まない。`devfile.yaml` を読み、`parent` を解決し、レジストリからスタックを取得する処理は別リポジトリ `devfile/library` にある。このページと以降のページは `devfile/api` のコミット `368ea4e` を読んでいる。
+型定義の隣に、`devfile/api` は小さなランタイムライブラリを同梱している。親 devfile や plugin を override として適用し、継承した内容をマージし、discriminated union (判別子フィールドでどの variant が設定されているか決まる型) を正規化し、devfile 内部の参照を検証するユーティリティである。パーサ本体は含まない。`devfile.yaml` を読み、`parent` を解決し、レジストリからスタックを取得する処理は別リポジトリ `devfile/library` にある。このページと以降のページは `devfile/api` のコミット `368ea4e` を読んでいる。
 
 ## いつ使うか
 

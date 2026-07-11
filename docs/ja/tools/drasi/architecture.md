@@ -58,9 +58,9 @@ flowchart LR
 
 ## 主要な設計判断
 
-**再クエリではなく増分評価。** エンジンは見たすべての element のインデックスを保持し、更新を element の旧バージョンと差分できるようにして、クエリ全体を再計算しない。これが、更新が新結果を計算する前に旧バージョンを引く理由であり (`continuous_query.rs:196`)、変更が届いても継続的クエリを安価に保つ仕組みである (Continuous Queries ドキュメント)。
+**増分評価。** エンジンは見たすべての element のインデックスを保持し、更新を element の旧バージョンと差分できるようにして、クエリ全体を再計算しない。これが、更新が新結果を計算する前に旧バージョンを引く理由であり (`continuous_query.rs:196`)、変更が届いても継続的クエリを安価に保つ仕組みである (Continuous Queries ドキュメント)。
 
-**pull ではなく push。** Source は捕捉した変更を前へ押し出し、Reaction には結果差分が押し込まれる。タイマーでポーリングするものはない。2 つのトランスポートは意図的に異なる。at-least-once の Redis Stream が Source からクエリへ運ぶので変更は永続化され ack される。一方 Dapr pub/sub がクエリから Reaction へ運ぶ (`redis_change_stream.rs:73`; `result_publisher.rs:47`)。
+**すべては push される。** Source は捕捉した変更を前へ押し出し、Reaction には結果差分が押し込まれる。タイマーでポーリングするものはない。2 つのトランスポートは意図的に異なる。at-least-once の Redis Stream が Source からクエリへ運ぶので変更は永続化され ack される。一方 Dapr pub/sub がクエリから Reaction へ運ぶ (`redis_change_stream.rs:73`; `result_publisher.rs:47`)。
 
 **Dapr の上に構築。** 各継続的クエリは Dapr 仮想アクターとして走り、コンポーネント間は Dapr を通じて通信する。そのため Drasi は Dapr サイドカーの存在を前提とする。これによりアクターのライフサイクルと状態管理を自前で再実装せず Dapr から得ている (Azure ブログ)。
 

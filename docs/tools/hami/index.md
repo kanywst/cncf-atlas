@@ -23,7 +23,7 @@ HAMi is vendor-neutral. NVIDIA is the most complete path, but the same interface
 - You need device sharing across more than one accelerator vendor under a single scheduling model.
 - You want fractional GPU requests (memory in MB, compute in percent) without rewriting the application or installing a custom container runtime.
 - You want to keep the default Kubernetes scheduler and add GPU-aware placement on top, or combine HAMi with Volcano for batch AI.
-- Less of a fit if your cards support MIG and hardware-partition isolation is a hard requirement: HAMi can drive MIG, but its default mode is software isolation through a preloaded library, which is weaker than a hardware boundary.
+- Less of a fit if your cards support MIG (NVIDIA Multi-Instance GPU) and hardware-partition isolation is a hard requirement: HAMi can drive MIG, but its default mode is software isolation through a preloaded library, which is weaker than a hardware boundary.
 - Not a training-job or pipeline orchestrator: it schedules and isolates devices, it does not manage job queues, gang scheduling, or workflow state on its own.
 
 ## In this deep-dive

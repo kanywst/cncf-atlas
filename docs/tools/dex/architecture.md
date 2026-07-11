@@ -57,7 +57,7 @@ The [Internals](./internals) page walks the token endpoint, PKCE, and ID Token s
 ## Key design decisions
 
 - **Delegation over storage.** Dex does not own user identities. It presents one OIDC face downstream and pushes the real authentication up to a connector, so an application implements OIDC once and Dex absorbs every upstream protocol.
-- **Capability by interface, not a monolith.** A connector implements only the interfaces for what it can do: `PasswordConnector` for direct username and password (`connector/connector.go:58`), `CallbackConnector` for OAuth2 redirect flows (`connector/connector.go:65`), `SAMLConnector` for SAML POST binding (`connector/connector.go:91`), `RefreshConnector` for refreshing claims (`connector/connector.go:109`). The server discovers each capability with a type assertion.
+- **Capability by interface.** A connector implements only the interfaces for what it can do: `PasswordConnector` for direct username and password (`connector/connector.go:58`), `CallbackConnector` for OAuth2 redirect flows (`connector/connector.go:65`), `SAMLConnector` for SAML POST binding (`connector/connector.go:91`), `RefreshConnector` for refreshing claims (`connector/connector.go:109`). The server discovers each capability with a type assertion.
 - **Storage is swappable, including Kubernetes.** Because state hides behind `storage.Storage` (`storage/storage.go:78`), Dex can run cluster-native on CRDs with no separate database, which is why embedded deployments favour it.
 - **Upstream tokens never leak downstream.** The `ConnectorData` field on an identity holds upstream tokens and is kept inside storage; it is never handed to the end user or the downstream OAuth client (`connector/connector.go:47-51`).
 
