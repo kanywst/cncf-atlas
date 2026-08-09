@@ -19,7 +19,7 @@
     "vitepress-plugin-mermaid": "^2.0.17"
   },
   "overrides": {
-    "dompurify": "^3.4.12",
+    "dompurify": "^3.4.13",
     "js-yaml": "^4.3.0",
     "linkify-it": "^5.0.2",
     "markdown-it": "^14.2.0",
