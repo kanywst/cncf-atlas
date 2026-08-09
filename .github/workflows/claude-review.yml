@@ -37,9 +37,14 @@ jobs:
       # Required by the action's default GitHub App authentication.
       id-token: write
     steps:
+      # persist-credentials: false because nothing after this step touches git
+      # over the network. The review reads the checkout and talks to GitHub
+      # through gh, so leaving the job token in .git/config would only widen
+      # what a compromised step could reach.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       # Without the secret the action exits successfully having reviewed
       # nothing, which is worse than failing: the check goes green and the
