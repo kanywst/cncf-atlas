@@ -3,7 +3,7 @@
 > Confidential Containers は無改変の Kubernetes Pod をハードウェア隔離された confidential virtual machine の中で動かし、リモート認証に合格したワークロードにだけシークレットを渡す。
 
 - **カテゴリ**: Security & Compliance
-- **CNCF 成熟度**: Incubating (2026-07-08 以降)
+- **CNCF 成熟度**: Incubating (2022-03-08 Sandbox 受理、2026-07-08 Incubating 昇格)
 - **言語**: Rust
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [confidential-containers/trustee](https://github.com/confidential-containers/trustee)

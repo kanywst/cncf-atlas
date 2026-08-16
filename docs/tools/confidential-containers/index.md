@@ -3,7 +3,7 @@
 > Confidential Containers runs unmodified Kubernetes Pods inside hardware-isolated confidential virtual machines and releases secrets only to workloads that pass remote attestation.
 
 - **Category**: Security & Compliance
-- **CNCF maturity**: Incubating (since 2026-07-08)
+- **CNCF maturity**: Incubating (accepted Sandbox 2022-03-08, promoted to Incubating 2026-07-08)
 - **Language**: Rust
 - **License**: Apache-2.0
 - **Repository**: [confidential-containers/trustee](https://github.com/confidential-containers/trustee)

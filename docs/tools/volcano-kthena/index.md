@@ -3,7 +3,7 @@
 > Kubernetes-native LLM inference orchestration that pairs Volcano gang scheduling with KV-cache-aware, prefill-decode routing.
 
 - **Category**: Orchestration & Scheduling
-- **CNCF maturity**: Incubating, inherited from Volcano. The CNCF landscape lists Kthena as a sub-project of Volcano with no maturity level of its own.
+- **CNCF maturity**: Incubating, inherited from Volcano
 - **Language**: Go
 - **License**: Apache-2.0
 - **Repository**: [volcano-sh/kthena](https://github.com/volcano-sh/kthena)
@@ -11,7 +11,7 @@
 
 ## What it is
 
-Kthena is a subproject of [Volcano](https://www.cncf.io/projects/volcano/) that orchestrates large language model inference on Kubernetes. Volcano started as a batch scheduler for AI training; Kthena extends the same scheduling machinery to the serving side of the AI lifecycle. The Volcano community announced it on 2026-01-28.
+Kthena is a subproject of [Volcano](https://www.cncf.io/projects/volcano/) that orchestrates large language model inference on Kubernetes. Volcano started as a batch scheduler for AI training; Kthena extends the same scheduling machinery to the serving side of the AI lifecycle. The Volcano community announced it on 2026-01-28. Being a subproject is also why the maturity above is inherited: the CNCF landscape lists Kthena under Volcano and gives it no maturity level of its own, so Volcano's Incubating status is the one that applies.
 
 It splits into two parts. A control plane (`kthena-controller-manager`) reconciles custom resources to deploy, scale, and upgrade inference replicas, and delegates gang scheduling to the Volcano scheduler. A data plane (`kthena-router`) is the entry point for inference traffic: it classifies each OpenAI-compatible request, applies rate limiting and traffic policy, scores candidate pods, and proxies to the chosen inference instance. The two planes can be deployed independently.
 
