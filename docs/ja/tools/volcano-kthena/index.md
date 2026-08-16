@@ -11,7 +11,7 @@
 
 ## 何をするものか
 
-Kthena は [Volcano](https://www.cncf.io/projects/volcano/) のサブプロジェクトで、Kubernetes 上で大規模言語モデル (LLM) の推論をオーケストレーションする。Volcano はもともと AI 学習向けのバッチスケジューラとして始まったが、Kthena は同じスケジューリング機構を推論 (サービング) 側に広げ、AI ライフサイクル全体を扱えるようにする。Volcano コミュニティが 2026-01-28 に正式発表した。上の成熟度が継承である理由もここにある。CNCF landscape は Kthena を Volcano の下に置き、独自の成熟度を与えていないため、適用されるのは Volcano の Incubating である。
+Kthena は [Volcano](https://www.cncf.io/projects/volcano/) のサブプロジェクトで、Kubernetes 上で大規模言語モデル (LLM) の推論をオーケストレーションする。Volcano はもともと AI 学習向けのバッチスケジューラとして始まったが、Kthena は同じスケジューリング機構を推論 (サービング) 側に広げ、AI ライフサイクル全体を扱えるようにする。Volcano コミュニティが 2026-01-28 に正式発表した。上の成熟度が継承である理由もここにある。CNCF landscape の Kthena エントリは `parent_project: Volcano` を持ち、独自の成熟度を持たない。したがって適用されるのは Volcano の Incubating である ([landscape.yml](https://github.com/cncf/landscape/blob/25d7d6bcc26718ee74a8565f03bcb5bb69e7b7df/landscape.yml#L19863-L19874))。
 
 構成は 2 つに分かれる。コントロールプレーン (`kthena-controller-manager`) はカスタムリソースを reconcile して推論レプリカの deploy / scale / upgrade を回し、gang scheduling は Volcano スケジューラに委譲する。データプレーン (`kthena-router`) は推論トラフィックの入口で、OpenAI 互換リクエストを分類し、レート制限とトラフィックポリシーを当て、候補 pod を採点して選んだ推論インスタンスへプロキシする。2 つのプレーンは独立してデプロイできる。
 
@@ -48,3 +48,4 @@ Kthena は推論エンジンを置き換えない。vLLM や SGLang などのエ
 10. [Cloud-Native AI Inference using KServe and llm-d](https://kserve.github.io/website/blog/cloud-native-ai-inference-kserve-llm-d)
 11. [AIBrix: Towards Scalable, Cost-Effective LLM Inference Infrastructure (arXiv)](https://arxiv.org/html/2504.03648v1)
 12. [Kthena quick-start guide](https://github.com/volcano-sh/kthena/blob/main/docs/kthena/docs/getting-started/quick-start.md)
+13. [cncf/landscape `landscape.yml`、commit `25d7d6b` の Volcano Kthena エントリ](https://github.com/cncf/landscape/blob/25d7d6bcc26718ee74a8565f03bcb5bb69e7b7df/landscape.yml#L19863-L19874)
