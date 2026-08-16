@@ -17,6 +17,7 @@ Kubeflow は 2017 年に Google 社内で、TensorFlow を Kubernetes 上で動�
 | 2022 | KServe (serving) が LF AI & Data 配下の独立プロジェクトとしてスピンアウト |
 | 2023 | 2023-07-25 に CNCF Incubating プロジェクトとして受理 ([CNCF](https://www.cncf.io/projects/kubeflow/)) |
 | 2026 | KFP 2.16.1 を 2026-05-05 にリリース ([GitHub API](https://api.github.com/repos/kubeflow/pipelines)) |
+| 2026 | 2026-07-24 に CNCF Graduated へ昇格 ([CNCF](https://www.cncf.io/projects/kubeflow/)) |
 
 ## どう進化したか
 
@@ -24,8 +25,8 @@ Pipelines の最大の転換は v1 から v2 への移行である。KFP v2 は�
 
 Kubeflow はサブプロジェクトが成熟するにつれてスコープを絞ってもいった。Serving は 2022 年に KServe として独立した。その結果が今日のアンブレラ構造で、CNCF が追跡する `kubeflow/kubeflow` リポジトリはゲートウェイであり、稼働するコードは Pipelines のようなサブプロジェクトのリポジトリにある。
 
-ガバナンスは 2023 年に変化した。Google が Project Steering Group の支援のもと CNCF incubation を申請し ([Kubeflow ブログ](https://blog.kubeflow.org/kubeflow-applied-cncf-incubating/))、CNCF は 2023-07-25 に Kubeflow を Incubating として受理した ([CNCF](https://www.cncf.io/projects/kubeflow/))。
+ガバナンスは 2023 年に変化した。Google が Project Steering Group の支援のもと CNCF incubation を申請し ([Kubeflow ブログ](https://blog.kubeflow.org/kubeflow-applied-cncf-incubating/))、CNCF は 2023-07-25 に Kubeflow を Incubating として受理し、その 3 年後の 2026-07-24 に Graduated へ昇格させた ([CNCF](https://www.cncf.io/projects/kubeflow/))。
 
 ## 現在地
 
-Kubeflow は CNCF Incubating プロジェクトで、health metrics は LFX Insights で追跡されている ([CNCF](https://www.cncf.io/projects/kubeflow/))。Pipelines は定期的にリリースしており、執筆時点の最新は 2.16.1 (2026-05-05 公開) である ([GitHub API](https://api.github.com/repos/kubeflow/pipelines))。v2 が default の実行エンジンで、プロジェクトが掲げる方向性は、Python SDK を主要なオーサリング面とした Kubernetes 上のエンドツーエンド ML パイプライン・オーケストレーションである。
+Kubeflow は 2026-07-24 以降 CNCF Graduated プロジェクトであり、health metrics は LFX Insights で追跡されている ([CNCF](https://www.cncf.io/projects/kubeflow/))。Pipelines は定期的にリリースしており、執筆時点の最新は 2.16.1 (2026-05-05 公開) である ([GitHub API](https://api.github.com/repos/kubeflow/pipelines))。v2 が default の実行エンジンで、プロジェクトが掲げる方向性は、Python SDK を主要なオーサリング面とした Kubernetes 上のエンドツーエンド ML パイプライン・オーケストレーションである。

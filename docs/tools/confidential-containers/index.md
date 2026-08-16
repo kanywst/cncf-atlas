@@ -3,7 +3,7 @@
 > Confidential Containers runs unmodified Kubernetes Pods inside hardware-isolated confidential virtual machines and releases secrets only to workloads that pass remote attestation.
 
 - **Category**: Security & Compliance
-- **CNCF maturity**: Sandbox
+- **CNCF maturity**: Incubating (since 2026-07-08)
 - **Language**: Rust
 - **License**: Apache-2.0
 - **Repository**: [confidential-containers/trustee](https://github.com/confidential-containers/trustee)
@@ -11,7 +11,7 @@
 
 ## What it is
 
-Confidential Containers (CoCo) is a CNCF Sandbox project that runs Kubernetes workloads inside a Trusted Execution Environment (TEE), a hardware-isolated memory region that the host operating system and hypervisor cannot read. The goal is to protect data while it is in use, so a cloud provider running the infrastructure cannot inspect the tenant's containers or their data.
+Confidential Containers (CoCo) is a CNCF Incubating project that runs Kubernetes workloads inside a Trusted Execution Environment (TEE), a hardware-isolated memory region that the host operating system and hypervisor cannot read. The goal is to protect data while it is in use, so a cloud provider running the infrastructure cannot inspect the tenant's containers or their data.
 
 The project spans several repositories in the [confidential-containers](https://github.com/confidential-containers) GitHub organization. The runtime side reuses Kata Containers to boot each Pod inside a lightweight confidential virtual machine (CVM). This deep-dive focuses on **trustee**, the server-side implementation of attestation and secret delivery. Trustee holds the part of CoCo's trust model that decides which workloads are genuine TEEs and what secrets they may receive.
 
@@ -45,3 +45,4 @@ Trustee is written in Rust as a Cargo workspace. Its central component is the Ke
 8. RATS architecture draft: <https://www.ietf.org/archive/id/draft-ietf-rats-architecture-22.html>
 9. Project website: <https://confidentialcontainers.org/>
 10. guest-components repository: <https://github.com/confidential-containers/guest-components>
+11. CNCF, "Confidential Containers becomes a CNCF incubating project": <https://www.cncf.io/blog/2026/07/22/confidential-containers-becomes-a-cncf-incubating-project/>

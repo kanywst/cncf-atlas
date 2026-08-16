@@ -16,6 +16,7 @@ Cloud Native Buildpacks (CNB) was launched in January 2018 as a joint effort by 
 | 2018-10 | CNB is accepted into the CNCF Sandbox under Apache-2.0. |
 | 2020-11 | The CNCF TOC approves promotion from Sandbox to Incubation. |
 | 2024-2025 | Heroku adopts CNB across its next-generation "Fir" platform. |
+| 2026-07 | CNB reaches CNCF Graduated maturity on 2026-07-17. |
 
 ## How it evolved
 
@@ -25,7 +26,7 @@ Governance moved with the technology. When the CNCF TOC approved Incubation on 2
 
 ## Where it stands now
 
-CNB remains at CNCF Incubating maturity and has not graduated. The `pack` CLI is the primary platform implementation, with `buildpacks/lifecycle` as the reference build engine and `buildpacks/spec` as the contract. Recent direction is anchored by Heroku's "Fir" generation, which adopts CNB by default for all apps while the older Cedar generation keeps classic buildpacks.
+CNB reached CNCF Graduated maturity on 2026-07-17, which CNCF announced on 2026-08-11. The announcement names Bloomberg and Heroku by Salesforce as active contributing organisations, and puts the roadmap on OCI Artifacts support, SBOM workflows, and compatibility with WebAssembly workloads. The `pack` CLI is the primary platform implementation, with `buildpacks/lifecycle` as the reference build engine and `buildpacks/spec` as the contract. Recent direction is anchored by Heroku's "Fir" generation, which adopts CNB by default for all apps while the older Cedar generation keeps classic buildpacks.
 
 ## Sources
 
@@ -35,3 +36,5 @@ CNB remains at CNCF Incubating maturity and has not graduated. The `pack` CLI is
 4. [Planting New Platform Roots in Cloud Native with Fir (Heroku)](https://www.heroku.com/blog/planting-new-platform-roots-cloud-native-fir/)
 5. [How Maintaining Cloud Native Buildpacks Powers Platforms Like Heroku](https://www.heroku.com/blog/how-maintaining-cloud-native-buildpacks-powers-platforms-like-heroku/)
 6. [buildpacks/rfcs repository](https://github.com/buildpacks/rfcs)
+7. [CNCF Announces Graduation of Cloud Native Buildpacks](https://www.cncf.io/announcements/2026/08/11/cncf-announces-graduation-of-cloud-native-buildpacks-advancing-the-standard-for-container-builds/)
+8. [Buildpacks project page (CNCF)](https://www.cncf.io/projects/buildpacks/)

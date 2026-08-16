@@ -14,7 +14,7 @@ CNCF プロジェクトとしての "Kubeflow" はアンブレラ（複数サブ
 - pinned commit: `5beeae1a86b14be2b141a459d92ea2dd01d0aa17` (2026-06-24) / 近いタグ: `2.16.1`（backend）, `sdk-2.16.1`（SDK）。最新リリースは 2.16.1 (2026-05-05)
 - 言語 / ビルド: Go (backend, 約 252k 行 / 843 files), Python (SDK, 約 166k 行), TypeScript+TSX (frontend React 19, 約 149k 行), Protobuf (API IR, 約 9k 行)。ビルドは `make -C backend`、SDK は `pip install -e sdk/python`、frontend は `npm`。Go module は `github.com/kubeflow/pipelines`（`src/go.mod:1`）
 - ライセンス: Apache-2.0（`src/LICENSE` 冒頭が `Apache License Version 2.0`、GitHub API も `Apache-2.0`）
-- CNCF 成熟度: Incubating（2023-07-25 受理、後述）
+- CNCF 成熟度: Graduated（2023-07-25 Incubating 受理 → 2026-07-24 Graduated、後述）
 - カテゴリ (tools.ts の CATEGORY_ORDER から): Orchestration & Scheduling
 - main entrypoint: API server は `backend/src/apiserver/main.go`（gRPC を `:8887` で listen `main.go:340`、grpc-gateway の REST proxy を `:8888` `main.go:74`）。他に persistence agent / scheduledworkflow controller / v2 driver / v2 launcher / cache server がそれぞれ `main.go` を持つ
 

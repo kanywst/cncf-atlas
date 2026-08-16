@@ -10,7 +10,7 @@
 
 ## メモ
 
-- slug: `kubeflow` / category: `Orchestration & Scheduling`（固定指定）/ maturity: Incubating（CNCF 2023-07-25 受理）。
+- slug: `kubeflow` / category: `Orchestration & Scheduling`（固定指定）/ maturity: Graduated（CNCF 2023-07-25 Incubating 受理 → 2026-07-24 Graduated）。
 - リポ解決の注意: CNCF の "Kubeflow" はアンブレラで、公式リポ `kubeflow/kubeflow` は現在 gateway 化されコードが無い。コードのディープダイブは中核オーケストレーション実装の `kubeflow/pipelines` を対象にした。write 段でこの「アンブレラ vs 実装リポ」の区別を明記すること（読者が `kubeflow/kubeflow` を clone して困惑するのを防ぐ）。
 - pinned `5beeae1` は master の途中コミット（タグ無し）。最近リリースは backend 2.16.1 / sdk-2.16.1。Internals の path:line はこの commit 限定で valid。
 - 採用事例は ADOPTERS.md の 4 社 + Vertex AI Pipelines (KFP DSL 採用) のみ citable。これ以上は捏造しない。
