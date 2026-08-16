@@ -24,10 +24,15 @@ concurrency:
 jobs:
   review:
     # A pull request from a fork gets no secrets, so the job would fail on
-    # authentication rather than say anything useful. Drafts are skipped until
-    # they are marked ready, which is what the ready_for_review trigger is for.
+    # authentication rather than say anything useful. Dependabot is the same
+    # problem by a different route: its pull requests run against the separate
+    # Dependabot secret store, so a repository Actions secret reads as empty
+    # there. A version bump is not the kind of diff this prompt is written for
+    # anyway. Drafts are skipped until they are marked ready, which is what the
+    # ready_for_review trigger is for.
     if: >-
       github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login != 'dependabot[bot]' &&
       github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     timeout-minutes: 20
