@@ -3,7 +3,7 @@
 > Dockerfile を書かずに、アプリのソースコードを本番向け OCI イメージへ変換する。
 
 - **カテゴリ**: App Definition & GitOps
-- **CNCF 成熟度**: Incubating
+- **CNCF 成熟度**: Graduated (2026-07-17 以降)
 - **言語**: Go
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [buildpacks/pack](https://github.com/buildpacks/pack)
@@ -48,3 +48,5 @@ CNB は、Heroku・Cloud Foundry・Google App Engine などで分裂していた
 11. [buildpacks/spec リポジトリ](https://github.com/buildpacks/spec)
 12. [Basic App チュートリアル (buildpacks.io docs)](https://buildpacks.io/docs/for-app-developers/tutorials/basic-app/)
 13. [buildpacks/rfcs リポジトリ](https://github.com/buildpacks/rfcs)
+14. [CNCF Announces Graduation of Cloud Native Buildpacks](https://www.cncf.io/announcements/2026/08/11/cncf-announces-graduation-of-cloud-native-buildpacks-advancing-the-standard-for-container-builds/)
+15. [Buildpacks プロジェクトページ (CNCF)](https://www.cncf.io/projects/buildpacks/)

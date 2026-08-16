@@ -14,6 +14,7 @@ The project was accepted into the CNCF Sandbox on 2022-03-08, recorded on the [C
 | 2022 | Accepted into the CNCF Sandbox on 2022-03-08 ([cncf/sandbox#216](https://github.com/cncf/sandbox/issues/216)). |
 | 2022 | trustee repository created (2022-04-25). |
 | 2026 | Steady trustee releases: v0.18.0 (2026-03-23), v0.19.0 (2026-04-30), v0.20.0 (2026-05-19). |
+| 2026 | Moved from Sandbox to CNCF Incubating on 2026-07-08 ([CNCF](https://www.cncf.io/blog/2026/07/22/confidential-containers-becomes-a-cncf-incubating-project/)). |
 
 ## How it evolved
 
@@ -23,4 +24,4 @@ The attack model sharpened over time into the project's defining claim: the clou
 
 ## Where it stands now
 
-Trustee ships releases on a regular cadence; recent tags include v0.18.0, v0.19.0, and v0.20.0 across the first half of 2026. Development is spread across the confidential-containers GitHub organization, with trustee and guest-components as the two main implementation repositories and `confidential-containers/confidential-containers` serving as the meta repository for governance, architecture docs, and the ADOPTERS list. The project remains a CNCF Sandbox project and continues to expand its set of supported TEE verifiers.
+Trustee ships releases on a regular cadence; recent tags include v0.18.0, v0.19.0, and v0.20.0 across the first half of 2026. Development is spread across the confidential-containers GitHub organization, with trustee and guest-components as the two main implementation repositories and `confidential-containers/confidential-containers` serving as the meta repository for governance, architecture docs, and the ADOPTERS list. The CNCF TOC moved the project from Sandbox to Incubating on 2026-07-08, after four years in the Sandbox, citing demonstrated maturity in integrating TEE-backed isolation into standard Kubernetes workflows ([CNCF](https://www.cncf.io/blog/2026/07/22/confidential-containers-becomes-a-cncf-incubating-project/)). It continues to expand its set of supported TEE verifiers.

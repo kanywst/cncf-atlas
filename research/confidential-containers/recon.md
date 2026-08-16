@@ -12,7 +12,7 @@ CoCo = Confidential Containers の略。プロジェクト全体は GitHub org [
 - pinned commit: `af53e983f15500db6600430c089da796a6c1c6bc` (2026-06-26) / 近いタグ: `v0.20.0` (2026-05-19、HEAD はその後の main)
 - 言語 / ビルド: Rust (workspace, edition 2021) / `make background-check-kbs` でバイナリ、`docker compose up` で KBS + AS + RVPS 一式
 - ライセンス: Apache-2.0 (`src/LICENSE` 1-4 行目が "Apache License Version 2.0"、本文に "Apache License" 4 箇所。GitHub API も `Apache-2.0`)
-- CNCF 成熟度: Sandbox (2022-03-08 受理)
+- CNCF 成熟度: Incubating (2022-03-08 Sandbox 受理 → 2026-07-08 Incubating 昇格)
 - カテゴリ (tools.ts の CATEGORY_ORDER から): Security & Compliance
 
 ### workspace 構成 (`src/Cargo.toml` 2-13 行目)

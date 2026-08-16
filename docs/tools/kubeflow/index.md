@@ -3,7 +3,7 @@
 > Kubeflow Pipelines orchestrates end-to-end machine learning workflows on Kubernetes by compiling pipeline definitions into Argo Workflows and tracking every run in ML Metadata.
 
 - **Category**: Orchestration & Scheduling
-- **CNCF maturity**: Incubating
+- **CNCF maturity**: Graduated (since 2026-07-24)
 - **Language**: Go (backend), Python (SDK), TypeScript (frontend)
 - **License**: Apache-2.0
 - **Repository**: [kubeflow/pipelines](https://github.com/kubeflow/pipelines)
@@ -11,7 +11,7 @@
 
 ## What it is
 
-Kubeflow is a CNCF Incubating project for running machine learning workloads on Kubernetes. It is an umbrella: the repository the CNCF tracks, [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow), is now a gateway whose README states that development happens in the individual subproject repositories. The implementation lives in subprojects such as Pipelines, Katib, Trainer, and Spark Operator.
+Kubeflow is a CNCF Graduated project for running machine learning workloads on Kubernetes. It is an umbrella: the repository the CNCF tracks, [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow), is now a gateway whose README states that development happens in the individual subproject repositories. The implementation lives in subprojects such as Pipelines, Katib, Trainer, and Spark Operator.
 
 This deep-dive covers Kubeflow Pipelines (KFP), the orchestration core. Its README leads with "End to end orchestration: enabling and simplifying the orchestration of end to end machine learning pipelines" (`README.md:17`). KFP takes a pipeline authored in the Python `kfp` SDK, compiles it to a protobuf intermediate representation, and turns that into an Argo Workflow custom resource that Kubernetes executes. An API server manages runs, experiments, and recurring runs. A persistence agent watches Workflow status and writes it back to a database. ML Metadata (MLMD) records every execution and artifact for lineage and caching.
 

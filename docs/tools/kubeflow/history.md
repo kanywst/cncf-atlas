@@ -17,6 +17,7 @@ Kubeflow Pipelines, the orchestration subproject this deep-dive covers, lives in
 | 2022 | KServe (serving) spun out as an independent project under LF AI & Data |
 | 2023 | Accepted into CNCF as an Incubating project on 2023-07-25 ([CNCF](https://www.cncf.io/projects/kubeflow/)) |
 | 2026 | KFP 2.16.1 released 2026-05-05 ([GitHub API](https://api.github.com/repos/kubeflow/pipelines)) |
+| 2026 | Moved to CNCF Graduated maturity on 2026-07-24 ([CNCF](https://www.cncf.io/projects/kubeflow/)) |
 
 ## How it evolved
 
@@ -24,8 +25,8 @@ The largest shift in Pipelines was the move from v1 to v2. KFP v2 compiles a pip
 
 Kubeflow also narrowed in scope as subprojects matured into independent projects. Serving left as KServe in 2022. The result is the umbrella structure visible today: the CNCF-tracked `kubeflow/kubeflow` repository is a gateway, and the working code lives in subproject repositories like Pipelines.
 
-Governance changed in 2023, when Google, with Project Steering Group support, applied for CNCF incubation ([Kubeflow blog](https://blog.kubeflow.org/kubeflow-applied-cncf-incubating/)). CNCF accepted Kubeflow as Incubating on 2023-07-25 ([CNCF](https://www.cncf.io/projects/kubeflow/)).
+Governance changed in 2023, when Google, with Project Steering Group support, applied for CNCF incubation ([Kubeflow blog](https://blog.kubeflow.org/kubeflow-applied-cncf-incubating/)). CNCF accepted Kubeflow as Incubating on 2023-07-25, and moved it to Graduated on 2026-07-24, three years later ([CNCF](https://www.cncf.io/projects/kubeflow/)).
 
 ## Where it stands now
 
-Kubeflow is a CNCF Incubating project with health metrics tracked through LFX Insights ([CNCF](https://www.cncf.io/projects/kubeflow/)). Pipelines ships regular releases; the latest at the time of writing is 2.16.1, released 2026-05-05 ([GitHub API](https://api.github.com/repos/kubeflow/pipelines)). v2 is the default execution engine, and the project's stated direction is end-to-end ML pipeline orchestration on Kubernetes with the Python SDK as the primary authoring surface.
+Kubeflow is a CNCF Graduated project as of 2026-07-24, with health metrics tracked through LFX Insights ([CNCF](https://www.cncf.io/projects/kubeflow/)). Pipelines ships regular releases; the latest at the time of writing is 2.16.1, released 2026-05-05 ([GitHub API](https://api.github.com/repos/kubeflow/pipelines)). v2 is the default execution engine, and the project's stated direction is end-to-end ML pipeline orchestration on Kubernetes with the Python SDK as the primary authoring surface.

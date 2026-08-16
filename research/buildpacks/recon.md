@@ -8,7 +8,7 @@
 - pinned commit: `2df3b8c3b0955ea41aec010783ddfe70cbc17c56` / タグ: `v0.40.7` (HEAD = タグそのもの)
 - 言語 / ビルド: Go (`module github.com/buildpacks/pack`, `go.mod`) / `make build` (出力 `out/pack`)、テストは `make unit` + `make acceptance`
 - ライセンス: Apache-2.0 (リポ `LICENSE` 冒頭で確認、`gh` の `license.spdx_id` も `Apache-2.0`)
-- CNCF 成熟度: Incubating (2018-10 Sandbox 受理 → 2020-11-18 TOC が Incubation 承認。Graduated には未到達)
+- CNCF 成熟度: Graduated (2018-10 Sandbox 受理 → 2020-11-18 TOC が Incubation 承認 → 2026-07-17 Graduated 到達、2026-08-11 に CNCF が発表)
 - カテゴリ (指定値をそのまま使用): App Definition & GitOps
 - main entrypoint: `main.go:15` `func main()` → `cmd.NewPackCommand(logger)` (`main.go:19`)。cobra ルートコマンド。SoftError なら exit 2、それ以外 exit 1 (`main.go:27-30`)
 

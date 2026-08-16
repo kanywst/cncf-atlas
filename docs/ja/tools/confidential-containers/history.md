@@ -14,6 +14,7 @@ Confidential Containers は 2022 年に、Trusted Execution Environment (TEE) �
 | 2022 | 2022-03-08 に CNCF Sandbox 受理 ([cncf/sandbox#216](https://github.com/cncf/sandbox/issues/216))。 |
 | 2022 | trustee リポジトリ作成 (2022-04-25)。 |
 | 2026 | trustee の継続的リリース: v0.18.0 (2026-03-23)、v0.19.0 (2026-04-30)、v0.20.0 (2026-05-19)。 |
+| 2026 | 2026-07-08 に Sandbox から CNCF Incubating へ昇格 ([CNCF](https://www.cncf.io/blog/2026/07/22/confidential-containers-becomes-a-cncf-incubating-project/))。 |
 
 ## どう進化したか
 
@@ -23,4 +24,4 @@ CoCo は隔離モデルの異なる 2 つのランタイム実装に落ち着い
 
 ## 現在地
 
-trustee は定期的なリリースを続けており、直近のタグは 2026 年前半の v0.18.0、v0.19.0、v0.20.0 である。開発は confidential-containers GitHub org 全体に分散し、trustee と guest-components が 2 つの主要な実装リポジトリ、`confidential-containers/confidential-containers` がガバナンス・アーキテクチャ文書・ADOPTERS 一覧のメタリポジトリとして機能する。プロジェクトは CNCF Sandbox のままで、対応する TEE verifier のセットを拡大し続けている。
+trustee は定期的なリリースを続けており、直近のタグは 2026 年前半の v0.18.0、v0.19.0、v0.20.0 である。開発は confidential-containers GitHub org 全体に分散し、trustee と guest-components が 2 つの主要な実装リポジトリ、`confidential-containers/confidential-containers` がガバナンス・アーキテクチャ文書・ADOPTERS 一覧のメタリポジトリとして機能する。CNCF TOC は Sandbox 入りから 4 年後の 2026-07-08 に、このプロジェクトを Sandbox から Incubating へ昇格させた。TEE 裏付けの隔離を標準的な Kubernetes ワークフローへ統合した点での成熟が理由として挙げられている ([CNCF](https://www.cncf.io/blog/2026/07/22/confidential-containers-becomes-a-cncf-incubating-project/))。対応する TEE verifier のセットは拡大を続けている。

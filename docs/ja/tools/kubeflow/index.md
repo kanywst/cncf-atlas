@@ -3,7 +3,7 @@
 > Kubeflow Pipelines は、パイプライン定義を Argo Workflows にコンパイルし、すべての実行を ML Metadata で追跡することで、エンドツーエンドの機械学習ワークフローを Kubernetes 上でオーケストレーションする。
 
 - **カテゴリ**: Orchestration & Scheduling
-- **CNCF 成熟度**: Incubating
+- **CNCF 成熟度**: Graduated (2026-07-24 以降)
 - **言語**: Go (バックエンド), Python (SDK), TypeScript (フロントエンド)
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [kubeflow/pipelines](https://github.com/kubeflow/pipelines)
@@ -11,7 +11,7 @@
 
 ## 何をするものか
 
-Kubeflow は Kubernetes 上で機械学習ワークロードを動かすための CNCF Incubating プロジェクトである。これはアンブレラであり、CNCF が追跡するリポジトリ [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow) は現在ゲートウェイ化していて、README には開発は個々のサブプロジェクトのリポジトリで行われると書かれている。実装は Pipelines、Katib、Trainer、Spark Operator といったサブプロジェクトに存在する。
+Kubeflow は Kubernetes 上で機械学習ワークロードを動かすための CNCF Graduated プロジェクトである。これはアンブレラであり、CNCF が追跡するリポジトリ [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow) は現在ゲートウェイ化していて、README には開発は個々のサブプロジェクトのリポジトリで行われると書かれている。実装は Pipelines、Katib、Trainer、Spark Operator といったサブプロジェクトに存在する。
 
 このディープダイブはオーケストレーションの中核である Kubeflow Pipelines (KFP) を扱う。README は「End to end orchestration: enabling and simplifying the orchestration of end to end machine learning pipelines」で始まる (`README.md:17`)。KFP は Python の `kfp` SDK で記述されたパイプラインを protobuf の中間表現にコンパイルし、それを Kubernetes が実行する Argo Workflow カスタムリソースに変換する。API サーバが run・experiment・recurring run を管理する。Persistence Agent が Workflow の status を watch し、データベースに書き戻す。ML Metadata (MLMD) がすべての execution と artifact を記録し、リネージとキャッシュを支える。
 

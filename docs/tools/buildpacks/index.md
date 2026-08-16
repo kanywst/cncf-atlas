@@ -3,7 +3,7 @@
 > Turn application source code into production-ready OCI images without writing a Dockerfile.
 
 - **Category**: App Definition & GitOps
-- **CNCF maturity**: Incubating
+- **CNCF maturity**: Graduated (since 2026-07-17)
 - **Language**: Go
 - **License**: Apache-2.0
 - **Repository**: [buildpacks/pack](https://github.com/buildpacks/pack)
@@ -48,3 +48,5 @@ CNB exists to unify a buildpack ecosystem that had fragmented across Heroku, Clo
 11. [buildpacks/spec repository](https://github.com/buildpacks/spec)
 12. [Basic App tutorial (buildpacks.io docs)](https://buildpacks.io/docs/for-app-developers/tutorials/basic-app/)
 13. [buildpacks/rfcs repository](https://github.com/buildpacks/rfcs)
+14. [CNCF Announces Graduation of Cloud Native Buildpacks](https://www.cncf.io/announcements/2026/08/11/cncf-announces-graduation-of-cloud-native-buildpacks-advancing-the-standard-for-container-builds/)
+15. [Buildpacks project page (CNCF)](https://www.cncf.io/projects/buildpacks/)

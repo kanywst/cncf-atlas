@@ -12,7 +12,7 @@
 
 - 対象 repo の選定: プロジェクト全体は org に分散。メタ repo は docs のみなので、実装の中核 `trustee` (KBS + AS + RVPS, Rust) を deep-dive 対象に固定した。write 段では「プロジェクト = Confidential Containers、コードは trustee を主に読む」という前提を明示すること。
 - category: Security & Compliance (確信度高、CoCo は confidential computing = データ使用中保護)。Runtime も成立するが、価値の核は attestation/鍵配布のセキュリティ。
-- maturity: CNCF Sandbox (2022-03-08)。
+- maturity: CNCF Incubating (2022-03-08 Sandbox 受理 → 2026-07-08 Incubating 昇格)。
 - 代表トレースは RCAR ハンドシェイク (auth → attest → token) と plugin resource ゲート。図にしやすい。
 - 薄い点 / 二次パスで補強したい所:
   - guest-components 側 (AA, CDH, image-rs) は別 repo。深掘りするなら clone を追加するか、guest-server 連携を README ベースで補う。

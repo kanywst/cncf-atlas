@@ -22,4 +22,4 @@ recon.md の「出典 N」と対応。アクセス日はすべて 2026-06-24。
 
 - pin commit `2df3b8c3b0955ea41aec010783ddfe70cbc17c56` (tag `v0.40.7`) の `LICENSE` で Apache-2.0 を直接確認。`gh api /repos/buildpacks/pack` の `license.spdx_id` も `Apache-2.0`。
 - stars/forks/issues/contributors の数値は `gh api` (2026-06-24) で取得。stars 2,939 / forks 345 / open issues 169 / contributors 約 164 (anon 含む last page)。出典 9。
-- ガバナンス: CNCF Incubating、設計変更は RFC プロセス (`buildpacks/rfcs`)。出典 1, 13。
+- ガバナンス: CNCF Graduated (2026-07-17)、設計変更は RFC プロセス (`buildpacks/rfcs`)。出典 1, 13。

@@ -16,6 +16,7 @@ Cloud Native Buildpacks (CNB) は、この分裂したエコシステムを単�
 | 2018-10 | CNB が Apache-2.0 で CNCF Sandbox に受理。 |
 | 2020-11 | CNCF TOC が Sandbox から Incubation への昇格を承認。 |
 | 2024-2025 | Heroku が次世代基盤 "Fir" で CNB を全面採用。 |
+| 2026-07 | CNB が 2026-07-17 に CNCF Graduated に到達。 |
 
 ## どう進化したか
 
@@ -25,7 +26,7 @@ Cloud Native Buildpacks (CNB) は、この分裂したエコシステムを単�
 
 ## 現状
 
-CNB は CNCF Incubating のままで、Graduated には到達していない。`pack` CLI が主要なプラットフォーム実装であり、`buildpacks/lifecycle` が参照ビルドエンジン、`buildpacks/spec` が契約である。最近の方向性は Heroku の "Fir" 世代が起点で、Fir 世代は全アプリでデフォルトに CNB を採用し、旧 Cedar 世代は classic buildpack を維持する。
+CNB は 2026-07-17 に CNCF Graduated に到達し、CNCF は 2026-08-11 にこれを発表した。発表では Bloomberg と Heroku by Salesforce を活発な貢献組織として挙げ、ロードマップとして OCI Artifacts 対応、SBOM ワークフロー、WebAssembly ワークロードとの互換性を掲げている。`pack` CLI が主要なプラットフォーム実装であり、`buildpacks/lifecycle` が参照ビルドエンジン、`buildpacks/spec` が契約である。最近の方向性は Heroku の "Fir" 世代が起点で、Fir 世代は全アプリでデフォルトに CNB を採用し、旧 Cedar 世代は classic buildpack を維持する。
 
 ## 出典
 
@@ -35,3 +36,5 @@ CNB は CNCF Incubating のままで、Graduated には到達していない。`
 4. [Planting New Platform Roots in Cloud Native with Fir (Heroku)](https://www.heroku.com/blog/planting-new-platform-roots-cloud-native-fir/)
 5. [How Maintaining Cloud Native Buildpacks Powers Platforms Like Heroku](https://www.heroku.com/blog/how-maintaining-cloud-native-buildpacks-powers-platforms-like-heroku/)
 6. [buildpacks/rfcs リポジトリ](https://github.com/buildpacks/rfcs)
+7. [CNCF Announces Graduation of Cloud Native Buildpacks](https://www.cncf.io/announcements/2026/08/11/cncf-announces-graduation-of-cloud-native-buildpacks-advancing-the-standard-for-container-builds/)
+8. [Buildpacks プロジェクトページ (CNCF)](https://www.cncf.io/projects/buildpacks/)

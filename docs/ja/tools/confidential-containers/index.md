@@ -3,7 +3,7 @@
 > Confidential Containers は無改変の Kubernetes Pod をハードウェア隔離された confidential virtual machine の中で動かし、リモート認証に合格したワークロードにだけシークレットを渡す。
 
 - **カテゴリ**: Security & Compliance
-- **CNCF 成熟度**: Sandbox
+- **CNCF 成熟度**: Incubating (2026-07-08 以降)
 - **言語**: Rust
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [confidential-containers/trustee](https://github.com/confidential-containers/trustee)
@@ -11,7 +11,7 @@
 
 ## 何をするものか
 
-Confidential Containers (CoCo) は CNCF Sandbox プロジェクトで、Kubernetes ワークロードを Trusted Execution Environment (TEE、ホスト OS やハイパーバイザから読めないハードウェア隔離されたメモリ領域) の中で動かす。狙いはデータを使用中 (in-use) に守ることで、インフラを運用するクラウド事業者がテナントのコンテナやそのデータを覗けないようにする。
+Confidential Containers (CoCo) は CNCF Incubating プロジェクトで、Kubernetes ワークロードを Trusted Execution Environment (TEE、ホスト OS やハイパーバイザから読めないハードウェア隔離されたメモリ領域) の中で動かす。狙いはデータを使用中 (in-use) に守ることで、インフラを運用するクラウド事業者がテナントのコンテナやそのデータを覗けないようにする。
 
 プロジェクトは GitHub org [confidential-containers](https://github.com/confidential-containers) の複数リポジトリに分散している。ランタイム側は Kata Containers を再利用し、各 Pod を軽量な confidential virtual machine (CVM) として起動する。このディープダイブが扱うのは **trustee**、すなわち認証 (attestation) とシークレット配布のサーバ側実装である。trustee は、どのワークロードが本物の TEE で、どのシークレットを受け取ってよいかを決める CoCo の信頼モデルの中核を担う。
 
@@ -45,3 +45,4 @@ trustee は Rust の Cargo workspace として書かれている。中核は Key
 8. RATS architecture draft: <https://www.ietf.org/archive/id/draft-ietf-rats-architecture-22.html>
 9. プロジェクト Web サイト: <https://confidentialcontainers.org/>
 10. guest-components リポジトリ: <https://github.com/confidential-containers/guest-components>
+11. CNCF, "Confidential Containers becomes a CNCF incubating project": <https://www.cncf.io/blog/2026/07/22/confidential-containers-becomes-a-cncf-incubating-project/>
