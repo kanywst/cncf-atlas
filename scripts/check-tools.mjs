@@ -2,7 +2,7 @@
 // Every entry in docs/.vitepress/tools.ts must have all six section pages in both
 // locales, and its category must be a known one. Run in CI as the repo's "test".
 
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 
@@ -47,10 +47,27 @@ for (const { slug, category } of entries) {
   }
 }
 
+// The check above only runs registry -> disk. A deep-dive written but never added to
+// tools.ts passes it while being unreachable: no catalog card, no sidebar entry, no way
+// in except by typing the URL. Nine of them accumulated before anyone noticed, so walk
+// the other direction too.
+const registered = new Set(entries.map((e) => e.slug))
+for (const locale of ['', 'ja/']) {
+  const dir = resolve(root, `docs/${locale}tools`)
+  if (!existsSync(dir)) continue
+  for (const slug of readdirSync(dir, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name)) {
+    if (!registered.has(slug)) {
+      errors.push(`docs/${locale}tools/${slug}/ has pages but no entry in tools.ts, so it is unreachable`)
+    }
+  }
+}
+
 if (errors.length) {
   console.error(`check-tools: ${errors.length} problem(s) found`)
   for (const e of errors) console.error(`  - ${e}`)
   process.exit(1)
 }
 
-console.log(`check-tools: ${entries.length} tool(s) registered, all pages present, categories valid`)
+console.log(`check-tools: ${entries.length} tool(s) registered, all pages present and reachable, categories valid`)
