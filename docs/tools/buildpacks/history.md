@@ -26,7 +26,7 @@ Governance moved with the technology. When the CNCF TOC approved Incubation on 2
 
 ## Where it stands now
 
-CNB reached CNCF Graduated maturity on 2026-07-17, which CNCF announced on 2026-08-11. The announcement names Bloomberg and Heroku by Salesforce as active contributing organisations, and puts the roadmap on OCI Artifacts support, SBOM workflows, and compatibility with WebAssembly workloads. The `pack` CLI is the primary platform implementation, with `buildpacks/lifecycle` as the reference build engine and `buildpacks/spec` as the contract. Recent direction is anchored by Heroku's "Fir" generation, which adopts CNB by default for all apps while the older Cedar generation keeps classic buildpacks.
+CNB reached CNCF Graduated maturity on 2026-07-17, which CNCF announced on 2026-08-11. The announcement names Bloomberg and Heroku by Salesforce as active contributing organizations, and puts the roadmap on OCI Artifacts support, SBOM workflows, and compatibility with WebAssembly workloads. The `pack` CLI is the primary platform implementation, with `buildpacks/lifecycle` as the reference build engine and `buildpacks/spec` as the contract. Recent direction is anchored by Heroku's "Fir" generation, which adopts CNB by default for all apps while the older Cedar generation keeps classic buildpacks.
 
 ## Sources
 
