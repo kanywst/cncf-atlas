@@ -3,7 +3,7 @@
 > Kubernetes-native LLM inference orchestration that pairs Volcano gang scheduling with KV-cache-aware, prefill-decode routing.
 
 - **Category**: Orchestration & Scheduling
-- **CNCF maturity**: Incubating
+- **CNCF maturity**: Incubating, inherited from Volcano. The CNCF landscape lists Kthena as a sub-project of Volcano with no maturity level of its own.
 - **Language**: Go
 - **License**: Apache-2.0
 - **Repository**: [volcano-sh/kthena](https://github.com/volcano-sh/kthena)
