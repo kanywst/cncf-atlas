@@ -3,7 +3,7 @@
 > Dockerfile を書かずに、アプリのソースコードを本番向け OCI イメージへ変換する。
 
 - **カテゴリ**: App Definition & GitOps
-- **CNCF 成熟度**: Graduated (2026-07-17 以降)
+- **CNCF 成熟度**: Graduated (2026-07-17 昇格)
 - **言語**: Go
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [buildpacks/pack](https://github.com/buildpacks/pack)

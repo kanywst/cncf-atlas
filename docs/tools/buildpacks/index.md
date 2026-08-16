@@ -3,7 +3,7 @@
 > Turn application source code into production-ready OCI images without writing a Dockerfile.
 
 - **Category**: App Definition & GitOps
-- **CNCF maturity**: Graduated (since 2026-07-17)
+- **CNCF maturity**: Graduated (promoted 2026-07-17)
 - **Language**: Go
 - **License**: Apache-2.0
 - **Repository**: [buildpacks/pack](https://github.com/buildpacks/pack)

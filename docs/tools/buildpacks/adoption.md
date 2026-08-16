@@ -9,6 +9,7 @@ Each organisation below is cited. Adopters without a public source are omitted.
 | Heroku (Salesforce) | Next-generation "Fir" platform adopts CNB by default for all apps; Heroku funds a dedicated maintainer team. | [Heroku Fir](https://www.heroku.com/blog/planting-new-platform-roots-cloud-native-fir/) |
 | DigitalOcean | App Platform builds with CNB when no Dockerfile is present, detecting the language and building with buildpacks. | [DigitalOcean docs](https://docs.digitalocean.com/products/app-platform/reference/buildpacks/) |
 | Greenhouse, Salesforce, VMware | Named as production users at the time of CNCF Incubation. | [CNCF](https://www.cncf.io/blog/2020/11/18/toc-approves-cloud-native-buildpacks-from-sandbox-to-incubation/) |
+| GitLab, Google, HashiCorp, Spring, VMware by Broadcom | Named as adopters in the CNCF graduation announcement, which puts the total at more than twenty. | [CNCF](https://www.cncf.io/announcements/2026/08/11/cncf-announces-graduation-of-cloud-native-buildpacks-advancing-the-standard-for-container-builds/) |
 
 ## Adoption signals
 
@@ -20,7 +21,7 @@ Measured on `buildpacks/pack` via the GitHub API on 2026-06-24.
 - Contributors: about 164 (including anonymous)
 - Repository created: 2018-06-25
 
-The CNCF Incubation approval (2020-11-18) cited more than fifteen production users and committers from multiple organisations.
+The CNCF Incubation approval (2020-11-18) cited more than fifteen production users and committers from multiple organisations. The graduation announcement (2026-08-11) puts the project-wide figures at 535 contributors across 164 organisations. Those count the whole project, not the `buildpacks/pack` repository measured above.
 
 ## Ecosystem
 
@@ -50,3 +51,4 @@ The core distinction is a vendor-neutral platform-to-buildpack contract plus OCI
 4. [App Platform Buildpack References (DigitalOcean)](https://docs.digitalocean.com/products/app-platform/reference/buildpacks/)
 5. [Getting Started / How to Use Paketo Builders (Paketo Buildpacks)](https://paketo.io/docs/howto/builders/)
 6. [buildpacks/pack repository](https://github.com/buildpacks/pack)
+7. [CNCF Announces Graduation of Cloud Native Buildpacks](https://www.cncf.io/announcements/2026/08/11/cncf-announces-graduation-of-cloud-native-buildpacks-advancing-the-standard-for-container-builds/)

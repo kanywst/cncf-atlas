@@ -9,6 +9,7 @@
 | Heroku (Salesforce) | 次世代基盤 "Fir" が CNB を全アプリでデフォルト採用。Heroku は専任メンテナチームに投資。 | [Heroku Fir](https://www.heroku.com/blog/planting-new-platform-roots-cloud-native-fir/) |
 | DigitalOcean | App Platform は Dockerfile が無いとき CNB でビルドし、言語を検出して buildpack でビルドする。 | [DigitalOcean docs](https://docs.digitalocean.com/products/app-platform/reference/buildpacks/) |
 | Greenhouse, Salesforce, VMware | CNCF Incubation 時点の本番ユーザとして明記。 | [CNCF](https://www.cncf.io/blog/2020/11/18/toc-approves-cloud-native-buildpacks-from-sandbox-to-incubation/) |
+| GitLab, Google, HashiCorp, Spring, VMware by Broadcom | CNCF 卒業アナウンスが採用企業として明記。全体では 20 社超としている。 | [CNCF](https://www.cncf.io/announcements/2026/08/11/cncf-announces-graduation-of-cloud-native-buildpacks-advancing-the-standard-for-container-builds/) |
 
 ## 採用シグナル
 
@@ -20,7 +21,7 @@
 - Contributors: 約 164 (匿名含む)
 - リポジトリ作成: 2018-06-25
 
-CNCF Incubation 承認 (2020-11-18) は 15 を超える本番ユーザと複数組織からの committer を挙げている。
+CNCF Incubation 承認 (2020-11-18) は 15 を超える本番ユーザと複数組織からの committer を挙げている。卒業アナウンス (2026-08-11) はプロジェクト全体の数字として 164 組織にまたがる 535 contributors を挙げている。これはプロジェクト全体の値で、上で計測した `buildpacks/pack` リポジトリ単体の値ではない。
 
 ## エコシステム
 
@@ -50,3 +51,4 @@ CNCF Incubation 承認 (2020-11-18) は 15 を超える本番ユーザと複数�
 4. [App Platform Buildpack References (DigitalOcean)](https://docs.digitalocean.com/products/app-platform/reference/buildpacks/)
 5. [Getting Started / How to Use Paketo Builders (Paketo Buildpacks)](https://paketo.io/docs/howto/builders/)
 6. [buildpacks/pack リポジトリ](https://github.com/buildpacks/pack)
+7. [CNCF Announces Graduation of Cloud Native Buildpacks](https://www.cncf.io/announcements/2026/08/11/cncf-announces-graduation-of-cloud-native-buildpacks-advancing-the-standard-for-container-builds/)
