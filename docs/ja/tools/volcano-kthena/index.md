@@ -3,7 +3,7 @@
 > Volcano の gang scheduling と KV キャッシュ対応の prefill-decode ルーティングを組み合わせた、Kubernetes ネイティブな LLM 推論オーケストレータ。
 
 - **カテゴリ**: Orchestration & Scheduling
-- **CNCF 成熟度**: Volcano から継承した Incubating。CNCF landscape 上の Kthena は Volcano のサブプロジェクト扱いで、独自の成熟度を持たない。
+- **CNCF 成熟度**: Volcano から継承した Incubating
 - **言語**: Go
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [volcano-sh/kthena](https://github.com/volcano-sh/kthena)
@@ -11,7 +11,7 @@
 
 ## 何をするものか
 
-Kthena は [Volcano](https://www.cncf.io/projects/volcano/) のサブプロジェクトで、Kubernetes 上で大規模言語モデル (LLM) の推論をオーケストレーションする。Volcano はもともと AI 学習向けのバッチスケジューラとして始まったが、Kthena は同じスケジューリング機構を推論 (サービング) 側に広げ、AI ライフサイクル全体を扱えるようにする。Volcano コミュニティが 2026-01-28 に正式発表した。
+Kthena は [Volcano](https://www.cncf.io/projects/volcano/) のサブプロジェクトで、Kubernetes 上で大規模言語モデル (LLM) の推論をオーケストレーションする。Volcano はもともと AI 学習向けのバッチスケジューラとして始まったが、Kthena は同じスケジューリング機構を推論 (サービング) 側に広げ、AI ライフサイクル全体を扱えるようにする。Volcano コミュニティが 2026-01-28 に正式発表した。上の成熟度が継承である理由もここにある。CNCF landscape は Kthena を Volcano の下に置き、独自の成熟度を与えていないため、適用されるのは Volcano の Incubating である。
 
 構成は 2 つに分かれる。コントロールプレーン (`kthena-controller-manager`) はカスタムリソースを reconcile して推論レプリカの deploy / scale / upgrade を回し、gang scheduling は Volcano スケジューラに委譲する。データプレーン (`kthena-router`) は推論トラフィックの入口で、OpenAI 互換リクエストを分類し、レート制限とトラフィックポリシーを当て、候補 pod を採点して選んだ推論インスタンスへプロキシする。2 つのプレーンは独立してデプロイできる。
 

@@ -3,7 +3,7 @@
 > Kubeflow Pipelines orchestrates end-to-end machine learning workflows on Kubernetes by compiling pipeline definitions into Argo Workflows and tracking every run in ML Metadata.
 
 - **Category**: Orchestration & Scheduling
-- **CNCF maturity**: Graduated (since 2026-07-24)
+- **CNCF maturity**: Graduated (promoted 2026-07-24)
 - **Language**: Go (backend), Python (SDK), TypeScript (frontend)
 - **License**: Apache-2.0
 - **Repository**: [kubeflow/pipelines](https://github.com/kubeflow/pipelines)
