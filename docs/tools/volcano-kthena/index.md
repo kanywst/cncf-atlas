@@ -11,7 +11,7 @@
 
 ## What it is
 
-Kthena is a subproject of [Volcano](https://www.cncf.io/projects/volcano/) that orchestrates large language model inference on Kubernetes. Volcano started as a batch scheduler for AI training; Kthena extends the same scheduling machinery to the serving side of the AI lifecycle. The Volcano community announced it on 2026-01-28. Being a subproject is also why the maturity above is inherited: the CNCF landscape lists Kthena under Volcano and gives it no maturity level of its own, so Volcano's Incubating status is the one that applies.
+Kthena is a subproject of [Volcano](https://www.cncf.io/projects/volcano/) that orchestrates large language model inference on Kubernetes. Volcano started as a batch scheduler for AI training; Kthena extends the same scheduling machinery to the serving side of the AI lifecycle. The Volcano community announced it on 2026-01-28. Being a subproject is also why the maturity above is inherited. The CNCF landscape entry for Kthena carries `parent_project: Volcano` and no maturity level of its own, so Volcano's Incubating status is the one that applies ([landscape.yml](https://github.com/cncf/landscape/blob/25d7d6bcc26718ee74a8565f03bcb5bb69e7b7df/landscape.yml#L19863-L19874)).
 
 It splits into two parts. A control plane (`kthena-controller-manager`) reconciles custom resources to deploy, scale, and upgrade inference replicas, and delegates gang scheduling to the Volcano scheduler. A data plane (`kthena-router`) is the entry point for inference traffic: it classifies each OpenAI-compatible request, applies rate limiting and traffic policy, scores candidate pods, and proxies to the chosen inference instance. The two planes can be deployed independently.
 
@@ -48,3 +48,4 @@ It fits less well when you want a Gateway API Inference Extension native stack (
 10. [Cloud-Native AI Inference using KServe and llm-d](https://kserve.github.io/website/blog/cloud-native-ai-inference-kserve-llm-d)
 11. [AIBrix: Towards Scalable, Cost-Effective LLM Inference Infrastructure (arXiv)](https://arxiv.org/html/2504.03648v1)
 12. [Kthena quick-start guide](https://github.com/volcano-sh/kthena/blob/main/docs/kthena/docs/getting-started/quick-start.md)
+13. [cncf/landscape `landscape.yml`, Volcano Kthena entry at commit `25d7d6b`](https://github.com/cncf/landscape/blob/25d7d6bcc26718ee74a8565f03bcb5bb69e7b7df/landscape.yml#L19863-L19874)
