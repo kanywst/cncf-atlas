@@ -3,7 +3,7 @@
 > Volcano の gang scheduling と KV キャッシュ対応の prefill-decode ルーティングを組み合わせた、Kubernetes ネイティブな LLM 推論オーケストレータ。
 
 - **カテゴリ**: Orchestration & Scheduling
-- **CNCF 成熟度**: Incubating
+- **CNCF 成熟度**: Volcano から継承した Incubating。CNCF landscape 上の Kthena は Volcano のサブプロジェクト扱いで、独自の成熟度を持たない。
 - **言語**: Go
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [volcano-sh/kthena](https://github.com/volcano-sh/kthena)
