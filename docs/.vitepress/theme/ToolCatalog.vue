@@ -32,8 +32,8 @@ const heading = computed(() => (lang.value === 'ja' ? 'カテゴリから探す'
 
 const empty = computed(() =>
   lang.value === 'ja'
-    ? 'まだツールがありません。oss-tech-recon → oss-tech-write で最初のディープダイブを生成してください。'
-    : 'No tools yet. Run oss-tech-recon → oss-tech-write to generate the first deep-dive.',
+    ? 'まだツールがありません。atlas-recon → atlas-write で最初のディープダイブを生成してください。'
+    : 'No tools yet. Run atlas-recon → atlas-write to generate the first deep-dive.',
 )
 </script>
 

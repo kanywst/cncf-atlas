@@ -1,5 +1,5 @@
 // Single source of truth for the tool catalog.
-// The oss-tech-write skill appends one entry here per documented tool; the sidebar
+// The atlas-write skill appends one entry here per documented tool; the sidebar
 // (config.ts) and the homepage catalog (ToolCatalog.vue) both read from it.
 //
 // Product premise: the CNCF landscape is a wall of logos with no context. This catalog
