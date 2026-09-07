@@ -24,25 +24,33 @@ function slugify(name: string) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 }
-// Only deep-dives have pages. A card-tier entry linked from here would 404, and the
-// map's whole point is that an unlinked tile reads as "not written yet".
+// A tile has three states. A deep-dive links to its pages. A card-tier entry has no
+// pages, so it links out to the upstream repo instead of 404ing. Anything the catalog
+// does not carry at all stays unlinked, which is what reads as "not written yet".
 const deepDives = tools.filter((t) => t.tier !== 'card')
+const cards = tools.filter((t) => t.tier === 'card')
 const docBySlug = new Set(deepDives.map((t) => t.slug))
 const docByName = new Map(deepDives.map((t) => [t.name, t.slug]))
+const repoBySlug = new Map(cards.map((t) => [t.slug, t.repo!]))
+const repoByName = new Map(cards.map((t) => [t.name, t.repo!]))
 function docSlug(name: string): string | null {
   const s = slugify(name)
   if (docBySlug.has(s)) return s
   return docByName.get(name) ?? null
 }
+function cardRepo(name: string): string | null {
+  return repoBySlug.get(slugify(name)) ?? repoByName.get(name) ?? null
+}
 
 const panels = computed(() => {
-  type Tile = { name: string; m: 'g' | 'i' | 's'; link: string | null }
+  type Tile = { name: string; m: 'g' | 'i' | 's'; link: string | null; ext: boolean }
   const map = new Map<string, Tile[]>()
   const push = (cat: string, name: string, m: 'g' | 'i' | 's') => {
     if (!map.has(cat)) map.set(cat, [])
     const slug = docSlug(name)
-    const link = slug ? withBase(`${prefix.value}/tools/${slug}/`) : null
-    map.get(cat)!.push({ name, m, link })
+    const repo = slug ? null : cardRepo(name)
+    const link = slug ? withBase(`${prefix.value}/tools/${slug}/`) : repo
+    map.get(cat)!.push({ name, m, link, ext: !slug && Boolean(repo) })
   }
   cncf.graduated.forEach((p) => push(p.category, p.name, 'g'))
   cncf.incubating.forEach((p) => push(p.category, p.name, 'i'))
@@ -80,7 +88,7 @@ const t = computed(() =>
         cDives: 'deep-dives',
         mEyebrow: '// THE MAP',
         mH2: 'エコシステム全体を、成熟度つきの制御盤で。',
-        mNote: 'CNCF の全プロジェクトを役割でまとめ、左の帯で成熟度を示す。ロゴの壁ではなく、ヘルスボードとして読める。',
+        mNote: 'CNCF の全プロジェクトを役割でまとめ、左の帯で成熟度を示す。→ はサイト内のディープダイブ、↗ は説明とリポジトリだけのカタログ項目。',
         dEyebrow: '// DEEP-DIVES',
         dH2: 'マーケティングページではなく、ソースから。',
         dNote: '各ディープダイブはピン留めしたコミットの上流コードを実際に読み、出典を添える。',
@@ -111,7 +119,7 @@ const t = computed(() =>
         cDives: 'deep-dives',
         mEyebrow: '// THE MAP',
         mH2: 'The whole ecosystem, as a status board.',
-        mNote: 'Every CNCF project grouped by what it does, with a maturity status bar down the left edge. A health board you can read, not a wall of logos.',
+        mNote: 'Every CNCF project grouped by what it does, with a maturity status bar down the left edge. An arrow → goes to a deep-dive on this site; ↗ goes to the upstream repository of a project the catalog lists but has not written up.',
         dEyebrow: '// DEEP-DIVES',
         dH2: 'Read from the source, not the marketing page.',
         dNote: 'Each deep-dive reads the upstream code at a pinned commit and cites where every claim came from.',
@@ -178,12 +186,14 @@ const t = computed(() =>
                 v-for="proj in p.projects"
                 :key="proj.name"
                 class="cp-tile"
-                :class="[proj.m, { todo: !proj.link }]"
+                :class="[proj.m, { todo: !proj.link, ext: proj.ext }]"
                 :href="proj.link || undefined"
+                :target="proj.ext ? '_blank' : undefined"
+                :rel="proj.ext ? 'noreferrer' : undefined"
               >
                 <i class="dot" />
                 <span class="nm">{{ proj.name }}</span>
-                <span v-if="proj.link" class="cp-arrow">→</span>
+                <span v-if="proj.link" class="cp-arrow">{{ proj.ext ? '↗' : '→' }}</span>
               </component>
             </div>
           </div>

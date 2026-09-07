@@ -2,7 +2,7 @@
 
 > Kubernetes-native bare metal host provisioning that drives OpenStack Ironic through the BareMetalHost CRD.
 
-- **Category**: Orchestration & Scheduling
+- **Category**: Provisioning & Infrastructure
 - **CNCF maturity**: Incubating
 - **Language**: Go
 - **License**: Apache-2.0

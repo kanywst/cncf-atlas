@@ -2,7 +2,7 @@
 
 > HAMi は、1 枚の物理 GPU をデバイスメモリと演算パーセントで分割共有し、Pod ごとの上限を実行時に強制する。アプリケーションの改変は要らない。
 
-- **カテゴリ**: Orchestration & Scheduling
+- **カテゴリ**: AI & Machine Learning
 - **CNCF 成熟度**: Incubating (2024-08-21 Sandbox 受理、2026-07-02 Incubating 昇格)
 - **言語**: Go (`go 1.26.2`)
 - **ライセンス**: Apache-2.0

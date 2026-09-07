@@ -2,7 +2,7 @@
 
 > BareMetalHost CRD で OpenStack Ironic を駆動し、ベアメタルを Kubernetes ネイティブに払い出すプロビジョナ。
 
-- **カテゴリ**: Orchestration & Scheduling
+- **カテゴリ**: Provisioning & Infrastructure
 - **CNCF 成熟度**: Incubating
 - **言語**: Go
 - **ライセンス**: Apache-2.0

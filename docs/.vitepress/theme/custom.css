@@ -432,6 +432,16 @@ body {
   background: transparent;
 }
 
+/* Card tier: a catalog entry that links upstream rather than to a deep-dive.
+   Sits between the two, so the eye still finds the written-up projects first. */
+.cp-tile.ext {
+  opacity: 0.72;
+}
+
+.cp-tile.ext .cp-arrow {
+  color: var(--cp-text-2);
+}
+
 /* Documented tiles are links; a hover arrow signals it */
 .cp-arrow {
   flex: none;

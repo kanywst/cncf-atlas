@@ -2,7 +2,7 @@
 
 > Kubernetes-native, multi-framework inference platform that turns a model into an autoscaling InferenceService for both predictive and generative AI.
 
-- **Category**: Orchestration & Scheduling
+- **Category**: AI & Machine Learning
 - **CNCF maturity**: Incubating
 - **Language**: Go (control plane), Python (data plane)
 - **License**: Apache-2.0

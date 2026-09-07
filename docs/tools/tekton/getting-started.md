@@ -1,6 +1,6 @@
 # Getting Started
 
-> Commands follow the install instructions in `docs/install.md` at commit `9dec5e4b`. They assume a running Kubernetes cluster and a `kubectl` that can reach it with cluster-admin rights.
+> Commands follow the install instructions in `docs/install.md` at commit `9dec5e4b`, and were run against a `kind` cluster on 2026-09-07. They assume a running Kubernetes cluster and a `kubectl` that can reach it with cluster-admin rights.
 
 ## Prerequisites
 
@@ -14,9 +14,9 @@
 kubectl apply --filename https://infra.tekton.dev/tekton-releases/pipeline/latest/release.yaml
 ```
 
-This creates the `tekton-pipelines` namespace, the eight custom resource definitions, and the controller and webhook deployments. To pin a version instead of tracking latest, replace `latest` with `previous/<version>`, for example `previous/v1.16.0`.
+This creates the `tekton-pipelines` namespace, the eight custom resource definitions, and four deployments: `tekton-pipelines-controller`, `tekton-pipelines-webhook`, `tekton-events-controller`, and `tekton-pipelines-remote-resolvers`. To pin a version instead of tracking latest, replace `latest` with `previous/<version>`, for example `previous/v1.16.0`.
 
-Wait until both deployments report ready:
+Wait until they report ready:
 
 ```bash
 kubectl get pods --namespace tekton-pipelines --watch
@@ -71,7 +71,7 @@ kubectl logs "$POD" --container step-second
 The `TaskRun` should reach `SUCCEEDED=True`:
 
 ```bash
-kubectl get taskrun -o custom-columns=NAME:.metadata.name,SUCCEEDED:.status.conditions[0].status,REASON:.status.conditions[0].reason
+kubectl get taskrun -o 'custom-columns=NAME:.metadata.name,SUCCEEDED:.status.conditions[0].status,REASON:.status.conditions[0].reason'
 ```
 
 To see the machinery described in [Internals](./internals) rather than just the result, inspect the pod Tekton built:
@@ -80,7 +80,7 @@ To see the machinery described in [Internals](./internals) rather than just the 
 kubectl get pod "$POD" -o jsonpath='{range .spec.containers[*]}{.name}{"\t"}{.command}{"\n"}{end}'
 ```
 
-Every step container's command is `/tekton/bin/entrypoint`, and the original command sits in the arguments after `-entrypoint` and `--`. The init container named `prepare` is the one that copied that binary into the shared volume.
+Every step container's command is `/tekton/bin/entrypoint`, and the original command sits in the arguments after `-entrypoint` and `--`. The init container named `prepare` is the one that copied that binary into the shared volume. A second init container, `place-scripts`, appears because the example's second step uses `script` rather than `command`; it writes that script to disk for the step to run.
 
 If a `TaskRun` stays pending, the usual causes are the webhook not being ready, the image being unpullable, or the pod being unschedulable. `kubectl describe taskrun` surfaces the first, `kubectl describe pod "$POD"` the other two.
 

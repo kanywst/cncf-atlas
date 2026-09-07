@@ -2,7 +2,7 @@
 
 > プラットフォームチームが自前の API を定義し、コントローラがクラウドおよびクラスタ内リソースを宣言された状態へ継続的に reconcile する、Kubernetes ベースのコントロールプレーンフレームワーク。
 
-- **カテゴリ**: App Definition & GitOps
+- **カテゴリ**: Provisioning & Infrastructure
 - **CNCF 成熟度**: Graduated
 - **言語**: Go (`go 1.25.10`、module `github.com/crossplane/crossplane/v2`)
 - **ライセンス**: Apache-2.0

@@ -2,7 +2,7 @@
 
 > A Kubernetes-based control plane framework that lets platform teams define their own APIs and have controllers continuously reconcile cloud and in-cluster resources toward a declared state.
 
-- **Category**: App Definition & GitOps
+- **Category**: Provisioning & Infrastructure
 - **CNCF maturity**: Graduated
 - **Language**: Go (`go 1.25.10`, module `github.com/crossplane/crossplane/v2`)
 - **License**: Apache-2.0

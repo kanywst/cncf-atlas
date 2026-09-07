@@ -2,7 +2,7 @@
 
 > A WebAssembly component runtime that runs the same host locally and on Kubernetes, wiring components to swappable capability plugins.
 
-- **Category**: Runtime
+- **Category**: WebAssembly
 - **CNCF maturity**: Incubating
 - **Language**: Rust (with a Go Kubernetes operator and gateway)
 - **License**: Apache-2.0

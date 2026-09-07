@@ -2,7 +2,7 @@
 
 > HAMi lets Kubernetes workloads share a physical GPU by device memory and compute percentage, with per-pod limits enforced at runtime, and no changes to the application.
 
-- **Category**: Orchestration & Scheduling
+- **Category**: AI & Machine Learning
 - **CNCF maturity**: Incubating (accepted Sandbox 2024-08-21, promoted to Incubating 2026-07-02)
 - **Language**: Go (`go 1.26.2`)
 - **License**: Apache-2.0

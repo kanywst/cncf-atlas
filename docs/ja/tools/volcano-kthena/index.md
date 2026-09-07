@@ -2,7 +2,7 @@
 
 > Volcano の gang scheduling と KV キャッシュ対応の prefill-decode ルーティングを組み合わせた、Kubernetes ネイティブな LLM 推論オーケストレータ。
 
-- **カテゴリ**: Orchestration & Scheduling
+- **カテゴリ**: AI & Machine Learning
 - **CNCF 成熟度**: Volcano から継承した Incubating
 - **言語**: Go
 - **ライセンス**: Apache-2.0

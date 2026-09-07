@@ -2,7 +2,7 @@
 
 > 同じホストをローカルでも Kubernetes でも動かし、コンポーネントを差し替え可能な capability プラグインに結線する WebAssembly コンポーネントランタイム。
 
-- **カテゴリ**: Runtime
+- **カテゴリ**: WebAssembly
 - **CNCF 成熟度**: Incubating
 - **言語**: Rust (Go 製の Kubernetes operator と gateway を併設)
 - **ライセンス**: Apache-2.0

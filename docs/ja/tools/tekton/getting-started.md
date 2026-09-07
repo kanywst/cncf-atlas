@@ -1,6 +1,6 @@
 # はじめに
 
-> コマンドはコミット `9dec5e4b` 時点の `docs/install.md` の手順に従う。稼働中の Kubernetes クラスタと、cluster-admin 権限でそこに届く `kubectl` を前提とする。
+> コマンドはコミット `9dec5e4b` 時点の `docs/install.md` の手順に従い、2026-09-07 に `kind` クラスタで実行して確認した。稼働中の Kubernetes クラスタと、cluster-admin 権限でそこに届く `kubectl` を前提とする。
 
 ## 前提
 
@@ -14,9 +14,9 @@
 kubectl apply --filename https://infra.tekton.dev/tekton-releases/pipeline/latest/release.yaml
 ```
 
-これで `tekton-pipelines` 名前空間、8 つのカスタムリソース定義、controller と webhook の Deployment が作られる。latest を追うのではなくバージョンを固定したい場合は、`latest` を `previous/<version>` に置き換える (例: `previous/v1.16.0`)。
+これで `tekton-pipelines` 名前空間、8 つのカスタムリソース定義、そして 4 つの Deployment (`tekton-pipelines-controller`、`tekton-pipelines-webhook`、`tekton-events-controller`、`tekton-pipelines-remote-resolvers`) が作られる。latest を追うのではなくバージョンを固定したい場合は、`latest` を `previous/<version>` に置き換える (例: `previous/v1.16.0`)。
 
-両方の Deployment が ready になるまで待つ。
+それらが ready になるまで待つ。
 
 ```bash
 kubectl get pods --namespace tekton-pipelines --watch
@@ -71,7 +71,7 @@ kubectl logs "$POD" --container step-second
 `TaskRun` が `SUCCEEDED=True` に到達していればよい。
 
 ```bash
-kubectl get taskrun -o custom-columns=NAME:.metadata.name,SUCCEEDED:.status.conditions[0].status,REASON:.status.conditions[0].reason
+kubectl get taskrun -o 'custom-columns=NAME:.metadata.name,SUCCEEDED:.status.conditions[0].status,REASON:.status.conditions[0].reason'
 ```
 
 結果だけでなく [内部実装](./internals) で説明した仕掛けそのものを見たいなら、Tekton が組み立てた Pod を覗く。
@@ -80,7 +80,7 @@ kubectl get taskrun -o custom-columns=NAME:.metadata.name,SUCCEEDED:.status.cond
 kubectl get pod "$POD" -o jsonpath='{range .spec.containers[*]}{.name}{"\t"}{.command}{"\n"}{end}'
 ```
 
-どの step コンテナもコマンドが `/tekton/bin/entrypoint` になっていて、元のコマンドは `-entrypoint` と `--` の後ろの引数に入っている。`prepare` という名前の init コンテナが、そのバイナリを共有ボリュームにコピーした張本人。
+どの step コンテナもコマンドが `/tekton/bin/entrypoint` になっていて、元のコマンドは `-entrypoint` と `--` の後ろの引数に入っている。`prepare` という名前の init コンテナが、そのバイナリを共有ボリュームにコピーした張本人。init コンテナがもう 1 つ `place-scripts` として出てくるのは、この例の 2 番目の step が `command` ではなく `script` を使っているため。その script をディスクに書き出す役。
 
 `TaskRun` が pending のまま止まる場合、原因はたいてい webhook が ready でない、イメージが pull できない、Pod がスケジュールできない、のいずれか。1 つ目は `kubectl describe taskrun`、残りは `kubectl describe pod "$POD"` に出る。
 

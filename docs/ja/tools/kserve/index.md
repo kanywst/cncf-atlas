@@ -2,7 +2,7 @@
 
 > モデルを autoscaling な InferenceService CRD に変える、Kubernetes ネイティブでマルチフレームワークの推論基盤。予測 AI と生成 AI を 1 つのプラットフォームで扱う。
 
-- **カテゴリ**: Orchestration & Scheduling
+- **カテゴリ**: AI & Machine Learning
 - **CNCF 成熟度**: Incubating
 - **言語**: Go (control plane)、Python (data plane)
 - **ライセンス**: Apache-2.0

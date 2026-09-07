@@ -2,7 +2,7 @@
 
 > Kubernetes-native LLM inference orchestration that pairs Volcano gang scheduling with KV-cache-aware, prefill-decode routing.
 
-- **Category**: Orchestration & Scheduling
+- **Category**: AI & Machine Learning
 - **CNCF maturity**: Incubating, inherited from Volcano
 - **Language**: Go
 - **License**: Apache-2.0

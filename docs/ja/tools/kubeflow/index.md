@@ -2,7 +2,7 @@
 
 > Kubeflow Pipelines は、パイプライン定義を Argo Workflows にコンパイルし、すべての実行を ML Metadata で追跡することで、エンドツーエンドの機械学習ワークフローを Kubernetes 上でオーケストレーションする。
 
-- **カテゴリ**: Orchestration & Scheduling
+- **カテゴリ**: AI & Machine Learning
 - **CNCF 成熟度**: Graduated (2026-07-24 昇格)
 - **言語**: Go (バックエンド), Python (SDK), TypeScript (フロントエンド)
 - **ライセンス**: Apache-2.0
