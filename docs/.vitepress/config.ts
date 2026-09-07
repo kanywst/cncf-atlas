@@ -14,15 +14,19 @@ const SECTIONS = [
   { key: 'getting-started', en: 'Getting Started', ja: 'はじめに' },
 ]
 
+// Card-tier entries have no pages, so they get no sidebar section. They are reachable
+// from the catalog, which links them straight to their upstream repo.
 function toolSidebar(prefix: string, lang: 'en' | 'ja'): DefaultTheme.SidebarItem[] {
-  return tools.map((t) => ({
-    text: t.name,
-    collapsed: true,
-    items: SECTIONS.map((s) => ({
-      text: lang === 'ja' ? s.ja : s.en,
-      link: `${prefix}/tools/${t.slug}/${s.key}`.replace(/\/$/, '/'),
-    })),
-  }))
+  return tools
+    .filter((t) => t.tier !== 'card')
+    .map((t) => ({
+      text: t.name,
+      collapsed: true,
+      items: SECTIONS.map((s) => ({
+        text: lang === 'ja' ? s.ja : s.en,
+        link: `${prefix}/tools/${t.slug}/${s.key}`.replace(/\/$/, '/'),
+      })),
+    }))
 }
 
 function catalogLink(prefix: string, lang: 'en' | 'ja') {

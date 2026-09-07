@@ -77,7 +77,7 @@ scripts/                     check-tools.mjs (CI catalog check), seed-cncf-issue
 
 ## How the pieces wire together
 
-`tools.ts` is the single source of truth. Adding a `ToolEntry` there is what makes a deep-dive reachable: `config.ts` builds both sidebars from it, and `ToolCatalog.vue` renders the cards from it. Pages on disk with no entry are unreachable (nine of them accumulated once before anyone noticed, which is why `check-tools.mjs` now walks disk to registry as well).
+`tools.ts` is the single source of truth. Adding a `ToolEntry` there is what makes a deep-dive reachable: `config.ts` builds both sidebars from it, and `ToolCatalog.vue` renders the cards from it. `config.ts` and `Landing.vue` filter out tier `card` entries, which have no pages to link to. Pages on disk with no entry are unreachable (nine of them accumulated once before anyone noticed, which is why `check-tools.mjs` now walks disk to registry as well).
 
 The six section keys live in `SECTIONS` in `config.ts` and must match the filenames exactly: `index`, `history`, `architecture`, `adoption`, `internals`, `getting-started`. That array also carries the English and Japanese sidebar labels.
 
@@ -96,7 +96,18 @@ It never executes TypeScript. Consequences worth knowing before editing `tools.t
 - Each entry must be a flat object literal with **no nested braces**, and `slug` must appear before `category`. Both the multi-line style at the top of the file and the one-line style at the bottom parse fine.
 - `CATEGORY_ORDER` is read from the array literal, and every entry's `category` must be one of its strings.
 
-The check fails on: a registered slug missing any of the twelve files (six sections, two locales), an unknown category, or a `docs/{,ja/}tools/<slug>/` directory with no entry in `tools.ts`.
+The check fails on: a tier `deep` slug missing any of the twelve files (six sections, two locales), an unknown category or tier, a tier `card` entry with no `repo` or with pages on disk, a tier `deep` entry carrying a `repo`, or a `docs/{,ja/}tools/<slug>/` directory with no entry in `tools.ts`.
+
+## Two tiers
+
+`ToolEntry.tier` decides how much of the site a project gets. It defaults to `deep`, so existing entries and anything `atlas-write` produces need no change.
+
+- **`deep`** is the full six-section bilingual deep-dive under `docs/`. It costs a recon pass over the upstream repo, so it is reserved for projects enough people run to justify one. Every CNCF Graduated and Incubating project is `deep`.
+- **`card`** is a catalog row and nothing else: name, tagline, category, maturity, and `repo`, which the card links to directly. It carries no pages, no sidebar entry, and no internal link. It exists so the Sandbox long tail is still findable and still says what it is, without a deep-dive behind it. Sandbox projects nobody has written up are `card`.
+
+Card taglines come from the project's own one-liner in [`cncf/landscape`](https://github.com/cncf/landscape) `landscape.yml` or its GitHub repo description, edited into this site's voice. Do not invent them.
+
+To promote a card, run `atlas-recon` then `atlas-write`, then drop the `tier` and `repo` fields from its entry. `check-tools.mjs` catches a half-done promotion in either direction.
 
 ## Categories and maturity
 

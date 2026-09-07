@@ -24,8 +24,11 @@ function slugify(name: string) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 }
-const docBySlug = new Set(tools.map((t) => t.slug))
-const docByName = new Map(tools.map((t) => [t.name, t.slug]))
+// Only deep-dives have pages. A card-tier entry linked from here would 404, and the
+// map's whole point is that an unlinked tile reads as "not written yet".
+const deepDives = tools.filter((t) => t.tier !== 'card')
+const docBySlug = new Set(deepDives.map((t) => t.slug))
+const docByName = new Map(deepDives.map((t) => [t.name, t.slug]))
 function docSlug(name: string): string | null {
   const s = slugify(name)
   if (docBySlug.has(s)) return s
@@ -52,7 +55,7 @@ const panels = computed(() => {
 const catCount = computed(() => panels.value.length)
 
 const dives = computed(() =>
-  tools.map((t) => ({
+  deepDives.map((t) => ({
     name: t.name,
     maturity: t.maturity,
     desc: ja.value ? t.taglineJa : t.tagline,

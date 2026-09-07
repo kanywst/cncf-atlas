@@ -1,6 +1,7 @@
 // Validates the catalog registry against the files on disk.
-// Every entry in docs/.vitepress/tools.ts must have all six section pages in both
-// locales, and its category must be a known one. Run in CI as the repo's "test".
+// Every tier "deep" entry in docs/.vitepress/tools.ts must have all six section pages
+// in both locales; every tier "card" entry must have a repo URL and no pages at all.
+// Categories must be known. Run in CI as the repo's "test".
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -28,16 +29,42 @@ const categories = [...(code.match(/CATEGORY_ORDER[^=]*=\s*\[([^\]]*)\]/s)?.[1] 
 const entries = [...code.matchAll(/\{[^{}]*?slug:\s*['"]([^'"]+)['"][^{}]*?category:\s*['"]([^'"]+)['"][^{}]*?\}/gs)].map((m) => ({
   slug: m[1],
   category: m[2],
+  // Tier and repo are optional and can sit anywhere in the object literal, so read
+  // them off the whole matched entry rather than pinning them to a field order.
+  tier: m[0].match(/tier:\s*['"]([^'"]+)['"]/)?.[1] ?? 'deep',
+  repo: m[0].match(/repo:\s*['"]([^'"]+)['"]/)?.[1] ?? null,
 }))
 
 const errors = []
 
 if (categories.length === 0) errors.push('CATEGORY_ORDER could not be parsed from tools.ts')
 
-for (const { slug, category } of entries) {
+const TIERS = ['deep', 'card']
+
+for (const { slug, category, tier, repo } of entries) {
   if (!categories.includes(category)) {
     errors.push(`tool "${slug}": category "${category}" is not in CATEGORY_ORDER`)
   }
+  if (!TIERS.includes(tier)) {
+    errors.push(`tool "${slug}": tier "${tier}" is not one of ${TIERS.join(', ')}`)
+  }
+
+  // A card is a catalog row that links upstream, so the repo URL is the whole entry.
+  // A deep-dive links to its own pages and must have all twelve of them.
+  if (tier === 'card') {
+    if (!repo) errors.push(`tool "${slug}": tier "card" needs a repo URL to link to`)
+    const pages = ['', 'ja/']
+      .map((locale) => `docs/${locale}tools/${slug}`)
+      .filter((rel) => existsSync(resolve(root, rel)))
+    if (pages.length) {
+      errors.push(
+        `tool "${slug}": tier "card" but ${pages.join(' and ')} exists; promote it to tier "deep" (and drop repo) or delete the pages`,
+      )
+    }
+    continue
+  }
+
+  if (repo) errors.push(`tool "${slug}": tier "deep" links to its own pages, so the repo field is unused`)
   for (const locale of ['', 'ja/']) {
     for (const section of SECTIONS) {
       const file = section === 'index' ? 'index.md' : `${section}.md`
@@ -70,4 +97,8 @@ if (errors.length) {
   process.exit(1)
 }
 
-console.log(`check-tools: ${entries.length} tool(s) registered, all pages present and reachable, categories valid`)
+const deep = entries.filter((e) => e.tier !== 'card').length
+console.log(
+  `check-tools: ${entries.length} tool(s) registered (${deep} deep-dive, ${entries.length - deep} card), ` +
+    'all pages present and reachable, categories valid',
+)

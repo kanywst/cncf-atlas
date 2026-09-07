@@ -585,6 +585,13 @@ body {
   padding: 0;
 }
 
+.catalog-legend {
+  margin: -14px 0 26px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--cp-text-3);
+}
+
 .catalog-group {
   margin: 8px 0 32px;
 }
@@ -644,6 +651,31 @@ body {
   font-size: 13.5px;
   line-height: 1.55;
   color: var(--cp-text-2);
+}
+
+/* Card tier: catalog row only, no deep-dive behind it. Reads as a quieter surface so
+   the eye lands on the written-up projects first, and says where the link goes. */
+.catalog-card.is-card {
+  background: transparent;
+  border-style: dashed;
+}
+
+.catalog-card.is-card .name {
+  font-weight: 500;
+}
+
+.catalog-card .card-repo {
+  margin-top: auto;
+  padding-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cp-text-3);
+}
+
+.catalog-card.is-card:hover .card-repo {
+  color: var(--cp-accent);
 }
 
 .maturity {
