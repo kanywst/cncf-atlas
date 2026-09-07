@@ -21,7 +21,7 @@ Confusingly, "Tekton" names both a family and a component. The family includes T
 
 - You already run Kubernetes and want CI/CD to be an object in the same cluster, subject to the same RBAC, admission control, and audit log.
 - You want the same pipeline definition to run unmodified on any conformant cluster, on any cloud or on-premises.
-- You are building a delivery platform for other teams rather than using one. Tekton is deliberately a framework: it ships primitives, not an opinionated product experience. Red Hat OpenShift Pipelines and IBM Cloud Continuous Delivery are products built on top of it.
+- You are building a delivery platform for other teams rather than using one. Tekton is deliberately a framework, shipping primitives and leaving the product experience to whoever builds on it. Red Hat OpenShift Pipelines and IBM Cloud Continuous Delivery are products built on top of it.
 - You care about supply chain provenance and want signing and SLSA attestation wired into the runner itself, which is what Tekton Chains adds.
 
 Where it is the wrong choice:

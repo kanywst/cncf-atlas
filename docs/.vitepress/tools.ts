@@ -258,6 +258,7 @@ export const tools: ToolEntry[] = [
   { slug: "holmesgpt", name: "HolmesGPT", tagline: "An AI agent that investigates production incidents by driving read-only observability tools through a controlled LLM loop.", taglineJa: "read-only な observability ツールを制御された LLM ループで駆動し本番インシデントを調査する AI エージェント。", category: "Observability", maturity: "Sandbox" },
 
   { slug: "tekton", name: "Tekton", tagline: "Kubernetes-native CI/CD: pipelines, tasks, and runs are custom resources, and every step is a container in a pod.", taglineJa: "Kubernetes ネイティブな CI/CD。パイプラインもタスクもその実行もカスタムリソースで、すべてのステップは Pod の中のコンテナ。", category: "App Definition & GitOps", maturity: "Incubating" },
+  { slug: "k8gb", name: "k8gb", tagline: "Global load balancing across Kubernetes clusters, built out of DNS delegation and CoreDNS instead of an appliance or a control plane.", taglineJa: "Kubernetes クラスタをまたぐグローバル負荷分散。アプライアンスもコントロールプレーンも使わず、DNS の委譲と CoreDNS で組み立てる。", category: "Service Mesh & Networking", maturity: "Incubating" },
   // ---------------------------------------------------------------------------
   // Card tier: CNCF Sandbox projects with no deep-dive. They are here so the long
   // tail is still findable and still says what it is; each links to its upstream

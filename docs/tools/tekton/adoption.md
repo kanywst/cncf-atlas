@@ -19,7 +19,7 @@ Tekton has no `ADOPTERS` file in the repository. The names below come from the p
 | Puppet | Named in the CNCF acceptance announcement | [CNCF, 2026-03-24](https://www.cncf.io/blog/2026/03/24/tekton-becomes-a-cncf-incubating-project/) |
 | Ford Motor Company | Named in the CNCF acceptance announcement | [CNCF, 2026-03-24](https://www.cncf.io/blog/2026/03/24/tekton-becomes-a-cncf-incubating-project/) |
 
-The pattern worth noting is that several of the largest names are vendors shipping Tekton inside a product rather than end users running it directly. Red Hat OpenShift Pipelines and IBM Cloud Continuous Delivery both mean a Tekton install that most of their users never see as Tekton.
+Several of the largest names are vendors shipping Tekton inside a product rather than end users running it directly. Red Hat OpenShift Pipelines and IBM Cloud Continuous Delivery both mean a Tekton install that most of their users never see as Tekton.
 
 ## Adoption signals
 

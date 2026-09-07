@@ -21,7 +21,7 @@ Tekton は継続的デリバリのための語彙を Kubernetes に与える。�
 
 - すでに Kubernetes を運用していて、CI/CD を同じクラスタ上のオブジェクトにしたい。RBAC もアドミッション制御も監査ログも同じものが効く。
 - 同じパイプライン定義を、どのクラウドでもオンプレでも、準拠したクラスタなら無改造で動かしたい。
-- デリバリのプラットフォームを他チームに提供する側にいる。Tekton は意図的にフレームワークであって、製品としての体験を持たない。Red Hat OpenShift Pipelines や IBM Cloud Continuous Delivery はその上に作られた製品。
+- デリバリのプラットフォームを他チームに提供する側にいる。Tekton は意図的にフレームワークで、プリミティブを提供し、製品としての体験はその上に作る側に委ねる。Red Hat OpenShift Pipelines や IBM Cloud Continuous Delivery はその上に作られた製品。
 - サプライチェーンの provenance を重視していて、署名と SLSA 属性の生成を実行基盤そのものに組み込みたい。Tekton Chains がその役目を担う。
 
 向かないケース:

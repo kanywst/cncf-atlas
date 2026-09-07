@@ -63,7 +63,7 @@ The TaskRun controller then takes over at `pkg/reconciler/taskrun/taskrun.go:137
 
 **Results ride the pod's termination message.** How a task returns a value is covered in [Internals](./internals); the architectural consequence is that results are small by design and Tekton has had to add a second mechanism for anything larger.
 
-**API stability is a runtime flag, not a build.** `enable-api-fields` is read from a ConfigMap and applies cluster-wide, with `beta` as the default (`pkg/apis/config/feature_flags.go:73`). An alpha feature is present in every install and simply refused unless the cluster operator opts in.
+**API stability is a runtime flag, not a build.** `enable-api-fields` is read from a ConfigMap and applies cluster-wide, with `beta` as the default (`pkg/apis/config/feature_flags.go:73`). An alpha feature is present in every install and refused unless the cluster operator opts in.
 
 **Definitions do not have to live in the cluster.** Remote resolution makes a pipeline reference a git revision or a signed OCI artifact, which is what lets one catalog serve many clusters.
 
