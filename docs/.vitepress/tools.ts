@@ -257,6 +257,7 @@ export const tools: ToolEntry[] = [
   { slug: "higress", name: "Higress", tagline: "An API gateway that embeds a forked Istio Pilot to turn Ingress and nginx annotations into Envoy config, with a Wasm plugin layer for AI and traffic.", taglineJa: "フォークした Istio Pilot を内蔵し、Ingress と nginx アノテーションを Envoy 設定に変える API ゲートウェイ。AI・トラフィック向けの Wasm プラグイン層を持つ。", category: "API Gateway", maturity: "Sandbox" },
   { slug: "holmesgpt", name: "HolmesGPT", tagline: "An AI agent that investigates production incidents by driving read-only observability tools through a controlled LLM loop.", taglineJa: "read-only な observability ツールを制御された LLM ループで駆動し本番インシデントを調査する AI エージェント。", category: "Observability", maturity: "Sandbox" },
 
+  { slug: "tekton", name: "Tekton", tagline: "Kubernetes-native CI/CD: pipelines, tasks, and runs are custom resources, and every step is a container in a pod.", taglineJa: "Kubernetes ネイティブな CI/CD。パイプラインもタスクもその実行もカスタムリソースで、すべてのステップは Pod の中のコンテナ。", category: "App Definition & GitOps", maturity: "Incubating" },
   // ---------------------------------------------------------------------------
   // Card tier: CNCF Sandbox projects with no deep-dive. They are here so the long
   // tail is still findable and still says what it is; each links to its upstream
