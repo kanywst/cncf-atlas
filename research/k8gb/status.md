@@ -19,3 +19,4 @@
 - Getting Started は 2026-09-08 に `make deploy-full-local-setup` を実際に回して検証。クラスタ 3 つの起動と `Gslb` / `DNSEndpoint` の確認、operator ログの `Final target list` までは動く
 - arm64 (Apple Silicon) では `dig` 系がすべて空。原因は edgedns の `internetsystemsconsortium/bind9:9.21` が amd64 単一アーキで、qemu 下で segfault すること。BIND が死ぬ → external-dns が RFC2136 で NS 委譲を書けない → ゾーンが委譲されない → CoreDNS が何も返さない、という連鎖。ページに事実として記載済み
 - VM は 2 CPU / 4GB では足りない (Helm 中に API サーバの TLS handshake timeout)。`fs.inotify.max_user_instances` の既定 128 も k3s の `too many open files` を招く。どちらもページに記載済み
+- 上記 arm64 の件は upstream に報告済み: <https://github.com/k8gb-io/k8gb/issues/2527> (2026-09-08 起票)。修正方針が決まったら Getting Started の注意書きを更新する
