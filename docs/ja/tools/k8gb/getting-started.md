@@ -1,6 +1,6 @@
 # はじめに
 
-> コマンドはコミット `34b4535c` 時点の `README.md` と `docs/local.md` に従う。
+> コマンドはコミット `34b4535c` 時点の `README.md` と `docs/local.md` に従う。2026-09-08 に遊び場を実際に立ち上げて確認した。arm64 での注意は下記。
 
 グローバル負荷分散にはクラスタが最低 2 つと委譲された DNS ゾーンが要るので、1 コマンドで何かを実演できるインストールは存在しない。プロジェクトはこれをローカルの遊び場で解決している。Docker 上の k3s クラスタ 3 つで、1 つが親 DNS、残り 2 つが k8gb を動かす構成。[内部実装](./internals) の仕組みが実際に動くところを見るにはこれが一番速いので、このページもそれを使う。
 
@@ -24,6 +24,12 @@ make deploy-full-local-setup
 ```
 
 k3d のクラスタが 3 つ作られる。`k3d-edgedns` は BIND を動かし、他の 2 つへ委譲する親ゾーンを持つ。`k3d-test-gslb1` と `k3d-test-gslb2` はそれぞれ k8gb、UDP DNS 用に公開された CoreDNS (ポートはそれぞれ 5053 と 5054)、テスト用アプリケーション、サンプルの `Gslb` リソースを動かす。
+
+Apple Silicon などの arm64 ホストでは、遊び場は立ち上がるが DNS が一切応答しない。`edgedns` クラスタが使う `internetsystemsconsortium/bind9:9.21` は amd64 単一アーキのイメージで、エミュレーション下では起動時に `qemu: uncaught target signal 11 (Segmentation fault)` で落ちる。BIND が listen しない。この失敗の波及の仕方は [アーキテクチャ](./architecture) と同じ経路をなぞるので、理解しておく価値がある。external-dns が RFC 2136 で BIND に NS 委譲を書き込めず (`RFC2136 create record failed ... connection reset by peer`)、ゾーンが委譲されず、各 CoreDNS がそれらのホストについて何も提供しなくなり、以下の `dig` はすべて空で返る。
+
+オペレータ自体は影響を受けず、ログには仕組みが動いている様子が残る。arm64 ではそれが「動作確認」の代替手段になる。
+
+VM のサイズも要る。k3s クラスタ 3 つは 2 CPU / 4GB のコンテナ VM には収まらない。足りないと Helm インストール中に API サーバの TLS handshake timeout として現れ、`fs.inotify.max_user_instances` を既定のままにしていると k3s のログに `too many open files` として現れる。
 
 実環境ではオペレータは Helm チャートで入れる。
 
@@ -90,6 +96,16 @@ kubectl get dnsendpoint --context k3d-test-gslb1 -n test-gslb
 ```
 
 `Gslb` の status にはホスト、計算されたヘルス、最終的に決まったターゲットが載る。`DNSEndpoint` が CoreDNS の提供元になっているオブジェクト。
+
+もっとも直接的なのはオペレータ自身のログで、DNS が動かないときに残る手段でもある。reconcile のたびに、決定したターゲット一覧が [内部実装](./internals) で引用した行から出力される。
+
+```bash
+kubectl logs --context k3d-test-gslb1 -n k8gb deploy/k8gb --tail=200 | grep "Final target list"
+```
+
+```text
+INF .../k8gbendpoint/applicationDNSEndpoint.go:167 > Final target list gslb=multiservice-gslb-all targets=["172.19.0.4","172.19.0.5"]
+```
 
 フェイルオーバーを見たいなら、片方のクラスタでテストアプリケーションを 0 にスケールしてから手順 2 の `dig` をやり直す。レコードが期限切れになった時点で、そのクラスタのアドレスが消えるはず。
 

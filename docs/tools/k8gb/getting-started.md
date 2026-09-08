@@ -1,6 +1,6 @@
 # Getting Started
 
-> Commands follow `README.md` and `docs/local.md` at commit `34b4535c`.
+> Commands follow `README.md` and `docs/local.md` at commit `34b4535c`. The playground was brought up on 2026-09-08 to check them; see the arm64 note below.
 
 Global load balancing needs at least two clusters and a delegated DNS zone, so there is no single-command install that demonstrates anything. The project solves this with a local playground: three k3s clusters in Docker, one acting as the parent DNS, two running k8gb. That is the fastest way to see the mechanism from [Internals](./internals) actually work, so it is what this page uses.
 
@@ -24,6 +24,12 @@ make deploy-full-local-setup
 ```
 
 This creates three k3d clusters. `k3d-edgedns` runs BIND and holds the parent zone that delegates to the other two. `k3d-test-gslb1` and `k3d-test-gslb2` each run k8gb, a CoreDNS exposed for UDP DNS on ports 5053 and 5054 respectively, a test application, and sample `Gslb` resources.
+
+On Apple Silicon and other arm64 hosts the playground comes up but answers no DNS. The `edgedns` cluster runs `internetsystemsconsortium/bind9:9.21`, published as a single amd64 image; under emulation it crashes on startup with `qemu: uncaught target signal 11 (Segmentation fault)`, so BIND never listens. That failure cascades in a way worth understanding, because it traces the same path as [Architecture](./architecture): external-dns cannot write the NS delegation into BIND over RFC 2136 (`RFC2136 create record failed ... connection reset by peer`), so the zone is never delegated, so the CoreDNS instances serve nothing for those hosts, and every `dig` below comes back empty.
+
+The operator itself is unaffected and its logs still show the mechanism working, which is what the "Verify it works" section falls back to on arm64.
+
+Size the VM too. Three k3s clusters do not fit in a 2 CPU, 4 GB container VM; running out shows up as API server TLS handshake timeouts during the Helm install, and as `too many open files` in the k3s logs when `fs.inotify.max_user_instances` is left at its default.
 
 For a real deployment the operator is a Helm chart instead:
 
@@ -90,6 +96,16 @@ kubectl get dnsendpoint --context k3d-test-gslb1 -n test-gslb
 ```
 
 The `Gslb` status carries the hosts, the health it computed, and the targets it settled on. The `DNSEndpoint` is the object CoreDNS is serving from.
+
+The operator's own log is the most direct view, and it is what still works when DNS does not. Each reconcile prints the list it settled on, from the line quoted in [Internals](./internals):
+
+```bash
+kubectl logs --context k3d-test-gslb1 -n k8gb deploy/k8gb --tail=200 | grep "Final target list"
+```
+
+```text
+INF .../k8gbendpoint/applicationDNSEndpoint.go:167 > Final target list gslb=multiservice-gslb-all targets=["172.19.0.4","172.19.0.5"]
+```
 
 To watch a failover, scale the test application to zero in one cluster and re-run the `dig` from step 2. The addresses belonging to that cluster should disappear once the records expire.
 

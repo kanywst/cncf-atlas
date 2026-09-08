@@ -16,4 +16,6 @@
 - 採用事例は `ADOPTERS.md` の 7 組織のみ
 - Getting Started の例は新 API グループ `k8gb.io/v1beta1` を使う (旧 `k8gb.absa.oss` は移行中の遺物)
 - 公開先: `docs/tools/k8gb/` と `docs/ja/tools/k8gb/`。カタログ登録済み (Service Mesh & Networking / Incubating)
-- Getting Started は `make deploy-full-local-setup` の k3d 遊び場を軸にした。手順は `docs/local.md` から取ったが、実行は未検証
+- Getting Started は 2026-09-08 に `make deploy-full-local-setup` を実際に回して検証。クラスタ 3 つの起動と `Gslb` / `DNSEndpoint` の確認、operator ログの `Final target list` までは動く
+- arm64 (Apple Silicon) では `dig` 系がすべて空。原因は edgedns の `internetsystemsconsortium/bind9:9.21` が amd64 単一アーキで、qemu 下で segfault すること。BIND が死ぬ → external-dns が RFC2136 で NS 委譲を書けない → ゾーンが委譲されない → CoreDNS が何も返さない、という連鎖。ページに事実として記載済み
+- VM は 2 CPU / 4GB では足りない (Helm 中に API サーバの TLS handshake timeout)。`fs.inotify.max_user_instances` の既定 128 も k3s の `too many open files` を招く。どちらもページに記載済み
