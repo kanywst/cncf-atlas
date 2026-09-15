@@ -23,6 +23,7 @@
     "js-yaml": "^4.3.0",
     "linkify-it": "^5.0.2",
     "markdown-it": "^14.2.0",
-    "postcss": "^8.5.18"
+    "postcss": "^8.5.18",
+    "smol-toml": "^1.7.1"
   }
 }
