@@ -7,6 +7,13 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - dependencies
+    # mermaid is here only to satisfy vitepress-plugin-mermaid's peer range, which
+    # 2.0.17 (the latest release) still pins to "10 || 11". A major bump therefore
+    # fails npm ci in every CI job before any of them reach lint, test, or build.
+    # Drop this once the plugin ships mermaid 12 support.
+    ignore:
+      - dependency-name: "mermaid"
+        update-types: ["version-update:semver-major"]
     groups:
       vitepress:
         patterns:
