@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-The working directory is `oss-tech-deepdive`; the project, the npm package, and the published site are all **cncf-atlas** (`https://kanywst.github.io/cncf-atlas/`, so VitePress `base` is `/cncf-atlas/`). It is both a published VitePress site and the engine that fills it. Three skills in `.claude/skills/` do the work:
+The repo, the npm package, and the published site are all **cncf-atlas** (`https://kanywst.github.io/cncf-atlas/`, so VitePress `base` is `/cncf-atlas/`). It is both a published VitePress site and the engine that fills it. Three skills in `.claude/skills/` do the work:
 
 1. **`atlas-recon <owner/repo>`** clones and pins upstream, maps architecture and critical paths, and gathers cited material into `research/<tool>/`. It never writes site pages.
 2. **`atlas-write <tool>`** turns the recon dossier into the bilingual six-section deep-dive under `docs/`, registers the project in `tools.ts`, and builds green. It never researches from scratch.
@@ -24,9 +24,16 @@ npm test              # scripts/check-tools.mjs: catalog and pages agree, both d
 npm run lint          # markdownlint-cli2 over every .md, research dossiers included
 ```
 
-CI (`.github/workflows/ci.yml`) runs those three (lint, test, build) on every push and PR. `deploy.yml` publishes to GitHub Pages.
+CI (`.github/workflows/ci.yml`) runs those three (lint, test, build) on every push and PR, each in its own job off a fresh `npm ci`. `deploy.yml` publishes to GitHub Pages on a push to main.
 
-There is no per-tool test target: `check-tools.mjs` validates the whole catalog at once. To narrow the loop while working on one project:
+Two more workflows are easy to forget until they go red:
+
+- `security.yml` runs `npm audit --omit=dev --audit-level=high` and OSV scanner, on push and PR plus weekly. Accepted advisories live in `osv-scanner.toml`, each with a written reason; they are all Vite and esbuild dev-server issues that the static build never ships. Bumping the dev toolchain can mean adding one.
+- `claude-review.yml` reviews pull requests and gates nothing. It skips forks and Dependabot (neither can read the secret), and the action refuses to run when the workflow file differs from the copy on main, so a change to that file goes unreviewed until it merges.
+
+A dependency whose peer range the rest of the toolchain cannot satisfy fails `npm ci` and takes every job with it, lint and catalog check included, before any of them touch a file. When all five go red at once, read the install step, not the test output. `mermaid` is pinned to the 11 line for exactly this reason (`vitepress-plugin-mermaid` caps its peer at `10 || 11`), recorded as an `ignore` in `.github/dependabot.yml`.
+
+There is no per-tool test target: `check-tools.mjs` validates the whole catalog at once. It is a big catalog (234 entries at last count, 126 deep-dive and 108 card, which `npm test` prints), so a full build is not quick. To narrow the loop while working on one project:
 
 ```bash
 npx markdownlint-cli2 "docs/tools/<slug>/*.md" "docs/ja/tools/<slug>/*.md"
@@ -53,7 +60,7 @@ The CNCF landscape lists hundreds of projects as logos in a grid. It tells you a
 - **Source-read, not summarised.** Architecture and Internals come from the actual repo at a pinned commit. Every structural claim points at `file:line`. If you did not read it, do not write it.
 - **No fabricated adoption.** Every named adopter needs a citable source (an ADOPTERS file, a CNCF case study, a public talk, an engineering blog). No source means it stays out.
 - **Pin the commit.** Record the sha in `research/<tool>/` and in the Overview and Internals pages. Internals claims are only valid against that commit.
-- **English is the source of truth; Japanese is a full translation, not a summary.** Both locales carry the same six sections and the same facts.
+- **English is the source of truth; Japanese is a full translation, not a summary.** Both locales carry the same six sections and the same facts. This governs `docs/` only. The recon dossier under `research/<tool>/` is written in Japanese at the density of notes to self, with a source URL on every claim.
 - **Readable top to bottom.** A page should make sense to a reader who has only seen the earlier pages. Introduce a term before leaning on it.
 
 ## Writing voice
@@ -73,13 +80,15 @@ research/_TEMPLATE/          scaffold recon copies to research/<tool>/
 research/<tool>/             recon.md, sources.md, status.md; src/ (the clone) is gitignored
 data/cncf-projects.json      the full CNCF project backlog (used to seed tracking issues)
 scripts/                     check-tools.mjs (CI catalog check), seed-cncf-issues.mjs (issue seeder)
+osv-scanner.toml             accepted dev-toolchain advisories, one written reason per ignore
+README.md, README.ja.md      full mirrors of each other; edit them in pairs
 ```
 
 ## How the pieces wire together
 
 `tools.ts` is the single source of truth. Adding a `ToolEntry` there is what makes a deep-dive reachable: `config.ts` builds both sidebars from it, and `ToolCatalog.vue` renders the cards from it. `config.ts` and `Landing.vue` filter out tier `card` entries, which have no pages to link to. Pages on disk with no entry are unreachable (nine of them accumulated once before anyone noticed, which is why `check-tools.mjs` now walks disk to registry as well).
 
-The six section keys live in `SECTIONS` in `config.ts` and must match the filenames exactly: `index`, `history`, `architecture`, `adoption`, `internals`, `getting-started`. That array also carries the English and Japanese sidebar labels.
+There are two `SECTIONS` arrays, they use different conventions, and nothing keeps them in sync but hand. `config.ts` builds sidebar links, so its Overview key is `''` (the link is `/tools/<slug>/`) and every entry also carries the English and Japanese label. `check-tools.mjs` checks files on disk, so its list is `index`, `history`, `architecture`, `adoption`, `internals`, `getting-started`, matching the filenames exactly. Adding or renaming a section means editing both.
 
 Custom pages render through **layout slots keyed off frontmatter**, never as component tags in markdown, which keeps every `.md` free of inline-HTML lint:
 
@@ -117,4 +126,4 @@ To promote a card, run `atlas-recon` then `atlas-write`, then drop the `tier` an
 
 - `npm run docs:build` must be green (it catches broken links and bad config).
 - `npm test` must pass (`check-tools.mjs`, both directions).
-- `npm run lint` clean. Its ignores (`node_modules`, the VitePress `dist` and `cache`, `research/*/src`) live in `.markdownlint-cli2.jsonc`, so everything else, including `research/<tool>/*.md` and the READMEs, is linted. Write clean on the first pass; the maintainer's hook enforces it.
+- `npm run lint` clean. `.markdownlint-cli2.jsonc` turns off `MD013`, `MD024`, `MD036`, `MD041`, and `MD060`, and allows `picture`, `source`, and `img` as the only inline HTML. That exception exists for the README banners; pages carry no tags at all. Its ignores (`node_modules`, the VitePress `dist` and `cache`, `research/*/src`) mean everything else, including `research/<tool>/*.md` and both READMEs, is linted. Write clean on the first pass; the maintainer's hook enforces it.
