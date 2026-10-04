@@ -1,4 +1,4 @@
-# Accepted advisories. These all live in VitePress's build-time toolchain (the Vite
+# Accepted advisories. The first four live in VitePress's build-time toolchain (the Vite
 # dev server and esbuild), which is never run in CI or production. The deployed
 # artifact is a static site with no runtime npm dependencies, so these dev-server
 # request-forgery and DoS issues are not reachable by users. Dependabot tracks the
@@ -19,3 +19,10 @@ reason = "Vite dev server only; not run in CI or the deployed static site"
 [[IgnoredVulns]]
 id = "GHSA-v6wh-96g9-6wx3"
 reason = "Vite dev server only; not run in CI or the deployed static site"
+
+# No patched braces release exists yet. It is reached only through micromatch in
+# markdownlint-cli2, which expands the glob patterns this repo writes itself, so
+# no attacker-controlled pattern ever reaches it. Drop this once a fix ships.
+[[IgnoredVulns]]
+id = "GHSA-vfj7-8cjw-p6xm"
+reason = "braces via markdownlint-cli2 globbing; only expands this repo's own lint globs; no patched release yet"
