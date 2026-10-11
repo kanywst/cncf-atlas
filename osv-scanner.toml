@@ -26,3 +26,12 @@ reason = "Vite dev server only; not run in CI or the deployed static site"
 [[IgnoredVulns]]
 id = "GHSA-vfj7-8cjw-p6xm"
 reason = "braces via markdownlint-cli2 globbing; only expands this repo's own lint globs; no patched release yet"
+
+# The katex fix (0.18.2) is outside the ^0.16 range that both mermaid and
+# micromark-extension-math (via markdownlint) pin, so it cannot be installed yet.
+# Exploiting it needs an already-polluted Object.prototype plus attacker-written
+# math; every diagram and formula here comes from this repo's own markdown.
+# Drop this once mermaid moves to katex 0.18.
+[[IgnoredVulns]]
+id = "GHSA-238p-pmpm-9mq7"
+reason = "katex fix is outside mermaid's and micromark-extension-math's ^0.16 range; only renders this repo's own markdown"
