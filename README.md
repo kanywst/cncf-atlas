@@ -1,11 +1,11 @@
-<img src="assets/banner.svg" alt="CNCF Atlas — a control surface for the cloud native ecosystem" width="100%" />
+<img src="assets/banner.svg" alt="CNCF Atlas: every CNCF project on one map" width="100%" />
 
 [![CI](https://img.shields.io/github/actions/workflow/status/kanywst/cncf-atlas/ci.yml?style=flat-square&label=CI)](https://github.com/kanywst/cncf-atlas/actions/workflows/ci.yml)
 [![Security](https://img.shields.io/github/actions/workflow/status/kanywst/cncf-atlas/security.yml?style=flat-square&label=security)](https://github.com/kanywst/cncf-atlas/actions/workflows/security.yml)
 [![Pages](https://img.shields.io/github/actions/workflow/status/kanywst/cncf-atlas/deploy.yml?style=flat-square&label=pages)](https://github.com/kanywst/cncf-atlas/actions/workflows/deploy.yml)
-[![License](https://img.shields.io/badge/license-MIT-4d9fff?style=flat-square)](./LICENSE)
-[![Stars](https://img.shields.io/github/stars/kanywst/cncf-atlas?style=flat-square&color=4d9fff)](https://github.com/kanywst/cncf-atlas)
-[![Live site](https://img.shields.io/badge/site-live-4d9fff?style=flat-square)](https://kanywst.github.io/cncf-atlas/)
+[![License](https://img.shields.io/badge/license-MIT-1b2027?style=flat-square)](./LICENSE)
+[![Stars](https://img.shields.io/github/stars/kanywst/cncf-atlas?style=flat-square&color=1b2027)](https://github.com/kanywst/cncf-atlas)
+[![Live site](https://img.shields.io/badge/site-live-1b2027?style=flat-square)](https://kanywst.github.io/cncf-atlas/)
 
 **English** · [日本語](./README.ja.md)
 

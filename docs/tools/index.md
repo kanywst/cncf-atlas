@@ -5,4 +5,4 @@ catalog: true
 
 # Catalog
 
-Projects are grouped by role and labelled by CNCF maturity. Most link to a full deep-dive: history, architecture, real-world adoption, and code internals read from the upstream repository at a pinned commit. Every CNCF Graduated and Incubating project has one. The Sandbox long tail is listed too, with a one-line description and a link to its repository, so you can tell what a project is without a deep-dive existing yet.
+Every CNCF project, plus a few independent ones, grouped into lines by what they do. The marker on each stop shows CNCF maturity. Bold names open a deep-dive on this site; the rest open their upstream repository.

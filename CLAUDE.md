@@ -71,8 +71,10 @@ No marketing tone. No AI tells. In particular: no em dashes (use a period, comma
 
 ```text
 docs/.vitepress/tools.ts     catalog registry: one entry per project (slug, names, taglines, category, maturity)
+docs/.vitepress/lines.ts     one transit line per category: colour, two-letter code, ja name
+docs/.vitepress/sections.ts  the six deep-dive sections, in order, with their en and ja labels
 docs/.vitepress/config.ts    i18n, sidebar, and section labels (built from tools.ts); base = '/cncf-atlas/'
-docs/.vitepress/theme/       custom theme: Landing.vue, ToolCatalog.vue, custom.css, injected via layout slots
+docs/.vitepress/theme/       custom theme: Landing.vue, ToolCatalog.vue, RouteStrip.vue, StationMark.vue, MermaidDiagram.vue, custom.css, injected via layout slots
 docs/tools/<slug>/           en deep-dive: index, history, architecture, adoption, internals, getting-started
 docs/ja/tools/<slug>/        ja mirror, the same six files
 templates/tool-doc/{en,ja}/  section skeletons to copy from
@@ -86,16 +88,21 @@ README.md, README.ja.md      full mirrors of each other; edit them in pairs
 
 ## How the pieces wire together
 
-`tools.ts` is the single source of truth. Adding a `ToolEntry` there is what makes a deep-dive reachable: `config.ts` builds both sidebars from it, and `ToolCatalog.vue` renders the cards from it. `config.ts` and `Landing.vue` filter out tier `card` entries, which have no pages to link to. Pages on disk with no entry are unreachable (nine of them accumulated once before anyone noticed, which is why `check-tools.mjs` now walks disk to registry as well).
+`tools.ts` is the single source of truth. Adding a `ToolEntry` there is what makes a deep-dive reachable: `config.ts` builds both sidebars from it (grouped by line), and `ToolCatalog.vue` and `Landing.vue` render the catalog and the home map from it. `config.ts` filters out tier `card` entries, which have no pages to link to; the catalog and the home map keep them and link them to their upstream repo. Pages on disk with no entry are unreachable (nine of them accumulated once before anyone noticed, which is why `check-tools.mjs` now walks disk to registry as well).
 
-There are two `SECTIONS` arrays, they use different conventions, and nothing keeps them in sync but hand. `config.ts` builds sidebar links, so its Overview key is `''` (the link is `/tools/<slug>/`) and every entry also carries the English and Japanese label. `check-tools.mjs` checks files on disk, so its list is `index`, `history`, `architecture`, `adoption`, `internals`, `getting-started`, matching the filenames exactly. Adding or renaming a section means editing both.
+There are two `SECTIONS` arrays, they use different conventions, and nothing keeps them in sync but hand. `docs/.vitepress/sections.ts` is the one the site imports (sidebar, route strip, home page, page titles): its Overview key is `''` (the link is `/tools/<slug>/`) and every entry carries the one English and Japanese label used everywhere. `check-tools.mjs` checks files on disk, so its list is `index`, `history`, `architecture`, `adoption`, `internals`, `getting-started`, matching the filenames exactly. Adding or renaming a section means editing both.
+
+Section pages have bare H1s ("Architecture"), so `config.ts` qualifies them with the project name in two places: `transformPageData` sets the tab title to `<Project>: <Section>`, and the local-search `_render` hook prefixes the indexed H1 the same way. It also relabels the footer link that crosses from one project to the next.
 
 Custom pages render through **layout slots keyed off frontmatter**, never as component tags in markdown, which keeps every `.md` free of inline-HTML lint:
 
 - `home: true` renders `Landing.vue` into the `page-top` slot (`docs/index.md`, `docs/ja/index.md`).
 - `catalog: true` renders `ToolCatalog.vue` into the `page-bottom` slot (`docs/tools/index.md`, `docs/ja/tools/index.md`).
+- Every page gets `RouteStrip.vue` in the `doc-before` slot. It renders only under `/tools/<slug>/` for a deep-dive slug: the six sections drawn as stops on the project's line, current page marked.
 
-Mermaid is enabled through `vitepress-plugin-mermaid` (`withMermaid` wraps the config), so ```` ```mermaid ```` fences work in any page. Nearly every `architecture.md` uses one.
+The visual language is a transit map. Each category is a line (`lines.ts`), each project a stop, and the stop marker's shape carries maturity (`StationMark.vue`): Graduated a large ink ring, Incubating a smaller ring in the line colour, Sandbox a plain stop, Independent a square. Colour only ever means "which line"; text stays ink on paper. The home map, the catalog, the sidebar groups, the route strip, and `assets/banner.svg` all draw from the same `lines.ts`.
+
+Mermaid is enabled through `vitepress-plugin-mermaid` (`withMermaid` wraps the config), so ```` ```mermaid ```` fences work in any page. Nearly every `architecture.md` uses one. The plugin's own `<Mermaid>` component is replaced: `theme/MermaidDiagram.vue` registers under the same name in `enhanceApp` and renders through a serial queue (`theme/mermaid-render.ts`) with a fresh id per render. The plugin's version rendered concurrently with ids that repeat across pages, which made valid diagrams fail with "Syntax error in text" now and then. A diagram that really fails to parse shows its source in a `<pre>`. Node ids that are flowchart keywords (`call`, `end`, `style`, `class`, `click`) do fail to parse; rename them.
 
 ### check-tools.mjs parses tools.ts with a regex, not an import
 
@@ -120,7 +127,7 @@ To promote a card, run `atlas-recon` then `atlas-write`, then drop the `tier` an
 
 ## Categories and maturity
 
-`category` must be one of `CATEGORY_ORDER` in `tools.ts` (add it there first if needed). `maturity` is the CNCF level (`Graduated`, `Incubating`, `Sandbox`, `Archived`) or `Independent` for non-CNCF projects. Verify it against the CNCF landscape or the project; do not guess.
+`category` must be one of `CATEGORY_ORDER` in `tools.ts` (add it there first if needed). A new category also needs an entry in `LINES` in `lines.ts` (colour, unused two-letter code, Japanese name); without one it still renders, but as a grey line coded `??`. `maturity` is the CNCF level (`Graduated`, `Incubating`, `Sandbox`, `Archived`) or `Independent` for non-CNCF projects. Verify it against the CNCF landscape or the project; do not guess.
 
 ## Verify before "done"
 

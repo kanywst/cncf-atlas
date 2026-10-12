@@ -4,6 +4,7 @@ import { useData } from 'vitepress'
 import type { Theme } from 'vitepress'
 import ToolCatalog from './ToolCatalog.vue'
 import Landing from './Landing.vue'
+import RouteStrip from './RouteStrip.vue'
 import MermaidDiagram from './MermaidDiagram.vue'
 import './custom.css'
 
@@ -11,6 +12,8 @@ import './custom.css'
 // markdown, so the .md files stay plain (no inline-HTML lint).
 // `home: true`    -> the custom Landing replaces the page body.
 // `catalog: true` -> the tool catalog renders below the page intro.
+// Every deep-dive page gets the route strip above its content; it renders nothing
+// on pages outside /tools/<slug>/.
 export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
@@ -23,9 +26,11 @@ export default {
   Layout() {
     const { lang, frontmatter } = useData()
     const locale = lang.value.startsWith('ja') ? 'ja' : 'en'
-    const slots: Record<string, () => unknown> = {}
+    const slots: Record<string, () => unknown> = {
+      'doc-before': () => h(RouteStrip, { locale }),
+    }
     if (frontmatter.value.home) slots['page-top'] = () => h(Landing, { locale })
-    else if (frontmatter.value.catalog) slots['page-bottom'] = () => h(ToolCatalog, { locale })
+    else if (frontmatter.value.catalog) slots['page-bottom'] = () => h(ToolCatalog, { locale, key: locale })
     return h(DefaultTheme.Layout, null, slots)
   },
 } satisfies Theme

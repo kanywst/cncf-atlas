@@ -1,90 +1,263 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { withBase } from 'vitepress'
-import { tools, CATEGORY_ORDER } from '../tools'
+import { tools, type Maturity } from '../tools'
+import { linesWithStations, lineStyle, MATURITY_JA } from '../lines'
+import StationMark from './StationMark.vue'
 
 const props = defineProps<{ locale?: 'en' | 'ja' }>()
-const lang = computed(() => props.locale ?? 'en')
-const prefix = computed(() => (lang.value === 'ja' ? '/ja' : ''))
+const ja = computed(() => props.locale === 'ja')
+const prefix = computed(() => (ja.value ? '/ja' : ''))
 
-const groups = computed(() => {
-  const byCat = new Map<string, ReturnType<typeof toCard>[]>()
-  for (const t of tools) {
-    const card = toCard(t)
-    if (!byCat.has(t.category)) byCat.set(t.category, [])
-    byCat.get(t.category)!.push(card)
-  }
-  const ordered = [...CATEGORY_ORDER, ...[...byCat.keys()].filter((c) => !CATEGORY_ORDER.includes(c))]
-  return ordered
-    .filter((c) => byCat.has(c))
-    .map((c) => {
-      // Deep-dives lead each category; cards follow, alphabetically so the long tail
-      // is scannable. Registry order is meaningless once there are a hundred of them.
-      const items = byCat.get(c)!
-      return {
-        category: c,
-        items: [...items.filter((i) => !i.card), ...items.filter((i) => i.card).sort((a, b) => a.name.localeCompare(b.name))],
-      }
-    })
-})
+const lines = linesWithStations()
 
-function toCard(t: (typeof tools)[number]) {
-  const card = t.tier === 'card'
-  return {
-    slug: t.slug,
-    name: t.name,
-    maturity: t.maturity,
-    card,
-    tagline: lang.value === 'ja' ? t.taglineJa : t.tagline,
-    // A deep-dive links to its own pages; a card has none, so it links upstream.
-    link: card ? t.repo! : withBase(`${prefix.value}/tools/${t.slug}/`),
-  }
+type Tier = 'all' | 'deep' | 'card'
+const q = ref('')
+const picked = ref<Maturity[]>([])
+const tier = ref<Tier>('all')
+
+const MATURITIES: Maturity[] = ['Graduated', 'Incubating', 'Sandbox', 'Independent']
+
+// Filter state lives in the query string so a filtered view can be linked to.
+// Unknown values (a stale or hand-edited link) are dropped rather than applied.
+function readQuery() {
+  const p = new URLSearchParams(location.search)
+  q.value = p.get('q') ?? ''
+  picked.value = (p.get('m')?.split(',') ?? []).filter((m): m is Maturity => MATURITIES.includes(m as Maturity))
+  const t = p.get('tier')
+  tier.value = t === 'deep' || t === 'card' ? t : 'all'
 }
 
-const heading = computed(() => (lang.value === 'ja' ? 'カテゴリから探す' : 'Browse by category'))
+// Links to /tools/#<line> land with the line heading under the sticky filter bar:
+// the VitePress router scrolls by its own fixed offset and ignores scroll-margin.
+// Scroll again once it is done, letting scroll-margin-top account for the bar.
+function landOnHash() {
+  const id = decodeURIComponent(location.hash.slice(1))
+  if (!id) return
+  requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView()))
+}
 
-const legend = computed(() =>
-  lang.value === 'ja'
-    ? 'ディープダイブがあるプロジェクトはサイト内の解説に、ないものは上流リポジトリに直接リンクします。'
-    : 'Projects with a deep-dive link to it. The rest link straight to their upstream repository.',
+// In-page jumps from the badge row. Going through the router would scroll by its fixed
+// offset; scrollIntoView honours scroll-margin-top, which clears the sticky filters.
+function jump(code: string) {
+  const id = code.toLowerCase()
+  history.replaceState(history.state, '', `${location.pathname}${location.search}#${id}`)
+  document.getElementById(id)?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+}
+
+// Publish the sticky filter bar's height (0 where it is not sticky) so each line's
+// scroll-margin-top clears it.
+const root = ref<HTMLElement | null>(null)
+const filtersEl = ref<HTMLElement | null>(null)
+let ro: ResizeObserver | undefined
+function measureFilters() {
+  const f = filtersEl.value
+  if (!f || !root.value) return
+  const h = getComputedStyle(f).position === 'sticky' ? f.offsetHeight : 0
+  root.value.style.setProperty('--filters-h', `${h}px`)
+}
+
+onMounted(() => {
+  readQuery()
+  measureFilters()
+  ro = new ResizeObserver(measureFilters)
+  if (filtersEl.value) ro.observe(filtersEl.value)
+  window.addEventListener('resize', measureFilters)
+  landOnHash()
+  window.addEventListener('hashchange', landOnHash)
+})
+onBeforeUnmount(() => {
+  ro?.disconnect()
+  window.removeEventListener('resize', measureFilters)
+  window.removeEventListener('hashchange', landOnHash)
+})
+watch([q, picked, tier], () => {
+  const p = new URLSearchParams()
+  if (q.value.trim()) p.set('q', q.value.trim())
+  if (picked.value.length) p.set('m', picked.value.join(','))
+  if (tier.value !== 'all') p.set('tier', tier.value)
+  const s = p.toString()
+  history.replaceState(history.state, '', `${location.pathname}${s ? `?${s}` : ''}${location.hash}`)
+}, { deep: true })
+
+const needle = computed(() => q.value.trim().toLowerCase())
+function matchesText(t: (typeof tools)[number]) {
+  if (!needle.value) return true
+  return [t.name, t.tagline, t.taglineJa].some((s) => s.toLowerCase().includes(needle.value))
+}
+function matchesTier(t: (typeof tools)[number]) {
+  return tier.value === 'all' || (tier.value === 'card') === (t.tier === 'card')
+}
+function matchesMaturity(t: (typeof tools)[number]) {
+  return !picked.value.length || picked.value.includes(t.maturity)
+}
+
+// Each facet counts what it would show given the other facets, the way a faceted
+// index should: the numbers tell you what a click will leave on screen.
+const maturityCounts = computed(() =>
+  Object.fromEntries(MATURITIES.map((m) => [m, tools.filter((t) => t.maturity === m && matchesText(t) && matchesTier(t)).length])),
 )
+const tierCounts = computed(() => {
+  const base = tools.filter((t) => matchesText(t) && matchesMaturity(t))
+  return { all: base.length, deep: base.filter((t) => t.tier !== 'card').length, card: base.filter((t) => t.tier === 'card').length }
+})
 
-const repoLabel = computed(() => (lang.value === 'ja' ? 'リポジトリ' : 'repo'))
+const shown = computed(() =>
+  lines
+    .map((l) => ({ ...l, stations: l.stations.filter((t) => matchesText(t) && matchesTier(t) && matchesMaturity(t)) }))
+    .filter((l) => l.stations.length),
+)
+const total = computed(() => shown.value.reduce((n, l) => n + l.stations.length, 0))
+const filtered = computed(() => Boolean(needle.value || picked.value.length || tier.value !== 'all'))
 
-const empty = computed(() =>
-  lang.value === 'ja'
-    ? 'まだツールがありません。atlas-recon → atlas-write で最初のディープダイブを生成してください。'
-    : 'No tools yet. Run atlas-recon → atlas-write to generate the first deep-dive.',
+function toggle(m: Maturity) {
+  picked.value = picked.value.includes(m) ? picked.value.filter((x) => x !== m) : [...picked.value, m]
+}
+function reset() {
+  q.value = ''
+  picked.value = []
+  tier.value = 'all'
+}
+
+function href(t: (typeof tools)[number]) {
+  return t.tier === 'card' ? t.repo! : withBase(`${prefix.value}/tools/${t.slug}/`)
+}
+function maturityLabel(m: Maturity) {
+  if (m === 'Independent') return ja.value ? MATURITY_JA.Independent : 'Not in CNCF'
+  return m
+}
+
+const c = computed(() =>
+  ja.value
+    ? {
+        search: '名前や説明で絞り込む',
+        maturity: '成熟度',
+        tierLabel: '解説',
+        all: 'すべて',
+        deep: 'ディープダイブ',
+        card: 'リポジトリのみ',
+        showing: (n: number) => `${n} 件を表示`,
+        reset: '絞り込みを解除',
+        none: (s: string) => `「${s}」に一致するプロジェクトはない。`,
+        noneBare: 'この条件に一致するプロジェクトはない。',
+        repo: 'リポジトリ',
+        jump: '路線へ移動',
+      }
+    : {
+        search: 'Filter by name or description',
+        maturity: 'Maturity',
+        tierLabel: 'Write-up',
+        all: 'All',
+        deep: 'Deep-dive',
+        card: 'Repository only',
+        showing: (n: number) => `Showing ${n} ${n === 1 ? 'project' : 'projects'}`,
+        reset: 'Clear filters',
+        none: (s: string) => `No project matches “${s}”.`,
+        noneBare: 'No project matches these filters.',
+        repo: 'repository',
+        jump: 'Jump to a line',
+      },
 )
 </script>
 
 <template>
-  <section class="catalog-section">
-    <h2 class="catalog-heading">{{ heading }}</h2>
-    <p class="catalog-legend">{{ legend }}</p>
-    <template v-if="groups.length">
-      <section v-for="g in groups" :key="g.category" class="catalog-group">
-        <h3 class="catalog-group-title">{{ g.category }}</h3>
-        <div class="catalog">
-          <a
-            v-for="t in g.items"
-            :key="t.slug"
-            class="catalog-card"
-            :class="{ 'is-card': t.card }"
-            :href="t.link"
-            :target="t.card ? '_blank' : undefined"
-            :rel="t.card ? 'noreferrer' : undefined"
-          >
-            <span class="card-top">
-              <span class="name">{{ t.name }}</span>
-              <span class="maturity" :data-m="t.maturity">{{ t.maturity }}</span>
-            </span>
-            <span class="tagline">{{ t.tagline }}</span>
-            <span v-if="t.card" class="card-repo">{{ repoLabel }} ↗</span>
-          </a>
-        </div>
+  <div ref="root" class="cat">
+    <div ref="filtersEl" class="cat-filters" role="search">
+      <input
+        v-model="q"
+        class="cat-q"
+        type="search"
+        :placeholder="c.search"
+        :aria-label="c.search"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <fieldset class="cat-facet">
+        <legend>{{ c.maturity }}</legend>
+        <button
+          v-for="m in MATURITIES"
+          :key="m"
+          type="button"
+          class="chip"
+          :class="{ empty: !maturityCounts[m] }"
+          :aria-pressed="picked.includes(m)"
+          @click="toggle(m)"
+        >
+          <StationMark :m="m" stub />
+          <span>{{ maturityLabel(m) }}</span>
+          <span class="n">{{ maturityCounts[m] }}</span>
+        </button>
+      </fieldset>
+      <fieldset class="cat-facet">
+        <legend>{{ c.tierLabel }}</legend>
+        <button
+          v-for="k in (['all', 'deep', 'card'] as const)"
+          :key="k"
+          type="button"
+          class="chip"
+          :class="{ empty: !tierCounts[k] }"
+          :aria-pressed="tier === k"
+          @click="tier = k"
+        >
+          <span>{{ c[k] }}</span>
+          <span class="n">{{ tierCounts[k] }}</span>
+        </button>
+      </fieldset>
+      <p class="cat-status" aria-live="polite">
+        {{ c.showing(total) }}
+        <button v-if="filtered" type="button" class="cat-reset" @click="reset">{{ c.reset }}</button>
+      </p>
+    </div>
+
+    <nav class="cat-jump" :aria-label="c.jump">
+      <a
+        v-for="l in lines"
+        :key="l.category"
+        class="ln"
+        :class="{ off: !shown.some((x) => x.category === l.category) }"
+        :style="lineStyle(l.category)"
+        :href="`#${l.line.code.toLowerCase()}`"
+        @click.prevent="jump(l.line.code)"
+        :title="ja ? l.line.ja : l.line.en"
+        :aria-label="ja ? l.line.ja : l.line.en"
+      ><span class="badge">{{ l.line.code }}</span></a>
+    </nav>
+
+    <div v-if="shown.length" class="cat-lines">
+      <section
+        v-for="l in shown"
+        :id="l.line.code.toLowerCase()"
+        :key="l.category"
+        class="cat-line ln"
+        :style="lineStyle(l.category)"
+      >
+        <h2 class="cat-line-head">
+          <span class="badge">{{ l.line.code }}</span>
+          <span class="nm">{{ ja ? l.line.ja : l.line.en }}</span>
+          <span class="n">{{ l.stations.length }}</span>
+        </h2>
+        <ol class="cat-stops">
+          <li v-for="t in l.stations" :key="t.slug" :class="{ card: t.tier === 'card' }">
+            <StationMark :m="t.maturity" />
+            <a
+              :href="href(t)"
+              :target="t.tier === 'card' ? '_blank' : undefined"
+              :rel="t.tier === 'card' ? 'noreferrer' : undefined"
+            >
+              <span class="nm">{{ t.name }}</span>
+              <svg v-if="t.tier === 'card'" class="ext" viewBox="0 0 12 12" :aria-label="c.repo" role="img">
+                <path d="M4.5 2.5h5v5M9.5 2.5 3 9" fill="none" stroke="currentColor" stroke-width="1.4" />
+              </svg>
+            </a>
+            <span class="tag">{{ ja ? t.taglineJa : t.tagline }}</span>
+            <span class="mat">{{ maturityLabel(t.maturity) }}</span>
+          </li>
+        </ol>
       </section>
-    </template>
-    <div v-else class="catalog-empty">{{ empty }}</div>
-  </section>
+    </div>
+    <div v-else class="cat-empty">
+      <p>{{ needle ? c.none(q.trim()) : c.noneBare }}</p>
+      <button type="button" class="cat-reset" @click="reset">{{ c.reset }}</button>
+    </div>
+  </div>
 </template>
