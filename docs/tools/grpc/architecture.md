@@ -9,8 +9,8 @@ flowchart TD
   proto[.proto service definition] -->|protoc + plugin| stubs[Generated client and server stubs]
   stubs --> wrapper[Language wrapper: src/cpp, src/python, ...]
   wrapper --> core[C-core: src/core]
-  core --> call[Call layer: CallSpine, CallFilters]
-  call --> transport[Transport: CHTTP2 / PH2 / InProc]
+  core --> callLayer[Call layer: CallSpine, CallFilters]
+  callLayer --> transport[Transport: CHTTP2 / PH2 / InProc]
   transport --> net[HTTP/2 over the network]
 ```
 

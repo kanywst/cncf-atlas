@@ -9,8 +9,8 @@ flowchart TD
   proto[.proto サービス定義] -->|protoc + プラグイン| stubs[生成されたクライアント/サーバスタブ]
   stubs --> wrapper[言語ラッパ: src/cpp, src/python, ...]
   wrapper --> core[C-core: src/core]
-  core --> call[Call 層: CallSpine, CallFilters]
-  call --> transport[Transport: CHTTP2 / PH2 / InProc]
+  core --> callLayer[Call 層: CallSpine, CallFilters]
+  callLayer --> transport[Transport: CHTTP2 / PH2 / InProc]
   transport --> net[ネットワーク上の HTTP/2]
 ```
 
