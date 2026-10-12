@@ -4,6 +4,7 @@ import { useData } from 'vitepress'
 import type { Theme } from 'vitepress'
 import ToolCatalog from './ToolCatalog.vue'
 import Landing from './Landing.vue'
+import MermaidDiagram from './MermaidDiagram.vue'
 import './custom.css'
 
 // Custom pages are rendered through layout slots rather than as component tags in
@@ -15,6 +16,9 @@ export default {
   enhanceApp({ app }) {
     app.component('ToolCatalog', ToolCatalog)
     app.component('Landing', Landing)
+    // Takes over the name the mermaid plugin registers before enhanceApp runs.
+    // See mermaid-render.ts for why.
+    app.component('Mermaid', MermaidDiagram)
   },
   Layout() {
     const { lang, frontmatter } = useData()
