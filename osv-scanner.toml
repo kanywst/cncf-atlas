@@ -20,12 +20,29 @@ reason = "Vite dev server only; not run in CI or the deployed static site"
 id = "GHSA-v6wh-96g9-6wx3"
 reason = "Vite dev server only; not run in CI or the deployed static site"
 
-# No patched braces release exists yet. It is reached only through micromatch in
-# markdownlint-cli2, which expands the glob patterns this repo writes itself, so
-# no attacker-controlled pattern ever reaches it. Drop this once a fix ships.
+# VitePress 1.x pins Vite 5, and these are fixed only in Vite 6.4.4 and later.
+# Three are in launch-editor (the dev server's open-in-editor endpoint) and two
+# in the dev server's middleware and fs.allow checks. None of it ships in the
+# static build.
 [[IgnoredVulns]]
-id = "GHSA-vfj7-8cjw-p6xm"
-reason = "braces via markdownlint-cli2 globbing; only expands this repo's own lint globs; no patched release yet"
+id = "GHSA-587h-7wmj-h5pm"
+reason = "Vite dev server (launch-editor) only; fix needs Vite 6, which VitePress 1.x cannot use"
+
+[[IgnoredVulns]]
+id = "GHSA-698v-4r3x-3vcv"
+reason = "Vite dev server (launch-editor) only; fix needs Vite 6, which VitePress 1.x cannot use"
+
+[[IgnoredVulns]]
+id = "GHSA-r825-w8mm-5pxw"
+reason = "Vite dev server (launch-editor) only; fix needs Vite 6, which VitePress 1.x cannot use"
+
+[[IgnoredVulns]]
+id = "GHSA-9jrq-w75r-8gcw"
+reason = "Vite dev server middleware only; fix needs Vite 6, which VitePress 1.x cannot use"
+
+[[IgnoredVulns]]
+id = "GHSA-rq7h-c2jc-7f22"
+reason = "Vite dev server fs.allow only; fix needs Vite 6, which VitePress 1.x cannot use"
 
 # The katex fix (0.18.2) is outside the ^0.16 range that both mermaid and
 # micromark-extension-math (via markdownlint) pin, so it cannot be installed yet.
