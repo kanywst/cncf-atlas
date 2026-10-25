@@ -23,7 +23,12 @@ reason = "Vite dev server only; not run in CI or the deployed static site"
 # VitePress 1.x pins Vite 5, and these are fixed only in Vite 6.4.4 and later.
 # Three are in launch-editor (the dev server's open-in-editor endpoint) and two
 # in the dev server's middleware and fs.allow checks. None of it ships in the
-# static build.
+# static build. Each advisory lists 6.4.4 as the first patched 6.x release:
+# https://github.com/advisories/GHSA-587h-7wmj-h5pm
+# https://github.com/advisories/GHSA-698v-4r3x-3vcv
+# https://github.com/advisories/GHSA-r825-w8mm-5pxw
+# https://github.com/advisories/GHSA-9jrq-w75r-8gcw
+# https://github.com/advisories/GHSA-rq7h-c2jc-7f22
 [[IgnoredVulns]]
 id = "GHSA-587h-7wmj-h5pm"
 reason = "Vite dev server (launch-editor) only; fix needs Vite 6, which VitePress 1.x cannot use"
