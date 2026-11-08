@@ -28,7 +28,7 @@ CI (`.github/workflows/ci.yml`) runs those three (lint, test, build) on every pu
 
 Two more workflows are easy to forget until they go red:
 
-- `security.yml` runs `npm audit --omit=dev --audit-level=high` and OSV scanner, on push and PR plus weekly. Accepted advisories live in `osv-scanner.toml`, each with a written reason; they are all Vite and esbuild dev-server issues that the static build never ships. Bumping the dev toolchain can mean adding one.
+- `security.yml` runs `npm audit --omit=dev --audit-level=high` and OSV scanner, on push and PR plus weekly. Accepted advisories live in `osv-scanner.toml`, each with a written reason (none right now). `package.json` overrides `vite` to 6.x and `katex` to 0.18.x because VitePress 1.x and mermaid 11 still ask for the vulnerable majors; drop those overrides once VitePress 2 and a mermaid-12-capable `vitepress-plugin-mermaid` land.
 - `claude-review.yml` reviews pull requests and gates nothing. It skips forks and Dependabot (neither can read the secret), and the action refuses to run when the workflow file differs from the copy on main, so a change to that file goes unreviewed until it merges.
 
 A dependency whose peer range the rest of the toolchain cannot satisfy fails `npm ci` and takes every job with it, lint and catalog check included, before any of them touch a file. When all five go red at once, read the install step, not the test output. `mermaid` is pinned to the 11 line for exactly this reason (`vitepress-plugin-mermaid` caps its peer at `10 || 11`), recorded as an `ignore` in `.github/dependabot.yml`.

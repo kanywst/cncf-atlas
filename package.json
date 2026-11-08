@@ -21,10 +21,12 @@
   "overrides": {
     "dompurify": "^3.4.17",
     "js-yaml": "^4.3.0",
+    "katex": "^0.18.2",
     "linkify-it": "^5.0.2",
     "markdown-it": "^14.3.3",
     "postcss": "^8.5.18",
     "re2js": "~2.8.7",
-    "smol-toml": "^1.7.1"
+    "smol-toml": "^1.7.1",
+    "vite": "^6.4.5"
   }
 }
