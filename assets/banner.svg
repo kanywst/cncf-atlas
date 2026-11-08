@@ -2,7 +2,7 @@
   <rect width="1280" height="400" rx="16" fill="#ffffff"/>
   <rect x="0.5" y="0.5" width="1279" height="399" rx="16" fill="none" stroke="#dfe3e8"/>
   <text x="64" y="100" font-family="Overpass, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="62" font-weight="800" letter-spacing="-1.5" fill="#1b2027">CNCF Atlas</text>
-  <text x="66" y="140" font-family="Overpass, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" fill="#535c67">Every CNCF project on one map, each one read from its source.</text>
+  <text x="66" y="140" font-family="Overpass, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" fill="#535c67">Every CNCF project on one map. Graduated and Incubating read from their source.</text>
   <line x1="83.8" y1="188.0" x2="1054.2" y2="188.0" stroke="#0079c2" stroke-width="5" stroke-linecap="round"/>
   <line x1="83.8" y1="200.4" x2="1196.2" y2="200.4" stroke="#f39700" stroke-width="5" stroke-linecap="round"/>
   <line x1="83.8" y1="212.8" x2="344.2" y2="212.8" stroke="#8fa3ad" stroke-width="5" stroke-linecap="round"/>
