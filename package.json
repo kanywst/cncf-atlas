@@ -2,7 +2,7 @@
   "name": "cncf-atlas",
   "version": "0.1.0",
   "private": false,
-  "description": "A readable map of the cloud native ecosystem. Every CNCF project with its history, architecture, adoption, and code internals. English and Japanese.",
+  "description": "A readable map of the cloud native ecosystem. History, architecture, adoption, and code internals for every CNCF Graduated and Incubating project and some Sandbox ones. English and Japanese.",
   "license": "MIT",
   "type": "module",
   "scripts": {

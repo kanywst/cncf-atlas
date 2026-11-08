@@ -60,7 +60,7 @@ export default withMermaid(defineConfig({
   base,
   title: 'CNCF Atlas',
   description:
-    'A readable map of the cloud native ecosystem: history, architecture, adoption, and code internals for every CNCF project.',
+    'A readable map of the cloud native ecosystem: history, architecture, adoption, and code internals for every CNCF Graduated and Incubating project and some Sandbox ones.',
   cleanUrls: true,
   lastUpdated: true,
   metaChunk: true,

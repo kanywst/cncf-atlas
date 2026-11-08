@@ -11,7 +11,7 @@
 
 ## Why this exists
 
-The CNCF landscape lists hundreds of projects as logos in a grid. It tells you a project exists, but not what it is, how it works, or whether it fits your stack. CNCF Atlas fills that gap. Each project gets a deep-dive written from its actual repository, in the same shape every time, so you can read it top to bottom and come away understanding it.
+The CNCF landscape lists hundreds of projects as logos in a grid. It tells you a project exists, but not what it is, how it works, or whether it fits your stack. CNCF Atlas fills that gap. Every Graduated and Incubating project, and some Sandbox ones, gets a deep-dive written from its actual repository, in the same shape every time, so you can read it top to bottom and come away understanding it. The rest of Sandbox is listed as a one-line card that links to its repository.
 
 ## What you get
 
