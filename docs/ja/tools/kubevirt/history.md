@@ -14,7 +14,7 @@ KubeVirt は 2016 年末、Red Hat 社内の「仮想マシンをコンテナの
 | 2020 | Red Hat OpenShift Virtualization (KubeVirt + KVM) が GA |
 | 2022 | CNCF Incubating に昇格 (2022-04-19) |
 | 2023 | v1.0 リリース、リリース頻度を年 3 回へ変更 |
-| 2026 | CNCF Graduated に (TOC 投票 2026-11-04 締切、[cncf/toc#1822](https://github.com/cncf/toc/issues/1822)) |
+| 2026 | CNCF Graduated に (TOC 投票 2026-11-04 締切、[cncf/toc#1822](https://github.com/cncf/toc/issues/1822)、昇格手続き [cncf/toc#2359](https://github.com/cncf/toc/issues/2359)) |
 
 ## どう進化したか
 

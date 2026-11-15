@@ -14,7 +14,7 @@ KubeVirt began at Red Hat in late 2016 from a single question: could a virtual m
 | 2020 | Red Hat OpenShift Virtualization (KubeVirt + KVM) reaches GA |
 | 2022 | Promoted to CNCF Incubating (2022-04-19) |
 | 2023 | v1.0 released; release cadence moved to three times per year |
-| 2026 | Graduated in the CNCF (TOC vote closed 2026-11-04, [cncf/toc#1822](https://github.com/cncf/toc/issues/1822)) |
+| 2026 | Graduated in the CNCF (TOC vote closed 2026-11-04, [cncf/toc#1822](https://github.com/cncf/toc/issues/1822); level change [cncf/toc#2359](https://github.com/cncf/toc/issues/2359)) |
 
 ## How it evolved
 

@@ -15,7 +15,7 @@ Collison が Apcera を創業すると、NATS は Go へ書き直され `gnatsd`
 | 2018 | CNCF に Incubating として受理 (2018-03-15) ([CNCF project page](https://www.cncf.io/projects/nats/)) |
 | ~2021 | 2.2 系で JetStream が組み込み・推奨の永続化経路に ([JetStream docs](https://docs.nats.io/nats-concepts/jetstream)) |
 | 2025 | Synadia とのガバナンス紛争が解決。商標は Linux Foundation に譲渡、Apache-2.0 を継続 ([CNCF announcement](https://www.cncf.io/announcements/2025/05/01/cncf-and-synadia-align-on-securing-the-future-of-the-nats-io-project/)) |
-| 2026 | `v2.14.2` リリース (2026-06-02)、CNCF Graduated に (TOC 投票 2026-11-02 締切、[cncf/toc#2042](https://github.com/cncf/toc/issues/2042)) |
+| 2026 | `v2.14.2` リリース (2026-06-02)、CNCF Graduated に (TOC 投票 2026-11-02 締切、[cncf/toc#2042](https://github.com/cncf/toc/issues/2042)、昇格手続き [cncf/toc#2354](https://github.com/cncf/toc/issues/2354)) |
 
 ## どう進化したか
 

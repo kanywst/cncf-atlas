@@ -13,7 +13,7 @@ Karmada は Huawei Cloud 主導のマルチクラスタの取り組みから生�
 | 2023 | CNCF Incubating に昇格 (2023-12-12)。 |
 | 2025 | 正式な Adopter Group プログラムを発足 (2025-03)。 |
 | 2026 | `v1.18.0` を直近の stable ラインとしてリリース。`v1.19.0-alpha.0` を master で cut。 |
-| 2026 | CNCF Graduated に (TOC 投票 2026-09-03 締切、[cncf/toc#1572](https://github.com/cncf/toc/issues/1572))。 |
+| 2026 | CNCF Graduated に (TOC 投票 2026-09-03 締切、[cncf/toc#1572](https://github.com/cncf/toc/issues/1572)、昇格手続き [cncf/toc#2289](https://github.com/cncf/toc/issues/2289))。 |
 
 ## どう進化したか
 

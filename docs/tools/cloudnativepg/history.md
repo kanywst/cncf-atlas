@@ -14,7 +14,7 @@ It first existed as a proprietary EDB product, "Cloud Native PostgreSQL." On 202
 | 2024 | CNCF Sandbox application filed as cncf/sandbox issue #128 (2024-09-24), assigned to the January 2025 review milestone. |
 | 2025 | Accepted into the CNCF Sandbox (January 2025 review, gitvote passed). |
 | 2026 | Stable line at v1.29.1 (2026-05-08); `main` carries manifests for the v1.30.0-rc1 release candidate. |
-| 2026 | Moved to CNCF Incubating (TOC vote closed 2026-11-02, [cncf/toc#1961](https://github.com/cncf/toc/issues/1961)). |
+| 2026 | Moved to CNCF Incubating (TOC vote closed 2026-11-02, [cncf/toc#1961](https://github.com/cncf/toc/issues/1961); level change [cncf/toc#2355](https://github.com/cncf/toc/issues/2355)). |
 
 ## How it evolved
 

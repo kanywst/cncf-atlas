@@ -15,7 +15,7 @@ When Collison founded Apcera, NATS was rewritten in Go as `gnatsd`. The motivati
 | 2018 | Accepted into CNCF as an Incubating project (2018-03-15) ([CNCF project page](https://www.cncf.io/projects/nats/)) |
 | ~2021 | JetStream becomes the built-in, recommended path for persistence in the 2.2 line ([JetStream docs](https://docs.nats.io/nats-concepts/jetstream)) |
 | 2025 | Governance dispute with Synadia resolved; trademarks transferred to the Linux Foundation, project stays Apache-2.0 ([CNCF announcement](https://www.cncf.io/announcements/2025/05/01/cncf-and-synadia-align-on-securing-the-future-of-the-nats-io-project/)) |
-| 2026 | `v2.14.2` released (2026-06-02); graduated in the CNCF (TOC vote closed 2026-11-02, [cncf/toc#2042](https://github.com/cncf/toc/issues/2042)) |
+| 2026 | `v2.14.2` released (2026-06-02); graduated in the CNCF (TOC vote closed 2026-11-02, [cncf/toc#2042](https://github.com/cncf/toc/issues/2042); level change [cncf/toc#2354](https://github.com/cncf/toc/issues/2354)) |
 
 ## How it evolved
 

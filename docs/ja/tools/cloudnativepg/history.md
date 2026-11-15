@@ -14,7 +14,7 @@ CloudNativePG は、PostgreSQL コンサルティング会社 2ndQuadrant (後�
 | 2024 | CNCF Sandbox 申請を cncf/sandbox issue #128 として起票 (2024-09-24)、2025 年 1 月レビューのマイルストーンに割当。 |
 | 2025 | CNCF Sandbox に承認 (2025 年 1 月レビュー、gitvote 可決)。 |
 | 2026 | 安定版は v1.29.1 (2026-05-08)。`main` には v1.30.0-rc1 のマニフェストが同梱。 |
-| 2026 | CNCF Incubating に昇格 (TOC 投票 2026-11-02 締切、[cncf/toc#1961](https://github.com/cncf/toc/issues/1961))。 |
+| 2026 | CNCF Incubating に昇格 (TOC 投票 2026-11-02 締切、[cncf/toc#1961](https://github.com/cncf/toc/issues/1961)、昇格手続き [cncf/toc#2355](https://github.com/cncf/toc/issues/2355))。 |
 
 ## どう進化したか
 
