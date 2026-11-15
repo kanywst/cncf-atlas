@@ -14,15 +14,16 @@ The organizations below are listed with dates in the project's `ADOPTERS.md`, wh
 | Mirakl | Operates 300+ clusters totaling 8 TB (2025-02-03). | [ADOPTERS.md](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md) |
 | Vera Rubin Observatory | Telescope systems and astronomical data release (2025-06-17). | [ADOPTERS.md](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md) |
 | Ericsson | PostgreSQL for 5G network products (2026-06-17). | [ADOPTERS.md](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md) |
+| CoreWeave | Runs CoreWeave Database (CWDB), its managed PostgreSQL service inside customers' CoreWeave Kubernetes Service clusters, plus the databases behind its own platform services (2026-11-11). | [ADOPTERS.md](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md) |
 
-The same file lists further adopters including Tesla (2026-03-31), Belastingdienst (the Netherlands Tax Administration, 2026-04-02), Nutanix NKP (2025-11-19), and PostgreSQL platform vendors (Tembo, ParadeDB, Xata, pgEdge) that build their compute layer on it.
+The same file lists further adopters including Tesla (2026-03-31), Belastingdienst (the Netherlands Tax Administration, 2026-04-02), Nutanix NKP (2025-11-19), and PostgreSQL platform vendors (Tembo, ParadeDB, Xata, pgEdge) that build their compute layer on it. Entries added between June and November 2026 include amaiko (2026-10-23), Wordfully (2026-10-25), and CageForge (2026-10-28).
 
 ## Adoption signals
 
-- GitHub stars: about 8,883 on the `cloudnative-pg/cloudnative-pg` repository (observed 2026-06-28).
-- Contributors: roughly 226, measured from the last page of the GitHub contributors API (observed 2026-06-28).
-- Release cadence: a maintained stable minor line (v1.29.1, 2026-05-08) with the next minor prepared through release candidates (`v1.30.0-rc1`) carried in `releases/` on `main`.
-- CNCF status: accepted into the Sandbox in January 2025 (cncf/sandbox issue #128), moved to Incubating in November 2026 ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961)).
+- GitHub stars: about 9,596 on the `cloudnative-pg/cloudnative-pg` repository, with 818 forks (observed 2026-11-16).
+- Contributors: roughly 242, measured from the last page of the GitHub contributors API (observed 2026-11-16).
+- Release cadence: two stable minor lines patched in parallel. v1.30.1 and v1.29.3 both shipped on 2026-09-23, three months after v1.30.0 (2026-06-29) ([releases](https://github.com/cloudnative-pg/cloudnative-pg/releases)).
+- CNCF status: accepted into the Sandbox in January 2025 (cncf/sandbox issue #128), moved to Incubating when the TOC vote closed on 2026-11-02 ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961)).
 
 ## Ecosystem
 

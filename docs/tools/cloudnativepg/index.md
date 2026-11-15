@@ -7,7 +7,7 @@
 - **Language**: Go
 - **License**: Apache License 2.0
 - **Repository**: [cloudnative-pg/cloudnative-pg](https://github.com/cloudnative-pg/cloudnative-pg)
-- **Documented at commit**: `7ef33bb` (2026-06-26, `main`)
+- **Documented at commit**: `719385f` (2026-11-13, `main`)
 
 ## What it is
 

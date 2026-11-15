@@ -13,15 +13,15 @@ CloudNativePG は、PostgreSQL コンサルティング会社 2ndQuadrant (後�
 | 2022 | EDB が operator を CloudNativePG として OSS 化し v1.15.0 をリリース (2022-04-21)、その後 IP をベンダー中立コミュニティへ Apache-2.0 で寄贈。 |
 | 2024 | CNCF Sandbox 申請を cncf/sandbox issue #128 として起票 (2024-09-24)、2025 年 1 月レビューのマイルストーンに割当。 |
 | 2025 | CNCF Sandbox に承認 (2025 年 1 月レビュー、gitvote 可決)。 |
-| 2026 | 安定版は v1.29.1 (2026-05-08)。`main` には v1.30.0-rc1 のマニフェストが同梱。 |
+| 2026 | v1.30.0 をリリース (2026-06-29)。PostgreSQL のロールを独立した Kubernetes オブジェクトとして管理する `DatabaseRole` CRD と、primary への昇格を制御する Kubernetes `Lease` が加わった ([リリースノート](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/docs/src/release_notes/v1.30.md))。2026-09-23 にパッチリリース v1.30.1 と v1.29.3 が続いた。 |
 | 2026 | CNCF Incubating に昇格 (TOC 投票 2026-11-02 締切、[cncf/toc#1961](https://github.com/cncf/toc/issues/1961)、昇格手続き [cncf/toc#2355](https://github.com/cncf/toc/issues/2355))。 |
 
 ## どう進化したか
 
 最も大きなガバナンスの転換は 2022 年の寄贈だった。EDB はコード・商標・意思決定を独自の GOVERNANCE を持つオープンコミュニティへ移し、単一ベンダーの資産であることをやめた。その後コミュニティは CNCF 加盟を目指し、2025 年 1 月に Sandbox プロジェクトとして到達した。
 
-技術面で注目すべき転換はプラグインアーキテクチャへの移行だ。当初は barman-cloud を使って operator に内蔵されていたバックアップと WAL (Write-Ahead Log、先行書き込みログ) の処理が、gRPC ベースのサイドカープラグイン機構である CNPG-i (CloudNativePG Plugin Interface) へ移行している。barman-cloud 機能はコアバイナリ内ではなくプラグイン (`cloudnative-pg/barman-cloud` 依存) の背後に置かれるようになった。
+技術面で注目すべき転換はプラグインアーキテクチャへの移行だ。当初は barman-cloud を使って operator に内蔵されていたバックアップと WAL (Write-Ahead Log、先行書き込みログ) の処理が、gRPC ベースのサイドカープラグイン機構である CNPG-i (CloudNativePG Plugin Interface) へ移行している。barman-cloud 機能はプラグイン (`cloudnative-pg/barman-cloud` 依存) として提供されており、v1.30.0 のリリースノートは operator 内蔵 (in-tree) の Barman Cloud サポートを 1.31.0 で削除する予定としている ([リリースノート](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/docs/src/release_notes/v1.30.md))。
 
 ## 現在地
 
-プロジェクトは安定マイナーライン (2026 年半ば時点で v1.29.x) を出荷し、次のマイナー (v1.30.0) をリポジトリの `releases/` ディレクトリに同梱したリリース候補で準備している。メンテナは次のガバナンス目標を CNCF Incubation と公言しており (創設者の 1 人 Gabriele Bartolini が KubeCon NA 2025 の振り返り記事で道筋を説明)、2026 年 11 月に TOC が Incubating への昇格を決めた ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961))。開発はコミュニティ主導で、EDB を含む複数組織がコントリビュータに名を連ねる。
+プロジェクトは複数の安定マイナーラインを並行して保守している。v1.30.1 と v1.29.3 はどちらも 2026-09-23 にリリースされ、2026 年 11 月時点の最新版だ ([releases](https://github.com/cloudnative-pg/cloudnative-pg/releases))。次のマイナーのリリース候補は、各 `.0` の前にリポジトリの `releases/` ディレクトリに同梱される。メンテナは次のガバナンス目標を CNCF Incubation と公言しており (創設者の 1 人 Gabriele Bartolini が KubeCon NA 2025 の振り返り記事で道筋を説明)、Incubation 申請の TOC 投票が 2026-11-02 に締め切られ、Incubating へ昇格した ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961))。開発はコミュニティ主導で、EDB を含む複数組織がコントリビュータに名を連ねる。
