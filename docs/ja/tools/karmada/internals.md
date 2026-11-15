@@ -1,6 +1,6 @@
 # 内部実装
 
-> コミット `658499d` のソースを読んだもの。ここでの主張はすべてファイルと行を指す。
+> コミット `aad59e1` のソースを読んだもの。ここでの主張はすべてファイルと行を指す。
 
 ## コードマップ
 
@@ -19,10 +19,10 @@
 
 ## 中核データ構造
 
-- `workv1alpha2.ResourceBindingSpec` (`pkg/apis/work/v1alpha2/binding_types.go:71`) はスケジューリングの作業台。`Resource` 参照、`Replicas`、`ReplicaRequirements`、`Placement`、そしてスケジュール結果 `Clusters []TargetCluster` (`binding_types.go:100`) を持つ。新しめの `Components []Component` フィールド (`binding_types.go:89`) はマルチ pod テンプレート (分散学習) 向けで、`MultiplePodTemplatesScheduling` feature gate で有効化される。
-- `workv1alpha2.TargetCluster` (`binding_types.go:287`) は 1 クラスタと割当レプリカ数の組で、スケジュール結果の単位。
-- `workv1alpha1.Work` / `WorkSpec` (`pkg/apis/work/v1alpha1/work_types.go:44,57`) はメンバークラスタへ届ける封筒。`WorkloadTemplate` (`work_types.go:77`) が `Manifests []Manifest` (`work_types.go:84`) を持ち、各々は任意の Kubernetes リソースを包む `runtime.RawExtension`。
-- `policyv1alpha1.PropagationSpec` (`pkg/apis/policy/v1alpha1/propagation_types.go:62`) は `ResourceSelectors []ResourceSelector` (`propagation_types.go:223`) で対象を選び、`Placement` (`propagation_types.go:471`) で配置する。
+- `workv1alpha2.ResourceBindingSpec` (`pkg/apis/work/v1alpha2/binding_types.go:71`) はスケジューリングの作業台。`Resource` 参照、`Replicas`、`ReplicaRequirements`、`Placement`、そしてスケジュール結果 `Clusters []TargetCluster` (`binding_types.go:102`) を持つ。新しめの `Components []Component` フィールド (`binding_types.go:98`) はマルチ pod テンプレート (分散学習) 向けで、`MultiplePodTemplatesScheduling` feature gate で有効化される。この gate は Alpha でデフォルト無効 (`pkg/features/features.go:192`)。
+- `workv1alpha2.TargetCluster` (`binding_types.go:287`) は 1 クラスタと割当レプリカ数の組で、スケジュール結果の単位。マルチ pod テンプレートのワークロードでは、コンポーネントごとのレプリカ数 `Components []TargetComponent` (`binding_types.go:299`、型は `:303`) も持つ。`AssignReplicas` がこれを埋めるのは gate が有効でコンポーネントが 2 つ以上あるときだけ。こうしたワークロードは候補クラスタ全部に配られ、各クラスタのエントリには全コンポーネントのレプリカ数がそのまま写される (`pkg/scheduler/core/common.go:72-81`)。
+- `workv1alpha1.Work` / `WorkSpec` (`pkg/apis/work/v1alpha1/work_types.go:44,57`) はメンバークラスタへ届ける封筒。`WorkloadTemplate` (`work_types.go:77`) が `Manifests []Manifest` (`work_types.go:80`) を持ち、各 `Manifest` (`work_types.go:84`) は任意の Kubernetes リソースを包む `runtime.RawExtension`。
+- `policyv1alpha1.PropagationSpec` (`pkg/apis/policy/v1alpha1/propagation_types.go:62`) は `ResourceSelectors []ResourceSelector` (`propagation_types.go:69`、型は `:223`) で対象を選び、`Placement` (`propagation_types.go:90`、型は `:445`) で配置する。
 
 ## 追う価値のあるパス
 
@@ -32,10 +32,10 @@
 // When syncing workloads to member clusters, the controller MUST strictly adhere to the scheduling results
 ```
 
-このコメントは `pkg/controllers/binding/common.go:80` にある。レプリカ改訂は workload 型に対して行われ (`common.go:86`)、次に override ポリシーが適用され (`ApplyOverridePolicies`, `common.go:109`)、`Work` オブジェクトが per-cluster の `ObjectMeta` (`common.go:134`) で namespace `karmada-es-<cluster>` (`pkg/util/names/names.go:80,92`) に構築される。続いて execution コントローラが引き継ぐ: `Reconcile` (`pkg/controllers/execution/execution_controller.go:82`) から `syncToClusters` (`execution_controller.go:266`) で各マニフェストを unmarshal し、`tryCreateOrUpdateWorkload` (`execution_controller.go:311`) を呼び、`ObjectWatcher.Create`/`Update` (`execution_controller.go:324,332`) に至る。
+このコメントは `pkg/controllers/binding/common.go:80` にある。レプリカ改訂は workload 型に対して行われ (`common.go:86`)、次に override ポリシーが適用され (`ApplyOverridePolicies`, `common.go:109`)、`Work` オブジェクトが per-cluster の `ObjectMeta` (`common.go:134`) で namespace `karmada-es-<cluster>` (`pkg/util/names/names.go:80,92`) に構築される。続いて execution コントローラが引き継ぐ: `Reconcile` (`pkg/controllers/execution/execution_controller.go:97`) から `syncToClusters` (`execution_controller.go:304`) で各マニフェストを unmarshal し、`tryCreateOrUpdateWorkload` (`execution_controller.go:349`) を呼び、`ObjectWatcher.Create`/`Update` (`execution_controller.go:362,370`) に至る。upstream PR [#7552](https://github.com/karmada-io/karmada/pull/7552) 以降、`Work` のマニフェストをメンバークラスタへ書き込むのはこのコントローラだけで、メンバー側のコピーがドリフトすると自前の informer ハンドラが `Work` をキューに戻す (`execution_controller.go:485,520,593`)。
 
 ## 読んで驚いた点
 
-真に非自明な設計判断は **Lua ベースの Resource Interpreter Framework** である。ワークロード型ごとの扱いをハードコードする代わりに、Karmada は解釈ロジックを Lua スクリプトとして Go を再コンパイルせず注入させる。`pkg/resourceinterpreter/interpreter.go:50` のインターフェースが `GetReplicas`、`ReviseReplica`、`AggregateStatus` などの operation を宣言する。declarative 実装は `New` (`pkg/resourceinterpreter/customized/declarative/luavm/lua.go:46`) で gopher-lua VM のプールを作り、`RunScript` (`lua.go:74`) でユーザ定義関数を呼ぶ。型付きエントリは `GetReplicas` (`lua.go:129`) と `ReviseReplica` (`lua.go:185`)。スクリプトは `ResourceInterpreterCustomization` CRD に載る。リポジトリには `default/native` と `default/thirdparty/resourcecustomizations` 配下に Flux, Argo, Ray, Kubeflow, Flink 向けのビルトインインタプリタも同梱される。これが「アプリ無改造」を任意の CRD (`FlinkDeployment`, `RayJob`, `PyTorchJob` など) まで広げる肝で、それらのレプリカ分割や status 集約は Go ではなく Lua で記述される。
+真に非自明な設計判断は **Lua ベースの Resource Interpreter Framework** である。ワークロード型ごとの扱いをハードコードする代わりに、Karmada は解釈ロジックを Lua スクリプトとして Go を再コンパイルせず注入させる。`pkg/resourceinterpreter/interpreter.go:43` のインターフェースが `GetReplicas`、`ReviseReplica`、`AggregateStatus` などの operation を宣言する。declarative 実装は `New` (`pkg/resourceinterpreter/customized/declarative/luavm/lua.go:46`) で gopher-lua VM のプールを作り、`RunScript` (`lua.go:74`) でユーザ定義関数を呼ぶ。型付きエントリは `GetReplicas` (`lua.go:129`) と `ReviseReplica` (`lua.go:185`)。スクリプトは `ResourceInterpreterCustomization` CRD に載る。リポジトリには `default/native` と `default/thirdparty/resourcecustomizations` 配下に Flux, Argo, Ray, Kubeflow, Flink のほか Volcano, Spark Operator, OpenKruise など向けのビルトインインタプリタも同梱される。これが「アプリ無改造」を任意の CRD (`FlinkDeployment`, `RayJob`, `PyTorchJob` など) まで広げる肝で、それらのレプリカ分割や status 集約は Go ではなく Lua で記述される。
 
 2 つ目の驚きは、テンプレート自身のレプリカフィールドを意図的に信用しない点である。スケジューラはレプリカをスケジュール対象の希少資源として計上し、`ensureWork` は同期のたびにテンプレート値を上書きする (`pkg/controllers/binding/common.go:80-96`)。ワークロードが自前のレプリカ数を設定してスケジューラの quota や queue 計上を静かに迂回できないようにするためである。

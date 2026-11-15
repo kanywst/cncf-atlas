@@ -12,8 +12,9 @@ Karmada grew out of the multi-cluster work led by Huawei Cloud, co-initiated wit
 | 2021 | Accepted as a CNCF Sandbox project (2021-09-14). |
 | 2023 | Promoted to CNCF Incubating (2023-12-12). |
 | 2025 | Formal Adopter Group program launched (2025-03). |
-| 2026 | `v1.18.0` released as the recent stable line; `v1.19.0-alpha.0` cut on master. |
-| 2026 | Graduated in the CNCF (TOC vote closed 2026-09-03, [cncf/toc#1572](https://github.com/cncf/toc/issues/1572); level change [cncf/toc#2289](https://github.com/cncf/toc/issues/2289)). |
+| 2026 | `v1.18.0` released (2026-05-30). |
+| 2026 | `v1.19.0` released (2026-08-31): multi-component scheduling for distributed AI training jobs advances, and priority-based scheduling moves to Beta, on by default ([CNCF announcement](https://www.cncf.io/announcements/2026/09/07/cloud-native-computing-foundation-announces-karmada-graduation/)). |
+| 2026 | Graduated in the CNCF: the TOC vote closed 2026-09-03 ([cncf/toc#1572](https://github.com/cncf/toc/issues/1572)), the level change closed 2026-09-04 ([cncf/toc#2289](https://github.com/cncf/toc/issues/2289)), and CNCF announced it on 2026-09-08 at KubeCon + CloudNativeCon China in Shanghai. |
 
 ## How it evolved
 
@@ -21,4 +22,6 @@ Karmada moved from a basic federation tool toward an automation-heavy control pl
 
 ## Where it stands now
 
-Karmada graduated in the CNCF in September 2026 ([cncf/toc#1572](https://github.com/cncf/toc/issues/1572)). At the documented commit (`658499d`, 2026-06-22), the project had an active release cadence: `v1.18.0` is the recent stable release (2026-05-30) and `v1.19.0-alpha.0` is in progress. At the time of incubation CNCF reported more than 500 contributors from 60+ organizations across 20+ countries, with 7 maintainers. As of 2026-06-24 the GitHub repo shows 5,503 stars and 1,149 forks ([CNCF blog](https://www.cncf.io/blog/2023/12/12/karmada-brings-kubernetes-multi-cloud-capabilities-to-cncf-incubator/), [GitHub API](https://api.github.com/repos/karmada-io/karmada)).
+Karmada graduated in the CNCF in September 2026. To get there it completed a third-party security audit, set up a formal steering committee, and adopted the CNCF Code of Conduct. The announcement counts more than 1,214 contributors across 292 organizations, with maintainers from six organizations ([CNCF announcement](https://www.cncf.io/announcements/2026/09/07/cloud-native-computing-foundation-announces-karmada-graduation/)).
+
+At the documented commit (`aad59e1`, 2026-11-13) the latest stable release is `v1.19.1` (2026-10-31). Patch releases `v1.18.4` and `v1.17.7` shipped the same day, so three minor lines receive fixes in parallel, and `v1.20.0-beta.0` is the current pre-release. The gates behind those `v1.19.0` features read as follows at this commit: `PriorityBasedScheduling` is Beta and on by default, while `PriorityBasedPreemptiveScheduling` and `MultiplePodTemplatesScheduling` are still Alpha and off (`pkg/features/features.go:186,187,192`). As of 2026-11-16 the GitHub repo shows 5,765 stars and 1,252 forks ([GitHub releases](https://github.com/karmada-io/karmada/releases), [GitHub API](https://api.github.com/repos/karmada-io/karmada)).
