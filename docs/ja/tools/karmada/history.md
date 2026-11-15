@@ -13,6 +13,7 @@ Karmada は Huawei Cloud 主導のマルチクラスタの取り組みから生�
 | 2023 | CNCF Incubating に昇格 (2023-12-12)。 |
 | 2025 | 正式な Adopter Group プログラムを発足 (2025-03)。 |
 | 2026 | `v1.18.0` を直近の stable ラインとしてリリース。`v1.19.0-alpha.0` を master で cut。 |
+| 2026 | CNCF Graduated に (TOC 投票 2026-09-03 締切、[cncf/toc#1572](https://github.com/cncf/toc/issues/1572)、昇格手続き [cncf/toc#2289](https://github.com/cncf/toc/issues/2289))。 |
 
 ## どう進化したか
 
@@ -20,4 +21,4 @@ Karmada は基本的な federation ツールから、自動化寄りのコント
 
 ## 現在地
 
-ドキュメント基準コミット (`658499d`, 2026-06-22) 時点で、Karmada は CNCF Incubating プロジェクトであり、リリースは活発: `v1.18.0` が直近の stable リリース (2026-05-30)、`v1.19.0-alpha.0` が進行中。incubation 時点では CNCF が 20+ 国・60+ 組織から 500+ contributor、maintainer 7 名と公表していた。2026-06-24 時点で GitHub リポジトリは 5,503 stars / 1,149 forks ([CNCF blog](https://www.cncf.io/blog/2023/12/12/karmada-brings-kubernetes-multi-cloud-capabilities-to-cncf-incubator/), [GitHub API](https://api.github.com/repos/karmada-io/karmada))。
+Karmada は 2026 年 9 月に CNCF Graduated になった ([cncf/toc#1572](https://github.com/cncf/toc/issues/1572))。ドキュメント基準コミット (`658499d`, 2026-06-22) 時点のリリースは活発: `v1.18.0` が直近の stable リリース (2026-05-30)、`v1.19.0-alpha.0` が進行中。incubation 時点では CNCF が 20+ 国・60+ 組織から 500+ contributor、maintainer 7 名と公表していた。2026-06-24 時点で GitHub リポジトリは 5,503 stars / 1,149 forks ([CNCF blog](https://www.cncf.io/blog/2023/12/12/karmada-brings-kubernetes-multi-cloud-capabilities-to-cncf-incubator/), [GitHub API](https://api.github.com/repos/karmada-io/karmada))。

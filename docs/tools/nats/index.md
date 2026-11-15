@@ -3,7 +3,7 @@
 > A high-performance messaging system that ships as a single Go binary and adds optional JetStream persistence on top of a fire-and-forget core.
 
 - **Category**: Messaging & Streaming
-- **CNCF maturity**: Incubating
+- **CNCF maturity**: Graduated
 - **Language**: Go
 - **License**: Apache-2.0
 - **Repository**: [nats-io/nats-server](https://github.com/nats-io/nats-server)

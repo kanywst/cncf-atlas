@@ -3,7 +3,7 @@
 > 単一の Go バイナリとして配布される高性能メッセージングシステム。fire-and-forget な中核の上に、JetStream による永続化を任意で追加できる。
 
 - **カテゴリ**: Messaging & Streaming
-- **CNCF 成熟度**: Incubating
+- **CNCF 成熟度**: Graduated
 - **言語**: Go
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [nats-io/nats-server](https://github.com/nats-io/nats-server)

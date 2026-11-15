@@ -14,6 +14,7 @@ CloudNativePG は、PostgreSQL コンサルティング会社 2ndQuadrant (後�
 | 2024 | CNCF Sandbox 申請を cncf/sandbox issue #128 として起票 (2024-09-24)、2025 年 1 月レビューのマイルストーンに割当。 |
 | 2025 | CNCF Sandbox に承認 (2025 年 1 月レビュー、gitvote 可決)。 |
 | 2026 | 安定版は v1.29.1 (2026-05-08)。`main` には v1.30.0-rc1 のマニフェストが同梱。 |
+| 2026 | CNCF Incubating に昇格 (TOC 投票 2026-11-02 締切、[cncf/toc#1961](https://github.com/cncf/toc/issues/1961)、昇格手続き [cncf/toc#2355](https://github.com/cncf/toc/issues/2355))。 |
 
 ## どう進化したか
 
@@ -23,4 +24,4 @@ CloudNativePG は、PostgreSQL コンサルティング会社 2ndQuadrant (後�
 
 ## 現在地
 
-プロジェクトは安定マイナーライン (2026 年半ば時点で v1.29.x) を出荷し、次のマイナー (v1.30.0) をリポジトリの `releases/` ディレクトリに同梱したリリース候補で準備している。メンテナは次のガバナンス目標が CNCF Incubation だと公言しており、創設者の 1 人 Gabriele Bartolini が KubeCon NA 2025 の振り返り記事でその道筋を説明した。開発はコミュニティ主導で、EDB を含む複数組織がコントリビュータに名を連ねる。
+プロジェクトは安定マイナーライン (2026 年半ば時点で v1.29.x) を出荷し、次のマイナー (v1.30.0) をリポジトリの `releases/` ディレクトリに同梱したリリース候補で準備している。メンテナは次のガバナンス目標を CNCF Incubation と公言しており (創設者の 1 人 Gabriele Bartolini が KubeCon NA 2025 の振り返り記事で道筋を説明)、2026 年 11 月に TOC が Incubating への昇格を決めた ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961))。開発はコミュニティ主導で、EDB を含む複数組織がコントリビュータに名を連ねる。

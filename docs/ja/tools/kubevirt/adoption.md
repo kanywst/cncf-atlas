@@ -21,7 +21,7 @@ CNCF は、KubeVirt と Kube-OVN でソブリンクラウドを構築した Swis
 - GitHub スター: 6,917、フォーク: 1,710 (`gh repo view`、観測 2026-06-24)。
 - コントリビュータ: 約 361 人 (GitHub contributors API のページネーション、観測 2026-06-24)。
 - リリース頻度: v1.0 以降は年 3 回。最新は `v1.8.4` (2026-06-16)。
-- 2025 年 11 月時点で CNCF Graduation のプロセス中、ADOPTERS は 41 件 ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/))。
+- 2026 年 11 月に CNCF Graduated ([cncf/toc#1822](https://github.com/cncf/toc/issues/1822))。Graduation 審査中の 2025 年 11 月時点で ADOPTERS は 41 件 ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/))。
 
 ## エコシステム
 

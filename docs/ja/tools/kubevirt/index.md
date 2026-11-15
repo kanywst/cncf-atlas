@@ -3,7 +3,7 @@
 > KVM 仮想マシンを Kubernetes ネイティブなワークロードとして実行・管理する。
 
 - **カテゴリ**: Orchestration & Scheduling
-- **CNCF 成熟度**: Incubating
+- **CNCF 成熟度**: Graduated
 - **言語**: Go (`go.mod:1`, `go 1.24.0`)
 - **ライセンス**: Apache-2.0 (`LICENSE:1`)
 - **リポジトリ**: [kubevirt/kubevirt](https://github.com/kubevirt/kubevirt)

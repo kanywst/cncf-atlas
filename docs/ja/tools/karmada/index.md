@@ -3,7 +3,7 @@
 > 複数クラスタ/クラウドへワークロードを Kubernetes ネイティブ API のまま配布・スケジューリングするコントロールプレーン。
 
 - **カテゴリ**: Orchestration & Scheduling
-- **CNCF 成熟度**: Incubating
+- **CNCF 成熟度**: Graduated
 - **言語**: Go
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [karmada-io/karmada](https://github.com/karmada-io/karmada)

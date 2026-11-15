@@ -3,7 +3,7 @@
 > A Kubernetes operator that runs PostgreSQL with high availability, using the Kubernetes API itself as the consensus store instead of an external tool like etcd or Patroni.
 
 - **Category**: Storage & Database
-- **CNCF maturity**: Sandbox
+- **CNCF maturity**: Incubating
 - **Language**: Go
 - **License**: Apache License 2.0
 - **Repository**: [cloudnative-pg/cloudnative-pg](https://github.com/cloudnative-pg/cloudnative-pg)
@@ -15,7 +15,7 @@ CloudNativePG is a Kubernetes operator for PostgreSQL. You describe the database
 
 Its defining design choice is that it relies on no external Distributed Configuration Store (DCS). Most PostgreSQL high-availability stacks use Patroni or repmgr backed by etcd, Consul, or ZooKeeper to elect a primary. CloudNativePG instead treats the Kubernetes API server as the single source of truth. The operator watches the `Cluster` resource, and an in-Pod agent called the instance manager watches the same resource, so the cluster state and the database topology live in one place.
 
-The project began as a proprietary EDB product, was open-sourced and donated to a vendor-neutral community in 2022, and joined the CNCF Sandbox in January 2025. It is written in Go on top of controller-runtime.
+The project began as a proprietary EDB product, was open-sourced and donated to a vendor-neutral community in 2022, joined the CNCF Sandbox in January 2025, and moved to Incubating in November 2026 ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961)). It is written in Go on top of controller-runtime.
 
 ## When to use it
 

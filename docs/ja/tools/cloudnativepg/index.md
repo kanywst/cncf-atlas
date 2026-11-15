@@ -3,7 +3,7 @@
 > Kubernetes 上で PostgreSQL を高可用に運用する operator。etcd や Patroni のような外部ツールではなく、Kubernetes API 自体を合意ストアとして使う。
 
 - **カテゴリ**: Storage & Database
-- **CNCF 成熟度**: Sandbox
+- **CNCF 成熟度**: Incubating
 - **言語**: Go
 - **ライセンス**: Apache License 2.0
 - **リポジトリ**: [cloudnative-pg/cloudnative-pg](https://github.com/cloudnative-pg/cloudnative-pg)
@@ -15,7 +15,7 @@ CloudNativePG は PostgreSQL のための Kubernetes operator。欲しいデー�
 
 最大の設計上の選択は、外部 DCS (Distributed Configuration Store、分散構成ストア) に依存しない点だ。多くの PostgreSQL 高可用スタックは、primary を選出するために etcd・Consul・ZooKeeper を裏に持つ Patroni や repmgr を使う。CloudNativePG はその代わりに Kubernetes API サーバを唯一の真実の源として扱う。operator が `Cluster` リソースを watch し、各 Pod 内で動く instance manager というエージェントも同じリソースを watch するので、クラスタの状態とデータベースのトポロジが 1 か所に集約される。
 
-プロジェクトは EDB (EnterpriseDB) のプロプライエタリ製品として始まり、2022 年にベンダー中立なコミュニティへ OSS 化・寄贈され、2025 年 1 月に CNCF Sandbox 入りした。controller-runtime を土台に Go で書かれている。
+プロジェクトは EDB (EnterpriseDB) のプロプライエタリ製品として始まり、2022 年にベンダー中立なコミュニティへ OSS 化・寄贈され、2025 年 1 月に CNCF Sandbox 入りし、2026 年 11 月に Incubating へ昇格した ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961))。controller-runtime を土台に Go で書かれている。
 
 ## いつ使うか
 
