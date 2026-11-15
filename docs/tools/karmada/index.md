@@ -7,7 +7,7 @@
 - **Language**: Go
 - **License**: Apache-2.0
 - **Repository**: [karmada-io/karmada](https://github.com/karmada-io/karmada)
-- **Documented at commit**: `658499d` (2026-06-22, master, near tag `v1.19.0-alpha.0`)
+- **Documented at commit**: `aad59e1` (2026-11-13, master, 28 commits after tag `v1.20.0-beta.0`)
 
 ## What it is
 
@@ -36,11 +36,13 @@ When a single cluster is enough, or when you only need GitOps-style delivery to 
 
 ## Sources
 
-1. [karmada-io/karmada](https://github.com/karmada-io/karmada) (README, code), accessed 2026-06-24.
-2. [Karmada Adopters](https://karmada.io/adopters/), accessed 2026-06-24.
+1. [karmada-io/karmada](https://github.com/karmada-io/karmada) (README, code), accessed 2026-11-16.
+2. [Karmada Adopters](https://karmada.io/adopters/), accessed 2026-11-16.
 3. [Karmada website](https://karmada.io/), accessed 2026-06-24.
 4. [Karmada brings Kubernetes multi-cloud capabilities to CNCF Incubator](https://www.cncf.io/blog/2023/12/12/karmada-brings-kubernetes-multi-cloud-capabilities-to-cncf-incubator/), CNCF blog, accessed 2026-06-24.
 5. [Karmada CNCF project page](https://www.cncf.io/projects/karmada/), accessed 2026-06-24.
 6. [Karmada and Open Cluster Management: two new approaches](https://www.cncf.io/blog/2022/09/26/karmada-and-open-cluster-management-two-new-approaches-to-the-multicluster-fleet-management-challenge/), CNCF blog, accessed 2026-06-24.
 7. [Karmada launches Adopter Group](https://www.cncf.io/blog/2025/03/26/karmada-launches-adopter-group/), CNCF blog, accessed 2026-06-24.
-8. [GitHub REST API: repos/karmada-io/karmada](https://api.github.com/repos/karmada-io/karmada), accessed 2026-06-24.
+8. [GitHub REST API: repos/karmada-io/karmada](https://api.github.com/repos/karmada-io/karmada), accessed 2026-11-16.
+9. [Cloud Native Computing Foundation Announces Karmada Graduation](https://www.cncf.io/announcements/2026/09/07/cloud-native-computing-foundation-announces-karmada-graduation/), CNCF announcement, accessed 2026-11-16.
+10. [Karmada Graduation Application, cncf/toc#1572](https://github.com/cncf/toc/issues/1572), accessed 2026-11-16.

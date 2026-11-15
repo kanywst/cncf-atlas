@@ -48,9 +48,9 @@ Pull モード用。メンバークラスタ内で動作し、コントロール
 2. スケジューラが `pkg/scheduler/scheduler.go:359` (`scheduleNext`) で反応し、`doScheduleBinding` (`scheduler.go:395`) から `scheduleResourceBinding` (`scheduler.go:571`)、affinity ベースの配置では `scheduleResourceBindingWithClusterAffinity` (`scheduler.go:590`) を経て `s.Algorithm.Schedule(...)` (`scheduler.go:600`) を呼ぶ。
 3. スケジューリングアルゴリズム本体は `pkg/scheduler/core/generic_scheduler.go:71` (`Schedule`)。filter プラグイン (`findClustersThatFit`, `generic_scheduler.go:119`)、score プラグイン (`prioritizeClusters`, `generic_scheduler.go:166`)、`selectClusters` (`generic_scheduler.go:196`, `core/common.go:34` の `SelectClusters`)、`assignReplicas` (`generic_scheduler.go:201`, `core/common.go:51` の `AssignReplicas`) を順に走らせる。スケジューラは結果を binding の `spec.Clusters` に patch する (`patchScheduleResultForResourceBinding`, `scheduler.go:610`)。
 4. binding コントローラが `pkg/controllers/binding/binding_controller.go:70` (`Reconcile`) で `syncBinding` (`binding_controller.go:110`)、続いて `ensureWork` (`pkg/controllers/binding/common.go:53`) を呼ぶ。対象クラスタごとに workload を DeepCopy し、レプリカ数をスケジュール結果で上書きし、override ポリシーを適用 (`common.go:109`) し、per-cluster の実行 namespace `karmada-es-<cluster>` に `Work` を生成する。
-5. execution コントローラが `pkg/controllers/execution/execution_controller.go:82` (`Reconcile`) で `syncWork` (`execution_controller.go:151`)、`syncToClusters` (`execution_controller.go:266`) を呼び、各マニフェストを `ObjectWatcher.Create`/`Update` (`execution_controller.go:324`, `:332`) でメンバー API に適用し、成功で `Work` に Applied を立てる (`execution_controller.go:302`)。
+5. execution コントローラが `pkg/controllers/execution/execution_controller.go:97` (`Reconcile`) でまずメンバークラスタ上に Work のリソース型の informer (オブジェクトをキャッシュし、変更のたびにコールバックを呼ぶクライアント側の watch) を登録し (`execution_controller.go:151`)、続いて `syncWork` (`execution_controller.go:189`)、`syncToClusters` (`execution_controller.go:304`) を呼ぶ。各マニフェストを `ObjectWatcher.Create`/`Update` (`execution_controller.go:362`, `:370`) でメンバー API に適用し、成功で `Work` に Applied を立てる (`execution_controller.go:340`)。
 
-`pkg/controllers/status` 配下の status コントローラ群が逆向きに走り、各メンバーの実状態を `Work` から `ResourceBinding`、テンプレートへ集約する。
+ドリフト (メンバークラスタ上で直接行われ、オブジェクトを `Work` の記述からずらす変更) も同じコントローラが扱う。メンバークラスタ上の Karmada 管理オブジェクトが追加・変更・削除されると informer のハンドラ (`onAdd`, `onUpdate`, `onDelete`, `execution_controller.go:485,520,593`) が動き、所有元の `Work` をキューに戻すので、次の同期で再適用される。Karmada 自身の書き込みによる追加・更新イベント (オブジェクトの resource version が Karmada の記録と一致する) と、`managedFields` や `status` など刈り込み対象のフィールドだけが違う更新は無視される (`pkg/resourceinterpreter/default/native/prune/prune.go:66,81`)。`pkg/controllers/status` 配下の status コントローラ群は逆向きに走って報告だけを行い、各メンバーの実状態を `Work` から `ResourceBinding`、テンプレートへ集約する。upstream PR [#7552](https://github.com/karmada-io/karmada/pull/7552) (2026-08-19 マージ) 以前は、work status コントローラ自身もドリフトしたメンバー側オブジェクトを書き戻し・再作成していた。この PR で `Work` のマニフェストをメンバークラスタへ書き込む処理はすべて execution コントローラに移った。
 
 ## 主要な設計判断
 
@@ -61,6 +61,6 @@ Pull モード用。メンバークラスタ内で動作し、コントロール
 ## 拡張ポイント
 
 - **PropagationPolicy / ClusterPropagationPolicy と OverridePolicy** CRD で配置とクラスタごとのカスタマイズを制御する (`pkg/apis/policy/v1alpha1/propagation_types.go:52`)。
-- **Resource Interpreter Framework**: インターフェース (`pkg/resourceinterpreter/interpreter.go:50`) と、Lua スクリプト実装 (`ResourceInterpreterCustomization` CRD) により、任意の CRD についてレプリカの読み取り・改訂・status 集約を Karmada に教える。
+- **Resource Interpreter Framework**: インターフェース (`pkg/resourceinterpreter/interpreter.go:43`) と、Lua スクリプト実装 (`ResourceInterpreterCustomization` CRD) により、任意の CRD についてレプリカの読み取り・改訂・status 集約を Karmada に教える。
 - **スケジューラフレームワークのプラグイン**: filter と score プラグイン。スコアは 0..100 に制限される (`pkg/scheduler/framework/interface.go:39-42`)。
 - **Admission webhook** (`cmd/webhook`)。

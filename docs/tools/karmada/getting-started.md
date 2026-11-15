@@ -1,6 +1,6 @@
 # Getting Started
 
-> Verified against the README quick start at commit `658499d`. Commands assume a local machine with Docker available for `kind`.
+> Verified against the README quick start at commit `aad59e1`. Commands assume a local machine with Docker available for `kind`.
 
 ## Prerequisites
 

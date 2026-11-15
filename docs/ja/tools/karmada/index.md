@@ -7,7 +7,7 @@
 - **言語**: Go
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [karmada-io/karmada](https://github.com/karmada-io/karmada)
-- **ドキュメント基準コミット**: `658499d` (2026-06-22, master, タグ `v1.19.0-alpha.0` 付近)
+- **ドキュメント基準コミット**: `aad59e1` (2026-11-13, master, タグ `v1.20.0-beta.0` の 28 コミット後)
 
 ## 何をするものか
 
@@ -36,11 +36,13 @@ Karmada は専用のコントロールプレーン (独自の `karmada-apiserver
 
 ## 出典
 
-1. [karmada-io/karmada](https://github.com/karmada-io/karmada) (README, code), 参照 2026-06-24。
-2. [Karmada Adopters](https://karmada.io/adopters/), 参照 2026-06-24。
+1. [karmada-io/karmada](https://github.com/karmada-io/karmada) (README, code), 参照 2026-11-16。
+2. [Karmada Adopters](https://karmada.io/adopters/), 参照 2026-11-16。
 3. [Karmada 公式サイト](https://karmada.io/), 参照 2026-06-24。
 4. [Karmada brings Kubernetes multi-cloud capabilities to CNCF Incubator](https://www.cncf.io/blog/2023/12/12/karmada-brings-kubernetes-multi-cloud-capabilities-to-cncf-incubator/), CNCF blog, 参照 2026-06-24。
 5. [Karmada CNCF プロジェクトページ](https://www.cncf.io/projects/karmada/), 参照 2026-06-24。
 6. [Karmada and Open Cluster Management: two new approaches](https://www.cncf.io/blog/2022/09/26/karmada-and-open-cluster-management-two-new-approaches-to-the-multicluster-fleet-management-challenge/), CNCF blog, 参照 2026-06-24。
 7. [Karmada launches Adopter Group](https://www.cncf.io/blog/2025/03/26/karmada-launches-adopter-group/), CNCF blog, 参照 2026-06-24。
-8. [GitHub REST API: repos/karmada-io/karmada](https://api.github.com/repos/karmada-io/karmada), 参照 2026-06-24。
+8. [GitHub REST API: repos/karmada-io/karmada](https://api.github.com/repos/karmada-io/karmada), 参照 2026-11-16。
+9. [Cloud Native Computing Foundation Announces Karmada Graduation](https://www.cncf.io/announcements/2026/09/07/cloud-native-computing-foundation-announces-karmada-graduation/), CNCF アナウンス, 参照 2026-11-16。
+10. [Karmada Graduation Application, cncf/toc#1572](https://github.com/cncf/toc/issues/1572), 参照 2026-11-16。
