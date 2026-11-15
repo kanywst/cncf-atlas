@@ -2,7 +2,7 @@
 
 ## Who uses it
 
-The NATS graduation application states that the nats.io adopters list and CNCF case studies name 2,000+ organizations ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042)). The named examples below come from cited sources.
+The NATS graduation application, which passed its TOC vote on 2026-11-02, states that the nats.io adopters list and CNCF case studies name 2,000+ organizations ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042)). The named examples below come from cited sources.
 
 | Organisation | Use case | Source |
 | --- | --- | --- |
@@ -16,7 +16,7 @@ The NATS graduation application states that the nats.io adopters list and CNCF c
 
 ## Adoption signals
 
-As observed on 2026-06-24, `nats-io/nats-server` had 20,083 stars, 1,846 forks, and 508 open issues (GitHub API). The repository was created on 2012-10-29. GitHub GraphQL reported around 190 mentionable users. The graduation application cited 169+ contributors, 18.3k+ stars, and 11k+ Slack members at the time of filing ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042)). The latest release is `v2.14.2` (2026-06-02).
+As observed on 2026-11-16, `nats-io/nats-server` had 21,042 stars, 2,042 forks, 459 open issues, and 18 open pull requests ([GitHub](https://github.com/nats-io/nats-server)). The repository was created on 2012-10-29. GitHub GraphQL reported 235 mentionable users. The graduation application cited 169+ contributors, 18.3k+ stars, and 11k+ Slack members at the time of filing ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042)). The latest releases are `v2.15.3` and `v2.14.10`, both from 2026-11-11 ([releases](https://github.com/nats-io/nats-server/releases)).
 
 ## Ecosystem
 

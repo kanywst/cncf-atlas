@@ -2,7 +2,7 @@
 
 ## 誰が使っているか
 
-NATS の graduation 申請は、nats.io の adopters リストと CNCF ケーススタディに 2,000+ 組織が記載されているとしている ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042))。以下の具体例は出典のある事例だ。
+2026-11-02 に TOC 投票を通過した NATS の graduation 申請は、nats.io の adopters リストと CNCF ケーススタディに 2,000+ 組織が記載されているとしている ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042))。以下の具体例は出典のある事例だ。
 
 | 組織 | ユースケース | 出典 |
 | --- | --- | --- |
@@ -16,7 +16,7 @@ NATS の graduation 申請は、nats.io の adopters リストと CNCF ケース
 
 ## 採用のシグナル
 
-2026-06-24 時点で `nats-io/nats-server` は stars 20,083・forks 1,846・open issues 508 (GitHub API)。リポジトリ作成は 2012-10-29。GitHub GraphQL の mentionable users はおよそ 190。graduation 申請は申請時点で contributors 169+・stars 18.3k+・Slack 11k+ と記載している ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042))。直近リリースは `v2.14.2` (2026-06-02)。
+2026-11-16 時点で `nats-io/nats-server` は stars 21,042・forks 2,042・open issues 459・open pull requests 18 ([GitHub](https://github.com/nats-io/nats-server))。リポジトリ作成は 2012-10-29。GitHub GraphQL の mentionable users は 235。graduation 申請は申請時点で contributors 169+・stars 18.3k+・Slack 11k+ と記載している ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042))。直近リリースは `v2.15.3` と `v2.14.10` で、どちらも 2026-11-11 ([releases](https://github.com/nats-io/nats-server/releases))。
 
 ## エコシステム
 

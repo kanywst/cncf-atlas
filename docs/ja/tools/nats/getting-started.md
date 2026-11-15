@@ -1,10 +1,10 @@
 # はじめに
 
-> `v2.14.2` で検証済み。コマンドは Go 1.25+ または Docker のある Unix シェルと、`nats` CLI を想定。
+> 2026-11-16 時点の最新リリース `v2.15.3` を対象に書いた。コマンドは Go 1.26+ または Docker のある Unix シェルと、`nats` CLI を想定。
 
 ## 前提
 
-- ソースからビルドするなら Go 1.25 以降、公開イメージを動かすなら Docker。
+- ソースからビルドするなら Go 1.26 以降 (リリースの `go.mod` が `go 1.26.0` を宣言している、[go.mod](https://github.com/nats-io/nats-server/blob/v2.15.3/go.mod))、公開イメージを動かすなら Docker。
 - コマンドラインから publish/subscribe するための `nats` CLI。
 
 ## インストール

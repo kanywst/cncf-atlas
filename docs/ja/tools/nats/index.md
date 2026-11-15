@@ -7,7 +7,7 @@
 - **言語**: Go
 - **ライセンス**: Apache-2.0
 - **リポジトリ**: [nats-io/nats-server](https://github.com/nats-io/nats-server)
-- **ドキュメント基準コミット**: `bd058fac` (default ブランチ HEAD、ソース VERSION は `2.15.0-dev`、直近リリースは `v2.14.2`)
+- **ドキュメント基準コミット**: `6993500c` (2026-11-13 時点の default ブランチ HEAD、ソース VERSION は `2.16.0-dev`、直近リリースは `v2.15.3`)
 
 ## 何をするものか
 
@@ -15,7 +15,7 @@ NATS は publish/subscribe 型のメッセージングシステム。送信側�
 
 中核プロトコルは at-most-once。サーバはディスクに何も保持せず、購読者が現在いないメッセージは破棄される。この中核の上に JetStream が永続化・リプレイ・at-least-once 配送・key/value バケット・オブジェクトストレージを追加する。JetStream はデータを独自の追記型ファイル形式で保存し、クラスタ間を Raft で複製するため、外部 DB を必要としない。
 
-単一の `nats-server` バイナリが配置形態の全レンジをカバーする。スタンドアロンプロセス、ルーティングされたサーバ群によるクラスタ、リージョン横断のゲートウェイによるスーパークラスタ、クラスタをエッジまで延ばす leaf node まで。同じ接続処理コードが、各接続に `kind` を付けることでこれらすべてを担う ([`server/client.go:259`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L259))。
+単一の `nats-server` バイナリが配置形態の全レンジをカバーする。スタンドアロンプロセス、ルーティングされたサーバ群によるクラスタ、リージョン横断のゲートウェイによるスーパークラスタ、クラスタをエッジまで延ばす leaf node まで。同じ接続処理コードが、各接続に `kind` を付けることでこれらすべてを担う ([`server/client.go:260`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L260))。
 
 ## いつ使うか
 
