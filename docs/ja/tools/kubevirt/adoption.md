@@ -2,7 +2,7 @@
 
 ## 誰が使っているか
 
-以下はプロジェクトの [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) の記載で、コミット `3a1a19f` のリポジトリ実物で確認した。年はエントリに記載の開始年。
+以下はプロジェクトの [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) の記載から一部を抜き出したもので、コミット `3a1a19f` のリポジトリ実物で確認した。年はエントリに記載の開始年。
 
 | 組織 | ユースケース | 出典 |
 | --- | --- | --- |
@@ -10,7 +10,7 @@
 | Cloudflare | コアデータセンタで CI runner などコンテナ化しづらい用途に利用 (2018) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | CoreWeave | GPU 主体の K8s ネイティブクラウド。VDI など非コンテナ化ワークロードをベアメタルに併置 (2020) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Civo | テナントクラスタの provisioning (2020) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
-| SK Telecom | GPU クラウド基盤 Petasus AI Cloud の中核の仮想化エンジン。RDMA ネットワーク付きの GPU VM を提供 (2022) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
+| SK Telecom | 自社 AI クラウドで RDMA ネットワーク付きの GPU VM を提供 (2022) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Nebius | AI クラウド基盤の一部として、GPU を載せた VM を Kubernetes 上で動かす (2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Arm | aarch64 上の KubeVirt 性能最適化 (2021) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Aussie Broadband | ベアメタル上で VM とコンテナを橋渡し (2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |

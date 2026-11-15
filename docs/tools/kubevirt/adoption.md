@@ -2,7 +2,7 @@
 
 ## Who uses it
 
-The following are listed in the project's [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md), verified against the repository file at commit `3a1a19f`. The year is the entry's listed start year.
+A selection of the organisations listed in the project's [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md), verified against the repository file at commit `3a1a19f`. The year is the entry's listed start year.
 
 | Organisation | Use case | Source |
 | --- | --- | --- |
@@ -10,7 +10,7 @@ The following are listed in the project's [ADOPTERS.md](https://github.com/kubev
 | Cloudflare | KubeVirt in core data centres for hard-to-containerise uses like CI runners (2018) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | CoreWeave | GPU-focused Kubernetes-native cloud co-locating non-containerised workloads such as VDI on bare metal (2020) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Civo | Tenant cluster provisioning (2020) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
-| SK Telecom | Core virtualization engine of the Petasus AI Cloud GPU platform, delivering GPU VMs with RDMA networking (2022) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
+| SK Telecom | GPU VMs with RDMA networking on its AI cloud (2022) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Nebius | GPU-backed VMs on Kubernetes as part of its AI cloud infrastructure (2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Arm | Performance optimisation of KubeVirt on aarch64 (2021) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Aussie Broadband | Bridging VMs and containers on bare metal (2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
