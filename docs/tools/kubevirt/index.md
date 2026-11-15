@@ -3,7 +3,7 @@
 > Run and manage KVM virtual machines as first-class Kubernetes workloads.
 
 - **Category**: Orchestration & Scheduling
-- **CNCF maturity**: Incubating
+- **CNCF maturity**: Graduated
 - **Language**: Go (`go.mod:1`, `go 1.24.0`)
 - **License**: Apache-2.0 (`LICENSE:1`)
 - **Repository**: [kubevirt/kubevirt](https://github.com/kubevirt/kubevirt)

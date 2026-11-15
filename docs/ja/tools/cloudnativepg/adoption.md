@@ -22,7 +22,7 @@
 - GitHub スター: `cloudnative-pg/cloudnative-pg` リポジトリで約 8,883 (2026-06-28 観測)。
 - コントリビュータ: GitHub contributors API の最終ページから測って約 226 名 (2026-06-28 観測)。
 - リリース頻度: 維持された安定マイナーライン (v1.29.1, 2026-05-08) と、`main` の `releases/` に同梱されたリリース候補 (`v1.30.0-rc1`) で準備される次のマイナー。
-- CNCF ステータス: 2025 年 1 月に Sandbox 入り (cncf/sandbox issue #128)、メンテナは次に Incubation を公言。
+- CNCF ステータス: 2025 年 1 月に Sandbox 入り (cncf/sandbox issue #128)、2026 年 11 月に Incubating へ昇格 ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961))。
 
 ## エコシステム
 

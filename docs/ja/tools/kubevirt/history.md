@@ -14,6 +14,7 @@ KubeVirt は 2016 年末、Red Hat 社内の「仮想マシンをコンテナの
 | 2020 | Red Hat OpenShift Virtualization (KubeVirt + KVM) が GA |
 | 2022 | CNCF Incubating に昇格 (2022-04-19) |
 | 2023 | v1.0 リリース、リリース頻度を年 3 回へ変更 |
+| 2026 | CNCF Graduated に (TOC 投票 2026-11-04 締切、[cncf/toc#1822](https://github.com/cncf/toc/issues/1822)) |
 
 ## どう進化したか
 
@@ -23,4 +24,4 @@ KubeVirt は 2016 年末、Red Hat 社内の「仮想マシンをコンテナの
 
 ## 現在地
 
-KubeVirt は CNCF Incubating プロジェクト (2022-04-19 昇格) で、年 3 回ほどリリースする。2026-06-24 時点の最新リリースは `v1.8.4` (2026-06-16)。2025 年 11 月時点では CNCF Graduation のプロセス中で、ADOPTERS は 41 件と報じられた ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/))。コードベースは Go (`go.mod:1`, `go 1.24.0`)、Apache-2.0 ライセンス (`LICENSE:1`)。
+KubeVirt は CNCF Graduated プロジェクト (2022-04-19 に Incubating、2026 年 11 月に Graduated、[cncf/toc#1822](https://github.com/cncf/toc/issues/1822)) で、年 3 回ほどリリースする。2026-06-24 時点の最新リリースは `v1.8.4` (2026-06-16)。Graduation 審査中だった 2025 年 11 月時点で、ADOPTERS は 41 件と報じられた ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/))。コードベースは Go (`go.mod:1`, `go 1.24.0`)、Apache-2.0 ライセンス (`LICENSE:1`)。

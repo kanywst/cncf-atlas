@@ -3,7 +3,7 @@
 > Kubernetes-native control plane that propagates and schedules workloads across many clusters and clouds.
 
 - **Category**: Orchestration & Scheduling
-- **CNCF maturity**: Incubating
+- **CNCF maturity**: Graduated
 - **Language**: Go
 - **License**: Apache-2.0
 - **Repository**: [karmada-io/karmada](https://github.com/karmada-io/karmada)

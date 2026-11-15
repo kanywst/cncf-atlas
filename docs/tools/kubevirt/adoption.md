@@ -21,7 +21,7 @@ CNCF reports a Swisscom case study using KubeVirt with Kube-OVN for a sovereign 
 - GitHub stars: 6,917; forks: 1,710 (via `gh repo view`, observed 2026-06-24).
 - Contributors: roughly 361 (GitHub contributors API pagination, observed 2026-06-24).
 - Release cadence: three releases per year since v1.0; latest `v1.8.4` (2026-06-16).
-- Reported in the CNCF Graduation process with 41 listed adopters as of November 2025 ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/)).
+- Graduated in the CNCF in November 2026 ([cncf/toc#1822](https://github.com/cncf/toc/issues/1822)); 41 listed adopters were reported in November 2025, during the graduation review ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/)).
 
 ## Ecosystem
 

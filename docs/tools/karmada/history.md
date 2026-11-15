@@ -13,6 +13,7 @@ Karmada grew out of the multi-cluster work led by Huawei Cloud, co-initiated wit
 | 2023 | Promoted to CNCF Incubating (2023-12-12). |
 | 2025 | Formal Adopter Group program launched (2025-03). |
 | 2026 | `v1.18.0` released as the recent stable line; `v1.19.0-alpha.0` cut on master. |
+| 2026 | Graduated in the CNCF (TOC vote closed 2026-09-03, [cncf/toc#1572](https://github.com/cncf/toc/issues/1572)). |
 
 ## How it evolved
 
@@ -20,4 +21,4 @@ Karmada moved from a basic federation tool toward an automation-heavy control pl
 
 ## Where it stands now
 
-At the documented commit (`658499d`, 2026-06-22), Karmada is a CNCF Incubating project with active release cadence: `v1.18.0` is the recent stable release (2026-05-30) and `v1.19.0-alpha.0` is in progress. At the time of incubation CNCF reported more than 500 contributors from 60+ organizations across 20+ countries, with 7 maintainers. As of 2026-06-24 the GitHub repo shows 5,503 stars and 1,149 forks ([CNCF blog](https://www.cncf.io/blog/2023/12/12/karmada-brings-kubernetes-multi-cloud-capabilities-to-cncf-incubator/), [GitHub API](https://api.github.com/repos/karmada-io/karmada)).
+Karmada graduated in the CNCF in September 2026 ([cncf/toc#1572](https://github.com/cncf/toc/issues/1572)). At the documented commit (`658499d`, 2026-06-22), the project had an active release cadence: `v1.18.0` is the recent stable release (2026-05-30) and `v1.19.0-alpha.0` is in progress. At the time of incubation CNCF reported more than 500 contributors from 60+ organizations across 20+ countries, with 7 maintainers. As of 2026-06-24 the GitHub repo shows 5,503 stars and 1,149 forks ([CNCF blog](https://www.cncf.io/blog/2023/12/12/karmada-brings-kubernetes-multi-cloud-capabilities-to-cncf-incubator/), [GitHub API](https://api.github.com/repos/karmada-io/karmada)).

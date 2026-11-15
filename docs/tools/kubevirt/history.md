@@ -14,6 +14,7 @@ KubeVirt began at Red Hat in late 2016 from a single question: could a virtual m
 | 2020 | Red Hat OpenShift Virtualization (KubeVirt + KVM) reaches GA |
 | 2022 | Promoted to CNCF Incubating (2022-04-19) |
 | 2023 | v1.0 released; release cadence moved to three times per year |
+| 2026 | Graduated in the CNCF (TOC vote closed 2026-11-04, [cncf/toc#1822](https://github.com/cncf/toc/issues/1822)) |
 
 ## How it evolved
 
@@ -23,4 +24,4 @@ The architectural through-line has been consistency with Kubernetes. The project
 
 ## Where it stands now
 
-KubeVirt is a CNCF Incubating project (promoted 2022-04-19) and releases roughly three times per year. As of 2026-06-24 the latest release was `v1.8.4` (2026-06-16). As of November 2025 the project was reported to be in the CNCF Graduation process with 41 listed adopters ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/)). The codebase is Go (`go.mod:1`, `go 1.24.0`) under Apache-2.0 (`LICENSE:1`).
+KubeVirt is a CNCF Graduated project (Incubating from 2022-04-19, graduated in November 2026, [cncf/toc#1822](https://github.com/cncf/toc/issues/1822)) and releases roughly three times per year. As of 2026-06-24 the latest release was `v1.8.4` (2026-06-16). In November 2025, while the graduation review was under way, it was reported to have 41 listed adopters ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/)). The codebase is Go (`go.mod:1`, `go 1.24.0`) under Apache-2.0 (`LICENSE:1`).

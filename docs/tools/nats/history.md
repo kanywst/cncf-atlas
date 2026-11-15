@@ -15,7 +15,7 @@ When Collison founded Apcera, NATS was rewritten in Go as `gnatsd`. The motivati
 | 2018 | Accepted into CNCF as an Incubating project (2018-03-15) ([CNCF project page](https://www.cncf.io/projects/nats/)) |
 | ~2021 | JetStream becomes the built-in, recommended path for persistence in the 2.2 line ([JetStream docs](https://docs.nats.io/nats-concepts/jetstream)) |
 | 2025 | Governance dispute with Synadia resolved; trademarks transferred to the Linux Foundation, project stays Apache-2.0 ([CNCF announcement](https://www.cncf.io/announcements/2025/05/01/cncf-and-synadia-align-on-securing-the-future-of-the-nats-io-project/)) |
-| 2026 | `v2.14.2` released (2026-06-02); graduation application open ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042)) |
+| 2026 | `v2.14.2` released (2026-06-02); graduated in the CNCF (TOC vote closed 2026-11-02, [cncf/toc#2042](https://github.com/cncf/toc/issues/2042)) |
 
 ## How it evolved
 
@@ -27,4 +27,4 @@ The second was persistence. Early durable messaging lived in a separate layer ca
 
 In 2025 a governance dispute surfaced when Synadia notified the community of intent to pull NATS from CNCF and relicense it under BUSL. It was resolved: Synadia transferred two NATS trademarks to the Linux Foundation, CNCF kept the domain and GitHub organization, and the code stayed Apache-2.0 ([CNCF announcement](https://www.cncf.io/announcements/2025/05/01/cncf-and-synadia-align-on-securing-the-future-of-the-nats-io-project/), [CNCF blog](https://www.cncf.io/blog/2025/05/01/protecting-nats-and-the-integrity-of-open-source-cncfs-commitment-to-the-community/)).
 
-The project remains CNCF Incubating with an open graduation application ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042)). The latest release is `v2.14.2` (2026-06-02), and the source on the default branch carries VERSION `2.15.0-dev` ([`server/const.go:69`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/const.go#L69)).
+NATS graduated in the CNCF in November 2026, eight years after it entered as Incubating ([cncf/toc#2042](https://github.com/cncf/toc/issues/2042)). The latest release is `v2.14.2` (2026-06-02), and the source on the default branch carries VERSION `2.15.0-dev` ([`server/const.go:69`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/const.go#L69)).

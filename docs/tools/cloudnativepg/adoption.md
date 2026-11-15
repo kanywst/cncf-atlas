@@ -22,7 +22,7 @@ The same file lists further adopters including Tesla (2026-03-31), Belastingdien
 - GitHub stars: about 8,883 on the `cloudnative-pg/cloudnative-pg` repository (observed 2026-06-28).
 - Contributors: roughly 226, measured from the last page of the GitHub contributors API (observed 2026-06-28).
 - Release cadence: a maintained stable minor line (v1.29.1, 2026-05-08) with the next minor prepared through release candidates (`v1.30.0-rc1`) carried in `releases/` on `main`.
-- CNCF status: accepted into the Sandbox in January 2025 (cncf/sandbox issue #128), with maintainers publicly targeting Incubation next.
+- CNCF status: accepted into the Sandbox in January 2025 (cncf/sandbox issue #128), moved to Incubating in November 2026 ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961)).
 
 ## Ecosystem
 
