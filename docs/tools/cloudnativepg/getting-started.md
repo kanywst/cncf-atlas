@@ -1,6 +1,6 @@
 # Getting Started
 
-> Verified against the `main` manifest `cnpg-1.30.0-rc1.yaml`. Commands assume a running Kubernetes cluster and a configured `kubectl`.
+> Written against the v1.30.1 release manifest `cnpg-1.30.1.yaml` (released 2026-09-23). Commands assume a running Kubernetes cluster and a configured `kubectl`.
 
 ## Prerequisites
 
@@ -10,11 +10,11 @@
 
 ## Install
 
-Apply the operator manifest. This example uses the release candidate manifest carried on `main`; for production use the matching YAML from the releases page of the stable line you want.
+Apply the operator manifest. This is the URL the installation guide gives for v1.30.1, the latest stable release as of November 2026. For another minor line, use the YAML in that line's `release-1.x` branch.
 
 ```bash
 kubectl apply --server-side -f \
-  https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/releases/cnpg-1.30.0-rc1.yaml
+  https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.30/releases/cnpg-1.30.1.yaml
 ```
 
 Wait for the operator Deployment to roll out:

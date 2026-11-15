@@ -1,6 +1,6 @@
 # はじめに
 
-> `main` のマニフェスト `cnpg-1.30.0-rc1.yaml` で検証済み。コマンドは稼働中の Kubernetes クラスタと設定済みの `kubectl` を想定。
+> v1.30.1 のリリースマニフェスト `cnpg-1.30.1.yaml` (2026-09-23 リリース) を前提に書いている。コマンドは稼働中の Kubernetes クラスタと設定済みの `kubectl` を想定。
 
 ## 前提
 
@@ -10,11 +10,11 @@
 
 ## インストール
 
-operator マニフェストを適用する。この例では `main` に同梱されたリリース候補マニフェストを使う。本番では使いたい安定ラインの releases ページの YAML を使うこと。
+operator マニフェストを適用する。これはインストールガイドが v1.30.1 向けに示す URL で、v1.30.1 は 2026 年 11 月時点の最新安定版だ。別のマイナーラインを使うなら、そのラインの `release-1.x` ブランチにある YAML を使う。
 
 ```bash
 kubectl apply --server-side -f \
-  https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/releases/cnpg-1.30.0-rc1.yaml
+  https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.30/releases/cnpg-1.30.1.yaml
 ```
 
 operator Deployment のロールアウト完了を待つ:

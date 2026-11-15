@@ -7,7 +7,7 @@
 - **言語**: Go
 - **ライセンス**: Apache License 2.0
 - **リポジトリ**: [cloudnative-pg/cloudnative-pg](https://github.com/cloudnative-pg/cloudnative-pg)
-- **ドキュメント基準コミット**: `7ef33bb` (2026-06-26, `main`)
+- **ドキュメント基準コミット**: `719385f` (2026-11-13, `main`)
 
 ## 何をするものか
 

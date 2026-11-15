@@ -14,15 +14,16 @@
 | Mirakl | 300+ クラスタ・計 8 TB を運用 (2025-02-03)。 | [ADOPTERS.md](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md) |
 | Vera Rubin Observatory | 望遠鏡システムと天文データ公開 (2025-06-17)。 | [ADOPTERS.md](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md) |
 | Ericsson | 5G ネットワーク製品向けの PostgreSQL (2026-06-17)。 | [ADOPTERS.md](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md) |
+| CoreWeave | 顧客の CoreWeave Kubernetes Service クラスタ内で動くマネージド PostgreSQL サービス CoreWeave Database (CWDB) と、自社プラットフォームサービスの背後の DB を稼働 (2026-11-11)。 | [ADOPTERS.md](https://github.com/cloudnative-pg/cloudnative-pg/blob/main/ADOPTERS.md) |
 
-同ファイルにはさらに Tesla (2026-03-31)、Belastingdienst (オランダ税務局, 2026-04-02)、Nutanix NKP (2025-11-19)、compute 層に採用する PostgreSQL プラットフォーム各社 (Tembo・ParadeDB・Xata・pgEdge) も載っている。
+同ファイルにはさらに Tesla (2026-03-31)、Belastingdienst (オランダ税務局, 2026-04-02)、Nutanix NKP (2025-11-19)、compute 層に採用する PostgreSQL プラットフォーム各社 (Tembo・ParadeDB・Xata・pgEdge) も載っている。2026 年 6 月から 11 月の間に追加された行には amaiko (2026-10-23)、Wordfully (2026-10-25)、CageForge (2026-10-28) がある。
 
 ## 採用のシグナル
 
-- GitHub スター: `cloudnative-pg/cloudnative-pg` リポジトリで約 8,883 (2026-06-28 観測)。
-- コントリビュータ: GitHub contributors API の最終ページから測って約 226 名 (2026-06-28 観測)。
-- リリース頻度: 維持された安定マイナーライン (v1.29.1, 2026-05-08) と、`main` の `releases/` に同梱されたリリース候補 (`v1.30.0-rc1`) で準備される次のマイナー。
-- CNCF ステータス: 2025 年 1 月に Sandbox 入り (cncf/sandbox issue #128)、2026 年 11 月に Incubating へ昇格 ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961))。
+- GitHub スター: `cloudnative-pg/cloudnative-pg` リポジトリで約 9,596、フォーク 818 (2026-11-16 観測)。
+- コントリビュータ: GitHub contributors API の最終ページから測って約 242 名 (2026-11-16 観測)。
+- リリース頻度: 2 つの安定マイナーラインを並行してパッチする。v1.30.1 と v1.29.3 はどちらも 2026-09-23 に出荷され、v1.30.0 (2026-06-29) の 3 か月後だった ([releases](https://github.com/cloudnative-pg/cloudnative-pg/releases))。
+- CNCF ステータス: 2025 年 1 月に Sandbox 入り (cncf/sandbox issue #128)、2026-11-02 の TOC 投票締切で Incubating へ昇格 ([cncf/toc#1961](https://github.com/cncf/toc/issues/1961))。
 
 ## エコシステム
 
