@@ -1,10 +1,10 @@
 # Getting Started
 
-> Verified against `v2.14.2`. Commands assume a Unix shell with Go 1.25+ or Docker, plus the `nats` CLI.
+> Written for `v2.15.3`, the latest release on 2026-11-16. Commands assume a Unix shell with Go 1.26+ or Docker, plus the `nats` CLI.
 
 ## Prerequisites
 
-- Go 1.25 or newer to build from source, or Docker to run the published image.
+- Go 1.26 or newer to build from source (the release's `go.mod` declares `go 1.26.0`, [go.mod](https://github.com/nats-io/nats-server/blob/v2.15.3/go.mod)), or Docker to run the published image.
 - The `nats` CLI for publishing and subscribing from the command line.
 
 ## Install

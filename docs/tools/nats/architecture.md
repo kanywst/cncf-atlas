@@ -2,7 +2,7 @@
 
 ## Big picture
 
-The server lives almost entirely in the `server/` package; `main.go` is a thin CLI wrapper. A running `Server` ([`server/server.go:168`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/server.go#L168)) accepts connections, and every connection becomes a `client` ([`server/client.go:259`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L259)) regardless of whether it is an application, another server in the cluster, a gateway, a leaf node, or an internal JetStream connection. A `kind` field on the struct distinguishes them, so one code path handles CLIENT, ROUTER, GATEWAY, LEAF, JETSTREAM, and SYSTEM connections.
+The server lives almost entirely in the `server/` package; `main.go` is a thin CLI wrapper. A running `Server` ([`server/server.go:169`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/server.go#L169)) accepts connections, and every connection becomes a `client` ([`server/client.go:260`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L260)) regardless of whether it is an application, another server in the cluster, a gateway, a leaf node, or an internal JetStream connection. A `kind` field on the struct distinguishes them, so one code path handles CLIENT, ROUTER, GATEWAY, LEAF, JETSTREAM, and SYSTEM connections.
 
 Routing is subject-based. Each account owns a subscription-interest tree (a `Sublist`), and publishing a message means matching its subject against that tree to find subscribers.
 
@@ -30,7 +30,7 @@ flowchart TD
 
 ### Accounts and multi-tenancy
 
-`server/accounts.go` defines `Account` ([`server/accounts.go:52`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/accounts.go#L52)), the tenancy boundary. Each account holds its own `Sublist` (`acc.sl`) plus import/export rules, so the subject namespace is isolated per account.
+`server/accounts.go` defines `Account` ([`server/accounts.go:51`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/accounts.go#L51)), the tenancy boundary. Each account holds its own `Sublist` (`acc.sl`) plus import/export rules, so the subject namespace is isolated per account.
 
 ### Clustering and connection types
 
@@ -48,11 +48,11 @@ flowchart TD
 
 Take a core publish: a client sends `PUB subject reply size`, then the payload, and the message reaches matching subscribers.
 
-1. `readLoop` reads from the socket ([`server/client.go:1403`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L1403)) and hands bytes to `parse` ([`server/parser.go:137`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/parser.go#L137)).
-2. The parser accumulates the `PUB` arguments and, when complete, calls `processPub` ([`server/client.go:2880`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L2880)).
-3. After the payload arrives, `processInboundClientMsg` ([`server/client.go:4311`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L4311)) updates stats, checks publish permissions, and resolves subscribers.
-4. Matching first tries a per-client L1 cache (the connection's own cached map of subject to matching subscribers), then falls back to `acc.sl.Match` ([`server/client.go:4433`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L4433), [`server/sublist.go:532`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/sublist.go#L532)).
-5. Delivery goes through `processMsgResults` ([`server/client.go:5127`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L5127)) and finally `deliverMsg` ([`server/client.go:3690`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L3690)) to each subscriber's write buffer.
+1. `readLoop` reads from the socket ([`server/client.go:1514`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L1514)) and hands bytes to `parse` ([`server/parser.go:139`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/parser.go#L139)).
+2. The parser accumulates the `PUB` arguments and, when complete, calls `processPub` ([`server/client.go:3027`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L3027)).
+3. After the payload arrives, `processInboundClientMsg` ([`server/client.go:4556`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L4556)) updates stats, checks publish permissions, and resolves subscribers.
+4. Matching first tries a per-client L1 cache (the connection's own cached map of subject to matching subscribers), then falls back to `acc.sl.Match` ([`server/client.go:4675`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L4675), [`server/sublist.go:555`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/sublist.go#L555)).
+5. Delivery goes through `processMsgResults` ([`server/client.go:5490`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L5490)) and finally `deliverMsg` ([`server/client.go:3866`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L3866)) to each subscriber's write buffer.
 
 The [Internals](./internals) page walks this path line by line.
 
@@ -60,10 +60,10 @@ The [Internals](./internals) page walks this path line by line.
 
 The core protocol is at-most-once. A published message is matched against current interest and delivered to whoever is subscribed right now; nothing is stored. Durability is opt-in through JetStream, which layers persistence on top using its own append-only file format and Raft replication ([JetStream docs](https://docs.nats.io/nats-concepts/jetstream)).
 
-Throughput on the publish path is bought with caching rather than locking. The shared per-account `Sublist` is protected by a read-write mutex, but the server avoids taking it on every publish by keeping a per-client L1 results cache keyed by subject, validated against the sublist's atomic generation counter ([`server/client.go:4421`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L4421)). The maintainers left a comment marking this as a measured optimization ([`server/client.go:4371`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L4371)).
+Throughput on the publish path is bought with caching rather than locking. The shared per-account `Sublist` is protected by a read-write mutex, but the server avoids taking it on every publish by keeping a per-client L1 results cache keyed by subject, validated against the sublist's atomic generation counter ([`server/client.go:4663`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L4663)). The maintainers left a comment marking this as a measured optimization ([`server/client.go:4613`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L4613)).
 
 Reusing one `client` struct across all connection kinds keeps the protocol code in a single place. The same parser and delivery logic serve application clients, inter-server routes, gateways, and leaf nodes, with behavior differences gated on `kind`.
 
 ## Extension points
 
-NATS clients exist for 40+ languages as separate repositories under the `nats-io` organization ([nats-io org](https://github.com/nats-io)). JetStream exposes key/value and object-store APIs over the same protocol, leaf nodes provide an edge-connection point, and the server speaks MQTT and WebSocket in addition to its native protocol ([nats.io about](https://nats.io/about/)). Authentication can be delegated through auth callout ([`server/auth_callout.go`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/auth_callout.go)).
+NATS clients exist for 40+ languages as separate repositories under the `nats-io` organization ([nats-io org](https://github.com/nats-io)). JetStream exposes key/value and object-store APIs over the same protocol, leaf nodes provide an edge-connection point, and the server speaks MQTT and WebSocket in addition to its native protocol ([nats.io about](https://nats.io/about/)). Authentication can be delegated through auth callout ([`server/auth_callout.go`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/auth_callout.go)).

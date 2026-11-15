@@ -4,10 +4,10 @@
 
 | # | 種別 | タイトル | URL | 参照日 |
 | --- | --- | --- | --- | --- |
-| 1 | repo | nats-io/nats-server (GitHub) | <https://github.com/nats-io/nats-server> | 2026-06-24 |
+| 1 | repo | nats-io/nats-server (GitHub) | <https://github.com/nats-io/nats-server> | 2026-11-16 |
 | 2 | repo | nats-io organization (GitHub) | <https://github.com/nats-io> | 2026-06-24 |
-| 3 | foundation | NATS project page (CNCF) | <https://www.cncf.io/projects/nats/> | 2026-06-24 |
-| 4 | issue | NATS Graduation Application (cncf/toc#2042) | <https://github.com/cncf/toc/issues/2042> | 2026-06-24 |
+| 3 | foundation | NATS project page (CNCF) | <https://www.cncf.io/projects/nats/> | 2026-11-16 |
+| 4 | issue | NATS Graduation Application (cncf/toc#2042) | <https://github.com/cncf/toc/issues/2042> | 2026-11-16 |
 | 5 | announcement | CNCF and Synadia Align on Securing NATS.io (2025-05-01) | <https://www.cncf.io/announcements/2025/05/01/cncf-and-synadia-align-on-securing-the-future-of-the-nats-io-project/> | 2026-06-24 |
 | 6 | blog | Protecting NATS and the integrity of open source (CNCF) | <https://www.cncf.io/blog/2025/05/01/protecting-nats-and-the-integrity-of-open-source-cncfs-commitment-to-the-community/> | 2026-06-24 |
 | 7 | interview | RedMonk Conversation with Derek Collison | <https://redmonk.com/blog/2025/02/10/rmc-derek-collison-the-forrest-gump-of-messaging/> | 2026-06-24 |
@@ -19,7 +19,15 @@
 | 13 | benchmark | Benchmarking Message Queue Latency (Brave New Geek) | <https://bravenewgeek.com/benchmarking-message-queue-latency/> | 2026-06-24 |
 | 14 | comparison | Message Brokers Comparison 2026 (dev.to) | <https://dev.to/mahdi0shamlou/message-brokers-comparison-2026-kafka-rabbitmq-nats-redis-streams-which-one-should-you-3ea8> | 2026-06-24 |
 | 15 | comparison | Kafka vs RabbitMQ vs NATS vs SQS (BackendBytes) | <https://backendbytes.com/articles/message-queue-comparison/> | 2026-06-24 |
-| 16 | code | server/client.go (pinned commit) | <https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go> | 2026-06-24 |
-| 17 | code | server/sublist.go (pinned commit) | <https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/sublist.go> | 2026-06-24 |
-| 18 | code | server/parser.go (pinned commit) | <https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/parser.go> | 2026-06-24 |
-| 19 | code | server/filestore.go (pinned commit) | <https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/filestore.go> | 2026-06-24 |
+| 16 | code | server/client.go (pinned commit) | <https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go> | 2026-11-16 |
+| 17 | code | server/sublist.go (pinned commit) | <https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/sublist.go> | 2026-11-16 |
+| 18 | code | server/parser.go (pinned commit) | <https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/parser.go> | 2026-11-16 |
+| 19 | code | server/filestore.go (pinned commit) | <https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/filestore.go> | 2026-11-16 |
+| 20 | code | server/const.go VERSION (pinned commit) | <https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/const.go#L69> | 2026-11-16 |
+| 21 | code | pinned commit 6993500c | <https://github.com/nats-io/nats-server/commit/6993500ca20a02d1f42be713ceac3887b3bf819c> | 2026-11-16 |
+| 22 | compare | bd058fac...6993500c (旧 pin との差分) | <https://github.com/nats-io/nats-server/compare/bd058fac3d0c04398698b113e986b35065212fda...6993500ca20a02d1f42be713ceac3887b3bf819c> | 2026-11-16 |
+| 23 | releases | nats-server releases (v2.15.3 / v2.14.10, 2026-11-11) | <https://github.com/nats-io/nats-server/releases> | 2026-11-16 |
+| 24 | release | v2.15.0 (2026-09-17) | <https://github.com/nats-io/nats-server/releases/tag/v2.15.0> | 2026-11-16 |
+| 25 | code | go.mod at v2.15.3 (go 1.26.0) | <https://github.com/nats-io/nats-server/blob/v2.15.3/go.mod> | 2026-11-16 |
+| 26 | commit | 89c01e76 Remote queue sub weight expanded into sublist match results | <https://github.com/nats-io/nats-server/commit/89c01e76677ec7a9ede6ba2a20b007cdff693892> | 2026-11-16 |
+| 27 | issue | [LEVEL CHANGE] NATS Graduation (cncf/toc#2354) | <https://github.com/cncf/toc/issues/2354> | 2026-11-16 |

@@ -7,7 +7,7 @@
 - **Language**: Go
 - **License**: Apache-2.0
 - **Repository**: [nats-io/nats-server](https://github.com/nats-io/nats-server)
-- **Documented at commit**: `bd058fac` (default branch HEAD, source VERSION `2.15.0-dev`, nearest release `v2.14.2`)
+- **Documented at commit**: `6993500c` (default branch HEAD on 2026-11-13, source VERSION `2.16.0-dev`, nearest release `v2.15.3`)
 
 ## What it is
 
@@ -15,7 +15,7 @@ NATS is a publish/subscribe messaging system. Producers send messages to a subje
 
 The core protocol is at-most-once. The server holds nothing on disk, and a message with no current subscriber is dropped. On top of this core, JetStream adds persistence, replay, at-least-once delivery, key/value buckets, and object storage. JetStream stores data in its own append-only file format and replicates across a cluster with Raft, so it needs no external database.
 
-A single `nats-server` binary covers the full range of deployment shapes: a standalone process, a clustered set of routed servers, a super-cluster of gateways across regions, and leaf nodes that extend a cluster out to the edge. The same connection-handling code serves all of these by tagging each connection with a `kind` ([`server/client.go:259`](https://github.com/nats-io/nats-server/blob/bd058fac3d0c04398698b113e986b35065212fda/server/client.go#L259)).
+A single `nats-server` binary covers the full range of deployment shapes: a standalone process, a clustered set of routed servers, a super-cluster of gateways across regions, and leaf nodes that extend a cluster out to the edge. The same connection-handling code serves all of these by tagging each connection with a `kind` ([`server/client.go:260`](https://github.com/nats-io/nats-server/blob/6993500ca20a02d1f42be713ceac3887b3bf819c/server/client.go#L260)).
 
 ## When to use it
 
