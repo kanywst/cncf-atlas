@@ -13,7 +13,7 @@
     "lint": "markdownlint-cli2 \"**/*.md\""
   },
   "devDependencies": {
-    "markdownlint-cli2": "^0.24.0",
+    "markdownlint-cli2": "^0.24.1",
     "mermaid": "^11.17.2",
     "vitepress": "^1.6.3",
     "vitepress-plugin-mermaid": "^2.0.17"
