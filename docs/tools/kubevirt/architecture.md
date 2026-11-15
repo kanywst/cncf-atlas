@@ -27,15 +27,15 @@ The aggregated API server. It hosts the admission webhooks that validate KubeVir
 
 ### virt-controller
 
-The cluster-level controllers. They reconcile `VirtualMachineInstance`, `VirtualMachine`, migrations, replica sets, and pools. The `main` at `cmd/virt-controller/virt-controller.go:28` does nothing but call `watch.Execute()`.
+The cluster-level controllers. They reconcile `VirtualMachineInstance`, `VirtualMachine`, migrations, replica sets, and pools. The `main` at `cmd/virt-controller/virt-controller.go:27` does nothing but call `watch.Execute()`.
 
 ### virt-handler
 
-A DaemonSet running on each node. It reconciles the desired state of VMIs against the actual domains on its node and talks to the local `virt-launcher` over gRPC (`pkg/virt-handler/vm.go:2055`). It does not run libvirt itself.
+A DaemonSet running on each node. It reconciles the desired state of VMIs against the actual domains on its node and talks to the local `virt-launcher` over gRPC (`pkg/virt-handler/vm.go:2113`). It does not run libvirt itself.
 
 ### virt-launcher
 
-One Pod per VM. It carries libvirt and QEMU inside the Pod and drives the domain through `LibvirtDomainManager` (`pkg/virt-launcher/virtwrap/manager.go:1371`).
+One Pod per VM. It carries libvirt and QEMU inside the Pod and drives the domain through `LibvirtDomainManager` (`pkg/virt-launcher/virtwrap/manager.go:1804`).
 
 ### virtctl
 
@@ -46,17 +46,17 @@ The user-facing CLI under `cmd/virtctl`. It handles start, stop, console, vnc, a
 Starting a VM goes through these hops:
 
 1. The user creates a `VirtualMachine`. The VM controller creates a `VirtualMachineInstance` (VMI).
-2. The VMI controller's reconcile loop, `execute(key)` at `pkg/virt-controller/watch/vmi/vmi.go:306`, fetches the VMI and calls `c.sync(...)` at `pkg/virt-controller/watch/vmi/vmi.go:364`.
-3. When no Pod exists yet, `sync()` at `pkg/virt-controller/watch/vmi/lifecycle.go:66` renders a launch manifest via `RenderLaunchManifest(vmi)` at `pkg/virt-controller/watch/vmi/lifecycle.go:156`, then creates the Pod via `createPod(...)` at `pkg/virt-controller/watch/vmi/lifecycle.go:174`.
+2. The VMI controller's reconcile loop, `execute(key)` at `pkg/virt-controller/watch/vmi/vmi.go:309`, fetches the VMI and calls `c.sync(...)` at `pkg/virt-controller/watch/vmi/vmi.go:370`.
+3. When no Pod exists yet, `sync()` at `pkg/virt-controller/watch/vmi/lifecycle.go:66` renders a launch manifest via `RenderLaunchManifest(vmi)` at `pkg/virt-controller/watch/vmi/lifecycle.go:156`, then creates the Pod via `createPod(...)` at `pkg/virt-controller/watch/vmi/lifecycle.go:184`.
 4. The standard `kube-scheduler` binds the Pod to a node.
-5. That node's `virt-handler` detects the VMI and calls `client.SyncVirtualMachine(vmi, options)` at `pkg/virt-handler/vm.go:2055`, sending the request over gRPC to the local `virt-launcher`.
-6. `virt-launcher`'s `SyncVMI()` at `pkg/virt-launcher/virtwrap/manager.go:1371` converts the VMI to a libvirt domain and starts QEMU.
+5. That node's `virt-handler` detects the VMI and calls `client.SyncVirtualMachine(vmi, options)` at `pkg/virt-handler/vm.go:2113`, sending the request over gRPC to the local `virt-launcher`.
+6. `virt-launcher`'s `SyncVMI()` at `pkg/virt-launcher/virtwrap/manager.go:1804` converts the VMI to a libvirt domain and starts QEMU.
 
 ## Key design decisions
 
 The defining choice is one `virt-launcher` Pod per VMI, with libvirt and QEMU running inside that Pod. This makes a VM a first-class Kubernetes workload: it reuses the standard scheduler, Pod networking, PVCs, and eviction rather than a parallel hypervisor scheduler. The trade-off is an extra layer (Pod wrapping a VM) compared with a bare hypervisor.
 
-A second choice is delegation. `virt-handler` does not run libvirt; it sends desired state to the node-local `virt-launcher` over gRPC (`pkg/virt-handler/vm.go:2055`). The declarative-to-imperative translation, from the Kubernetes VMI spec to libvirt domain XML, is confined to one converter (`pkg/virt-launcher/virtwrap/converter/converter.go:967`).
+A second choice is delegation. `virt-handler` does not run libvirt; it sends desired state to the node-local `virt-launcher` over gRPC (`pkg/virt-handler/vm.go:2113`). The declarative-to-imperative translation, from the Kubernetes VMI spec to libvirt domain XML, enters through one converter function (`pkg/virt-launcher/virtwrap/converter/converter.go:43`), which hands the work to a fixed list of per-feature configurators.
 
 ## Extension points
 

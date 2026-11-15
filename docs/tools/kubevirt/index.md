@@ -4,10 +4,10 @@
 
 - **Category**: Orchestration & Scheduling
 - **CNCF maturity**: Graduated
-- **Language**: Go (`go.mod:1`, `go 1.24.0`)
-- **License**: Apache-2.0 (`LICENSE:1`)
+- **Language**: Go (`go.mod:3`, `go 1.26.0`)
+- **License**: Apache-2.0 (`LICENSE:2`)
 - **Repository**: [kubevirt/kubevirt](https://github.com/kubevirt/kubevirt)
-- **Documented at commit**: `55a003d` (main HEAD, 2026-06-24)
+- **Documented at commit**: `3a1a19f` (main HEAD, 2026-11-15; after release `v1.10.0-rc.1`)
 
 ## What it is
 
@@ -35,7 +35,7 @@ It is for teams that already run Kubernetes and need to keep workloads that cann
 
 ## Sources
 
-1. [kubevirt/kubevirt repository](https://github.com/kubevirt/kubevirt) (commit `55a003d`)
+1. [kubevirt/kubevirt repository](https://github.com/kubevirt/kubevirt) (commit `3a1a19f`)
 2. [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md)
 3. [docs/getting-started.md](https://github.com/kubevirt/kubevirt/blob/main/docs/getting-started.md)
 4. [docs/updates.md](https://github.com/kubevirt/kubevirt/blob/main/docs/updates.md)
@@ -44,3 +44,4 @@ It is for teams that already run Kubernetes and need to keep workloads that cann
 7. [CNCF: KubeVirt v1.0 has landed!](https://www.cncf.io/blog/2023/07/11/kubevirt-v1-0-has-landed/)
 8. [Red Hat: What is KubeVirt?](https://www.redhat.com/en/topics/virtualization/what-is-kubevirt)
 9. [InfoQ: CNCF Accepts KubeVirt as an Incubating Project](https://www.infoq.com/news/2022/06/cncf-kubevirt-incubating-project/)
+10. [cncf/toc#1822: KubeVirt Graduation Application](https://github.com/cncf/toc/issues/1822)

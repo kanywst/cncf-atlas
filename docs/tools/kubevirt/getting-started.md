@@ -1,6 +1,6 @@
 # Getting Started
 
-> Verified against release `v1.8.4`. Commands assume a running Kubernetes cluster and `kubectl` configured against it.
+> Written for release `v1.9.1`, the latest stable release on 2026-11-16. Commands assume a running Kubernetes cluster and `kubectl` configured against it.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@
 The install entry point is `virt-operator`: apply the operator manifest, then a `KubeVirt` custom resource that tells the operator to deploy the rest ([docs/getting-started.md](https://github.com/kubevirt/kubevirt/blob/main/docs/getting-started.md), [docs/updates.md](https://github.com/kubevirt/kubevirt/blob/main/docs/updates.md)).
 
 ```bash
-export RELEASE=v1.8.4
+export RELEASE=v1.9.1
 kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-operator.yaml
 kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-cr.yaml
 ```

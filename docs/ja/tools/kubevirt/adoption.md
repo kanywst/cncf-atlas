@@ -2,7 +2,7 @@
 
 ## 誰が使っているか
 
-以下はプロジェクトの [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) の記載で、コミット `55a003d` のリポジトリ実物で確認した。年はエントリに記載の開始年。
+以下はプロジェクトの [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) の記載で、コミット `3a1a19f` のリポジトリ実物で確認した。年はエントリに記載の開始年。
 
 | 組織 | ユースケース | 出典 |
 | --- | --- | --- |
@@ -10,6 +10,8 @@
 | Cloudflare | コアデータセンタで CI runner などコンテナ化しづらい用途に利用 (2018) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | CoreWeave | GPU 主体の K8s ネイティブクラウド。VDI など非コンテナ化ワークロードをベアメタルに併置 (2020) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Civo | テナントクラスタの provisioning (2020) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
+| SK Telecom | GPU クラウド基盤 Petasus AI Cloud の中核の仮想化エンジン。RDMA ネットワーク付きの GPU VM を提供 (2022) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
+| Nebius | AI クラウド基盤の一部として、GPU を載せた VM を Kubernetes 上で動かす (2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Arm | aarch64 上の KubeVirt 性能最適化 (2021) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Aussie Broadband | ベアメタル上で VM とコンテナを橋渡し (2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Microsoft | Azure Operator Nexus で VM ワークロードをホスト (Vendor, 2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
@@ -18,10 +20,11 @@ CNCF は、KubeVirt と Kube-OVN でソブリンクラウドを構築した Swis
 
 ## 採用のシグナル
 
-- GitHub スター: 6,917、フォーク: 1,710 (`gh repo view`、観測 2026-06-24)。
-- コントリビュータ: 約 361 人 (GitHub contributors API のページネーション、観測 2026-06-24)。
-- リリース頻度: v1.0 以降は年 3 回。最新は `v1.8.4` (2026-06-16)。
-- 2026 年 11 月に CNCF Graduated ([cncf/toc#1822](https://github.com/cncf/toc/issues/1822))。Graduation 審査中の 2025 年 11 月時点で ADOPTERS は 41 件 ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/))。
+- GitHub スター: 7,203、フォーク: 1,884 (GitHub REST API、観測 2026-11-16)。
+- コントリビュータ: 約 360 人 (GitHub contributors API のページネーション、観測 2026-11-16)。
+- リリース頻度: v1.0 以降は年 3 回。最新安定版は `v1.9.1` (2026-10-12)、2026-11-12 に `v1.10.0-rc.1` が出ている ([releases](https://github.com/kubevirt/kubevirt/releases))。
+- CNCF Graduated: TOC 投票は可決され 2026-11-04 に締め切られた ([cncf/toc#1822](https://github.com/cncf/toc/issues/1822))。
+- [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) にはコミット `3a1a19f` 時点で 47 組織が載る。`55a003d` から増えたのは Nebius・Prepare.sh・SK Telecom・Rafay・TrueFullstaq の 5 件。
 
 ## エコシステム
 
