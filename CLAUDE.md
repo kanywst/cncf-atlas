@@ -33,7 +33,7 @@ Two more workflows are easy to forget until they go red:
 
 A dependency whose peer range the rest of the toolchain cannot satisfy fails `npm ci` and takes every job with it, lint and catalog check included, before any of them touch a file. When all five go red at once, read the install step, not the test output. `mermaid` is pinned to the 11 line for exactly this reason (`vitepress-plugin-mermaid` caps its peer at `10 || 11`), recorded as an `ignore` in `.github/dependabot.yml`.
 
-There is no per-tool test target: `check-tools.mjs` validates the whole catalog at once. It is a big catalog (242 entries at last count, 126 deep-dive and 116 card, which `npm test` prints), so a full build is not quick. To narrow the loop while working on one project:
+There is no per-tool test target: `check-tools.mjs` validates the whole catalog at once. It is a big catalog (242 entries at last count, 127 deep-dive and 115 card, which `npm test` prints), so a full build is not quick. To narrow the loop while working on one project:
 
 ```bash
 npx markdownlint-cli2 "docs/tools/<slug>/*.md" "docs/ja/tools/<slug>/*.md"
