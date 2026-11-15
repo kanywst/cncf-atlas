@@ -27,15 +27,15 @@ aggregated API server。KubeVirt カスタムリソースを検証する admissi
 
 ### virt-controller
 
-クラスタレベルのコントローラ群。`VirtualMachineInstance`・`VirtualMachine`・migration・replica set・pool を reconcile する。`cmd/virt-controller/virt-controller.go:28` の `main` は `watch.Execute()` を呼ぶだけだ。
+クラスタレベルのコントローラ群。`VirtualMachineInstance`・`VirtualMachine`・migration・replica set・pool を reconcile する。`cmd/virt-controller/virt-controller.go:27` の `main` は `watch.Execute()` を呼ぶだけだ。
 
 ### virt-handler
 
-各ノードで動く DaemonSet。VMI の期待状態をノード上の実ドメインに突き合わせ、ノード内の `virt-launcher` と gRPC で通信する (`pkg/virt-handler/vm.go:2055`)。自身では libvirt を動かさない。
+各ノードで動く DaemonSet。VMI の期待状態をノード上の実ドメインに突き合わせ、ノード内の `virt-launcher` と gRPC で通信する (`pkg/virt-handler/vm.go:2113`)。自身では libvirt を動かさない。
 
 ### virt-launcher
 
-VM 1 台あたり 1 つの Pod。Pod の内側に libvirt と QEMU を抱え、`LibvirtDomainManager` (`pkg/virt-launcher/virtwrap/manager.go:1371`) でドメインを操作する。
+VM 1 台あたり 1 つの Pod。Pod の内側に libvirt と QEMU を抱え、`LibvirtDomainManager` (`pkg/virt-launcher/virtwrap/manager.go:1804`) でドメインを操作する。
 
 ### virtctl
 
@@ -46,17 +46,17 @@ VM 1 台あたり 1 つの Pod。Pod の内側に libvirt と QEMU を抱え、`
 VM 起動は次のホップをたどる。
 
 1. ユーザが `VirtualMachine` を作成する。VM コントローラが `VirtualMachineInstance` (VMI) を生成する。
-2. VMI コントローラの reconcile ループ `execute(key)` (`pkg/virt-controller/watch/vmi/vmi.go:306`) が VMI を取得し、`c.sync(...)` (`pkg/virt-controller/watch/vmi/vmi.go:364`) を呼ぶ。
-3. Pod がまだ無い場合、`sync()` (`pkg/virt-controller/watch/vmi/lifecycle.go:66`) が `RenderLaunchManifest(vmi)` (`pkg/virt-controller/watch/vmi/lifecycle.go:156`) で launch マニフェストを描画し、`createPod(...)` (`pkg/virt-controller/watch/vmi/lifecycle.go:174`) で Pod を作成する。
+2. VMI コントローラの reconcile ループ `execute(key)` (`pkg/virt-controller/watch/vmi/vmi.go:309`) が VMI を取得し、`c.sync(...)` (`pkg/virt-controller/watch/vmi/vmi.go:370`) を呼ぶ。
+3. Pod がまだ無い場合、`sync()` (`pkg/virt-controller/watch/vmi/lifecycle.go:66`) が `RenderLaunchManifest(vmi)` (`pkg/virt-controller/watch/vmi/lifecycle.go:156`) で launch マニフェストを描画し、`createPod(...)` (`pkg/virt-controller/watch/vmi/lifecycle.go:184`) で Pod を作成する。
 4. 標準の `kube-scheduler` が Pod をノードに割り当てる。
-5. そのノードの `virt-handler` が VMI を検知し、`client.SyncVirtualMachine(vmi, options)` (`pkg/virt-handler/vm.go:2055`) を gRPC 経由でノード内の `virt-launcher` に送る。
-6. `virt-launcher` の `SyncVMI()` (`pkg/virt-launcher/virtwrap/manager.go:1371`) が VMI を libvirt ドメインへ変換し QEMU を起動する。
+5. そのノードの `virt-handler` が VMI を検知し、`client.SyncVirtualMachine(vmi, options)` (`pkg/virt-handler/vm.go:2113`) を gRPC 経由でノード内の `virt-launcher` に送る。
+6. `virt-launcher` の `SyncVMI()` (`pkg/virt-launcher/virtwrap/manager.go:1804`) が VMI を libvirt ドメインへ変換し QEMU を起動する。
 
 ## 主要な設計判断
 
 決定的な選択は、VMI 1 台に対し `virt-launcher` Pod を 1 つ立て、libvirt と QEMU をその Pod の中で動かすことだ。これにより VM が第一級の Kubernetes ワークロードになり、並行 hypervisor スケジューラではなく標準のスケジューラ・Pod ネットワーク・PVC・eviction を再利用できる。トレードオフは、素の hypervisor に比べて層 (VM を包む Pod) が 1 つ増える点。
 
-第二の選択は委譲だ。`virt-handler` は libvirt を動かさず、期待状態をノード内の `virt-launcher` に gRPC で送る (`pkg/virt-handler/vm.go:2055`)。Kubernetes の VMI 仕様から libvirt ドメイン XML への宣言型から命令型への変換は、1 つの converter (`pkg/virt-launcher/virtwrap/converter/converter.go:967`) に閉じ込められている。
+第二の選択は委譲だ。`virt-handler` は libvirt を動かさず、期待状態をノード内の `virt-launcher` に gRPC で送る (`pkg/virt-handler/vm.go:2113`)。Kubernetes の VMI 仕様から libvirt ドメイン XML への宣言型から命令型への変換は、1 つの converter 関数 (`pkg/virt-launcher/virtwrap/converter/converter.go:43`) を入口とし、そこから機能ごとの configurator の固定リストに処理を渡す。
 
 ## 拡張ポイント
 

@@ -2,7 +2,7 @@
 
 ## Who uses it
 
-The following are listed in the project's [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md), verified against the repository file at commit `55a003d`. The year is the entry's listed start year.
+A selection of the organisations listed in the project's [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md), verified against the repository file at commit `3a1a19f`. The year is the entry's listed start year.
 
 | Organisation | Use case | Source |
 | --- | --- | --- |
@@ -10,6 +10,8 @@ The following are listed in the project's [ADOPTERS.md](https://github.com/kubev
 | Cloudflare | KubeVirt in core data centres for hard-to-containerise uses like CI runners (2018) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | CoreWeave | GPU-focused Kubernetes-native cloud co-locating non-containerised workloads such as VDI on bare metal (2020) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Civo | Tenant cluster provisioning (2020) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
+| SK Telecom | GPU VMs with RDMA networking on its AI cloud (2022) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
+| Nebius | GPU-backed VMs on Kubernetes as part of its AI cloud infrastructure (2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Arm | Performance optimisation of KubeVirt on aarch64 (2021) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Aussie Broadband | Bridging VMs and containers on bare metal (2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
 | Microsoft | Hosting VM workloads in Azure Operator Nexus (Vendor, 2023) | [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) |
@@ -18,10 +20,11 @@ CNCF reports a Swisscom case study using KubeVirt with Kube-OVN for a sovereign 
 
 ## Adoption signals
 
-- GitHub stars: 6,917; forks: 1,710 (via `gh repo view`, observed 2026-06-24).
-- Contributors: roughly 361 (GitHub contributors API pagination, observed 2026-06-24).
-- Release cadence: three releases per year since v1.0; latest `v1.8.4` (2026-06-16).
-- Graduated in the CNCF in November 2026 ([cncf/toc#1822](https://github.com/cncf/toc/issues/1822)); 41 listed adopters were reported in November 2025, during the graduation review ([CNCF projects: KubeVirt](https://www.cncf.io/projects/kubevirt/)).
+- GitHub stars: 7,203; forks: 1,884 (GitHub REST API, observed 2026-11-16).
+- Contributors: roughly 360 (GitHub contributors API pagination, observed 2026-11-16).
+- Release cadence: three releases per year since v1.0; latest stable `v1.9.1` (2026-10-12), with `v1.10.0-rc.1` out on 2026-11-12 ([releases](https://github.com/kubevirt/kubevirt/releases)).
+- Graduated in the CNCF: the TOC vote passed and closed on 2026-11-04 ([cncf/toc#1822](https://github.com/cncf/toc/issues/1822)).
+- [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md) lists 47 organisations at commit `3a1a19f`, five more than at `55a003d`: Nebius, Prepare.sh, SK Telecom, Rafay, and TrueFullstaq.
 
 ## Ecosystem
 

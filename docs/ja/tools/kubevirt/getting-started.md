@@ -1,6 +1,6 @@
 # はじめに
 
-> リリース `v1.8.4` で検証済み。コマンドは、稼働中の Kubernetes クラスタと、それに向けて設定済みの `kubectl` を想定。
+> 2026-11-16 時点の最新安定版リリース `v1.9.1` 向け。コマンドは、稼働中の Kubernetes クラスタと、それに向けて設定済みの `kubectl` を想定。
 
 ## 前提
 
@@ -13,7 +13,7 @@
 インストール起点は `virt-operator`。operator マニフェストを適用し、続いて operator に残りの配備を指示する `KubeVirt` カスタムリソースを適用する ([docs/getting-started.md](https://github.com/kubevirt/kubevirt/blob/main/docs/getting-started.md)、[docs/updates.md](https://github.com/kubevirt/kubevirt/blob/main/docs/updates.md))。
 
 ```bash
-export RELEASE=v1.8.4
+export RELEASE=v1.9.1
 kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-operator.yaml
 kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-cr.yaml
 ```

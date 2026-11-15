@@ -4,10 +4,10 @@
 
 - **カテゴリ**: Orchestration & Scheduling
 - **CNCF 成熟度**: Graduated
-- **言語**: Go (`go.mod:1`, `go 1.24.0`)
-- **ライセンス**: Apache-2.0 (`LICENSE:1`)
+- **言語**: Go (`go.mod:3`, `go 1.26.0`)
+- **ライセンス**: Apache-2.0 (`LICENSE:2`)
 - **リポジトリ**: [kubevirt/kubevirt](https://github.com/kubevirt/kubevirt)
-- **ドキュメント基準コミット**: `55a003d` (main HEAD, 2026-06-24)
+- **ドキュメント基準コミット**: `3a1a19f` (main HEAD, 2026-11-15。リリース `v1.10.0-rc.1` の後)
 
 ## 何をするものか
 
@@ -35,7 +35,7 @@ KubeVirt は、同じクラスタ上でコンテナの隣にフル仮想マシ�
 
 ## 出典
 
-1. [kubevirt/kubevirt リポジトリ](https://github.com/kubevirt/kubevirt) (コミット `55a003d`)
+1. [kubevirt/kubevirt リポジトリ](https://github.com/kubevirt/kubevirt) (コミット `3a1a19f`)
 2. [ADOPTERS.md](https://github.com/kubevirt/kubevirt/blob/main/ADOPTERS.md)
 3. [docs/getting-started.md](https://github.com/kubevirt/kubevirt/blob/main/docs/getting-started.md)
 4. [docs/updates.md](https://github.com/kubevirt/kubevirt/blob/main/docs/updates.md)
@@ -44,3 +44,4 @@ KubeVirt は、同じクラスタ上でコンテナの隣にフル仮想マシ�
 7. [CNCF: KubeVirt v1.0 has landed!](https://www.cncf.io/blog/2023/07/11/kubevirt-v1-0-has-landed/)
 8. [Red Hat: What is KubeVirt?](https://www.redhat.com/en/topics/virtualization/what-is-kubevirt)
 9. [InfoQ: CNCF Accepts KubeVirt as an Incubating Project](https://www.infoq.com/news/2022/06/cncf-kubevirt-incubating-project/)
+10. [cncf/toc#1822: KubeVirt Graduation Application](https://github.com/cncf/toc/issues/1822)
